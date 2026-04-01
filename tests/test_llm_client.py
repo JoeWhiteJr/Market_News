@@ -1,0 +1,102 @@
+"""Tests for the LLM client."""
+
+import json
+from unittest.mock import patch
+
+import pytest
+
+from market_mover.config import MarketMoverSettings
+from market_mover.exceptions import AnalysisParsingError, LLMError
+from market_mover.llm_client import LLMClient
+from market_mover.models import RawArticle, SourceType
+
+
+@pytest.fixture
+def llm_client(mock_settings):
+    return LLMClient(mock_settings)
+
+
+@pytest.fixture
+def sample_articles():
+    return [
+        RawArticle(
+            title="Fed Raises Rates",
+            url="https://example.com/fed",
+            source_name="Reuters",
+            source_type=SourceType.RSS,
+            summary="Rate hike of 25bps",
+        ),
+    ]
+
+
+VALID_LLM_RESPONSE = json.dumps({
+    "top_3": [
+        {
+            "rank": 1,
+            "title": "Fed Raises Rates",
+            "url": "https://example.com/fed",
+            "source_name": "Reuters",
+            "market_impact_summary": "Rate hikes affect all sectors.",
+            "impact_score": 9.0,
+            "is_video": False,
+        },
+    ]
+})
+
+
+class TestLLMClient:
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_analyze_articles_with_claude(self, mock_claude, llm_client, sample_articles):
+        mock_claude.return_value = VALID_LLM_RESPONSE
+        ranked, model = llm_client.analyze_articles(sample_articles)
+
+        assert len(ranked) == 1
+        assert ranked[0].rank == 1
+        assert ranked[0].title == "Fed Raises Rates"
+        assert ranked[0].impact_score == 9.0
+        assert "claude" in model.lower() or "sonnet" in model.lower()
+
+    @patch("market_mover.llm_client.LLMClient._call_gemini")
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_falls_back_to_gemini(self, mock_claude, mock_gemini, llm_client, sample_articles):
+        mock_claude.side_effect = Exception("Claude unavailable")
+        mock_gemini.return_value = VALID_LLM_RESPONSE
+
+        ranked, model = llm_client.analyze_articles(sample_articles)
+
+        assert len(ranked) == 1
+        assert "gemini" in model.lower() or "flash" in model.lower()
+
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_parses_markdown_wrapped_json(self, mock_claude, llm_client, sample_articles):
+        mock_claude.return_value = f"```json\n{VALID_LLM_RESPONSE}\n```"
+        ranked, _ = llm_client.analyze_articles(sample_articles)
+        assert len(ranked) == 1
+
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_parses_json_embedded_in_text(self, mock_claude, llm_client, sample_articles):
+        mock_claude.return_value = f"Here are the results:\n{VALID_LLM_RESPONSE}\nDone!"
+        ranked, _ = llm_client.analyze_articles(sample_articles)
+        assert len(ranked) == 1
+
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_raises_on_unparseable_response(self, mock_claude, llm_client, sample_articles):
+        mock_claude.return_value = "This is not JSON at all, no braces here."
+        with pytest.raises(AnalysisParsingError):
+            llm_client.analyze_articles(sample_articles)
+
+    def test_raises_without_api_keys(self, monkeypatch):
+        monkeypatch.setenv("CLAUDE_API_KEY_1", "")
+        monkeypatch.setenv("CLAUDE_API_KEY_2", "")
+        monkeypatch.setenv("GEMINI_API_KEY_1", "")
+        monkeypatch.setenv("GEMINI_API_KEY_2", "")
+        settings = MarketMoverSettings()
+        client = LLMClient(settings)
+        articles = [
+            RawArticle(
+                title="Test", url="https://x.com", source_name="X",
+                source_type=SourceType.RSS, summary="test",
+            )
+        ]
+        with pytest.raises(LLMError, match="No API keys configured"):
+            client.analyze_articles(articles)

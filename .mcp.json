@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "market-mover": {
+      "command": "/home/joe/market-mover-mcp/.venv/bin/python",
+      "args": ["-m", "market_mover.server"],
+      "cwd": "/home/joe/market-mover-mcp"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+[project]
+name = "market-mover-mcp"
+version = "0.1.0"
+description = "MCP server for daily market-moving news briefings via email"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=2.0",
+    "anthropic>=0.84",
+    "google-generativeai",
+    "newsapi-python",
+    "finnhub-python",
+    "feedparser",
+    "google-api-python-client",
+    "pydantic>=2.0",
+    "pydantic-settings",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["market_mover"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
