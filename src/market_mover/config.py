@@ -52,6 +52,10 @@ class MarketMoverSettings(BaseSettings):
     email_recipients: str = ""
     email_subject_prefix: str = "[Market Mover]"
 
+    # SMTP config (Gmail app password)
+    smtp_username: str = ""
+    smtp_app_password: str = ""
+
     # Rate limiting
     min_call_interval_secs: float = 1.0
 
