@@ -7,12 +7,42 @@ import itertools
 import json
 import logging
 import re
+from urllib.parse import urlparse
 
 from .config import MarketMoverSettings
 from .exceptions import AnalysisParsingError, LLMError
 from .models import RankedArticle, RawArticle
 
 logger = logging.getLogger("market_mover.llm_client")
+
+# Sentinel returned by _extract_text_from_anthropic_message when the response
+# has no usable text content (empty completion or only thinking/tool blocks).
+# Falls through to AnalysisParsingError so the caller can fall back to Gemini.
+NO_TEXT_SENTINEL = "LLM produced no text"
+
+
+def _extract_text_from_anthropic_message(message: object) -> str:
+    """Return the first text block's ``.text`` from an Anthropic message.
+
+    Defends against:
+    - Empty ``content`` list (``IndexError`` from ``content[0]``)
+    - Non-text first block such as ``ThinkingBlock`` / ``ToolUseBlock``
+      (``AttributeError`` from ``.text``)
+    """
+    content = getattr(message, "content", None) or []
+    for block in content:
+        block_type = getattr(block, "type", None)
+        text = getattr(block, "text", None)
+        if block_type == "text" and isinstance(text, str):
+            return text
+    # Fallback: some SDK versions don't set .type but do expose .text on text blocks.
+    for block in content:
+        text = getattr(block, "text", None)
+        if isinstance(text, str) and text:
+            return text
+    logger.warning("Anthropic response had no text blocks; returning sentinel")
+    return NO_TEXT_SENTINEL
+
 
 RANKING_SYSTEM_PROMPT = """You are a financial markets analyst. Your job is to evaluate news articles \
 and rank them by their potential impact on the stock market.
@@ -33,7 +63,6 @@ Return ONLY a JSON object in this exact format:
       "rank": 1,
       "title": "exact article title",
       "url": "exact article url",
-      "source_name": "source name",
       "market_impact_summary": "2-3 sentences explaining WHY this moves markets and what sectors/stocks are affected",
       "impact_score": 9.2,
       "is_video": false
@@ -42,7 +71,8 @@ Return ONLY a JSON object in this exact format:
   ]
 }
 
-Impact scores should be on a 0-10 scale. Be selective — only truly market-moving news should score above 7."""
+Impact scores should be on a 0-10 scale. Be selective — only truly market-moving news should score above 7.
+Do NOT invent or include a "source_name" field — the source is derived from the URL downstream."""
 
 
 class LLMClient:
@@ -118,7 +148,7 @@ class LLMClient:
             messages=[{"role": "user", "content": user_prompt}],
         )
 
-        return message.content[0].text
+        return _extract_text_from_anthropic_message(message)
 
     def _call_gemini(self, system_prompt: str, user_prompt: str) -> str:
         """Call Gemini API with round-robin key rotation."""
@@ -191,12 +221,17 @@ class LLMClient:
 
         ranked = []
         for item in top_3_data[:3]:
+            url = item.get("url", "")
+            # Source is derived from the URL downstream in the template; we keep
+            # a copy on the model for plain-text rendering / debugging. If the
+            # LLM still returned a source_name we ignore it to avoid the
+            # "Motley Fool / Cleveland Fed" co-attribution failure mode.
             ranked.append(
                 RankedArticle(
                     rank=item.get("rank", len(ranked) + 1),
                     title=item.get("title", ""),
-                    url=item.get("url", ""),
-                    source_name=item.get("source_name", ""),
+                    url=url,
+                    source_name=_source_name_from_url(url),
                     market_impact_summary=item.get("market_impact_summary", ""),
                     impact_score=float(item.get("impact_score", 0.0)),
                     is_video=item.get("is_video", False),
@@ -204,3 +239,16 @@ class LLMClient:
             )
 
         return ranked
+
+
+def _source_name_from_url(url: str) -> str:
+    """Derive a short source label from a URL's netloc (strip leading ``www.``)."""
+    if not url:
+        return ""
+    try:
+        netloc = urlparse(url).netloc.lower()
+    except (ValueError, AttributeError):
+        return ""
+    if netloc.startswith("www."):
+        netloc = netloc[4:]
+    return netloc
