@@ -44,8 +44,17 @@ def fetch_youtube_videos(
         datetime.now(timezone.utc) - timedelta(hours=max_age_hours)
     ).isoformat()
 
+    # Build an httplib2.Http with an explicit 20s timeout so YouTube API calls
+    # can't hang the pipeline. API-key auth doesn't require a credentialed http.
     try:
-        youtube = build("youtube", "v3", developerKey=api_key)
+        import httplib2
+
+        http = httplib2.Http(timeout=20)
+    except ImportError:
+        http = None
+
+    try:
+        youtube = build("youtube", "v3", developerKey=api_key, http=http)
     except Exception as e:
         logger.warning(f"Failed to build YouTube client: {e}")
         return []

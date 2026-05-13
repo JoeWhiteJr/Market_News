@@ -10,6 +10,9 @@ jobs:
   send-briefing:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
+      issues: write
 
     steps:
       - name: Checkout
@@ -24,6 +27,7 @@ jobs:
         run: pip install -e .
 
       - name: Run pipeline
+        id: run_pipeline
         env:
           CLAUDE_API_KEY_1: ${{ secrets.CLAUDE_API_KEY_1 }}
           GEMINI_API_KEY_1: ${{ secrets.GEMINI_API_KEY_1 }}
@@ -34,3 +38,24 @@ jobs:
           SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
           SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
         run: market-mover
+
+      - name: Open failure issue
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          gh issue create \
+            --title "[daily-briefing failed] ${DATE}" \
+            --body "The daily market briefing workflow failed on ${DATE}.
+
+          Run: ${RUN_URL}
+          Workflow: ${GITHUB_WORKFLOW}
+          Trigger: ${GITHUB_EVENT_NAME}
+
+          Joe — please check the logs above. The May 5 / Apr 28 2026 hangs were caused by missing HTTP timeouts; if this looks similar, escalate." \
+            --label "automated,daily-briefing-failure" || \
+          gh issue create \
+            --title "[daily-briefing failed] ${DATE}" \
+            --body "The daily market briefing workflow failed on ${DATE}. Run: ${RUN_URL}"

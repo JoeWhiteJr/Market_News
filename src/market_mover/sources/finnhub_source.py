@@ -36,6 +36,9 @@ def fetch_finnhub_articles(
         import finnhub
 
         client = finnhub.Client(api_key=api_key)
+        # Finnhub Client.DEFAULT_TIMEOUT is 10s class-wide; bump to 20s per task spec
+        # and pin it as an instance attribute so it survives any class-level change.
+        client.DEFAULT_TIMEOUT = 20
         news = client.general_news("general", min_id=0)
 
         if not news:

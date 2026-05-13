@@ -108,7 +108,7 @@ class LLMClient:
         import anthropic
 
         key = next(self._claude_key_cycle)
-        client = anthropic.Anthropic(api_key=key)
+        client = anthropic.Anthropic(api_key=key, timeout=45)
 
         message = client.messages.create(
             model=self._settings.claude_model,
@@ -116,6 +116,7 @@ class LLMClient:
             temperature=self._settings.temperature,
             system=system_prompt,
             messages=[{"role": "user", "content": user_prompt}],
+            timeout=45,
         )
 
         return message.content[0].text
@@ -138,6 +139,7 @@ class LLMClient:
                 temperature=self._settings.temperature,
                 max_output_tokens=self._settings.max_tokens,
             ),
+            request_options={"timeout": 45},
         )
 
         return response.text
