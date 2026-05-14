@@ -16,10 +16,11 @@ from .config import MarketMoverSettings  # noqa: E402
 from .email_sender import send_email  # noqa: E402
 from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
-from .models import RawArticle  # noqa: E402
+from .models import RawArticle, SparklineSeries  # noqa: E402
 from .server import _deduplicate_articles  # noqa: E402
 from .sources.finnhub_source import fetch_finnhub_articles  # noqa: E402
 from .sources.newsapi_source import fetch_newsapi_articles  # noqa: E402
+from .sources.quotes_source import fetch_sparkline_data  # noqa: E402
 from .sources.rss_source import fetch_rss_articles  # noqa: E402
 from .sources.youtube_source import fetch_youtube_videos  # noqa: E402
 
@@ -30,20 +31,27 @@ logging.basicConfig(
 logger = logging.getLogger("market_mover.cli")
 
 
-def _gather_articles(settings: MarketMoverSettings) -> tuple[list[RawArticle], dict[str, str]]:
-    """Fetch articles from all sources in parallel, capturing per-source errors.
+def _gather_articles(
+    settings: MarketMoverSettings,
+) -> tuple[list[RawArticle], dict[str, SparklineSeries], dict[str, str]]:
+    """Fetch articles + sparkline data from all sources in parallel.
 
-    Sources are fetched concurrently via a ThreadPoolExecutor (max 4 workers,
-    one per source). Per-source rate limits are independent so parallel fetches
-    are safe. The 30s ``socket.setdefaulttimeout`` backstop and each fetcher's
-    per-call timeout still apply inside the worker threads.
+    Sources are fetched concurrently via a ThreadPoolExecutor (one worker per
+    fetcher). The sparkline fetch is the 5th task, sharing the same pool so the
+    pipeline doesn't pay for a second wave of network latency. Per-source rate
+    limits are independent so parallel fetches are safe. The 30s
+    ``socket.setdefaulttimeout`` backstop and each fetcher's per-call timeout
+    still apply inside the worker threads.
 
     Returns:
-        Tuple of (combined article list, dict mapping source name -> error message).
-        A source with no error is omitted from the dict; a source returning zero
-        articles but no exception is also omitted (it succeeded, just empty).
+        Tuple of (combined article list, sparkline data, dict mapping source
+        name -> error message). A source with no error is omitted from the
+        error dict; a source returning zero articles but no exception is also
+        omitted (it succeeded, just empty). If the sparkline fetch fails, the
+        sparkline dict is empty — callers should treat that as "skip the strip".
     """
     all_articles: list[RawArticle] = []
+    sparklines: dict[str, SparklineSeries] = {}
     errors: dict[str, str] = {}
 
     fetchers: list[tuple[str, Callable[[], list[RawArticle]]]] = [
@@ -68,10 +76,24 @@ def _gather_articles(settings: MarketMoverSettings) -> tuple[list[RawArticle], d
         ),
     ]
 
-    with ThreadPoolExecutor(max_workers=len(fetchers)) as executor:
+    sparkline_task: Callable[[], dict[str, SparklineSeries]] | None = None
+    if settings.sparkline_enabled and settings.finnhub_api_key:
+        sparkline_task = lambda: fetch_sparkline_data(  # noqa: E731
+            settings.sparkline_ticker_list,
+            api_key=settings.finnhub_api_key,
+            min_call_interval=settings.min_call_interval_secs,
+        )
+
+    total_workers = len(fetchers) + (1 if sparkline_task else 0)
+
+    with ThreadPoolExecutor(max_workers=total_workers) as executor:
         future_to_source = {
             executor.submit(fetcher): source_name for source_name, fetcher in fetchers
         }
+        sparkline_future = (
+            executor.submit(sparkline_task) if sparkline_task is not None else None
+        )
+
         for future in future_to_source:
             source_name = future_to_source[future]
             try:
@@ -82,7 +104,15 @@ def _gather_articles(settings: MarketMoverSettings) -> tuple[list[RawArticle], d
                 logger.warning(f"{source_name} fetch raised at gather level: {e}")
                 errors[source_name] = f"{type(e).__name__}: {e}"
 
-    return all_articles, errors
+        if sparkline_future is not None:
+            try:
+                sparklines = sparkline_future.result() or {}
+            except Exception as e:
+                # Sparkline failure is non-fatal — log and continue without the strip.
+                logger.warning(f"Sparkline fetch raised at gather level: {e}")
+                sparklines = {}
+
+    return all_articles, sparklines, errors
 
 
 def _send_degraded_email(
@@ -144,10 +174,12 @@ def run_pipeline() -> None:
 
     # Step 1: Gather
     logger.info("Step 1: Gathering news from all sources...")
-    all_articles, source_errors = _gather_articles(settings)
+    all_articles, sparklines, source_errors = _gather_articles(settings)
 
     deduped = _deduplicate_articles(all_articles)
     logger.info(f"Gathered {len(deduped)} articles (from {len(all_articles)} raw)")
+    if sparklines:
+        logger.info(f"Sparkline data for {len(sparklines)} tickers: {list(sparklines)}")
 
     if not deduped:
         logger.error(
@@ -170,8 +202,8 @@ def run_pipeline() -> None:
 
     # Step 3: Format
     logger.info("Step 3: Formatting email...")
-    html_body = render_email_html(ranked)
-    plain_text = render_plain_text(ranked)
+    html_body = render_email_html(ranked, sparklines=sparklines)
+    plain_text = render_plain_text(ranked, sparklines=sparklines)
     subject = build_subject(ranked, settings.email_subject_prefix)
 
     # Step 4: Send

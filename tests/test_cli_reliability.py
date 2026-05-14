@@ -23,10 +23,13 @@ class TestGatherArticlesErrorHandling:
             cli, "fetch_newsapi_articles", side_effect=socket.timeout("read timed out")
         ), patch.object(cli, "fetch_finnhub_articles", return_value=[]), patch.object(
             cli, "fetch_rss_articles", return_value=[]
-        ), patch.object(cli, "fetch_youtube_videos", return_value=[]):
-            articles, errors = cli._gather_articles(mock_settings)
+        ), patch.object(cli, "fetch_youtube_videos", return_value=[]), patch.object(
+            cli, "fetch_sparkline_data", return_value={}
+        ):
+            articles, sparklines, errors = cli._gather_articles(mock_settings)
 
         assert articles == []
+        assert sparklines == {}
         assert "NewsAPI" in errors
         assert "timeout" in errors["NewsAPI"].lower()
 
@@ -41,8 +44,10 @@ class TestGatherArticlesErrorHandling:
             cli, "fetch_newsapi_articles", side_effect=socket.timeout("boom")
         ), patch.object(cli, "fetch_finnhub_articles", return_value=[good_article]), patch.object(
             cli, "fetch_rss_articles", return_value=[]
-        ), patch.object(cli, "fetch_youtube_videos", return_value=[]):
-            articles, errors = cli._gather_articles(mock_settings)
+        ), patch.object(cli, "fetch_youtube_videos", return_value=[]), patch.object(
+            cli, "fetch_sparkline_data", return_value={}
+        ):
+            articles, _sparklines, errors = cli._gather_articles(mock_settings)
 
         assert len(articles) == 1
         assert articles[0].title == "Good"
@@ -54,8 +59,8 @@ class TestGatherArticlesErrorHandling:
             cli, "fetch_finnhub_articles", return_value=[]
         ), patch.object(cli, "fetch_rss_articles", return_value=[]), patch.object(
             cli, "fetch_youtube_videos", return_value=[]
-        ):
-            articles, errors = cli._gather_articles(mock_settings)
+        ), patch.object(cli, "fetch_sparkline_data", return_value={}):
+            articles, _sparklines, errors = cli._gather_articles(mock_settings)
 
         assert articles == []
         assert errors == {}
@@ -71,7 +76,9 @@ class TestDegradedModeEmail:
             cli, "fetch_finnhub_articles", return_value=[]
         ), patch.object(cli, "fetch_rss_articles", return_value=[]), patch.object(
             cli, "fetch_youtube_videos", return_value=[]
-        ), patch("market_mover.cli.MarketMoverSettings", return_value=mock_settings):
+        ), patch.object(cli, "fetch_sparkline_data", return_value={}), patch(
+            "market_mover.cli.MarketMoverSettings", return_value=mock_settings
+        ):
             # Should not raise SystemExit since degraded email succeeded
             cli.run_pipeline()
 
@@ -91,7 +98,9 @@ class TestDegradedModeEmail:
             cli, "fetch_finnhub_articles", side_effect=RuntimeError("Finnhub 503")
         ), patch.object(cli, "fetch_rss_articles", return_value=[]), patch.object(
             cli, "fetch_youtube_videos", return_value=[]
-        ), patch("market_mover.cli.MarketMoverSettings", return_value=mock_settings):
+        ), patch.object(cli, "fetch_sparkline_data", return_value={}), patch(
+            "market_mover.cli.MarketMoverSettings", return_value=mock_settings
+        ):
             cli.run_pipeline()
 
         call_kwargs = mock_send_email.call_args.kwargs
@@ -108,7 +117,9 @@ class TestDegradedModeEmail:
             cli, "fetch_finnhub_articles", return_value=[]
         ), patch.object(cli, "fetch_rss_articles", return_value=[]), patch.object(
             cli, "fetch_youtube_videos", return_value=[]
-        ), patch("market_mover.cli.MarketMoverSettings", return_value=mock_settings):
+        ), patch.object(cli, "fetch_sparkline_data", return_value={}), patch(
+            "market_mover.cli.MarketMoverSettings", return_value=mock_settings
+        ):
             with pytest.raises(SystemExit):
                 cli.run_pipeline()
 
@@ -128,9 +139,9 @@ class TestParallelGather:
             cli, "fetch_finnhub_articles", side_effect=slow_fetcher
         ), patch.object(cli, "fetch_rss_articles", side_effect=slow_fetcher), patch.object(
             cli, "fetch_youtube_videos", side_effect=slow_fetcher
-        ):
+        ), patch.object(cli, "fetch_sparkline_data", side_effect=slow_fetcher):
             start = time.monotonic()
-            articles, errors = cli._gather_articles(mock_settings)
+            articles, _sparklines, errors = cli._gather_articles(mock_settings)
             elapsed = time.monotonic() - start
 
         assert articles == []

@@ -9,12 +9,25 @@ from urllib.parse import quote as url_quote
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from .models import RankedArticle
+from .models import RankedArticle, SparklineSeries
 
 RANK_COLORS = {
     1: "#c0392b",  # Deep red — top impact (WCAG AA on white text)
     2: "#a05a00",  # Dark amber — was #f39c12, which failed 4.5:1 on #fff (~3.2:1)
     3: "#2470a8",  # Deep blue — WCAG AA on white text
+}
+
+# Sparkline up/down colors. Light-mode values must pass WCAG AA (4.5:1) against
+# the white email body (#ffffff); dark-mode overrides (defined in the
+# @prefers-color-scheme block below) must pass against the dark card bg
+# (#1a1d24). The `flat` color is a neutral mid-gray that reads on both.
+SPARKLINE_COLORS = {
+    "up_light": "#0a6f38",     # Forest green on #ffffff -> ~6.1:1
+    "down_light": "#c0392b",   # Same red as RANK_COLORS[1] -> ~4.66:1 on #ffffff
+    "flat_light": "#5a6068",   # Slate gray on #ffffff -> ~5.6:1
+    "up_dark": "#7bd99a",      # Mint on #1a1d24 -> ~7.5:1
+    "down_dark": "#ff7a6b",    # Coral on #1a1d24 -> ~5.5:1
+    "flat_dark": "#a8aeb8",    # Light slate on #1a1d24 -> ~7.4:1
 }
 
 # Small whitelist mapping common netlocs to nicer display names.
@@ -124,11 +137,18 @@ def _first_sentence(text: str, max_chars: int = 140) -> str:
     return snippet
 
 
-def render_email_html(articles: list[RankedArticle]) -> str:
+def render_email_html(
+    articles: list[RankedArticle],
+    sparklines: dict[str, SparklineSeries] | None = None,
+) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
     Args:
         articles: List of ranked articles (up to 3).
+        sparklines: Optional mapping of ticker -> :class:`SparklineSeries`. When
+            provided and non-empty, a sparkline strip renders at the top of the
+            email body (right after the hidden preheader). Render order matches
+            ``dict`` insertion order so callers control which ticker shows first.
 
     Returns:
         Complete HTML string for the email body.
@@ -137,6 +157,7 @@ def render_email_html(articles: list[RankedArticle]) -> str:
     date_str = html_escape(now_local.strftime("%B %d, %Y"))
     time_str = html_escape(now_local.strftime("%I:%M %p %Z"))
     article_blocks = "\n".join(_render_article_block(a) for a in articles[:3])
+    sparkline_block = _render_sparkline_block(sparklines or {})
 
     if articles:
         preheader_raw = _first_sentence(articles[0].market_impact_summary) or articles[0].title
@@ -167,7 +188,21 @@ def render_email_html(articles: list[RankedArticle]) -> str:
     .mm-summary {{ color: #c8cdd6 !important; }}
     .mm-footer {{ background-color: #11131a !important; border-top-color: #232734 !important; }}
     .mm-footer-text {{ color: #7a8090 !important; }}
+    /* Sparkline strip: swap to higher-contrast tones against the dark card bg. */
+    .mm-spark-wrap {{ background-color: #1a1d24 !important; border-bottom-color: #232734 !important; }}
+    .mm-spark-ticker {{ color: #e8ebf0 !important; }}
+    .mm-spark-up {{ color: {SPARKLINE_COLORS["up_dark"]} !important; }}
+    .mm-spark-up-stroke {{ stroke: {SPARKLINE_COLORS["up_dark"]} !important; }}
+    .mm-spark-down {{ color: {SPARKLINE_COLORS["down_dark"]} !important; }}
+    .mm-spark-down-stroke {{ stroke: {SPARKLINE_COLORS["down_dark"]} !important; }}
+    .mm-spark-flat {{ color: {SPARKLINE_COLORS["flat_dark"]} !important; }}
+    .mm-spark-flat-stroke {{ stroke: {SPARKLINE_COLORS["flat_dark"]} !important; }}
     /* Badges already use a dark-saturated background and #fff text — keep them. */
+  }}
+  /* Mobile: stack the sparkline cells vertically so labels stay legible. */
+  @media (max-width: 600px) {{
+    .mm-spark-cell {{ display:block !important; width:100% !important; padding:6px 0 !important; }}
+    .mm-spark-row {{ display:block !important; width:100% !important; }}
   }}
 </style>
 </head>
@@ -175,6 +210,7 @@ def render_email_html(articles: list[RankedArticle]) -> str:
 <div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#f4f4f4;opacity:0;">
 {preheader}
 </div>
+{sparkline_block}
 <table width="100%" cellpadding="0" cellspacing="0" class="mm-bg" style="background-color:#f4f4f4;padding:20px 0;">
 <tr><td align="center">
 <table width="600" cellpadding="0" cellspacing="0" class="mm-card" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
@@ -210,21 +246,161 @@ def render_email_html(articles: list[RankedArticle]) -> str:
 </html>"""
 
 
-def render_plain_text(articles: list[RankedArticle]) -> str:
+def _render_sparkline_block(sparklines: dict[str, SparklineSeries]) -> str:
+    """Render the 5-cell sparkline strip that sits above the date header.
+
+    Returns an empty string when no sparkline data is available — that way the
+    email still ships when Finnhub is down or the feature is disabled.
+
+    The block is wrapped in ``<section data-block="sparkline">`` so concurrent
+    edits (e.g. Dev A's contrarian-coda block at the bottom) don't touch the
+    same line ranges.
+
+    Layout uses a single ``<table>`` row with one ``<td>`` per ticker — modern
+    layout (flex/grid) isn't reliable across email clients, but tables are.
+    Mobile (max-width: 600px) flips each cell to ``display:block`` for a
+    vertical stack via the stylesheet above.
+    """
+    if not sparklines:
+        return ""
+
+    cells = []
+    text_parts = []
+    for series in sparklines.values():
+        cells.append(_render_sparkline_cell(series))
+        sign = "+" if series.pct_change >= 0 else ""
+        text_parts.append(
+            f"{html_escape(series.ticker)} {sign}{series.pct_change:.1f}%"
+        )
+
+    # Outlook desktop / Word-engine clients refuse inline SVG. Inside an
+    # `mso 9` conditional we hand them a plain text strip so Joe still sees
+    # the day's moves; everyone else hides the comment and renders the SVGs.
+    mso_fallback_text = html_escape("  ".join(text_parts))
+
+    return f"""
+<section data-block="sparkline">
+<!--[if mso]>
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-bottom:1px solid #eaeaea;">
+<tr><td align="center" style="padding:10px 16px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#333;">
+{mso_fallback_text}
+</td></tr>
+</table>
+<![endif]-->
+<!--[if !mso]><!-->
+<table width="100%" cellpadding="0" cellspacing="0" class="mm-spark-wrap" style="background-color:#ffffff;border-bottom:1px solid #eaeaea;">
+<tr><td align="center" style="padding:10px 16px;">
+  <table width="600" cellpadding="0" cellspacing="0" class="mm-spark-row" style="max-width:600px;width:100%;">
+  <tr>
+{"".join(cells)}
+  </tr>
+  </table>
+</td></tr>
+</table>
+<!--<![endif]-->
+</section>
+"""
+
+
+def _render_sparkline_cell(series: SparklineSeries) -> str:
+    """Render a single ticker cell (label + SVG polyline + pct change)."""
+    direction = series.direction
+    if direction == "up":
+        color = SPARKLINE_COLORS["up_light"]
+        text_class = "mm-spark-up"
+        stroke_class = "mm-spark-up-stroke"
+    elif direction == "down":
+        color = SPARKLINE_COLORS["down_light"]
+        text_class = "mm-spark-down"
+        stroke_class = "mm-spark-down-stroke"
+    else:
+        color = SPARKLINE_COLORS["flat_light"]
+        text_class = "mm-spark-flat"
+        stroke_class = "mm-spark-flat-stroke"
+
+    points = _polyline_points(series.close_prices, width=80, height=24, pad=2)
+    sign = "+" if series.pct_change >= 0 else ""
+    pct_text = html_escape(f"{sign}{series.pct_change:.1f}%")
+    ticker_text = html_escape(series.ticker)
+    aria = html_escape(
+        f"{series.ticker} 5-day change {sign}{series.pct_change:.1f} percent, "
+        f"trending {direction}"
+    )
+
+    return f"""    <td class="mm-spark-cell" align="center" valign="middle" width="20%" style="padding:4px 6px;font-family:Arial,Helvetica,sans-serif;">
+      <div role="img" aria-label="{aria}" style="line-height:1;">
+        <span class="mm-spark-ticker" style="display:inline-block;font-size:12px;font-weight:700;color:#1a1a2e;letter-spacing:0.3px;">{ticker_text}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="24" viewBox="0 0 80 24" style="display:inline-block;vertical-align:middle;margin:0 6px;" aria-hidden="true">
+          <polyline points="{points}" fill="none" stroke="{color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="{stroke_class}"/>
+        </svg>
+        <span class="{text_class}" style="display:inline-block;font-size:12px;font-weight:600;color:{color};">{pct_text}</span>
+      </div>
+    </td>
+"""
+
+
+def _polyline_points(
+    close_prices: list[float], width: int, height: int, pad: int
+) -> str:
+    """Map ``close_prices`` onto an SVG viewBox and return a ``points`` string.
+
+    The Y-axis is inverted (SVG origin is top-left) so visually-up prices go
+    UP on the page. A perfectly flat series renders as a horizontal line at
+    mid-height instead of crashing on division by zero.
+    """
+    n = len(close_prices)
+    if n == 0:
+        return ""
+    if n == 1:
+        return f"{pad},{height // 2}"
+
+    lo = min(close_prices)
+    hi = max(close_prices)
+    span = hi - lo
+    usable_w = width - 2 * pad
+    usable_h = height - 2 * pad
+
+    coords: list[str] = []
+    for idx, price in enumerate(close_prices):
+        x = pad + (idx * usable_w / (n - 1))
+        if span == 0:
+            y = height / 2
+        else:
+            # Higher price -> smaller y (top of SVG).
+            y = pad + usable_h * (1 - (price - lo) / span)
+        coords.append(f"{x:.1f},{y:.1f}")
+    return " ".join(coords)
+
+
+def render_plain_text(
+    articles: list[RankedArticle],
+    sparklines: dict[str, SparklineSeries] | None = None,
+) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
     Args:
         articles: List of ranked articles (up to 3).
+        sparklines: Optional sparkline strip — rendered as a single line of
+            ``TICKER +/-X.X%`` pairs above the date header when present.
 
     Returns:
         Plain text string for the email body.
     """
     date_str = _now_local().strftime("%B %d, %Y")
-    lines = [
+    lines = []
+    if sparklines:
+        parts = []
+        for series in sparklines.values():
+            sign = "+" if series.pct_change >= 0 else ""
+            parts.append(f"{series.ticker} {sign}{series.pct_change:.1f}%")
+        lines.append("  ".join(parts))
+        lines.append("")
+
+    lines.extend([
         f"MARKET MOVER — Top 3 Market-Moving Stories — {date_str}",
         "=" * 60,
         "",
-    ]
+    ])
 
     for article in articles[:3]:
         action = "Watch" if article.is_video else "Read"

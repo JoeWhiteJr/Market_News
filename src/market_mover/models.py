@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from enum import Enum
+from typing import Literal
 
 from pydantic import BaseModel
 
@@ -35,3 +36,12 @@ class RankedArticle(BaseModel):
     market_impact_summary: str
     impact_score: float
     is_video: bool = False
+
+
+class SparklineSeries(BaseModel):
+    """5-day price series for one ticker, rendered as a sparkline in the email."""
+
+    ticker: str
+    close_prices: list[float]
+    pct_change: float
+    direction: Literal["up", "down", "flat"]

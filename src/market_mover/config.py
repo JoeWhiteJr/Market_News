@@ -62,6 +62,15 @@ class MarketMoverSettings(BaseSettings):
     # Display timezone for rendered timestamps (header date, footer "generated at")
     briefing_tz: str = "America/Denver"
 
+    # Sparkline strip at the top of the email (Cycle 3)
+    sparkline_enabled: bool = True
+    sparkline_tickers: str = "SPY,QQQ,DIA,VIX,IWM"
+
+    @property
+    def sparkline_ticker_list(self) -> list[str]:
+        """Return list of tickers for the top-of-email sparkline strip."""
+        return [t.strip().upper() for t in self.sparkline_tickers.split(",") if t.strip()]
+
     @property
     def claude_api_keys(self) -> list[str]:
         """Return list of non-empty Claude API keys."""
