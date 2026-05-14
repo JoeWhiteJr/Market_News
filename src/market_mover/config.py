@@ -59,6 +59,9 @@ class MarketMoverSettings(BaseSettings):
     # Rate limiting
     min_call_interval_secs: float = 1.0
 
+    # Display timezone for rendered timestamps (header date, footer "generated at")
+    briefing_tz: str = "America/Denver"
+
     @property
     def claude_api_keys(self) -> list[str]:
         """Return list of non-empty Claude API keys."""
