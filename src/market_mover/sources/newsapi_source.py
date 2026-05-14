@@ -35,9 +35,21 @@ def fetch_newsapi_articles(
     _enforce_rate_limit(min_call_interval)
 
     try:
+        import requests
         from newsapi import NewsApiClient
 
-        api = NewsApiClient(api_key=api_key)
+        # NewsApiClient hardcodes a 30s timeout per request. Pass a Session whose
+        # `get` is wrapped to enforce a tighter 20s read timeout instead.
+        session = requests.Session()
+        _orig_get = session.get
+
+        def _get_with_timeout(*args, **kwargs):
+            kwargs["timeout"] = 20
+            return _orig_get(*args, **kwargs)
+
+        session.get = _get_with_timeout  # type: ignore[assignment]
+
+        api = NewsApiClient(api_key=api_key, session=session)
         end = datetime.now(timezone.utc)
         start = end - timedelta(days=1)
 

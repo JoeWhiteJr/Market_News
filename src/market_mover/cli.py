@@ -1,18 +1,26 @@
 """CLI entry point for running the Market Mover pipeline end-to-end."""
 
 import logging
+import socket
 import sys
+from collections.abc import Callable
+from datetime import datetime, timezone
 
-from .config import MarketMoverSettings
-from .email_sender import send_email
-from .email_template import build_subject, render_email_html, render_plain_text
-from .llm_client import LLMClient
-from .models import RawArticle
-from .sources.finnhub_source import fetch_finnhub_articles
-from .sources.newsapi_source import fetch_newsapi_articles
-from .sources.rss_source import fetch_rss_articles
-from .sources.youtube_source import fetch_youtube_videos
-from .server import _deduplicate_articles
+# Backstop network timeout for every socket-level operation in this process.
+# Individual SDK calls also set per-call timeouts, but this protects against
+# any code path we missed (the May 5 / Apr 28 2026 hangs went 15min without one).
+socket.setdefaulttimeout(30)
+
+from .config import MarketMoverSettings  # noqa: E402
+from .email_sender import send_email  # noqa: E402
+from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
+from .llm_client import LLMClient  # noqa: E402
+from .models import RawArticle  # noqa: E402
+from .server import _deduplicate_articles  # noqa: E402
+from .sources.finnhub_source import fetch_finnhub_articles  # noqa: E402
+from .sources.newsapi_source import fetch_newsapi_articles  # noqa: E402
+from .sources.rss_source import fetch_rss_articles  # noqa: E402
+from .sources.youtube_source import fetch_youtube_videos  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -21,31 +29,124 @@ logging.basicConfig(
 logger = logging.getLogger("market_mover.cli")
 
 
+def _gather_articles(settings: MarketMoverSettings) -> tuple[list[RawArticle], dict[str, str]]:
+    """Fetch articles from all sources, capturing per-source errors.
+
+    Returns:
+        Tuple of (combined article list, dict mapping source name -> error message).
+        A source with no error is omitted from the dict; a source returning zero
+        articles but no exception is also omitted (it succeeded, just empty).
+    """
+    all_articles: list[RawArticle] = []
+    errors: dict[str, str] = {}
+
+    fetchers: list[tuple[str, Callable[[], list[RawArticle]]]] = [
+        (
+            "NewsAPI",
+            lambda: fetch_newsapi_articles(
+                settings.newsapi_api_key, settings.min_call_interval_secs
+            ),
+        ),
+        (
+            "Finnhub",
+            lambda: fetch_finnhub_articles(
+                settings.finnhub_api_key, settings.min_call_interval_secs
+            ),
+        ),
+        ("RSS", lambda: fetch_rss_articles(settings.rss_feed_list)),
+        (
+            "YouTube",
+            lambda: fetch_youtube_videos(
+                settings.youtube_api_key, settings.youtube_channel_list
+            ),
+        ),
+    ]
+
+    for source_name, fetcher in fetchers:
+        try:
+            articles = fetcher()
+            all_articles.extend(articles)
+        except Exception as e:
+            # Each source is best-effort — capture errors so the degraded email can list them.
+            logger.warning(f"{source_name} fetch raised at gather level: {e}")
+            errors[source_name] = f"{type(e).__name__}: {e}"
+
+    return all_articles, errors
+
+
+def _send_degraded_email(
+    settings: MarketMoverSettings, source_errors: dict[str, str]
+) -> bool:
+    """Send a minimal email noting that all sources failed today.
+
+    Joe's hard requirement: never zero emails. A degraded notice beats silence.
+    """
+    date_str = datetime.now(timezone.utc).strftime("%B %d, %Y")
+    subject = f"{settings.email_subject_prefix} {datetime.now(timezone.utc).strftime('%m/%d')}: DEGRADED — no articles gathered"
+
+    if source_errors:
+        error_lines_text = "\n".join(
+            f"  - {name}: {msg}" for name, msg in source_errors.items()
+        )
+        error_lines_html = "\n".join(
+            f"<li><strong>{name}</strong>: {msg}</li>" for name, msg in source_errors.items()
+        )
+    else:
+        error_lines_text = "  (no source raised an exception — all sources returned zero articles)"
+        error_lines_html = "<li>No source raised an exception — all sources returned zero articles.</li>"
+
+    plain_text = (
+        f"MARKET MOVER — DEGRADED MODE — {date_str}\n"
+        f"{'=' * 60}\n\n"
+        "No articles were gathered from any source today.\n"
+        "Source errors:\n"
+        f"{error_lines_text}\n\n"
+        "This is a placeholder email so you know the pipeline ran but failed to "
+        "find content. Check the GitHub Actions logs for details.\n"
+    )
+    html_body = (
+        "<!DOCTYPE html><html><body style=\"font-family:Arial,Helvetica,sans-serif;"
+        "background:#fff4f4;padding:24px;\">"
+        f"<h2 style=\"color:#c0392b;margin:0 0 8px;\">Market Mover — DEGRADED MODE</h2>"
+        f"<p style=\"color:#555;margin:0 0 16px;\">{date_str}</p>"
+        "<p>No articles were gathered from any source today.</p>"
+        "<p><strong>Source errors:</strong></p>"
+        f"<ul>{error_lines_html}</ul>"
+        "<p style=\"color:#888;font-size:12px;\">This is a placeholder email so you "
+        "know the pipeline ran but failed to find content. Check the GitHub Actions "
+        "logs for details.</p>"
+        "</body></html>"
+    )
+
+    return send_email(
+        subject=subject,
+        html_body=html_body,
+        plain_text=plain_text,
+        recipients=settings.recipient_list,
+        settings=settings,
+    )
+
+
 def run_pipeline() -> None:
     """Run the full Market Mover pipeline: gather → analyze → format → send."""
     settings = MarketMoverSettings()
 
     # Step 1: Gather
     logger.info("Step 1: Gathering news from all sources...")
-    all_articles: list[RawArticle] = []
-
-    all_articles.extend(
-        fetch_newsapi_articles(settings.newsapi_api_key, settings.min_call_interval_secs)
-    )
-    all_articles.extend(
-        fetch_finnhub_articles(settings.finnhub_api_key, settings.min_call_interval_secs)
-    )
-    all_articles.extend(fetch_rss_articles(settings.rss_feed_list))
-    all_articles.extend(
-        fetch_youtube_videos(settings.youtube_api_key, settings.youtube_channel_list)
-    )
+    all_articles, source_errors = _gather_articles(settings)
 
     deduped = _deduplicate_articles(all_articles)
     logger.info(f"Gathered {len(deduped)} articles (from {len(all_articles)} raw)")
 
     if not deduped:
-        logger.error("No articles gathered from any source. Aborting.")
-        sys.exit(1)
+        logger.error(
+            "No articles gathered from any source. Sending degraded-mode email."
+        )
+        sent = _send_degraded_email(settings, source_errors)
+        if not sent:
+            logger.error("Degraded email also failed to send")
+            sys.exit(1)
+        return
 
     # Step 2: Analyze
     logger.info("Step 2: Analyzing with LLM...")

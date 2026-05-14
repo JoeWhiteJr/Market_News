@@ -35,9 +35,14 @@ def fetch_rss_articles(
     articles = []
     now = datetime.now(timezone.utc)
 
+    # feedparser has no built-in socket timeout — we rely on the process-wide
+    # socket.setdefaulttimeout(30) set in cli.py. Sending a short User-Agent
+    # also helps dead feeds fail fast (some servers hang on the default UA).
+    request_headers = {"User-Agent": "market-mover-mcp/0.1 (+https://github.com/JoeWhiteJr)"}
+
     for feed_url in feed_urls:
         try:
-            feed = feedparser.parse(feed_url)
+            feed = feedparser.parse(feed_url, request_headers=request_headers)
             feed_title = feed.feed.get("title", feed_url)
 
             for entry in feed.entries:
