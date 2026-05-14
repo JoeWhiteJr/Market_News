@@ -15,40 +15,81 @@ class TestDeduplication:
                 url="https://example.com/article",
                 source_name="Source A",
                 source_type=SourceType.NEWSAPI,
-                summary="Short",
+                summary="First seen",
             ),
             RawArticle(
                 title="Same Article",
                 url="https://example.com/article",
                 source_name="Source B",
                 source_type=SourceType.RSS,
-                summary="Longer summary here",
+                summary="Second seen",
             ),
         ]
         result = _deduplicate_articles(articles)
         assert len(result) == 1
-        assert result[0].summary == "Longer summary here"
+        # First-seen wins in the single-pass set-based dedupe.
+        assert result[0].summary == "First seen"
 
-    def test_removes_similar_titles(self):
+    def test_removes_titles_differing_only_by_punctuation(self):
         articles = [
             RawArticle(
-                title="Fed Raises Interest Rates by 25 Basis Points",
+                title="Fed Raises Rates: 25bps Hike",
                 url="https://reuters.com/fed",
                 source_name="Reuters",
                 source_type=SourceType.RSS,
-                summary="Short",
             ),
             RawArticle(
-                title="Fed Raises Interest Rates by 25 Basis Points Today",
+                title="fed raises rates 25bps hike!!!",
                 url="https://cnbc.com/fed",
                 source_name="CNBC",
                 source_type=SourceType.NEWSAPI,
-                summary="Longer summary about the Fed decision",
             ),
         ]
         result = _deduplicate_articles(articles)
         assert len(result) == 1
-        assert result[0].summary == "Longer summary about the Fed decision"
+        assert result[0].source_name == "Reuters"
+
+    def test_same_title_different_url_collapses_to_one(self):
+        """Two articles with identical normalized titles but different URLs
+        should collapse to one (formerly-dead title-dedup branch)."""
+        articles = [
+            RawArticle(
+                title="Fed Raises Rates",
+                url="https://reuters.com/fed-rates-rise",
+                source_name="Reuters",
+                source_type=SourceType.RSS,
+            ),
+            RawArticle(
+                title="Fed Raises Rates",
+                url="https://cnbc.com/fed-decision",
+                source_name="CNBC",
+                source_type=SourceType.NEWSAPI,
+            ),
+        ]
+        result = _deduplicate_articles(articles)
+        assert len(result) == 1
+        assert result[0].source_name == "Reuters"
+
+    def test_same_url_different_title_collapses_to_one(self):
+        """Two articles with the same normalized URL but different titles
+        should collapse to one (URL-dedup branch)."""
+        articles = [
+            RawArticle(
+                title="Fed Raises Rates",
+                url="https://example.com/fed-news",
+                source_name="Reuters",
+                source_type=SourceType.RSS,
+            ),
+            RawArticle(
+                title="Federal Reserve Lifts Rates 25bps",
+                url="https://example.com/fed-news?ref=twitter",
+                source_name="Reuters Wire",
+                source_type=SourceType.NEWSAPI,
+            ),
+        ]
+        result = _deduplicate_articles(articles)
+        assert len(result) == 1
+        assert result[0].title == "Fed Raises Rates"
 
     def test_keeps_different_articles(self):
         articles = [

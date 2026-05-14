@@ -8,7 +8,7 @@ Exposes 3 tools:
 
 import json
 import logging
-from difflib import SequenceMatcher
+import re
 from urllib.parse import urlparse, urlunparse
 
 from fastmcp import FastMCP
@@ -173,12 +173,27 @@ def _normalize_url(url: str) -> str:
     return urlunparse((parsed.scheme, parsed.netloc, path, "", "", ""))
 
 
-def _deduplicate_articles(articles: list[RawArticle]) -> list[RawArticle]:
-    """Remove duplicate articles by URL and fuzzy title matching.
+# Whitespace collapse for title normalization — case-folded, all non-alphanumerics
+# stripped, then collapsed to single spaces. Two titles that differ only in
+# punctuation, capitalization, or whitespace will collide.
+_TITLE_NONWORD_RE = re.compile(r"[^\w\s]")
+_TITLE_WHITESPACE_RE = re.compile(r"\s+")
 
-    Keeps the article with the longer summary when duplicates are found.
+
+def _normalize_title(title: str) -> str:
+    """Normalize an article title for set-based deduplication."""
+    lowered = _TITLE_NONWORD_RE.sub(" ", title.lower())
+    return _TITLE_WHITESPACE_RE.sub(" ", lowered).strip()
+
+
+def _deduplicate_articles(articles: list[RawArticle]) -> list[RawArticle]:
+    """Remove duplicate articles in a single O(n) pass.
+
+    An article is unique only if BOTH its normalized URL and its normalized
+    title have not been seen yet. The first occurrence wins.
     """
-    seen_urls: dict[str, RawArticle] = {}
+    seen_urls: set[str] = set()
+    seen_titles: set[str] = set()
     unique: list[RawArticle] = []
 
     for article in articles:
@@ -186,33 +201,14 @@ def _deduplicate_articles(articles: list[RawArticle]) -> list[RawArticle]:
             continue
 
         normalized_url = _normalize_url(article.url)
+        normalized_title = _normalize_title(article.title)
 
-        # Check URL dedup
-        if normalized_url in seen_urls:
-            existing = seen_urls[normalized_url]
-            if len(article.summary) > len(existing.summary):
-                seen_urls[normalized_url] = article
-                unique = [a for a in unique if _normalize_url(a.url) != normalized_url]
-                unique.append(article)
+        if normalized_url in seen_urls or normalized_title in seen_titles:
             continue
 
-        # Check fuzzy title dedup against existing articles
-        is_duplicate = False
-        for existing in unique:
-            similarity = SequenceMatcher(
-                None, article.title.lower(), existing.title.lower()
-            ).ratio()
-            if similarity > 0.80:
-                is_duplicate = True
-                if len(article.summary) > len(existing.summary):
-                    unique.remove(existing)
-                    unique.append(article)
-                    seen_urls[_normalize_url(article.url)] = article
-                break
-
-        if not is_duplicate:
-            seen_urls[normalized_url] = article
-            unique.append(article)
+        seen_urls.add(normalized_url)
+        seen_titles.add(normalized_title)
+        unique.append(article)
 
     return unique
 

@@ -4,6 +4,7 @@ import logging
 import socket
 import sys
 from collections.abc import Callable
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
 # Backstop network timeout for every socket-level operation in this process.
@@ -30,7 +31,12 @@ logger = logging.getLogger("market_mover.cli")
 
 
 def _gather_articles(settings: MarketMoverSettings) -> tuple[list[RawArticle], dict[str, str]]:
-    """Fetch articles from all sources, capturing per-source errors.
+    """Fetch articles from all sources in parallel, capturing per-source errors.
+
+    Sources are fetched concurrently via a ThreadPoolExecutor (max 4 workers,
+    one per source). Per-source rate limits are independent so parallel fetches
+    are safe. The 30s ``socket.setdefaulttimeout`` backstop and each fetcher's
+    per-call timeout still apply inside the worker threads.
 
     Returns:
         Tuple of (combined article list, dict mapping source name -> error message).
@@ -62,14 +68,19 @@ def _gather_articles(settings: MarketMoverSettings) -> tuple[list[RawArticle], d
         ),
     ]
 
-    for source_name, fetcher in fetchers:
-        try:
-            articles = fetcher()
-            all_articles.extend(articles)
-        except Exception as e:
-            # Each source is best-effort — capture errors so the degraded email can list them.
-            logger.warning(f"{source_name} fetch raised at gather level: {e}")
-            errors[source_name] = f"{type(e).__name__}: {e}"
+    with ThreadPoolExecutor(max_workers=len(fetchers)) as executor:
+        future_to_source = {
+            executor.submit(fetcher): source_name for source_name, fetcher in fetchers
+        }
+        for future in future_to_source:
+            source_name = future_to_source[future]
+            try:
+                articles = future.result()
+                all_articles.extend(articles)
+            except Exception as e:
+                # Each source is best-effort — capture errors so the degraded email can list them.
+                logger.warning(f"{source_name} fetch raised at gather level: {e}")
+                errors[source_name] = f"{type(e).__name__}: {e}"
 
     return all_articles, errors
 
