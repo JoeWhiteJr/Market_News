@@ -69,7 +69,7 @@ class TestEmptyAnthropicResponseFallsBackToGemini:
         with patch.object(_anthropic_module, "Anthropic", _StubAnthropic), patch.object(
             LLMClient, "_call_gemini", return_value=VALID_GEMINI_RESPONSE
         ) as mock_gemini:
-            ranked, model = client.analyze_articles(sample_articles)
+            ranked, model, _voice = client.analyze_articles(sample_articles)
 
         assert mock_gemini.called, "Gemini fallback was not invoked"
         assert len(ranked) == 1
@@ -91,7 +91,7 @@ class TestEmptyAnthropicResponseFallsBackToGemini:
         with patch.object(_anthropic_module, "Anthropic", _StubAnthropic), patch.object(
             LLMClient, "_call_gemini", return_value=VALID_GEMINI_RESPONSE
         ) as mock_gemini:
-            ranked, model = client.analyze_articles(sample_articles)
+            ranked, model, _voice = client.analyze_articles(sample_articles)
 
         assert mock_gemini.called
         assert len(ranked) == 1

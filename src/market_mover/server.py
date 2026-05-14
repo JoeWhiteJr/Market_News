@@ -128,7 +128,7 @@ def analyze_and_rank(articles_json: str) -> dict:
         }
 
     client = _get_llm_client()
-    ranked, model_used = client.analyze_articles(articles)
+    ranked, model_used, _voice = client.analyze_articles(articles)
 
     return {
         "top_3": [a.model_dump(mode="json") for a in ranked],

@@ -71,6 +71,19 @@ class MarketMoverSettings(BaseSettings):
         """Return list of tickers for the top-of-email sparkline strip."""
         return [t.strip().upper() for t in self.sparkline_tickers.split(",") if t.strip()]
 
+    # --- Cycle 3 voice + reasoning layer ------------------------------------
+    # Which persona to use day-to-day. Supported: vinny | neutral | terminal | villain.
+    briefing_voice: str = "vinny"
+    # If the LLM output trips the profanity guardrail, fall back to neutral for
+    # today's send (and log a warning). Default on — safer than shipping a
+    # potentially-off-tone briefing.
+    briefing_voice_override_to_neutral_on_detect: bool = True
+    # Weekly mimicry rotation (Mon=0 … Sun=6). -1 disables. Default Wednesday.
+    style_mimicry_weekday: int = 2
+    # Contrarian "Bear Case" coda — a second LLM call after the ranking.
+    # Off = skip the coda entirely (no second LLM call).
+    contrarian_coda_enabled: bool = True
+
     @property
     def claude_api_keys(self) -> list[str]:
         """Return list of non-empty Claude API keys."""
