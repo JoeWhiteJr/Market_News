@@ -15,6 +15,7 @@ from unittest.mock import patch
 from market_mover.email_template import (
     _derive_source_name,
     _get_tz,
+    _safe_href,
     build_subject,
     render_email_html,
 )
@@ -217,6 +218,76 @@ class TestLlmClientGuard:
             # Should not raise IndexError / AttributeError.
             out = client._call_claude("sys", "user")
         assert out == NO_TEXT_SENTINEL
+
+
+class TestSafeHrefSchemeAllowList:
+    """``_safe_href`` must reject any scheme outside http/https.
+
+    A malicious article URL of ``javascript:alert(1)`` would otherwise render as
+    a clickable XSS payload in clients that support inline JS in mail (rare, but
+    we still defense-in-depth this).
+    """
+
+    def test_javascript_scheme_is_rejected(self):
+        assert _safe_href("javascript:alert(1)") == "#"
+
+    def test_javascript_scheme_mixed_case_is_rejected(self):
+        assert _safe_href("JaVaScRiPt:alert(1)") == "#"
+
+    def test_data_uri_is_rejected(self):
+        assert _safe_href("data:text/html,<script>alert(1)</script>") == "#"
+
+    def test_vbscript_scheme_is_rejected(self):
+        assert _safe_href("vbscript:msgbox(1)") == "#"
+
+    def test_file_scheme_is_rejected(self):
+        assert _safe_href("file:///etc/passwd") == "#"
+
+    def test_protocol_relative_url_is_rejected(self):
+        # //example.com has no scheme — unsafe in an email context where there
+        # is no "current scheme" to inherit from.
+        assert _safe_href("//example.com/x") == "#"
+
+    def test_relative_url_is_rejected(self):
+        assert _safe_href("/just/a/path") == "#"
+
+    def test_bare_path_is_rejected(self):
+        assert _safe_href("example.com/x") == "#"
+
+    def test_empty_string_returns_empty(self):
+        assert _safe_href("") == ""
+
+    def test_whitespace_only_returns_empty(self):
+        assert _safe_href("   ") == ""
+
+    def test_http_url_passes_through(self):
+        out = _safe_href("http://example.com/x")
+        assert out == "http://example.com/x"
+
+    def test_https_url_passes_through(self):
+        out = _safe_href("https://example.com/x")
+        assert out == "https://example.com/x"
+
+    def test_https_with_query_and_fragment_passes_through(self):
+        out = _safe_href("https://example.com/path?q=1&r=2#frag")
+        # & must be HTML-escaped inside an href attribute.
+        assert "https://example.com/path?q=1" in out
+        assert "&amp;r=2" in out
+        assert "#frag" in out
+
+    def test_template_falls_back_on_javascript_url(self):
+        """End-to-end: rendering an article with a javascript: URL must not
+        emit a clickable ``href="javascript:..."`` anchor."""
+        article = _make_article(url="javascript:alert(1)")
+        html = render_email_html([article])
+        assert "javascript:alert" not in html
+        assert 'href="#"' in html
+
+    def test_template_renders_rank_aria_label(self):
+        """Badge has an aria-label announcing rank + impact score."""
+        article = _make_article(rank=1, impact=9.0)
+        html = render_email_html([article])
+        assert 'aria-label="Rank 1 story, impact score 9.0 out of 10"' in html
 
 
 class TestUnusedImportShim:
