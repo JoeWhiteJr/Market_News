@@ -6,6 +6,7 @@ email at all.
 """
 
 import socket
+import time
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -110,6 +111,33 @@ class TestDegradedModeEmail:
         ), patch("market_mover.cli.MarketMoverSettings", return_value=mock_settings):
             with pytest.raises(SystemExit):
                 cli.run_pipeline()
+
+
+class TestParallelGather:
+    """The gather step fans the 4 sources out in parallel via ThreadPoolExecutor."""
+
+    def test_sources_are_fetched_in_parallel(self, mock_settings):
+        """Four sources that each sleep 1s should finish in < 1.5s when run
+        in parallel (vs ~4s sequential). Proves the executor is wired up."""
+
+        def slow_fetcher(*_args, **_kwargs):
+            time.sleep(1.0)
+            return []
+
+        with patch.object(cli, "fetch_newsapi_articles", side_effect=slow_fetcher), patch.object(
+            cli, "fetch_finnhub_articles", side_effect=slow_fetcher
+        ), patch.object(cli, "fetch_rss_articles", side_effect=slow_fetcher), patch.object(
+            cli, "fetch_youtube_videos", side_effect=slow_fetcher
+        ):
+            start = time.monotonic()
+            articles, errors = cli._gather_articles(mock_settings)
+            elapsed = time.monotonic() - start
+
+        assert articles == []
+        assert errors == {}
+        assert elapsed < 1.5, (
+            f"_gather_articles took {elapsed:.2f}s — sources are not running in parallel"
+        )
 
 
 class TestSocketDefaultTimeout:

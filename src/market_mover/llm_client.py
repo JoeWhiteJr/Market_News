@@ -10,15 +10,10 @@ import re
 from urllib.parse import urlparse
 
 from .config import MarketMoverSettings
-from .exceptions import AnalysisParsingError, LLMError
+from .exceptions import AnalysisParsingError, EmptyLLMResponse, LLMError
 from .models import RankedArticle, RawArticle
 
 logger = logging.getLogger("market_mover.llm_client")
-
-# Sentinel returned by _extract_text_from_anthropic_message when the response
-# has no usable text content (empty completion or only thinking/tool blocks).
-# Falls through to AnalysisParsingError so the caller can fall back to Gemini.
-NO_TEXT_SENTINEL = "LLM produced no text"
 
 
 def _extract_text_from_anthropic_message(message: object) -> str:
@@ -28,6 +23,10 @@ def _extract_text_from_anthropic_message(message: object) -> str:
     - Empty ``content`` list (``IndexError`` from ``content[0]``)
     - Non-text first block such as ``ThinkingBlock`` / ``ToolUseBlock``
       (``AttributeError`` from ``.text``)
+
+    Raises:
+        EmptyLLMResponse: When the message has no usable text content.
+            Caught by ``analyze_articles`` so the caller falls through to Gemini.
     """
     content = getattr(message, "content", None) or []
     for block in content:
@@ -40,8 +39,10 @@ def _extract_text_from_anthropic_message(message: object) -> str:
         text = getattr(block, "text", None)
         if isinstance(text, str) and text:
             return text
-    logger.warning("Anthropic response had no text blocks; returning sentinel")
-    return NO_TEXT_SENTINEL
+    raise EmptyLLMResponse(
+        "Anthropic response had no text blocks (empty content or only "
+        "thinking/tool blocks)"
+    )
 
 
 RANKING_SYSTEM_PROMPT = """You are a financial markets analyst. Your job is to evaluate news articles \

@@ -12,14 +12,16 @@ from datetime import datetime
 from types import SimpleNamespace
 from unittest.mock import patch
 
+import pytest
+
 from market_mover.email_template import (
     _derive_source_name,
     _get_tz,
     build_subject,
     render_email_html,
 )
+from market_mover.exceptions import EmptyLLMResponse
 from market_mover.llm_client import (
-    NO_TEXT_SENTINEL,
     LLMClient,
     _extract_text_from_anthropic_message,
 )
@@ -173,17 +175,17 @@ class TestUrlBasedSourceAttribution:
 
 
 class TestLlmClientGuard:
-    def test_extract_text_handles_thinking_only_response(self):
+    def test_extract_text_raises_on_thinking_only_response(self):
         # ThinkingBlock-like object — has .type="thinking" and no .text.
         thinking_block = SimpleNamespace(type="thinking", thinking="reasoning...")
         msg = SimpleNamespace(content=[thinking_block])
-        result = _extract_text_from_anthropic_message(msg)
-        assert result == NO_TEXT_SENTINEL
+        with pytest.raises(EmptyLLMResponse):
+            _extract_text_from_anthropic_message(msg)
 
-    def test_extract_text_handles_empty_content(self):
+    def test_extract_text_raises_on_empty_content(self):
         msg = SimpleNamespace(content=[])
-        result = _extract_text_from_anthropic_message(msg)
-        assert result == NO_TEXT_SENTINEL
+        with pytest.raises(EmptyLLMResponse):
+            _extract_text_from_anthropic_message(msg)
 
     def test_extract_text_skips_tool_use_returns_text_block(self):
         tool_block = SimpleNamespace(type="tool_use", name="x", input={})
@@ -198,10 +200,9 @@ class TestLlmClientGuard:
         msg = SimpleNamespace(content=[block_a, block_b])
         assert _extract_text_from_anthropic_message(msg) == "first"
 
-    def test_call_claude_does_not_crash_on_thinking_only(self, mock_settings):
-        """Integration-ish: the full _call_claude path should not raise on a
-        ThinkingBlock-only response. It should return the sentinel, which the
-        upstream parser will then surface as an AnalysisParsingError."""
+    def test_call_claude_raises_empty_response_on_thinking_only(self, mock_settings):
+        """The full _call_claude path should raise EmptyLLMResponse on a
+        ThinkingBlock-only response so analyze_articles can fall through to Gemini."""
         client = LLMClient(mock_settings)
         thinking_only = SimpleNamespace(
             content=[SimpleNamespace(type="thinking", thinking="...")]
@@ -214,9 +215,8 @@ class TestLlmClientGuard:
         import anthropic as _anthropic_module
 
         with patch.object(_anthropic_module, "Anthropic", _StubAnthropic):
-            # Should not raise IndexError / AttributeError.
-            out = client._call_claude("sys", "user")
-        assert out == NO_TEXT_SENTINEL
+            with pytest.raises(EmptyLLMResponse):
+                client._call_claude("sys", "user")
 
 
 class TestUnusedImportShim:
