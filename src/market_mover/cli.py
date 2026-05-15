@@ -12,10 +12,13 @@ from datetime import datetime, timezone
 # any code path we missed (the May 5 / Apr 28 2026 hangs went 15min without one).
 socket.setdefaulttimeout(30)
 
+from datetime import date  # noqa: E402
+
 from .config import MarketMoverSettings  # noqa: E402
 from .email_sender import send_email  # noqa: E402
 from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
+from .mimicry import mimicry_voice_for, mimicry_voice_to_voice_spec  # noqa: E402
 from .models import RawArticle, SparklineSeries  # noqa: E402
 from .server import _deduplicate_articles  # noqa: E402
 from .sources.finnhub_source import fetch_finnhub_articles  # noqa: E402
@@ -23,6 +26,7 @@ from .sources.newsapi_source import fetch_newsapi_articles  # noqa: E402
 from .sources.quotes_source import fetch_sparkline_data  # noqa: E402
 from .sources.rss_source import fetch_rss_articles  # noqa: E402
 from .sources.youtube_source import fetch_youtube_videos  # noqa: E402
+from .voices import get_voice  # noqa: E402
 
 logging.basicConfig(
     level=logging.INFO,
@@ -194,17 +198,55 @@ def run_pipeline() -> None:
     # Step 2: Analyze
     logger.info("Step 2: Analyzing with LLM...")
     client = LLMClient(settings)
-    ranked, model_used = client.analyze_articles(deduped)
-    logger.info(f"Top 3 ranked by {model_used}")
+
+    # Voice resolution: mimicry day wins over the configured persona.
+    mim = mimicry_voice_for(date.today(), settings.style_mimicry_weekday)
+    if mim is not None:
+        active_voice = mimicry_voice_to_voice_spec(mim)
+        mimicry_label = mim["name"]
+        logger.info(f"Mimicry day — voice override: {mimicry_label}")
+    else:
+        active_voice = get_voice(settings.briefing_voice)
+        mimicry_label = None
+        logger.info(f"Voice: {active_voice.get('name')}")
+
+    ranked, model_used, effective_voice = client.analyze_articles(deduped, voice=active_voice)
+    logger.info(f"Top 3 ranked by {model_used} (effective voice: {effective_voice.get('name')})")
 
     for article in ranked:
         logger.info(f"  #{article.rank} [{article.impact_score}/10] {article.title[:60]}")
 
+    # Optional: contrarian "Bear Case" coda — second LLM call.
+    coda = None
+    if settings.contrarian_coda_enabled and ranked:
+        logger.info("Step 2b: Generating contrarian coda...")
+        try:
+            coda = client.generate_contrarian_coda(ranked[0], deduped)
+            if coda is None:
+                logger.info("Contrarian coda not produced for today (validation skipped)")
+            else:
+                logger.info(f"Contrarian coda: {coda.headline}")
+        except Exception as e:
+            # The daily send must not fail because the optional coda failed.
+            logger.warning(f"Contrarian coda generation raised: {e}; continuing without it")
+            coda = None
+    else:
+        logger.info("Contrarian coda disabled by config; skipping second LLM call")
+
+    # If the voice was overridden to neutral by the profanity guardrail, also
+    # drop the mimicry subject label — the bit doesn't land if the prose isn't there.
+    if effective_voice.get("name") != active_voice.get("name"):
+        mimicry_label = None
+
     # Step 3: Format
     logger.info("Step 3: Formatting email...")
-    html_body = render_email_html(ranked, sparklines=sparklines)
-    plain_text = render_plain_text(ranked, sparklines=sparklines)
-    subject = build_subject(ranked, settings.email_subject_prefix)
+    html_body = render_email_html(ranked, sparklines=sparklines, voice=effective_voice, coda=coda)
+    plain_text = render_plain_text(ranked, sparklines=sparklines, voice=effective_voice, coda=coda)
+    subject = build_subject(
+        ranked,
+        settings.email_subject_prefix,
+        mimicry_label=mimicry_label,
+    )
 
     # Step 4: Send
     logger.info(f"Step 4: Sending to {settings.recipient_list}...")

@@ -48,7 +48,7 @@ class TestLLMClient:
     @patch("market_mover.llm_client.LLMClient._call_claude")
     def test_analyze_articles_with_claude(self, mock_claude, llm_client, sample_articles):
         mock_claude.return_value = VALID_LLM_RESPONSE
-        ranked, model = llm_client.analyze_articles(sample_articles)
+        ranked, model, _voice = llm_client.analyze_articles(sample_articles)
 
         assert len(ranked) == 1
         assert ranked[0].rank == 1
@@ -62,7 +62,7 @@ class TestLLMClient:
         mock_claude.side_effect = Exception("Claude unavailable")
         mock_gemini.return_value = VALID_LLM_RESPONSE
 
-        ranked, model = llm_client.analyze_articles(sample_articles)
+        ranked, model, _voice = llm_client.analyze_articles(sample_articles)
 
         assert len(ranked) == 1
         assert "gemini" in model.lower() or "flash" in model.lower()
@@ -70,13 +70,13 @@ class TestLLMClient:
     @patch("market_mover.llm_client.LLMClient._call_claude")
     def test_parses_markdown_wrapped_json(self, mock_claude, llm_client, sample_articles):
         mock_claude.return_value = f"```json\n{VALID_LLM_RESPONSE}\n```"
-        ranked, _ = llm_client.analyze_articles(sample_articles)
+        ranked, _model, _voice = llm_client.analyze_articles(sample_articles)
         assert len(ranked) == 1
 
     @patch("market_mover.llm_client.LLMClient._call_claude")
     def test_parses_json_embedded_in_text(self, mock_claude, llm_client, sample_articles):
         mock_claude.return_value = f"Here are the results:\n{VALID_LLM_RESPONSE}\nDone!"
-        ranked, _ = llm_client.analyze_articles(sample_articles)
+        ranked, _model, _voice = llm_client.analyze_articles(sample_articles)
         assert len(ranked) == 1
 
     @patch("market_mover.llm_client.LLMClient._call_claude")

@@ -11,7 +11,14 @@ from urllib.parse import urlparse
 
 from .config import MarketMoverSettings
 from .exceptions import AnalysisParsingError, EmptyLLMResponse, LLMError
-from .models import RankedArticle, RawArticle
+from .models import ContrarianCoda, RankedArticle, RawArticle
+from .voices import (
+    NEUTRAL_VOICE,
+    VoiceSpec,
+    contains_profanity,
+    get_voice,
+    strip_profanity,
+)
 
 logger = logging.getLogger("market_mover.llm_client")
 
@@ -76,6 +83,29 @@ Impact scores should be on a 0-10 scale. Be selective — only truly market-movi
 Do NOT invent or include a "source_name" field — the source is derived from the URL downstream."""
 
 
+CONTRARIAN_SYSTEM_PROMPT = """You are a contrarian markets analyst. Your job is to steel-man \
+the strongest counter-argument to the day's #1 story — the "bear case" or \
+"what everyone's missing" angle.
+
+You will receive:
+1. The #1 story (title + summary).
+2. A list of OTHER real article URLs from today's news pool.
+
+You MUST pick ONE source URL from the provided list to cite. Do NOT invent or \
+hallucinate URLs — if no article in the pool supports a contrarian angle, pick \
+the closest tangentially-related one. The URL you return MUST appear verbatim \
+in the provided list.
+
+Return ONLY a JSON object in this exact format:
+{
+  "headline": "short headline — e.g. 'But: 10-year yields tell a different story'",
+  "argument": "2-3 sentences explaining the counter-argument and why it matters",
+  "source_url": "exact URL from the provided list"
+}
+
+Keep the argument honest and non-conspiratorial. Never recommend trades."""
+
+
 class LLMClient:
     """LLM client with Claude primary and Gemini fallback, using key rotation."""
 
@@ -88,19 +118,32 @@ class LLMClient:
             itertools.cycle(settings.gemini_api_keys) if settings.gemini_api_keys else None
         )
 
-    def analyze_articles(self, articles: list[RawArticle]) -> tuple[list[RankedArticle], str]:
+    def analyze_articles(
+        self,
+        articles: list[RawArticle],
+        voice: VoiceSpec | None = None,
+    ) -> tuple[list[RankedArticle], str, VoiceSpec]:
         """Analyze and rank articles by market impact using Claude with Gemini fallback.
 
         Args:
             articles: List of raw articles to analyze.
+            voice: Optional voice persona spec. If ``None``, the persona from
+                ``settings.briefing_voice`` is loaded. The persona's
+                ``system_prompt_suffix`` is appended to the ranking prompt;
+                the JSON output contract is unchanged.
 
         Returns:
-            Tuple of (list of top 3 RankedArticle, model name used).
+            Tuple of (list of top 3 RankedArticle, model name used, effective voice).
+            The effective voice may differ from the input if the profanity
+            guardrail tripped and the override-to-neutral toggle is on.
 
         Raises:
             LLMError: If both Claude and Gemini fail.
             AnalysisParsingError: If response cannot be parsed.
         """
+        active_voice: VoiceSpec = voice if voice is not None else get_voice(self._settings.briefing_voice)
+        system_prompt = _build_system_prompt(RANKING_SYSTEM_PROMPT, active_voice)
+
         articles_json = json.dumps(
             [a.model_dump(mode="json") for a in articles],
             indent=2,
@@ -110,10 +153,11 @@ class LLMClient:
         # Try Claude first
         if self._claude_key_cycle is not None:
             try:
-                raw_response = self._call_claude(RANKING_SYSTEM_PROMPT, user_prompt)
+                raw_response = self._call_claude(system_prompt, user_prompt)
                 ranked = self._parse_response(raw_response)
                 logger.info(f"Analysis completed via Claude ({self._settings.claude_model})")
-                return ranked, self._settings.claude_model
+                ranked, effective_voice = self._enforce_profanity_guardrail(ranked, active_voice)
+                return ranked, self._settings.claude_model, effective_voice
             except AnalysisParsingError:
                 raise
             except Exception as e:
@@ -122,10 +166,11 @@ class LLMClient:
         # Fallback to Gemini
         if self._gemini_key_cycle is not None:
             try:
-                raw_response = self._call_gemini(RANKING_SYSTEM_PROMPT, user_prompt)
+                raw_response = self._call_gemini(system_prompt, user_prompt)
                 ranked = self._parse_response(raw_response)
                 logger.info(f"Analysis completed via Gemini fallback ({self._settings.gemini_model})")
-                return ranked, self._settings.gemini_model
+                ranked, effective_voice = self._enforce_profanity_guardrail(ranked, active_voice)
+                return ranked, self._settings.gemini_model, effective_voice
             except AnalysisParsingError:
                 raise
             except Exception as e:
@@ -133,6 +178,140 @@ class LLMClient:
                 raise LLMError(f"Both Claude and Gemini failed. Last error: {e}")
 
         raise LLMError("No API keys configured for either Claude or Gemini")
+
+    def _enforce_profanity_guardrail(
+        self,
+        ranked: list[RankedArticle],
+        active_voice: VoiceSpec,
+    ) -> tuple[list[RankedArticle], VoiceSpec]:
+        """Strip any obvious profanity from summaries and, if detected, fall back to neutral.
+
+        Returns the (possibly-scrubbed) ranked list and the effective voice.
+        """
+        detected = any(contains_profanity(a.market_impact_summary) for a in ranked)
+        # Always strip, even if we don't fall back (defense in depth).
+        scrubbed: list[RankedArticle] = []
+        for a in ranked:
+            scrubbed.append(
+                a.model_copy(update={"market_impact_summary": strip_profanity(a.market_impact_summary)})
+            )
+
+        if detected and self._settings.briefing_voice_override_to_neutral_on_detect:
+            logger.warning(
+                "Profanity detected in LLM output — falling back to neutral voice for today's send "
+                "(was: %r)",
+                active_voice.get("name"),
+            )
+            return scrubbed, get_voice(NEUTRAL_VOICE)
+        if detected:
+            logger.warning(
+                "Profanity detected in LLM output — stripped, but voice override disabled; "
+                "keeping voice %r",
+                active_voice.get("name"),
+            )
+        return scrubbed, active_voice
+
+    def generate_contrarian_coda(
+        self,
+        top_story: RankedArticle,
+        all_articles: list[RawArticle],
+    ) -> ContrarianCoda | None:
+        """Generate a steel-manned counter-argument to ``top_story``.
+
+        Uses the same Claude→Gemini fallback chain as ``analyze_articles``.
+        The ``source_url`` returned by the LLM is validated against the pool
+        of real article URLs — hallucinated URLs return ``None`` (skip the
+        coda for today's send).
+
+        Any failure (LLM error, parse error, validation failure) returns
+        ``None`` rather than raising — the daily send must not break because
+        the optional coda failed.
+
+        Args:
+            top_story: The #1 ranked story to argue against.
+            all_articles: The full pool of raw articles (URLs sourced from here).
+
+        Returns:
+            A ``ContrarianCoda`` instance, or ``None`` on any failure.
+        """
+        # Build the pool of allowed source URLs. We dedupe + cap to keep prompt small.
+        url_pool: list[str] = []
+        seen: set[str] = set()
+        for a in all_articles:
+            if a.url and a.url not in seen and a.url != top_story.url:
+                url_pool.append(a.url)
+                seen.add(a.url)
+        if not url_pool:
+            logger.info("Contrarian coda skipped: no eligible source URLs in pool")
+            return None
+
+        # Cap at 50 URLs to keep the prompt reasonable.
+        capped_pool = url_pool[:50]
+
+        user_prompt = (
+            f"#1 STORY:\n"
+            f"Title: {top_story.title}\n"
+            f"Summary: {top_story.market_impact_summary}\n\n"
+            f"OTHER ARTICLE URLS (pick exactly one for source_url):\n"
+            + "\n".join(f"- {u}" for u in capped_pool)
+            + "\n\nReturn the JSON object as specified."
+        )
+
+        raw_response: str | None = None
+
+        if self._claude_key_cycle is not None:
+            try:
+                raw_response = self._call_claude(CONTRARIAN_SYSTEM_PROMPT, user_prompt)
+            except Exception as e:
+                logger.warning(f"Contrarian coda Claude call failed: {e}, trying Gemini")
+
+        if raw_response is None and self._gemini_key_cycle is not None:
+            try:
+                raw_response = self._call_gemini(CONTRARIAN_SYSTEM_PROMPT, user_prompt)
+            except Exception as e:
+                logger.warning(f"Contrarian coda Gemini call also failed: {e}")
+                return None
+
+        if raw_response is None:
+            return None
+
+        try:
+            parsed = _parse_json_loose(raw_response)
+        except ValueError as e:
+            logger.warning(f"Contrarian coda parse failed: {e}")
+            return None
+
+        if not isinstance(parsed, dict):
+            logger.warning("Contrarian coda parse returned non-dict; skipping")
+            return None
+
+        headline = str(parsed.get("headline", "")).strip()
+        argument = str(parsed.get("argument", "")).strip()
+        source_url = str(parsed.get("source_url", "")).strip()
+
+        if not (headline and argument and source_url):
+            logger.warning("Contrarian coda missing required fields; skipping")
+            return None
+
+        # Validate the URL against the real pool (this is the anti-hallucination check).
+        allowed = set(capped_pool)
+        if source_url not in allowed:
+            logger.warning(
+                "Contrarian coda source_url %r not in article pool; skipping render",
+                source_url,
+            )
+            return None
+
+        # Profanity strip (best-effort — doesn't trigger neutral fallback for the coda).
+        headline = strip_profanity(headline)
+        argument = strip_profanity(argument)
+
+        return ContrarianCoda(
+            headline=headline,
+            argument=argument,
+            source_url=source_url,
+            source_name=_source_name_from_url(source_url),
+        )
 
     def _call_claude(self, system_prompt: str, user_prompt: str) -> str:
         """Call Claude API with round-robin key rotation."""
@@ -242,6 +421,54 @@ class LLMClient:
             )
 
         return ranked
+
+
+def _build_system_prompt(base_prompt: str, voice: VoiceSpec) -> str:
+    """Append a voice persona suffix to the base ranking prompt.
+
+    The output JSON contract from ``base_prompt`` always wins — the voice
+    only flavors the prose inside ``market_impact_summary``.
+    """
+    suffix = voice.get("system_prompt_suffix", "")
+    if not suffix:
+        return base_prompt
+    return (
+        f"{base_prompt}\n\n"
+        "VOICE / TONE:\n"
+        f"{suffix}\n\n"
+        "Important: the JSON structure above is required. The voice ONLY influences "
+        "the prose inside each story's market_impact_summary — not the field names, "
+        "not the schema, not the count of stories."
+    )
+
+
+def _parse_json_loose(raw: str) -> object:
+    """Parse a JSON object from an LLM response, tolerating markdown wrappers.
+
+    Mirrors the 3-strategy approach in ``LLMClient._parse_response`` but
+    returns the raw parsed object so callers can pull whatever fields they need.
+    """
+    text = raw.strip()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+
+    code_match = re.search(r"```(?:json)?\s*\n?(.*?)\n?```", text, re.DOTALL)
+    if code_match:
+        try:
+            return json.loads(code_match.group(1).strip())
+        except json.JSONDecodeError:
+            pass
+
+    brace_match = re.search(r"\{.*\}", text, re.DOTALL)
+    if brace_match:
+        try:
+            return json.loads(brace_match.group(0))
+        except json.JSONDecodeError:
+            pass
+
+    raise ValueError(f"Could not parse JSON from response: {text[:300]}")
 
 
 def _source_name_from_url(url: str) -> str:
