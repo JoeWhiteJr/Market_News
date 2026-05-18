@@ -73,14 +73,24 @@ Return ONLY a JSON object in this exact format:
       "url": "exact article url",
       "market_impact_summary": "2-3 sentences explaining WHY this moves markets and what sectors/stocks are affected",
       "impact_score": 9.2,
-      "is_video": false
+      "is_video": false,
+      "primary_ticker": "SPY",
+      "category": "macro"
     },
     ...
   ]
 }
 
 Impact scores should be on a 0-10 scale. Be selective — only truly market-moving news should score above 7.
-Do NOT invent or include a "source_name" field — the source is derived from the URL downstream."""
+Do NOT invent or include a "source_name" field — the source is derived from the URL downstream.
+
+For "primary_ticker": pick the single most relevant exchange-traded ticker (e.g.,
+"TSLA" for a Tesla-specific story, "SPY" for broad-market macro, "USO" for oil,
+"BTC-USD" for crypto). Use null when no ticker is a clean proxy.
+For "category": pick exactly one of "macro" (Fed, CPI, jobs), "single_name"
+(one company), "commodity" (oil/gold/ag), "crypto", "geopolitical" (war,
+sanctions, election), or "other". These fields feed a future scorecard that
+grades yesterday's picks against actual price action — be honest, not generous."""
 
 
 CONTRARIAN_SYSTEM_PROMPT = """You are a contrarian markets analyst. Your job is to steel-man \
@@ -417,6 +427,8 @@ class LLMClient:
                     market_impact_summary=item.get("market_impact_summary", ""),
                     impact_score=float(item.get("impact_score", 0.0)),
                     is_video=item.get("is_video", False),
+                    primary_ticker=_normalize_primary_ticker(item.get("primary_ticker")),
+                    category=_normalize_category(item.get("category")),
                 )
             )
 
@@ -469,6 +481,42 @@ def _parse_json_loose(raw: str) -> object:
             pass
 
     raise ValueError(f"Could not parse JSON from response: {text[:300]}")
+
+
+_ALLOWED_CATEGORIES = frozenset(
+    {"macro", "single_name", "commodity", "crypto", "geopolitical", "other"}
+)
+
+
+def _normalize_primary_ticker(raw: object) -> str | None:
+    """Coerce the LLM's primary_ticker field to ``str | None``.
+
+    The LLM sometimes returns ``"null"`` or an empty string for "no clean ticker."
+    We treat any of those as ``None`` so the persisted JSONL stays clean.
+    """
+    if raw is None:
+        return None
+    if not isinstance(raw, str):
+        return None
+    cleaned = raw.strip()
+    if not cleaned or cleaned.lower() in {"null", "none", "n/a", "na"}:
+        return None
+    # Tickers are short — cap defensively so a hallucinated paragraph can't
+    # smuggle prose into a ticker field.
+    return cleaned[:20].upper()
+
+
+def _normalize_category(raw: object) -> str:
+    """Coerce the LLM's category field to one of the allowed values.
+
+    Falls back to ``"other"`` for anything unrecognized.
+    """
+    if not isinstance(raw, str):
+        return "other"
+    key = raw.strip().lower()
+    if key in _ALLOWED_CATEGORIES:
+        return key
+    return "other"
 
 
 def _source_name_from_url(url: str) -> str:

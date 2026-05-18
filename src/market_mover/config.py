@@ -84,6 +84,27 @@ class MarketMoverSettings(BaseSettings):
     # Off = skip the coda entirely (no second LLM call).
     contrarian_coda_enabled: bool = True
 
+    # --- Cycle 4A Yesterday-Index ------------------------------------------
+    # Path to the append-only JSONL of daily briefing records. Relative paths
+    # are resolved against the repo root via :attr:`briefings_jsonl_full_path`.
+    briefings_jsonl_path: str = "data/briefings.jsonl"
+    # Kill-switch — set to False to hide the scorecard and skip persistence.
+    # Joe asked for a single env flag so we can turn the feature off without
+    # a redeploy if it ever causes trouble.
+    yesterday_index_enabled: bool = True
+
+    @property
+    def briefings_jsonl_full_path(self) -> Path:
+        """Resolve :attr:`briefings_jsonl_path` against the repo root.
+
+        Absolute paths are returned untouched so deployments that mount a
+        persistent volume can override with e.g. ``/data/briefings.jsonl``.
+        """
+        p = Path(self.briefings_jsonl_path)
+        if p.is_absolute():
+            return p
+        return _PROJECT_ROOT / p
+
     @property
     def claude_api_keys(self) -> list[str]:
         """Return list of non-empty Claude API keys."""

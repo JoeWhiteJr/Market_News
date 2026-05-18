@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<style>
+  /* Dark-mode overrides for clients that honor prefers-color-scheme
+     (Apple Mail, iOS Mail, Outlook.com web, recent Gmail web).
+     Gmail iOS still auto-inverts; the meta tags above opt us out where supported. */
+  @media (prefers-color-scheme: dark) {
+    body, .mm-bg { background-color: #0f1116 !important; }
+    .mm-card { background-color: #1a1d24 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important; }
+    .mm-header { background-color: #11131a !important; }
+    .mm-header-title { color: #e8ebf0 !important; }
+    .mm-header-sub { color: #9aa0ad !important; }
+    .mm-article-wrap { background-color: #232734 !important; }
+    .mm-title { color: #e8ebf0 !important; }
+    .mm-source { color: #9aa0ad !important; }
+    .mm-summary { color: #c8cdd6 !important; }
+    .mm-footer { background-color: #11131a !important; border-top-color: #232734 !important; }
+    .mm-footer-text { color: #7a8090 !important; }
+    /* Sparkline strip: swap to higher-contrast tones against the dark card bg. */
+    .mm-spark-wrap { background-color: #1a1d24 !important; border-bottom-color: #232734 !important; }
+    .mm-spark-ticker { color: #e8ebf0 !important; }
+    .mm-spark-up { color: #7bd99a !important; }
+    .mm-spark-up-stroke { stroke: #7bd99a !important; }
+    .mm-spark-down { color: #ff7a6b !important; }
+    .mm-spark-down-stroke { stroke: #ff7a6b !important; }
+    .mm-spark-flat { color: #a8aeb8 !important; }
+    .mm-spark-flat-stroke { stroke: #a8aeb8 !important; }
+    /* Contrarian "Bear Case" section. */
+    .mm-contrarian-wrap { background-color: #1a1d24 !important; border-top-color: #232734 !important; }
+    .mm-contrarian-card { background-color: #232734 !important; border-left-color: #b9863d !important; }
+    .mm-contrarian-eyebrow { color: #b9863d !important; }
+    .mm-contrarian-headline { color: #e8ebf0 !important; }
+    .mm-contrarian-argument { color: #c8cdd6 !important; }
+    .mm-contrarian-source { color: #9aa0ad !important; }
+    /* Yesterday-Index scorecard (Cycle 4 Phase A). */
+    .mm-scorecard-wrap { background-color: #1a1d24 !important; }
+    .mm-scorecard-card { background-color: #232734 !important; border-left-color: #8a93a8 !important; }
+    .mm-scorecard-eyebrow { color: #b3bcd1 !important; }
+    .mm-scorecard-sub { color: #9aa0ad !important; }
+    .mm-scorecard-row { border-bottom-color: #2c3140 !important; }
+    .mm-scorecard-title { color: #e8ebf0 !important; }
+    .mm-scorecard-meta { color: #9aa0ad !important; }
+    .mm-scorecard-verdict { background-color: #2c3140 !important; color: #b3bcd1 !important; }
+    /* Badges already use a dark-saturated background and #fff text — keep them. */
+  }
+  /* Mobile: stack the sparkline cells vertically so labels stay legible. */
+  @media (max-width: 600px) {
+    .mm-spark-cell { display:block !important; width:100% !important; padding:6px 0 !important; }
+    .mm-spark-row { display:block !important; width:100% !important; }
+  }
+</style>
+</head>
+<body class="mm-bg" style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#f4f4f4;opacity:0;">
+The tape held flat after the statement — the long bond didn&#x27;t budge much either.
+</div>
+
+<section data-block="sparkline">
+<!--[if mso]>
+<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-bottom:1px solid #eaeaea;">
+<tr><td align="center" style="padding:10px 16px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#333;">
+SPY +0.8%  QQQ +0.7%  VIX -10.7%
+</td></tr>
+</table>
+<![endif]-->
+<!--[if !mso]><!-->
+<table width="100%" cellpadding="0" cellspacing="0" class="mm-spark-wrap" style="background-color:#ffffff;border-bottom:1px solid #eaeaea;">
+<tr><td align="center" style="padding:10px 16px;">
+  <table width="600" cellpadding="0" cellspacing="0" class="mm-spark-row" style="max-width:600px;width:100%;">
+  <tr>
+    <td class="mm-spark-cell" align="center" valign="middle" width="20%" style="padding:4px 6px;font-family:Arial,Helvetica,sans-serif;">
+      <div role="img" aria-label="SPY 5-day change +0.8 percent, trending up" style="line-height:1;">
+        <span class="mm-spark-ticker" style="display:inline-block;font-size:12px;font-weight:700;color:#1a1a2e;letter-spacing:0.3px;">SPY</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="24" viewBox="0 0 80 24" style="display:inline-block;vertical-align:middle;margin:0 6px;" aria-hidden="true">
+          <polyline points="2.0,22.0 21.0,12.5 40.0,14.9 59.0,7.7 78.0,2.0" fill="none" stroke="#0a6f38" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mm-spark-up-stroke"/>
+        </svg>
+        <span class="mm-spark-up" style="display:inline-block;font-size:12px;font-weight:600;color:#0a6f38;">+0.8%</span>
+      </div>
+    </td>
+    <td class="mm-spark-cell" align="center" valign="middle" width="20%" style="padding:4px 6px;font-family:Arial,Helvetica,sans-serif;">
+      <div role="img" aria-label="QQQ 5-day change +0.7 percent, trending up" style="line-height:1;">
+        <span class="mm-spark-ticker" style="display:inline-block;font-size:12px;font-weight:700;color:#1a1a2e;letter-spacing:0.3px;">QQQ</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="24" viewBox="0 0 80 24" style="display:inline-block;vertical-align:middle;margin:0 6px;" aria-hidden="true">
+          <polyline points="2.0,14.0 21.0,22.0 40.0,10.0 59.0,4.0 78.0,2.0" fill="none" stroke="#0a6f38" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mm-spark-up-stroke"/>
+        </svg>
+        <span class="mm-spark-up" style="display:inline-block;font-size:12px;font-weight:600;color:#0a6f38;">+0.7%</span>
+      </div>
+    </td>
+    <td class="mm-spark-cell" align="center" valign="middle" width="20%" style="padding:4px 6px;font-family:Arial,Helvetica,sans-serif;">
+      <div role="img" aria-label="VIX 5-day change -10.7 percent, trending down" style="line-height:1;">
+        <span class="mm-spark-ticker" style="display:inline-block;font-size:12px;font-weight:700;color:#1a1a2e;letter-spacing:0.3px;">VIX</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="24" viewBox="0 0 80 24" style="display:inline-block;vertical-align:middle;margin:0 6px;" aria-hidden="true">
+          <polyline points="2.0,2.0 21.0,8.7 40.0,12.7 59.0,18.0 78.0,22.0" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mm-spark-down-stroke"/>
+        </svg>
+        <span class="mm-spark-down" style="display:inline-block;font-size:12px;font-weight:600;color:#c0392b;">-10.7%</span>
+      </div>
+    </td>
+
+  </tr>
+  </table>
+</td></tr>
+</table>
+<!--<![endif]-->
+</section>
+
+<table width="100%" cellpadding="0" cellspacing="0" class="mm-bg" style="background-color:#f4f4f4;padding:20px 0;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" class="mm-card" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+
+<!-- Header -->
+<tr>
+<td class="mm-header" style="background-color:#1a1a2e;padding:24px 32px;text-align:center;">
+  <h1 class="mm-header-title" style="color:#ffffff;margin:0;font-size:24px;font-weight:700;">Market Mover</h1>
+  <p class="mm-header-sub" style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; May 18, 2026</p>
+</td>
+</tr>
+
+<!-- Yesterday-Index scorecard — Cycle 4 Phase A -->
+<tr>
+<td class="mm-scorecard-wrap" style="padding:24px 32px 0;background-color:#ffffff;">
+  <section data-block="scorecard" aria-label="Yesterday's picks scorecard">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:8px;">
+  <tr>
+  <td class="mm-scorecard-card" style="padding:16px;border-left:4px solid #3a3f4d;background-color:#f3f4f7;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span class="mm-scorecard-eyebrow" style="display:inline-block;color:#3a3f4d;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">
+          Yesterday&apos;s Scorecard &mdash; May 14
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-bottom:8px;">
+        <span class="mm-scorecard-sub" style="color:#666;font-size:12px;">
+          Grading Claude&rsquo;s picks against May 18&rsquo;s tape.
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+          <td class="mm-scorecard-row" style="padding:6px 0;border-bottom:1px solid #e6e7ec;">
+            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td valign="top" style="font-size:12px;color:#333;font-weight:600;width:32px;">
+                #1
+              </td>
+              <td valign="top" style="font-size:13px;color:#1a1a2e;line-height:1.35;">
+                <span class="mm-scorecard-title" style="font-weight:600;">CPI Comes in Hot at 3.4% YoY</span>
+                <br>
+                <span class="mm-scorecard-meta" style="color:#666;font-size:11px;">
+                  Impact 9.2/10 &middot; Ticker: SPY
+                </span>
+              </td>
+              <td valign="top" align="right" style="font-size:11px;color:#666;white-space:nowrap;padding-left:8px;">
+                <span class="mm-scorecard-verdict" style="display:inline-block;background-color:#e6e7ec;color:#3a3f4d;font-weight:600;padding:2px 8px;border-radius:10px;">
+                  TBD — judging launches in Phase B
+                </span>
+              </td>
+            </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="mm-scorecard-row" style="padding:6px 0;border-bottom:1px solid #e6e7ec;">
+            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td valign="top" style="font-size:12px;color:#333;font-weight:600;width:32px;">
+                #2
+              </td>
+              <td valign="top" style="font-size:13px;color:#1a1a2e;line-height:1.35;">
+                <span class="mm-scorecard-title" style="font-weight:600;">Tesla Misses Q2 Delivery Estimates</span>
+                <br>
+                <span class="mm-scorecard-meta" style="color:#666;font-size:11px;">
+                  Impact 7.8/10 &middot; Ticker: TSLA
+                </span>
+              </td>
+              <td valign="top" align="right" style="font-size:11px;color:#666;white-space:nowrap;padding-left:8px;">
+                <span class="mm-scorecard-verdict" style="display:inline-block;background-color:#e6e7ec;color:#3a3f4d;font-weight:600;padding:2px 8px;border-radius:10px;">
+                  TBD — judging launches in Phase B
+                </span>
+              </td>
+            </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td class="mm-scorecard-row" style="padding:6px 0;border-bottom:1px solid #e6e7ec;">
+            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td valign="top" style="font-size:12px;color:#333;font-weight:600;width:32px;">
+                #3
+              </td>
+              <td valign="top" style="font-size:13px;color:#1a1a2e;line-height:1.35;">
+                <span class="mm-scorecard-title" style="font-weight:600;">Gold Hits New All-Time High Above $2,400</span>
+                <br>
+                <span class="mm-scorecard-meta" style="color:#666;font-size:11px;">
+                  Impact 7.5/10 &middot; Ticker: GLD
+                </span>
+              </td>
+              <td valign="top" align="right" style="font-size:11px;color:#666;white-space:nowrap;padding-left:8px;">
+                <span class="mm-scorecard-verdict" style="display:inline-block;background-color:#e6e7ec;color:#3a3f4d;font-weight:600;padding:2px 8px;border-radius:10px;">
+                  TBD — judging launches in Phase B
+                </span>
+              </td>
+            </tr>
+            </table>
+          </td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+  </section>
+</td>
+</tr>
+<!-- Articles -->
+<tr>
+<td style="padding:24px 32px;">
+
+  <!-- Article #1 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #c0392b;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 1 story, impact score 8.7 out of 10" style="display:inline-block;background-color:#c0392b;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #1 &bull; Impact: 8.7/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.reuters.com/markets/fed-holds-rates" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          Fed Holds Rates Steady, Signals Patience on Cuts
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">Reuters</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          The tape held flat after the statement — the long bond didn&#x27;t budge much either. Powell sounded the same notes; the market&#x27;s already priced two cuts by year-end. Risk-on for now.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.reuters.com/markets/fed-holds-rates" style="color:#c0392b;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+
+  <!-- Article #2 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #a05a00;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 2 story, impact score 9.0 out of 10" style="display:inline-block;background-color:#a05a00;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #2 &bull; Impact: 9.0/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.cnbc.com/nvidia-earnings" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          NVIDIA Reports Record Quarterly Revenue, Beats by 12%
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">CNBC</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          $30B quarter, again. The AI capex cycle is real and it&#x27;s pulling semis and hyperscalers along for the ride. Watch the guide — that&#x27;s where the tape lives.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.cnbc.com/nvidia-earnings" style="color:#a05a00;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+
+  <!-- Article #3 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #2470a8;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 3 story, impact score 8.2 out of 10" style="display:inline-block;background-color:#2470a8;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #3 &bull; Impact: 8.2/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.bloomberg.com/markets/oil" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          Oil Surges After OPEC+ Cuts Production
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">Bloomberg</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          Crude punched through $90 on the announcement. That&#x27;s a tax on consumers and a problem for the inflation print next month. Energy bid, discretionary offered.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.bloomberg.com/markets/oil" style="color:#2470a8;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+</td>
+</tr>
+
+
+<!-- Contrarian "Bear Case" coda — Cycle 3 -->
+<tr>
+<td class="mm-contrarian-wrap" style="padding:0 32px 24px;background-color:#ffffff;border-top:1px solid #eaeaea;">
+  <section data-block="contrarian" aria-label="The Bear Case">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-top:20px;">
+  <tr>
+  <td class="mm-contrarian-card" style="padding:16px;border-left:4px solid #a05a00;background-color:#fbf6ee;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span class="mm-contrarian-eyebrow" style="display:inline-block;color:#a05a00;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;">
+          The Bear Case
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <p class="mm-contrarian-headline" style="color:#1a1a2e;font-size:15px;font-weight:600;line-height:1.3;margin:0;">
+          But: credit spreads are quietly widening
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-contrarian-argument" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          While equities celebrated the Fed pause, IG and HY spreads have widened 18bps over the past two weeks. The bond market sees something the tape doesn&#x27;t.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.bloomberg.com/markets/oil" class="mm-contrarian-source" style="color:#a05a00;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Bloomberg
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+  </section>
+</td>
+</tr>
+<!-- Footer -->
+<tr>
+<td class="mm-footer" style="background-color:#f8f8fa;padding:16px 32px;text-align:center;border-top:1px solid #eaeaea;">
+  <p class="mm-footer-text mm-signoff" style="color:#888;font-size:12px;margin:0 0 6px;font-style:italic;">— Vinny, from the floor</p>
+  <p class="mm-footer-text" style="color:#888;font-size:12px;margin:0;">
+    Generated by Market Mover MCP &bull; 08:06 AM MDT
+  </p>
+</td>
+</tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>

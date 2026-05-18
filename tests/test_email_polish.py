@@ -8,7 +8,7 @@ Covers:
 - ``LLMClient`` guard against Anthropic responses with no text blocks
 """
 
-from datetime import datetime
+from datetime import date, datetime
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -27,6 +27,11 @@ from market_mover.llm_client import (
     _extract_text_from_anthropic_message,
 )
 from market_mover.models import RankedArticle, RawArticle, SourceType
+from market_mover.scorecard import (
+    BriefingRecord,
+    ScorecardContrarian,
+    ScorecardPick,
+)
 
 
 def _make_article(
@@ -288,6 +293,81 @@ class TestSafeHrefSchemeAllowList:
         article = _make_article(rank=1, impact=9.0)
         html = render_email_html([article])
         assert 'aria-label="Rank 1 story, impact score 9.0 out of 10"' in html
+
+
+def _yesterday_record() -> BriefingRecord:
+    return BriefingRecord(
+        date=date(2026, 5, 14),
+        model_used="claude",
+        voice="vinny",
+        mimicry_voice=None,
+        picks=[
+            ScorecardPick(
+                rank=i,
+                title=f"Yesterday pick {i} title",
+                summary=f"Summary {i}",
+                impact_score=8.0 + i * 0.1,
+                primary_ticker="SPY",
+                category="macro",
+                source_url=f"https://example.com/y-{i}",
+                source_name="example.com",
+            )
+            for i in (1, 2, 3)
+        ],
+        contrarian=ScorecardContrarian(
+            headline="x",
+            argument="y",
+            source_url="https://example.com/bear",
+            source_name="example.com",
+        ),
+    )
+
+
+class TestScorecardSlot:
+    """Cycle 4A: scorecard renders between the sparkline strip and the Top 3."""
+
+    def test_no_yesterday_means_no_scorecard_section(self):
+        article = _make_article()
+        html = render_email_html([article])
+        assert 'data-block="scorecard"' not in html
+
+    def test_yesterday_renders_scorecard_section(self):
+        article = _make_article()
+        html = render_email_html([article], yesterday=_yesterday_record())
+        assert 'data-block="scorecard"' in html
+        # Every yesterday pick title shows up.
+        for i in (1, 2, 3):
+            assert f"Yesterday pick {i} title" in html
+        # TBD placeholder for each pick.
+        assert html.count("TBD") >= 3
+
+    def test_scorecard_slot_is_between_sparkline_and_articles(self):
+        """Order: sparkline (top) -> scorecard -> articles (Top 3) -> contrarian."""
+        # Use a minimal sparkline so the marker is present.
+        from market_mover.models import SparklineSeries
+
+        sparklines = {
+            "SPY": SparklineSeries(
+                ticker="SPY",
+                close_prices=[100.0, 101.0, 99.0, 102.0, 103.0],
+                pct_change=3.0,
+                direction="up",
+            )
+        }
+        article = _make_article(title="Today top story headline")
+        html = render_email_html(
+            [article], sparklines=sparklines, yesterday=_yesterday_record()
+        )
+        spark_idx = html.find('data-block="sparkline"')
+        scorecard_idx = html.find('data-block="scorecard"')
+        article_idx = html.find("Today top story headline")
+        assert spark_idx != -1, "sparkline block missing"
+        assert scorecard_idx != -1, "scorecard block missing"
+        assert article_idx != -1, "article block missing"
+        assert spark_idx < scorecard_idx < article_idx, (
+            f"Expected sparkline ({spark_idx}) < scorecard ({scorecard_idx}) "
+            f"< articles ({article_idx})"
+        )
 
 
 class TestUnusedImportShim:

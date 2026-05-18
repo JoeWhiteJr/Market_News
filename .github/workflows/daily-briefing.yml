@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
-      contents: read
+      contents: write
       issues: write
 
     steps:
@@ -38,6 +38,35 @@ jobs:
           SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
           SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
         run: market-mover
+
+      - name: Commit Yesterday-Index briefing record
+        # Phase A persistence: append today's briefing row to data/briefings.jsonl
+        # and push it back to main so tomorrow's run can render the scorecard.
+        # Best-effort — a push race (cron + manual dispatch in the same minute)
+        # leaves the loser as a dropped row; we log and move on rather than
+        # fail the workflow. The email already shipped.
+        if: success()
+        run: |
+          set -e
+          DATE=$(date -u +%Y-%m-%d)
+          if [ ! -f data/briefings.jsonl ]; then
+            echo "No data/briefings.jsonl produced this run; skipping commit-back."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/briefings.jsonl
+          if git diff --cached --quiet; then
+            echo "No changes to data/briefings.jsonl; nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore(data): record briefing for ${DATE}"
+          # Allow the push to fail without failing the workflow — the email
+          # has already gone out and the row is in the local file. A racing
+          # run will overwrite or we'll catch up tomorrow.
+          if ! git push; then
+            echo "::warning::Push of briefings.jsonl failed (likely race with concurrent run). Data for ${DATE} is in this runner's local file but did not propagate."
+          fi
 
       - name: Open failure issue
         if: failure()

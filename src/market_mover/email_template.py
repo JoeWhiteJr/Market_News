@@ -10,6 +10,11 @@ from urllib.parse import urlparse
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from .models import ContrarianCoda, RankedArticle, SparklineSeries
+from .scorecard import (
+    BriefingRecord,
+    render_scorecard_html,
+    render_scorecard_plain_text,
+)
 
 RANK_COLORS = {
     1: "#c0392b",  # Deep red — top impact (WCAG AA on white text)
@@ -142,6 +147,7 @@ def render_email_html(
     sparklines: dict[str, SparklineSeries] | None = None,
     voice: dict | None = None,
     coda: ContrarianCoda | None = None,
+    yesterday: BriefingRecord | None = None,
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -154,6 +160,10 @@ def render_email_html(
         voice: Optional voice spec — its ``signoff`` is rendered in the footer.
         coda: Optional ``ContrarianCoda`` rendered at the bottom (just before
             the footer) inside ``<section data-block="contrarian">``.
+        yesterday: Optional :class:`BriefingRecord` from the previous day. When
+            present, a scorecard section is rendered between the sparkline
+            strip (top) and the Top 3 articles. Phase A shows placeholder
+            verdicts; Phase B will fill in real verdicts.
 
     Returns:
         Complete HTML string for the email body.
@@ -163,6 +173,7 @@ def render_email_html(
     time_str = html_escape(now_local.strftime("%I:%M %p %Z"))
     article_blocks = "\n".join(_render_article_block(a) for a in articles[:3])
     sparkline_block = _render_sparkline_block(sparklines or {})
+    scorecard_block = render_scorecard_html(yesterday, now_local.date())
 
     if articles:
         preheader_raw = _first_sentence(articles[0].market_impact_summary) or articles[0].title
@@ -220,6 +231,15 @@ def render_email_html(
     .mm-contrarian-headline {{ color: #e8ebf0 !important; }}
     .mm-contrarian-argument {{ color: #c8cdd6 !important; }}
     .mm-contrarian-source {{ color: #9aa0ad !important; }}
+    /* Yesterday-Index scorecard (Cycle 4 Phase A). */
+    .mm-scorecard-wrap {{ background-color: #1a1d24 !important; }}
+    .mm-scorecard-card {{ background-color: #232734 !important; border-left-color: #8a93a8 !important; }}
+    .mm-scorecard-eyebrow {{ color: #b3bcd1 !important; }}
+    .mm-scorecard-sub {{ color: #9aa0ad !important; }}
+    .mm-scorecard-row {{ border-bottom-color: #2c3140 !important; }}
+    .mm-scorecard-title {{ color: #e8ebf0 !important; }}
+    .mm-scorecard-meta {{ color: #9aa0ad !important; }}
+    .mm-scorecard-verdict {{ background-color: #2c3140 !important; color: #b3bcd1 !important; }}
     /* Badges already use a dark-saturated background and #fff text — keep them. */
   }}
   /* Mobile: stack the sparkline cells vertically so labels stay legible. */
@@ -245,7 +265,7 @@ def render_email_html(
   <p class="mm-header-sub" style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; {date_str}</p>
 </td>
 </tr>
-
+{scorecard_block}
 <!-- Articles -->
 <tr>
 <td style="padding:24px 32px;">
@@ -402,6 +422,7 @@ def render_plain_text(
     sparklines: dict[str, SparklineSeries] | None = None,
     voice: dict | None = None,
     coda: ContrarianCoda | None = None,
+    yesterday: BriefingRecord | None = None,
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -411,11 +432,14 @@ def render_plain_text(
             ``TICKER +/-X.X%`` pairs above the date header when present.
         voice: Optional voice spec; its ``signoff`` is appended.
         coda: Optional contrarian coda — appended as a "Bear Case" section.
+        yesterday: Optional previous-day record. When present, a scorecard
+            section is appended between the sparkline strip and the Top 3.
 
     Returns:
         Plain text string for the email body.
     """
-    date_str = _now_local().strftime("%B %d, %Y")
+    now_local = _now_local()
+    date_str = now_local.strftime("%B %d, %Y")
     lines = []
     if sparklines:
         parts = []
@@ -423,6 +447,11 @@ def render_plain_text(
             sign = "+" if series.pct_change >= 0 else ""
             parts.append(f"{series.ticker} {sign}{series.pct_change:.1f}%")
         lines.append("  ".join(parts))
+        lines.append("")
+
+    scorecard_text = render_scorecard_plain_text(yesterday, now_local.date())
+    if scorecard_text:
+        lines.append(scorecard_text)
         lines.append("")
 
     lines.extend([
