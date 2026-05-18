@@ -36,6 +36,14 @@ class RankedArticle(BaseModel):
     market_impact_summary: str
     impact_score: float
     is_video: bool = False
+    # Cycle 4 Phase A: Yesterday-Index enrichment.
+    # ``primary_ticker`` is nullable — pure-macro stories ("inflation surges")
+    # have no clean ticker proxy. ``category`` defaults to ``"other"`` so the
+    # schema change stays backward-compatible with tests that don't pass it.
+    primary_ticker: str | None = None
+    category: Literal[
+        "macro", "single_name", "commodity", "crypto", "geopolitical", "other"
+    ] = "other"
 
 
 class SparklineSeries(BaseModel):

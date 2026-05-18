@@ -20,6 +20,7 @@ from .email_template import build_subject, render_email_html, render_plain_text 
 from .llm_client import LLMClient  # noqa: E402
 from .mimicry import mimicry_voice_for, mimicry_voice_to_voice_spec  # noqa: E402
 from .models import RawArticle, SparklineSeries  # noqa: E402
+from .scorecard import append_record, build_record_from_pipeline, load_yesterday  # noqa: E402
 from .server import _deduplicate_articles  # noqa: E402
 from .sources.finnhub_source import fetch_finnhub_articles  # noqa: E402
 from .sources.newsapi_source import fetch_newsapi_articles  # noqa: E402
@@ -33,6 +34,55 @@ logging.basicConfig(
     format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
 )
 logger = logging.getLogger("market_mover.cli")
+
+
+# Map the full model id returned by LLMClient ("claude-sonnet-4-...",
+# "gemini-2.5-flash") down to the literal stored in the JSONL ("claude" or
+# "gemini"). Defensive — unknown names bucket as "claude" since that's the
+# primary path; the scorecard still renders, the model field is informational.
+def _model_family_label(model_used: str) -> str:
+    """Return ``"claude"`` or ``"gemini"`` from a full SDK model identifier."""
+    name = (model_used or "").lower()
+    if "gemini" in name:
+        return "gemini"
+    return "claude"
+
+
+# Map an effective voice's ``name`` field back to its persona key. The voice
+# dict carries display names ("Vinny from the Floor", "The Chairman") but the
+# JSONL schema's ``voice`` field is the persona key (vinny/neutral/...).
+_VOICE_NAME_TO_KEY: dict[str, str] = {
+    "Vinny from the Floor": "vinny",
+    "Neutral": "neutral",
+    "Terminal": "terminal",
+    "The Chairman": "villain",
+}
+
+
+def _persona_voice_key(voice_spec: dict | None) -> str:
+    """Return the persona key for a :class:`VoiceSpec`. Defaults to ``"neutral"``."""
+    if not voice_spec:
+        return "neutral"
+    name = voice_spec.get("name", "")
+    return _VOICE_NAME_TO_KEY.get(name, "neutral")
+
+
+# Map the mimicry display label (subject suffix) back to the JSONL key.
+# Kept in sync with mimicry.py's _MIMICRY_VOICES list.
+_MIMICRY_NAME_TO_KEY: dict[str, str] = {
+    "Jim Cramer": "cramer",
+    "Warren Buffett (shareholder letter)": "buffett",
+    "Matt Levine": "matt_levine",
+    "Zerohedge": "zerohedge",
+    "FT leader": "ft_leader",
+}
+
+
+def _mimicry_voice_key(mimicry_label: str | None) -> str | None:
+    """Return the JSONL mimicry key for a display label, or ``None``."""
+    if not mimicry_label:
+        return None
+    return _MIMICRY_NAME_TO_KEY.get(mimicry_label)
 
 
 def _gather_articles(
@@ -212,6 +262,7 @@ def run_pipeline() -> None:
 
     ranked, model_used, effective_voice = client.analyze_articles(deduped, voice=active_voice)
     logger.info(f"Top 3 ranked by {model_used} (effective voice: {effective_voice.get('name')})")
+    model_family = _model_family_label(model_used)
 
     for article in ranked:
         logger.info(f"  #{article.rank} [{article.impact_score}/10] {article.title[:60]}")
@@ -240,8 +291,47 @@ def run_pipeline() -> None:
 
     # Step 3: Format
     logger.info("Step 3: Formatting email...")
-    html_body = render_email_html(ranked, sparklines=sparklines, voice=effective_voice, coda=coda)
-    plain_text = render_plain_text(ranked, sparklines=sparklines, voice=effective_voice, coda=coda)
+    today = date.today()
+
+    # Yesterday-Index: load the previous run's record (if any) so the scorecard
+    # slot can render between the sparkline and Top 3. Failures here are
+    # non-fatal — the email still ships if persistence has gone sideways.
+    yesterday_record = None
+    jsonl_path = settings.briefings_jsonl_full_path
+    if settings.yesterday_index_enabled:
+        try:
+            yesterday_record = load_yesterday(jsonl_path, today)
+            if yesterday_record is not None:
+                logger.info(
+                    "Yesterday-Index: rendering scorecard for %s (%d picks)",
+                    yesterday_record.date,
+                    len(yesterday_record.picks),
+                )
+            else:
+                logger.info(
+                    "Yesterday-Index: no prior record at %s — scorecard hidden",
+                    jsonl_path,
+                )
+        except Exception as e:
+            # Defense in depth — load_yesterday already swallows expected errors,
+            # but if anything surprising bubbles up we still want today to ship.
+            logger.warning(f"Yesterday-Index load raised unexpectedly: {e}")
+            yesterday_record = None
+
+    html_body = render_email_html(
+        ranked,
+        sparklines=sparklines,
+        voice=effective_voice,
+        coda=coda,
+        yesterday=yesterday_record,
+    )
+    plain_text = render_plain_text(
+        ranked,
+        sparklines=sparklines,
+        voice=effective_voice,
+        coda=coda,
+        yesterday=yesterday_record,
+    )
     subject = build_subject(
         ranked,
         settings.email_subject_prefix,
@@ -263,6 +353,28 @@ def run_pipeline() -> None:
     else:
         logger.error("Pipeline complete — email sending FAILED")
         sys.exit(1)
+
+    # Step 5: Persist today's record for tomorrow's scorecard.
+    # Best-effort — never fail the run because of disk I/O. The email already went out.
+    if settings.yesterday_index_enabled:
+        try:
+            mim_key = _mimicry_voice_key(mimicry_label)
+            record = build_record_from_pipeline(
+                today=today,
+                ranked=ranked,
+                coda=coda,
+                model_used=model_family,
+                voice=_persona_voice_key(effective_voice),
+                mimicry_voice=mim_key,
+            )
+            append_record(record, jsonl_path)
+            logger.info("Yesterday-Index: persisted today's record to %s", jsonl_path)
+        except Exception as e:
+            logger.warning(
+                "Yesterday-Index: failed to persist today's record (%s) — "
+                "email already sent, continuing",
+                e,
+            )
 
 
 if __name__ == "__main__":
