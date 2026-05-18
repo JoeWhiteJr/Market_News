@@ -1,0 +1,20 @@
+MARKET MOVER — Top 3 Market-Moving Stories — May 18, 2026
+============================================================
+
+#1 — Impact: 9.5/10
+  Iran War Drives Oil Past $111, US Inflation Hits 3.8% — Fed Rate Cuts Off the Table
+  Source: euronews.com
+  Brent crude surged to $111.34/barrel Monday (+1.9%) as the US-Iran conflict shows no sign of resolution, with President Trump warning Iran to 'get moving' or face escalation. April CPI hit 3.8% YoY — the highest since May 2023 — and producer prices rose 6% YoY, crushing any hope of Fed rate cuts in 2026. This macro shock hits every rate-sensitive and consumer-facing sector: airlines, energy, retail, REITs, and growth tech all face headwinds as 'higher for longer' becomes market consensus.
+  Read: https://www.euronews.com/business/2026/05/12/iran-war-pushes-us-inflation-to-38-as-petrol-prices-surge
+
+#2 — Impact: 9.0/10
+  Nvidia Q1 2026 Earnings Wednesday — Options Price 8% Move on World's Largest Company
+  Source: indexbox.io
+  Nvidia (NVDA) reports Q1 2026 results on May 20 after the close, with Wall Street expecting $78.76B in revenue driven by Blackwell AI chip demand. At a $5.71 trillion market cap — the world's largest — options are pricing an 8% move in either direction, representing hundreds of billions in potential market-cap swing. The print will reprice the entire AI/semiconductor complex: AMD, Intel, Micron, and cloud hyperscalers (MSFT, GOOGL, AMZN) all trade on Nvidia's data-center revenue guidance.
+  Read: https://www.indexbox.io/blog/nvidia-q1-2026-earnings-preview-strong-ai-demand-points-to-upside/
+
+#3 — Impact: 8.5/10
+  30-Year Treasury Yields Top 5%, S&P 500 Futures Slide as Higher-For-Longer Locks In
+  Source: CNBC
+  The 30-year Treasury yield hit 5.03% and the 10-year approached 4.6% as oil-driven inflation leaves the Fed — now led by Kevin Warsh under White House pressure to cut — with no room to ease; CME FedWatch pegs the probability of no action at the next meeting at 97%. S&P 500 and Nasdaq-100 futures are both down ~0.2% in Monday pre-market. Rising yields compress growth-stock multiples and hammer rate-sensitive sectors: REITs, utilities, homebuilders, and long-duration tech all face a sustained re-rating lower.
+  Read: https://www.cnbc.com/2026/05/17/stock-market-today-live-updates.html
