@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<style>
+  /* Dark-mode overrides for clients that honor prefers-color-scheme
+     (Apple Mail, iOS Mail, Outlook.com web, recent Gmail web).
+     Gmail iOS still auto-inverts; the meta tags above opt us out where supported. */
+  @media (prefers-color-scheme: dark) {
+    body, .mm-bg { background-color: #0f1116 !important; }
+    .mm-card { background-color: #1a1d24 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important; }
+    .mm-header { background-color: #11131a !important; }
+    .mm-header-title { color: #e8ebf0 !important; }
+    .mm-header-sub { color: #9aa0ad !important; }
+    .mm-article-wrap { background-color: #232734 !important; }
+    .mm-title { color: #e8ebf0 !important; }
+    .mm-source { color: #9aa0ad !important; }
+    .mm-summary { color: #c8cdd6 !important; }
+    .mm-footer { background-color: #11131a !important; border-top-color: #232734 !important; }
+    .mm-footer-text { color: #7a8090 !important; }
+    /* Sparkline strip: swap to higher-contrast tones against the dark card bg. */
+    .mm-spark-wrap { background-color: #1a1d24 !important; border-bottom-color: #232734 !important; }
+    .mm-spark-ticker { color: #e8ebf0 !important; }
+    .mm-spark-up { color: #7bd99a !important; }
+    .mm-spark-up-stroke { stroke: #7bd99a !important; }
+    .mm-spark-down { color: #ff7a6b !important; }
+    .mm-spark-down-stroke { stroke: #ff7a6b !important; }
+    .mm-spark-flat { color: #a8aeb8 !important; }
+    .mm-spark-flat-stroke { stroke: #a8aeb8 !important; }
+    /* Contrarian "Bear Case" section. */
+    .mm-contrarian-wrap { background-color: #1a1d24 !important; border-top-color: #232734 !important; }
+    .mm-contrarian-card { background-color: #232734 !important; border-left-color: #b9863d !important; }
+    .mm-contrarian-eyebrow { color: #b9863d !important; }
+    .mm-contrarian-headline { color: #e8ebf0 !important; }
+    .mm-contrarian-argument { color: #c8cdd6 !important; }
+    .mm-contrarian-source { color: #9aa0ad !important; }
+    /* Yesterday-Index scorecard (Cycle 4 Phase A). */
+    .mm-scorecard-wrap { background-color: #1a1d24 !important; }
+    .mm-scorecard-card { background-color: #232734 !important; border-left-color: #8a93a8 !important; }
+    .mm-scorecard-eyebrow { color: #b3bcd1 !important; }
+    .mm-scorecard-sub { color: #9aa0ad !important; }
+    .mm-scorecard-row { border-bottom-color: #2c3140 !important; }
+    .mm-scorecard-title { color: #e8ebf0 !important; }
+    .mm-scorecard-meta { color: #9aa0ad !important; }
+    .mm-scorecard-verdict { background-color: #2c3140 !important; color: #b3bcd1 !important; }
+    /* Badges already use a dark-saturated background and #fff text — keep them. */
+  }
+  /* Mobile: stack the sparkline cells vertically so labels stay legible. */
+  @media (max-width: 600px) {
+    .mm-spark-cell { display:block !important; width:100% !important; padding:6px 0 !important; }
+    .mm-spark-row { display:block !important; width:100% !important; }
+  }
+</style>
+</head>
+<body class="mm-bg" style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#f4f4f4;opacity:0;">
+Kevin Warsh, a hawkish inflation hawk, was sworn in as Fed Chair Friday just as CPI hit 3.8% — the highest since May 2023 — and the 10-year…
+</div>
+
+<table width="100%" cellpadding="0" cellspacing="0" class="mm-bg" style="background-color:#f4f4f4;padding:20px 0;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" class="mm-card" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+
+<!-- Header -->
+<tr>
+<td class="mm-header" style="background-color:#1a1a2e;padding:24px 32px;text-align:center;">
+  <h1 class="mm-header-title" style="color:#ffffff;margin:0;font-size:24px;font-weight:700;">Market Mover</h1>
+  <p class="mm-header-sub" style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; May 19, 2026</p>
+</td>
+</tr>
+
+<!-- Articles -->
+<tr>
+<td style="padding:24px 32px;">
+
+  <!-- Article #1 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #c0392b;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 1 story, impact score 9.5 out of 10" style="display:inline-block;background-color:#c0392b;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #1 &bull; Impact: 9.5/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.cnbc.com/2026/05/18/kevin-warsh-trump-federal-reserve-chair.html" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          New Fed Chair Kevin Warsh Sworn In Amid Surging Inflation and Spiking Treasury Yields
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">CNBC</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          Kevin Warsh, a hawkish inflation hawk, was sworn in as Fed Chair Friday just as CPI hit 3.8% — the highest since May 2023 — and the 10-year Treasury yield surged to a yearly high. Markets have repriced a Fed rate hike probability from 1% to ~45%, putting pressure on rate-sensitive sectors including tech, real estate, and growth stocks, while benefiting financials and bank stocks. Warsh has signaled his intent to aggressively shrink the Fed’s .7T balance sheet, making this the single most consequential macro shift of 2026.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.cnbc.com/2026/05/18/kevin-warsh-trump-federal-reserve-chair.html" style="color:#c0392b;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+
+  <!-- Article #2 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #a05a00;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 2 story, impact score 9.0 out of 10" style="display:inline-block;background-color:#a05a00;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #2 &bull; Impact: 9.0/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.thestreet.com/stock-market-today/stock-market-today-may-19-2026-updates" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          Nvidia Reports Q1 FY2026 Earnings Tomorrow: AI Bellwether Could Swing Entire Tech Sector
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">thestreet.com</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          Nvidia reports fiscal Q1 results after the bell Wednesday with Wall Street expecting $78.8B revenue (+79% YoY) and EPS of $1.77 (+120% YoY) — but the bar is so high that even a beat may not satisfy bulls. As the $3T+ bellwether for all AI infrastructure spending, Nvidia’s guidance on data center demand, supply constraints, and competition will move not just NVDA but the entire semiconductor sector, hyperscalers (MSFT, GOOG, AMZN, META), and AI-adjacent names.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.thestreet.com/stock-market-today/stock-market-today-may-19-2026-updates" style="color:#a05a00;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+
+  <!-- Article #3 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #2470a8;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 3 story, impact score 8.0 out of 10" style="display:inline-block;background-color:#2470a8;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #3 &bull; Impact: 8.0/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.thestreet.com/latest-news/stock-market-today-may-18-2026-updates" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          Trump Calls Off Iran Strike as Oil Prices Spike Near $110; Geopolitical Risk Premium Elevated
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">thestreet.com</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          President Trump announced he called off a scheduled military strike on Iran citing active peace negotiations, sending mixed signals to energy markets where Brent crude already trades near $110/bbl — a multi-year high. The episode underscores a persistent Middle East risk premium in oil; any breakdown in talks could send crude sharply higher, boosting energy sector stocks (XOM, CVX) while adding inflationary pressure that compounds the Fed’s already difficult path under new Chair Warsh.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.thestreet.com/latest-news/stock-market-today-may-18-2026-updates" style="color:#2470a8;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+</td>
+</tr>
+
+
+<!-- Footer -->
+<tr>
+<td class="mm-footer" style="background-color:#f8f8fa;padding:16px 32px;text-align:center;border-top:1px solid #eaeaea;">
+  
+  <p class="mm-footer-text" style="color:#888;font-size:12px;margin:0;">
+    Generated by Market Mover MCP &bull; 06:10 AM MDT
+  </p>
+</td>
+</tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
