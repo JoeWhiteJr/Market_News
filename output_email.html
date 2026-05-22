@@ -3,17 +3,72 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<style>
+  /* Dark-mode overrides for clients that honor prefers-color-scheme
+     (Apple Mail, iOS Mail, Outlook.com web, recent Gmail web).
+     Gmail iOS still auto-inverts; the meta tags above opt us out where supported. */
+  @media (prefers-color-scheme: dark) {
+    body, .mm-bg { background-color: #0f1116 !important; }
+    .mm-card { background-color: #1a1d24 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important; }
+    .mm-header { background-color: #11131a !important; }
+    .mm-header-title { color: #e8ebf0 !important; }
+    .mm-header-sub { color: #9aa0ad !important; }
+    .mm-article-wrap { background-color: #232734 !important; }
+    .mm-title { color: #e8ebf0 !important; }
+    .mm-source { color: #9aa0ad !important; }
+    .mm-summary { color: #c8cdd6 !important; }
+    .mm-footer { background-color: #11131a !important; border-top-color: #232734 !important; }
+    .mm-footer-text { color: #7a8090 !important; }
+    /* Sparkline strip: swap to higher-contrast tones against the dark card bg. */
+    .mm-spark-wrap { background-color: #1a1d24 !important; border-bottom-color: #232734 !important; }
+    .mm-spark-ticker { color: #e8ebf0 !important; }
+    .mm-spark-up { color: #7bd99a !important; }
+    .mm-spark-up-stroke { stroke: #7bd99a !important; }
+    .mm-spark-down { color: #ff7a6b !important; }
+    .mm-spark-down-stroke { stroke: #ff7a6b !important; }
+    .mm-spark-flat { color: #a8aeb8 !important; }
+    .mm-spark-flat-stroke { stroke: #a8aeb8 !important; }
+    /* Contrarian "Bear Case" section. */
+    .mm-contrarian-wrap { background-color: #1a1d24 !important; border-top-color: #232734 !important; }
+    .mm-contrarian-card { background-color: #232734 !important; border-left-color: #b9863d !important; }
+    .mm-contrarian-eyebrow { color: #b9863d !important; }
+    .mm-contrarian-headline { color: #e8ebf0 !important; }
+    .mm-contrarian-argument { color: #c8cdd6 !important; }
+    .mm-contrarian-source { color: #9aa0ad !important; }
+    /* Yesterday-Index scorecard (Cycle 4 Phase A). */
+    .mm-scorecard-wrap { background-color: #1a1d24 !important; }
+    .mm-scorecard-card { background-color: #232734 !important; border-left-color: #8a93a8 !important; }
+    .mm-scorecard-eyebrow { color: #b3bcd1 !important; }
+    .mm-scorecard-sub { color: #9aa0ad !important; }
+    .mm-scorecard-row { border-bottom-color: #2c3140 !important; }
+    .mm-scorecard-title { color: #e8ebf0 !important; }
+    .mm-scorecard-meta { color: #9aa0ad !important; }
+    .mm-scorecard-verdict { background-color: #2c3140 !important; color: #b3bcd1 !important; }
+    /* Badges already use a dark-saturated background and #fff text — keep them. */
+  }
+  /* Mobile: stack the sparkline cells vertically so labels stay legible. */
+  @media (max-width: 600px) {
+    .mm-spark-cell { display:block !important; width:100% !important; padding:6px 0 !important; }
+    .mm-spark-row { display:block !important; width:100% !important; }
+  }
+</style>
 </head>
-<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f4;padding:20px 0;">
+<body class="mm-bg" style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#f4f4f4;opacity:0;">
+Nvidia beat Q1 FY2027 estimates with $81.6B revenue (+85% YoY) and EPS of $1.87 vs $1.76 expected, fueling a broad AI-sector rally:…
+</div>
+
+<table width="100%" cellpadding="0" cellspacing="0" class="mm-bg" style="background-color:#f4f4f4;padding:20px 0;">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+<table width="600" cellpadding="0" cellspacing="0" class="mm-card" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
 
 <!-- Header -->
 <tr>
-<td style="background-color:#1a1a2e;padding:24px 32px;text-align:center;">
-  <h1 style="color:#ffffff;margin:0;font-size:24px;font-weight:700;">Market Mover</h1>
-  <p style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; April 03, 2026</p>
+<td class="mm-header" style="background-color:#1a1a2e;padding:24px 32px;text-align:center;">
+  <h1 class="mm-header-title" style="color:#ffffff;margin:0;font-size:24px;font-weight:700;">Market Mover</h1>
+  <p class="mm-header-sub" style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; May 22, 2026</p>
 </td>
 </tr>
 
@@ -24,37 +79,37 @@
   <!-- Article #1 -->
   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
   <tr>
-  <td style="padding:16px;border-left:4px solid #e74c3c;background-color:#fafafa;border-radius:0 6px 6px 0;">
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #c0392b;background-color:#fafafa;border-radius:0 6px 6px 0;">
     <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td>
-        <span style="display:inline-block;background-color:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+        <span role="img" aria-label="Rank 1 story, impact score 9.5 out of 10" style="display:inline-block;background-color:#c0392b;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
           #1 &bull; Impact: 9.5/10
         </span>
       </td>
     </tr>
     <tr>
       <td style="padding-top:8px;">
-        <a href="https://www.bloomberg.com/news/articles/2026-04-02/asian-equities-may-open-higher-after-us-rebound-markets-wrap" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
-          Iran Conflict Sends Brent Crude to Highest Level Since 2008
+        <a href="https://www.kiplinger.com/investing/live/nvidia-earnings-live-updates-and-commentary-may-2026" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          Nvidia Reports Record $81.6B Revenue, Beating Estimates — AI Boom Drives S&amp;P 500
         </a>
       </td>
     </tr>
     <tr>
       <td style="padding-top:4px;">
-        <span style="color:#888;font-size:12px;">Bloomberg</span>
+        <span class="mm-source" style="color:#888;font-size:12px;">kiplinger.com</span>
       </td>
     </tr>
     <tr>
       <td style="padding-top:8px;">
-        <p style="color:#444;font-size:14px;line-height:1.5;margin:0;">
-          Brent crude hit its highest price since 2008 after President Trump issued formal escalation warnings against Iran, shocking energy markets globally. The spike ripples across every sector: airlines, shipping, and consumer goods face surging input costs, while energy majors (XOM, CVX) surge. The Fed faces a new inflation headwind that could delay or cancel its single projected 2026 rate cut, pressuring rate-sensitive tech and real estate.
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          Nvidia beat Q1 FY2027 estimates with $81.6B revenue (+85% YoY) and EPS of $1.87 vs $1.76 expected, fueling a broad AI-sector rally: SoftBank surged 11%+, quantum computing stocks jumped 13–30%, and NVDA&#x27;s outsized S&amp;P 500 weighting (~50% of index performance) pulled the benchmark to an eighth consecutive weekly gain. The company added an $80B buyback and raised its dividend 25x. Key risk: a $5B revenue hit from China H20 chip export restrictions.
         </p>
       </td>
     </tr>
     <tr>
       <td style="padding-top:12px;">
-        <a href="https://www.bloomberg.com/news/articles/2026-04-02/asian-equities-may-open-higher-after-us-rebound-markets-wrap" style="color:#e74c3c;font-size:13px;font-weight:600;text-decoration:none;">
+        <a href="https://www.kiplinger.com/investing/live/nvidia-earnings-live-updates-and-commentary-may-2026" style="color:#c0392b;font-size:13px;font-weight:600;text-decoration:none;">
           &#8594; Read full article
         </a>
       </td>
@@ -67,37 +122,37 @@
   <!-- Article #2 -->
   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
   <tr>
-  <td style="padding:16px;border-left:4px solid #f39c12;background-color:#fafafa;border-radius:0 6px 6px 0;">
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #a05a00;background-color:#fafafa;border-radius:0 6px 6px 0;">
     <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td>
-        <span style="display:inline-block;background-color:#f39c12;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+        <span role="img" aria-label="Rank 2 story, impact score 9.0 out of 10" style="display:inline-block;background-color:#a05a00;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
           #2 &bull; Impact: 9.0/10
         </span>
       </td>
     </tr>
     <tr>
       <td style="padding-top:8px;">
-        <a href="https://insight.factset.com/total-nonfarm-payrolls-for-march-2026-are-projected-to-rise-by-60000" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
-          March Jobs Report Released Into Closed Market — S&P 500 Reacts Monday
+        <a href="https://www.cnbc.com/2026/05/19/treasurys-yields-inflation-traders-fed-interest-rates.html" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          Moody&#x27;s Strips U.S. of Last AAA Rating as 30-Year Treasury Yield Tops 5.19%
         </a>
       </td>
     </tr>
     <tr>
       <td style="padding-top:4px;">
-        <span style="color:#888;font-size:12px;">BLS / FactSet</span>
+        <span class="mm-source" style="color:#888;font-size:12px;">CNBC</span>
       </td>
     </tr>
     <tr>
       <td style="padding-top:8px;">
-        <p style="color:#444;font-size:14px;line-height:1.5;margin:0;">
-          The BLS released the March 2026 Employment Situation at 8:30 AM ET today (Good Friday — markets closed). Consensus: +60,000 nonfarm payrolls, a rebound from February's shocking -92,000 (distorted by the Kaiser Permanente strike). Monday's open will be the first tradeable reaction. A beat strengthens risk-on momentum; a miss compounds recession fears already elevated by oil shock and tariffs, directly shifting Fed rate-cut timing expectations.
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          Moody&#x27;s downgraded the U.S. sovereign credit rating from AAA to Aa1 on May 16, becoming the final major agency to cut — joining S&amp;P (2011) and Fitch (2023). The move sent the 30-year Treasury yield above 5.19%, its highest since before the financial crisis, raising borrowing costs across mortgages, corporate debt, and government financing. The downgrade reflects a projected debt-to-GDP path of 134% by 2035 and persistent deficits near 7% of GDP, pressuring rate-sensitive sectors including real estate, utilities, and financials.
         </p>
       </td>
     </tr>
     <tr>
       <td style="padding-top:12px;">
-        <a href="https://insight.factset.com/total-nonfarm-payrolls-for-march-2026-are-projected-to-rise-by-60000" style="color:#f39c12;font-size:13px;font-weight:600;text-decoration:none;">
+        <a href="https://www.cnbc.com/2026/05/19/treasurys-yields-inflation-traders-fed-interest-rates.html" style="color:#a05a00;font-size:13px;font-weight:600;text-decoration:none;">
           &#8594; Read full article
         </a>
       </td>
@@ -110,37 +165,37 @@
   <!-- Article #3 -->
   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
   <tr>
-  <td style="padding:16px;border-left:4px solid #3498db;background-color:#fafafa;border-radius:0 6px 6px 0;">
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #2470a8;background-color:#fafafa;border-radius:0 6px 6px 0;">
     <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td>
-        <span style="display:inline-block;background-color:#3498db;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+        <span role="img" aria-label="Rank 3 story, impact score 8.5 out of 10" style="display:inline-block;background-color:#2470a8;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
           #3 &bull; Impact: 8.5/10
         </span>
       </td>
     </tr>
     <tr>
       <td style="padding-top:8px;">
-        <a href="https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
-          Trump Imposes 10% Global Blanket Tariff Through July 24; GM Flags $4B Hit
+        <a href="https://247wallst.com/investing/2026/05/21/stock-market-live-may-21-2026-sp-500-spy-slips-as-oil-gushes-higher/" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          U.S.-Iran War Stalls: Oil Near $110 as Hormuz Disruption Locks Out 14 mb/d
         </a>
       </td>
     </tr>
     <tr>
       <td style="padding-top:4px;">
-        <span style="color:#888;font-size:12px;">Tax Foundation / Bloomberg</span>
+        <span class="mm-source" style="color:#888;font-size:12px;">247wallst.com</span>
       </td>
     </tr>
     <tr>
       <td style="padding-top:8px;">
-        <p style="color:#444;font-size:14px;line-height:1.5;margin:0;">
-          President Trump invoked Section 122 of the Trade Act to impose a 10% blanket tariff on all imports, effective for 150 days through July 24, 2026, while extending auto/USMCA exemptions indefinitely. The effective U.S. tariff rate now stands at 13.7% — the highest since the 1930s — costing the average household $1,500 this year. GM flagged a $4B tariff headwind for 2026, Ford $2B, and Apple ~$1B/quarter. Investors are rotating out of multinationals into domestic small-caps, with the Russell 2000 outperforming the Nasdaq by 9% over the past 30 days.
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          Stalled ceasefire talks between Washington and Tehran kept oil prices near $110/bbl after earlier swinging between $100 and $144, with over 14 million barrels per day still shut in from Gulf producers — an unprecedented supply shock. Trump threatened to resume military action if Iran doesn&#x27;t comply, while Hormuz remains restricted. Elevated energy prices are reigniting inflation fears, pushing Fed rate-cut bets into 2027 territory and weighing on transport, airlines, consumer discretionary, and the broader Dow, which slipped even as Nasdaq edged higher.
         </p>
       </td>
     </tr>
     <tr>
       <td style="padding-top:12px;">
-        <a href="https://taxfoundation.org/research/all/federal/trump-tariffs-trade-war/" style="color:#3498db;font-size:13px;font-weight:600;text-decoration:none;">
+        <a href="https://247wallst.com/investing/2026/05/21/stock-market-live-may-21-2026-sp-500-spy-slips-as-oil-gushes-higher/" style="color:#2470a8;font-size:13px;font-weight:600;text-decoration:none;">
           &#8594; Read full article
         </a>
       </td>
@@ -152,11 +207,13 @@
 </td>
 </tr>
 
+
 <!-- Footer -->
 <tr>
-<td style="background-color:#f8f8fa;padding:16px 32px;text-align:center;border-top:1px solid #eaeaea;">
-  <p style="color:#888;font-size:12px;margin:0;">
-    Generated by Market Mover MCP &bull; 12:23 PM UTC
+<td class="mm-footer" style="background-color:#f8f8fa;padding:16px 32px;text-align:center;border-top:1px solid #eaeaea;">
+  
+  <p class="mm-footer-text" style="color:#888;font-size:12px;margin:0;">
+    Generated by Market Mover MCP &bull; 06:10 AM MDT
   </p>
 </td>
 </tr>
