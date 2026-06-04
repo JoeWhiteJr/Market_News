@@ -93,6 +93,14 @@ class MarketMoverSettings(BaseSettings):
     # a redeploy if it ever causes trouble.
     yesterday_index_enabled: bool = True
 
+    # --- Cycle 4B Yesterday-Index judge ------------------------------------
+    # Anthropic model used by the Phase B judge. Logged per-row as
+    # ``judge_model`` so historical comparisons stay apples-to-apples.
+    # IMPORTANT: per ADR 0001 the rubric+prompt are LOCKED. If you change
+    # this model, also bump ``JUDGE_PROMPT_VERSION`` in judge.py and
+    # manually re-grade history (no automated migration).
+    judge_model: str = "claude-sonnet-4-20250514"
+
     @property
     def briefings_jsonl_full_path(self) -> Path:
         """Resolve :attr:`briefings_jsonl_path` against the repo root.

@@ -233,6 +233,128 @@ def load_yesterday(path: Path, today: date) -> BriefingRecord | None:
     return record
 
 
+def commit_daily_record(
+    today_record: BriefingRecord,
+    yesterday_judgments: list[Judgment] | None,
+    path: Path,
+    judge_model: str | None = None,
+    judge_prompt_version: int | None = None,
+    graded_at: str | None = None,
+) -> None:
+    """Atomically patch yesterday's row + append today's row in one rename.
+
+    Phase B replaces the simple Phase A append with a single atomic write
+    that does TWO things at once:
+
+    1. If ``yesterday_judgments`` is provided AND a row exists in ``path``
+       with ``date == today_record.date - 1 day`` (the previous record
+       returned by :func:`load_yesterday`), patch its ``judgments``,
+       ``graded_at``, ``judge_model`` and ``judge_prompt_version`` fields
+       in-place.
+    2. Append ``today_record`` as a fresh JSON line.
+
+    Both changes ship in a single tempfile→fsync→rename. This is critical:
+    if the daily run dies between updating yesterday and writing today, the
+    NEXT day's "yesterday" lookup would return today's actual yesterday
+    (now graded) instead of today's missing row, leading to a stale
+    scorecard. The atomic single-rename prevents that split state.
+
+    A re-judge is intentionally NOT performed: if the previous row already
+    has ``judgments != None`` we skip the patch step (the LLM call was
+    already made; re-running would be wasted spend). ``yesterday_judgments``
+    coming in as ``None`` (judge failed today) is equivalent to "no patch".
+
+    Args:
+        today_record: Today's :class:`BriefingRecord` to append.
+        yesterday_judgments: List of :class:`Judgment` from grading the
+            previous row, or ``None`` if the judge didn't run / failed.
+        path: Destination JSONL (typically ``data/briefings.jsonl``).
+        judge_model: Anthropic model identifier used (e.g.
+            ``"claude-sonnet-4-20250514"``). Stamped onto the patched row.
+        judge_prompt_version: Locked integer per the ADR. Stamped onto the
+            patched row alongside ``judge_model``.
+        graded_at: ISO-8601 timestamp of when the judging completed.
+            Defaults to the current UTC time when ``yesterday_judgments``
+            is provided.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Read all existing rows (the file is small — one row per weekday).
+    existing_lines: list[str] = []
+    if path.exists():
+        try:
+            with path.open("r", encoding="utf-8") as fh:
+                for raw in fh:
+                    stripped = raw.rstrip("\n")
+                    if stripped.strip():
+                        existing_lines.append(stripped)
+        except OSError as e:
+            logger.warning(
+                "commit_daily_record: could not read %s (%s) — starting fresh",
+                path,
+                e,
+            )
+            existing_lines = []
+
+    # Patch the most recent prior row if it matches and we have judgments.
+    if yesterday_judgments and existing_lines:
+        last_idx = len(existing_lines) - 1
+        last_line = existing_lines[last_idx]
+        try:
+            prior = BriefingRecord.model_validate_json(last_line)
+        except Exception as e:
+            logger.warning(
+                "commit_daily_record: last row malformed (%s) — leaving "
+                "untouched, will still append today",
+                e,
+            )
+            prior = None
+
+        if prior is not None and prior.judgments is None:
+            # Only patch if the row is actually older than today AND not
+            # already graded. Same-day rows / future rows / already-graded
+            # rows are left alone.
+            if prior.date < today_record.date:
+                graded_at_ts = graded_at or _graded_at_now()
+                patched = prior.model_copy(
+                    update={
+                        "judgments": list(yesterday_judgments),
+                        "graded_at": graded_at_ts,
+                        "judge_model": judge_model,
+                        "judge_prompt_version": judge_prompt_version,
+                    }
+                )
+                existing_lines[last_idx] = patched.model_dump_json(exclude_none=False)
+
+    today_line = today_record.model_dump_json(exclude_none=False)
+
+    # Single atomic rename onto the target.
+    with tempfile.NamedTemporaryFile(
+        mode="wb",
+        dir=str(path.parent),
+        prefix=path.name + ".",
+        suffix=".tmp",
+        delete=False,
+    ) as tmp:
+        for line in existing_lines:
+            tmp.write(line.encode("utf-8"))
+            tmp.write(b"\n")
+        tmp.write(today_line.encode("utf-8"))
+        tmp.write(b"\n")
+        tmp.flush()
+        os.fsync(tmp.fileno())
+        tmp_name = tmp.name
+
+    os.replace(tmp_name, str(path))
+
+
+def _graded_at_now() -> str:
+    """Return the current UTC time as an ISO-8601 string (factored for tests)."""
+    from datetime import datetime, timezone
+
+    return datetime.now(timezone.utc).isoformat()
+
+
 def compute_running_stats(
     path: Path, window_days: int = 30
 ) -> RunningStats | None:
@@ -260,6 +382,33 @@ def compute_running_stats(
 _SCORECARD_ACCENT = "#3a3f4d"
 _SCORECARD_PLACEHOLDER = "TBD — judging launches in Phase B"
 
+# Per-verdict visual styling for the scorecard badge. The light-mode colors
+# pass WCAG AA (4.5:1) against the light card body (#f3f4f7); the dark-mode
+# overrides ship via CSS classes (``mm-scorecard-verdict-{verdict}``) and the
+# dark-mode @media block in ``email_template.py``.
+#
+# Reuses Cycle 2's contrast-corrected tokens where possible:
+#   - HIT green derived from sparkline up_light (#0a6f38, ~6.1:1 on white)
+#   - MISS red is the same #c0392b as rank #1 (~4.66:1 on white)
+#   - PARTIAL amber is RANK_COLORS[2] (#a05a00, ~5.4:1 on white)
+#   - TOO_EARLY / NOT_APPLICABLE use a neutral slate (#5a6068, ~5.6:1 on white)
+_VERDICT_STYLES: dict[str, dict[str, str]] = {
+    "HIT":            {"icon": "✓",  "label": "HIT",       "color": "#0a6f38", "bg": "#dff3e6"},
+    "PARTIAL":        {"icon": "◐",  "label": "PARTIAL",   "color": "#a05a00", "bg": "#fbf0db"},
+    "MISS":           {"icon": "✗",  "label": "MISS",      "color": "#c0392b", "bg": "#fbe0dc"},
+    "TOO_EARLY":      {"icon": "⏱", "label": "TOO EARLY", "color": "#5a6068", "bg": "#e6e7ec"},
+    "NOT_APPLICABLE": {"icon": "—",  "label": "N/A",       "color": "#5a6068", "bg": "#e6e7ec"},
+}
+
+# Plain-text verdict markers (rendered inside ``[ ]`` brackets).
+_VERDICT_PLAIN_LABELS: dict[str, str] = {
+    "HIT":            "HIT",
+    "PARTIAL":        "PARTIAL",
+    "MISS":           "MISS",
+    "TOO_EARLY":      "TOO EARLY",
+    "NOT_APPLICABLE": "N/A",
+}
+
 
 def render_scorecard_html(
     yesterday: BriefingRecord | None, today: date
@@ -285,8 +434,15 @@ def render_scorecard_html(
     today_label = html_escape(today.strftime("%B %d"))
     model_label = html_escape(yesterday.model_used.title())
 
+    # Build a per-rank lookup so each pick gets its matching judgment (if any).
+    judgments_by_rank: dict[int, Judgment] = {}
+    if yesterday.judgments is not None:
+        for j in yesterday.judgments:
+            judgments_by_rank[j.rank] = j
+
     pick_rows = "\n".join(
-        _render_scorecard_pick_html(pick) for pick in yesterday.picks
+        _render_scorecard_pick_html(pick, judgments_by_rank.get(pick.rank))
+        for pick in yesterday.picks
     )
 
     return f"""
@@ -328,16 +484,26 @@ def render_scorecard_html(
 </tr>"""
 
 
-def _render_scorecard_pick_html(pick: ScorecardPick) -> str:
-    """Render a single yesterday pick as a scorecard row."""
+def _render_scorecard_pick_html(
+    pick: ScorecardPick, judgment: Judgment | None
+) -> str:
+    """Render a single yesterday pick as a scorecard row.
+
+    When ``judgment`` is ``None`` (Phase A row that hasn't been graded yet,
+    or the Phase B judge failed for this pick today) we keep the Phase A
+    "TBD" placeholder so the email still ships gracefully.
+    """
     title = html_escape(pick.title)
     score = html_escape(f"{pick.impact_score:.1f}")
     rank = pick.rank
-    placeholder = html_escape(_SCORECARD_PLACEHOLDER)
     ticker = html_escape(pick.primary_ticker) if pick.primary_ticker else "&mdash;"
 
+    verdict_block, justification_block, snapshot_block = _render_verdict_blocks(
+        judgment
+    )
+
     return f"""        <tr>
-          <td class="mm-scorecard-row" style="padding:6px 0;border-bottom:1px solid #e6e7ec;">
+          <td class="mm-scorecard-row" style="padding:8px 0;border-bottom:1px solid #e6e7ec;">
             <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
             <tr>
               <td valign="top" style="font-size:12px;color:#333;font-weight:600;width:32px;">
@@ -348,17 +514,95 @@ def _render_scorecard_pick_html(pick: ScorecardPick) -> str:
                 <br>
                 <span class="mm-scorecard-meta" style="color:#666;font-size:11px;">
                   Impact {score}/10 &middot; Ticker: {ticker}
-                </span>
+                </span>{justification_block}{snapshot_block}
               </td>
               <td valign="top" align="right" style="font-size:11px;color:#666;white-space:nowrap;padding-left:8px;">
-                <span class="mm-scorecard-verdict" style="display:inline-block;background-color:#e6e7ec;color:#3a3f4d;font-weight:600;padding:2px 8px;border-radius:10px;">
-                  {placeholder}
-                </span>
+                {verdict_block}
               </td>
             </tr>
             </table>
           </td>
         </tr>"""
+
+
+def _render_verdict_blocks(
+    judgment: Judgment | None,
+) -> tuple[str, str, str]:
+    """Return ``(verdict_badge_html, justification_html, snapshot_html)``.
+
+    For ``judgment is None`` we fall back to the Phase A TBD placeholder
+    badge (no justification / snapshot rendered).
+    """
+    if judgment is None:
+        placeholder = html_escape(_SCORECARD_PLACEHOLDER)
+        badge = (
+            f'<span class="mm-scorecard-verdict mm-scorecard-verdict-tbd" '
+            f'style="display:inline-block;background-color:#e6e7ec;'
+            f'color:#3a3f4d;font-weight:600;padding:2px 8px;border-radius:10px;">'
+            f'{placeholder}</span>'
+        )
+        return badge, "", ""
+
+    style = _VERDICT_STYLES.get(judgment.verdict, _VERDICT_STYLES["NOT_APPLICABLE"])
+    verdict_key = judgment.verdict.lower().replace("_", "-")
+    icon = html_escape(style["icon"])
+    label = html_escape(style["label"])
+
+    badge = (
+        f'<span class="mm-scorecard-verdict mm-scorecard-verdict-{verdict_key}" '
+        f'aria-label="Verdict: {label}" '
+        f'style="display:inline-block;background-color:{style["bg"]};'
+        f'color:{style["color"]};font-weight:700;padding:3px 9px;'
+        f'border-radius:10px;font-size:11px;letter-spacing:0.02em;">'
+        f'<span aria-hidden="true">{icon}</span> {label}</span>'
+    )
+
+    justification = html_escape(judgment.justification)
+    justification_block = (
+        f'<br><span class="mm-scorecard-justification" '
+        f'style="color:#666;font-size:11px;font-style:italic;">'
+        f'{justification}</span>'
+    )
+
+    snapshot_block = _render_price_snapshot(judgment)
+    return badge, justification_block, snapshot_block
+
+
+def _render_price_snapshot(judgment: Judgment) -> str:
+    """Render the inline price snapshot under a graded pick.
+
+    Format: ``"SPY -1.1% · VIX +12%"`` (sized 10px, muted gray). Falls
+    back to ``""`` if the price data is missing entirely.
+    """
+    pd = judgment.price_data
+    parts: list[str] = []
+    if pd.primary_ticker and pd.primary_pct_change_24h is not None:
+        sign = "+" if pd.primary_pct_change_24h >= 0 else ""
+        parts.append(
+            f"{html_escape(pd.primary_ticker)} {sign}{pd.primary_pct_change_24h:.1f}%"
+        )
+    # Don't double-list SPY if the primary already IS SPY.
+    primary_is_spy = (pd.primary_ticker or "").upper() == "SPY"
+    if not primary_is_spy:
+        spy_sign = "+" if pd.spy_pct >= 0 else ""
+        parts.append(f"SPY {spy_sign}{pd.spy_pct:.1f}%")
+    vix_sign = "+" if pd.vix_pct_change >= 0 else ""
+    parts.append(f"VIX {vix_sign}{pd.vix_pct_change:.1f}%")
+    if pd.sector_etf and pd.sector_pct is not None:
+        sector_sign = "+" if pd.sector_pct >= 0 else ""
+        parts.append(
+            f"{html_escape(pd.sector_etf)} {sector_sign}{pd.sector_pct:.1f}%"
+        )
+
+    if not parts:
+        return ""
+
+    snapshot = " &middot; ".join(parts)
+    return (
+        f'<br><span class="mm-scorecard-snapshot" '
+        f'style="color:#888;font-size:10px;letter-spacing:0.02em;">'
+        f'{snapshot}</span>'
+    )
 
 
 def render_scorecard_plain_text(
@@ -380,15 +624,47 @@ def render_scorecard_plain_text(
         f"Grading {yesterday.model_used.title()}'s picks against {today_label}'s tape.",
         "",
     ]
+    judgments_by_rank: dict[int, Judgment] = {}
+    if yesterday.judgments is not None:
+        for j in yesterday.judgments:
+            judgments_by_rank[j.rank] = j
+
     for pick in yesterday.picks:
         ticker = pick.primary_ticker or "—"
         lines.append(
             f"  #{pick.rank} [{pick.impact_score:.1f}/10] {pick.title}"
         )
         lines.append(f"      Ticker: {ticker}")
-        lines.append(f"      Verdict: {_SCORECARD_PLACEHOLDER}")
+        judgment = judgments_by_rank.get(pick.rank)
+        if judgment is None:
+            lines.append(f"      Verdict: {_SCORECARD_PLACEHOLDER}")
+        else:
+            label = _VERDICT_PLAIN_LABELS.get(judgment.verdict, judgment.verdict)
+            lines.append(f"      Verdict: [{label}] — {judgment.justification}")
+            snapshot = _plain_text_price_snapshot(judgment)
+            if snapshot:
+                lines.append(f"      {snapshot}")
         lines.append("")
     return "\n".join(lines)
+
+
+def _plain_text_price_snapshot(judgment: Judgment) -> str:
+    """Return ``"SPY -1.1%  VIX +12%"`` style snapshot, or ``""`` if empty."""
+    pd = judgment.price_data
+    parts: list[str] = []
+    if pd.primary_ticker and pd.primary_pct_change_24h is not None:
+        sign = "+" if pd.primary_pct_change_24h >= 0 else ""
+        parts.append(f"{pd.primary_ticker} {sign}{pd.primary_pct_change_24h:.1f}%")
+    primary_is_spy = (pd.primary_ticker or "").upper() == "SPY"
+    if not primary_is_spy:
+        sign = "+" if pd.spy_pct >= 0 else ""
+        parts.append(f"SPY {sign}{pd.spy_pct:.1f}%")
+    sign = "+" if pd.vix_pct_change >= 0 else ""
+    parts.append(f"VIX {sign}{pd.vix_pct_change:.1f}%")
+    if pd.sector_etf and pd.sector_pct is not None:
+        sign = "+" if pd.sector_pct >= 0 else ""
+        parts.append(f"{pd.sector_etf} {sign}{pd.sector_pct:.1f}%")
+    return "  ".join(parts)
 
 
 # ---------------------------------------------------------------------------

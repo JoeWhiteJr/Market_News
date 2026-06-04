@@ -17,10 +17,13 @@ from market_mover.models import ContrarianCoda, RankedArticle, RawArticle, Sourc
 from market_mover.scorecard import (
     SCHEMA_VERSION,
     BriefingRecord,
+    Judgment,
+    PriceData,
     ScorecardContrarian,
     ScorecardPick,
     append_record,
     build_record_from_pipeline,
+    commit_daily_record,
     compute_running_stats,
     load_yesterday,
     render_scorecard_html,

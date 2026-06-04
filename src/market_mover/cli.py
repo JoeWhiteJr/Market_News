@@ -20,7 +20,13 @@ from .email_template import build_subject, render_email_html, render_plain_text 
 from .llm_client import LLMClient  # noqa: E402
 from .mimicry import mimicry_voice_for, mimicry_voice_to_voice_spec  # noqa: E402
 from .models import RawArticle, SparklineSeries  # noqa: E402
-from .scorecard import append_record, build_record_from_pipeline, load_yesterday  # noqa: E402
+from .judge import JUDGE_PROMPT_VERSION, judge_yesterday, now_iso_utc  # noqa: E402
+from .scorecard import (  # noqa: E402
+    append_record,
+    build_record_from_pipeline,
+    commit_daily_record,
+    load_yesterday,
+)
 from .server import _deduplicate_articles  # noqa: E402
 from .sources.finnhub_source import fetch_finnhub_articles  # noqa: E402
 from .sources.newsapi_source import fetch_newsapi_articles  # noqa: E402
@@ -297,6 +303,7 @@ def run_pipeline() -> None:
     # slot can render between the sparkline and Top 3. Failures here are
     # non-fatal — the email still ships if persistence has gone sideways.
     yesterday_record = None
+    yesterday_judgments = None
     jsonl_path = settings.briefings_jsonl_full_path
     if settings.yesterday_index_enabled:
         try:
@@ -317,6 +324,50 @@ def run_pipeline() -> None:
             # but if anything surprising bubbles up we still want today to ship.
             logger.warning(f"Yesterday-Index load raised unexpectedly: {e}")
             yesterday_record = None
+
+        # Cycle 4 Phase B: if yesterday isn't already graded, run the LLM
+        # judge against its 3 picks now. Wrapped in a broad try/except —
+        # judge failures NEVER break the daily send (the scorecard falls
+        # back to the Phase A "TBD" placeholder).
+        if yesterday_record is not None and yesterday_record.judgments is None:
+            logger.info(
+                "Yesterday-Index: invoking judge for %s (%d picks)",
+                yesterday_record.date,
+                len(yesterday_record.picks),
+            )
+            try:
+                yesterday_judgments = judge_yesterday(
+                    yesterday_record, settings, client
+                )
+                if yesterday_judgments:
+                    # Stamp the loaded record so the scorecard renders the
+                    # real verdicts. The persisted patch in
+                    # commit_daily_record happens below.
+                    yesterday_record = yesterday_record.model_copy(
+                        update={
+                            "judgments": yesterday_judgments,
+                            "graded_at": now_iso_utc(),
+                            "judge_model": settings.judge_model,
+                            "judge_prompt_version": JUDGE_PROMPT_VERSION,
+                        }
+                    )
+                    logger.info(
+                        "Yesterday-Index: judged %d/%d picks",
+                        len(yesterday_judgments),
+                        len(yesterday_record.picks),
+                    )
+                else:
+                    logger.warning(
+                        "Yesterday-Index: judge returned no judgments — "
+                        "scorecard falls back to TBD placeholder"
+                    )
+            except Exception as e:
+                logger.warning(
+                    "Yesterday-Index: judge raised (%s) — continuing without "
+                    "real verdicts",
+                    e,
+                )
+                yesterday_judgments = None
 
     html_body = render_email_html(
         ranked,
@@ -354,8 +405,10 @@ def run_pipeline() -> None:
         logger.error("Pipeline complete — email sending FAILED")
         sys.exit(1)
 
-    # Step 5: Persist today's record for tomorrow's scorecard.
-    # Best-effort — never fail the run because of disk I/O. The email already went out.
+    # Step 5: Persist today's record AND patch yesterday's row with the
+    # judgments we computed above. Cycle 4 Phase B uses a single atomic
+    # rename for both writes — see ``commit_daily_record`` for the
+    # crash-resilience reasoning.
     if settings.yesterday_index_enabled:
         try:
             mim_key = _mimicry_voice_key(mimicry_label)
@@ -367,8 +420,20 @@ def run_pipeline() -> None:
                 voice=_persona_voice_key(effective_voice),
                 mimicry_voice=mim_key,
             )
-            append_record(record, jsonl_path)
-            logger.info("Yesterday-Index: persisted today's record to %s", jsonl_path)
+            commit_daily_record(
+                today_record=record,
+                yesterday_judgments=yesterday_judgments,
+                path=jsonl_path,
+                judge_model=settings.judge_model if yesterday_judgments else None,
+                judge_prompt_version=(
+                    JUDGE_PROMPT_VERSION if yesterday_judgments else None
+                ),
+            )
+            logger.info(
+                "Yesterday-Index: persisted today's record to %s (yesterday patched: %s)",
+                jsonl_path,
+                bool(yesterday_judgments),
+            )
         except Exception as e:
             logger.warning(
                 "Yesterday-Index: failed to persist today's record (%s) — "
