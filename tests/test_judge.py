@@ -543,58 +543,77 @@ class TestJudgeYesterday:
 
 
 # ---------------------------------------------------------------------------
-# Friday → Monday window: the quotes source must skip Saturday/Sunday.
-# Tested at the quotes_source level since judge_pick uses it directly.
+# Quote-based price fetch (Cycle 4c): /stock/candle is premium-only (403), so
+# the judge grades against the free /quote snapshot's session. Tested at the
+# quotes_source level since judge_pick uses it directly.
 # ---------------------------------------------------------------------------
 
 
-class TestFridayMondayWindow:
-    """Briefing on a Friday should grade against Monday's close, not Saturday."""
+class TestQuotePriceFetch:
+    """fetch_24h_close_change reads Finnhub /quote: dp = session % move, c = close."""
 
-    def test_next_trading_day_skips_weekend(self):
-        from market_mover.sources.quotes_source import fetch_24h_close_change
-
-        # 2026-05-15 is a Friday. Saturday 2026-05-16 + Sunday 2026-05-17 have
-        # no candle data. Monday 2026-05-18 should be the close-to-close target.
-        friday = date(2026, 5, 15)
-        saturday = date(2026, 5, 16)
-        sunday = date(2026, 5, 17)
-        monday = date(2026, 5, 18)
-
-        # Simulate Finnhub: only Friday + Monday return "ok" candles.
+    @staticmethod
+    def _mock_requests_returning(payload):
         def fake_get(url, params=None, timeout=None, **kw):
-            sym = params["symbol"]
-            from_ts = params["from"]
-            # Reverse-engineer date from from_ts.
-            from datetime import datetime, timezone
-            ts_date = datetime.fromtimestamp(from_ts, tz=timezone.utc).date()
+            assert url.endswith("/quote"), f"expected /quote, got {url}"
             resp = MagicMock()
             resp.raise_for_status.return_value = None
-            if ts_date == friday and sym == "SPY":
-                resp.json.return_value = {"s": "ok", "c": [500.0]}
-            elif ts_date == monday and sym == "SPY":
-                resp.json.return_value = {"s": "ok", "c": [510.0]}
-            elif ts_date in (saturday, sunday):
-                resp.json.return_value = {"s": "no_data"}
-            else:
-                resp.json.return_value = {"s": "no_data"}
+            resp.json.return_value = payload
             return resp
 
         mock_requests = MagicMock()
         mock_requests.get.side_effect = fake_get
+        return mock_requests
 
-        with patch.dict("sys.modules", {"requests": mock_requests}):
+    def test_equity_returns_dp_as_pct_change(self):
+        from market_mover.sources.quotes_source import fetch_24h_close_change
+
+        # SPY closed 510 from a 500 prior close -> dp +2.0%.
+        payload = {"c": 510.0, "pc": 500.0, "d": 10.0, "dp": 2.0}
+        with patch.dict("sys.modules", {"requests": self._mock_requests_returning(payload)}):
             pct_change, vix_level = fetch_24h_close_change(
-                "SPY",
-                friday,
-                api_key="test",
-                min_call_interval=0.0,
+                "SPY", date(2026, 5, 15), api_key="test", min_call_interval=0.0
             )
-
-        # 500 → 510 = +2.0%.
         assert pct_change is not None
         assert abs(pct_change - 2.0) < 1e-3
         assert vix_level is None  # SPY isn't VIX
+
+    def test_falls_back_to_pc_when_dp_missing(self):
+        from market_mover.sources.quotes_source import fetch_24h_close_change
+
+        # No dp field -> compute (c - pc) / pc * 100 = +2.0%.
+        payload = {"c": 510.0, "pc": 500.0, "d": 10.0}
+        with patch.dict("sys.modules", {"requests": self._mock_requests_returning(payload)}):
+            pct_change, vix_level = fetch_24h_close_change(
+                "SPY", date(2026, 5, 15), api_key="test", min_call_interval=0.0
+            )
+        assert pct_change is not None
+        assert abs(pct_change - 2.0) < 1e-3
+
+    def test_vix_returns_level_and_change(self):
+        from market_mover.sources.quotes_source import fetch_24h_close_change
+
+        payload = {"c": 15.0, "pc": 14.0, "dp": 7.142857}
+        with patch.dict("sys.modules", {"requests": self._mock_requests_returning(payload)}):
+            pct_change, vix_level = fetch_24h_close_change(
+                "VIX", date(2026, 5, 15), api_key="test", min_call_interval=0.0
+            )
+        assert pct_change is not None
+        assert abs(pct_change - 7.142857) < 1e-3
+        assert vix_level is not None
+        assert abs(vix_level - 15.0) < 1e-6  # absolute VIX level for the prompt
+
+    def test_unknown_symbol_zero_close_returns_none(self):
+        from market_mover.sources.quotes_source import fetch_24h_close_change
+
+        # Finnhub returns c == 0 for an unknown symbol -> treat as no data.
+        payload = {"c": 0, "pc": 0, "d": None, "dp": None}
+        with patch.dict("sys.modules", {"requests": self._mock_requests_returning(payload)}):
+            pct_change, vix_level = fetch_24h_close_change(
+                "ZZZZ", date(2026, 5, 15), api_key="test", min_call_interval=0.0
+            )
+        assert pct_change is None
+        assert vix_level is None
 
 
 # ---------------------------------------------------------------------------
