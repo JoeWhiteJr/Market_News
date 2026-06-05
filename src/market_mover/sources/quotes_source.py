@@ -156,118 +156,58 @@ def _enforce_rate_limit(min_interval: float) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Cycle 4 Phase B — judge price-data fetches
+# Cycle 4 Phase B/C — judge price-data fetches
 # ---------------------------------------------------------------------------
+#
+# NOTE on the data source (Cycle 4c): Finnhub's ``/stock/candle`` endpoint is
+# premium-only on our current plan — it returns HTTP 403 ("You don't have
+# access to this resource"). The free ``/quote`` endpoint works and returns a
+# single snapshot: current close ``c``, previous close ``pc``, and the session
+# percent change ``dp``. We grade against that snapshot's session.
+#
+# Why a snapshot is the right window: the daily cron grades YESTERDAY's
+# briefing pre-market (~06:00 MDT, before the 09:30 ET open). At that moment
+# the most-recent COMPLETED session is the one that followed yesterday's
+# pre-market briefing — exactly the "close-to-close, ~24h after the briefing"
+# window the ADR locks. ``dp`` is that session's move; ``c`` is its close
+# (used as the VIX level). ``briefing_date`` is retained for signature
+# stability + a staleness guard, not for historical lookup (``/quote`` has no
+# history).
 
 
-def _fetch_candle(
+def _fetch_quote(
     ticker: str,
-    from_ts: int,
-    to_ts: int,
     api_key: str,
+    min_call_interval: float,
 ) -> dict | None:
-    """Make a single Finnhub ``/stock/candle`` GET. Returns the parsed JSON
-    payload, or ``None`` on any failure (HTTP error, no requests lib, bad
-    JSON). The judge-side callers treat ``None`` as "no data — pass null
-    through to the LLM."""
+    """Make a single Finnhub ``/quote`` GET. Returns the parsed JSON payload,
+    or ``None`` on any failure (HTTP error, no requests lib, bad JSON). The
+    judge-side callers treat ``None`` as "no data — pass null through to the
+    LLM."
+
+    A successful ``/quote`` for a real symbol returns non-zero ``c`` and
+    ``pc``. Finnhub returns ``c == 0`` (and ``pc == 0``) for an unknown
+    symbol, which callers treat as "no data".
+    """
     try:
         import requests
-    except Exception as e:  # pragma: no cover — defensive
+    except Exception as e:  # pragma: no cover — defensive; requests is transitive
         logger.warning(f"Quote fetch unavailable (requests import failed): {e}")
         return None
 
+    _enforce_rate_limit(min_call_interval)
+
     try:
         resp = requests.get(
-            "https://finnhub.io/api/v1/stock/candle",
-            params={
-                "symbol": ticker,
-                "resolution": "D",
-                "from": from_ts,
-                "to": to_ts,
-                "token": api_key,
-            },
+            "https://finnhub.io/api/v1/quote",
+            params={"symbol": ticker, "token": api_key},
             timeout=_HTTP_TIMEOUT_SECS,
         )
         resp.raise_for_status()
         return resp.json()
     except Exception as e:
-        logger.warning(f"Candle fetch failed for {ticker}: {e}")
+        logger.warning(f"Quote fetch failed for {ticker}: {e}")
         return None
-
-
-def fetch_close_price(
-    ticker: str,
-    on_date: date,
-    api_key: str,
-    min_call_interval: float = 1.0,
-) -> float | None:
-    """Return the daily close price for ``ticker`` on ``on_date``.
-
-    Returns ``None`` when the date has no trading data (weekend, holiday,
-    illiquid ticker, API failure). The Phase B judge uses this for
-    close-to-close 24h calculations — the caller is expected to advance the
-    date manually for Friday→Monday windows.
-
-    Args:
-        ticker: Symbol to fetch (e.g. ``"SPY"``).
-        on_date: Calendar date to look up.
-        api_key: Finnhub API key. Empty -> ``None``.
-        min_call_interval: Min seconds between Finnhub HTTP calls. Defaults
-            to the project-wide 1.0s convention.
-    """
-    if not api_key or not ticker:
-        return None
-
-    _enforce_rate_limit(min_call_interval)
-
-    # Finnhub /stock/candle returns a list — pad the window by a couple days
-    # in case the exact date is a weekend/holiday and we want the user to
-    # have advanced manually (we still return None here if the requested
-    # date has no candle, but we ask for a small range so the API has data
-    # to return rather than failing outright).
-    day_start = datetime(on_date.year, on_date.month, on_date.day, tzinfo=timezone.utc)
-    day_end = day_start + timedelta(days=1)
-    from_ts = int(day_start.timestamp())
-    to_ts = int(day_end.timestamp())
-
-    payload = _fetch_candle(ticker.upper(), from_ts, to_ts, api_key)
-    if not isinstance(payload, dict):
-        return None
-    if payload.get("s") != "ok":
-        return None
-
-    closes_raw = payload.get("c") or []
-    if not isinstance(closes_raw, list) or not closes_raw:
-        return None
-
-    try:
-        # The last close in the window is the one we want (handles APIs that
-        # return adjacent days if our timestamp window straddles a boundary).
-        return float(closes_raw[-1])
-    except (TypeError, ValueError):
-        return None
-
-
-def _next_trading_day(
-    ticker: str,
-    after_date: date,
-    api_key: str,
-    min_call_interval: float,
-    max_lookahead: int = 7,
-) -> tuple[date, float] | None:
-    """Find the next trading day's close after ``after_date`` for ``ticker``.
-
-    Walks forward 1..max_lookahead calendar days and returns the first one
-    with a close. Friday → Monday (3 calendar days) is the common case;
-    Friday-into-a-Monday-holiday → Tuesday is 4 days. We cap at 7 to avoid
-    surprising the API budget on a permanently delisted ticker.
-    """
-    for offset in range(1, max_lookahead + 1):
-        candidate = after_date + timedelta(days=offset)
-        close = fetch_close_price(ticker, candidate, api_key, min_call_interval)
-        if close is not None:
-            return candidate, close
-    return None
 
 
 def fetch_24h_close_change(
@@ -278,22 +218,26 @@ def fetch_24h_close_change(
 ) -> tuple[float | None, float | None]:
     """Return ``(pct_change, vix_level_if_ticker_is_VIX_else_None)``.
 
-    Implements the ADR's locked window: close on ``briefing_date`` vs close
-    on the NEXT TRADING DAY. So a Friday briefing grades against Monday's
-    close (3 calendar days, 1 trading day). Holidays slide one more day.
+    Implements the ADR's locked close-to-close window via Finnhub ``/quote``
+    (see the module note above for why a snapshot is the correct window when
+    graded pre-market the next day). ``pct_change`` is the session percent
+    move (``dp``, falling back to ``(c - pc) / pc`` when ``dp`` is absent).
 
     For VIX (``"VIX"`` / ``"^VIX"``), also returns the absolute close level
-    — the judge prompt needs both the level (``vix_close``) and the change
-    (``vix_pct``).
+    ``c`` — the judge prompt needs both the level (``vix_close``) and the
+    change (``vix_pct``).
 
     Returns ``(None, None)`` when the underlying data isn't available — the
     judge LLM still produces a verdict (typically ``NOT_APPLICABLE`` or
-    ``TOO_EARLY``) when the prices are null.
+    ``TOO_EARLY``) when the prices are null. For VIX with a usable level but
+    no clean change, returns ``(None, level)`` so the prompt still shows the
+    VIX level.
 
     Args:
         ticker: Symbol to fetch (case-insensitive). VIX special-cased.
-        briefing_date: The day the briefing was sent — close-to-close window
-            starts here.
+        briefing_date: The day the briefing was sent. Retained for signature
+            stability; ``/quote`` has no historical lookup so the fetch uses
+            the latest completed session (see module note).
         api_key: Finnhub API key. Empty -> ``(None, None)``.
         min_call_interval: Min seconds between Finnhub HTTP calls.
     """
@@ -305,23 +249,34 @@ def fetch_24h_close_change(
     # Finnhub uses the ^VIX symbol for the index itself.
     finnhub_sym = "^VIX" if is_vix else sym
 
-    start_close = fetch_close_price(
-        finnhub_sym, briefing_date, api_key, min_call_interval
-    )
-    if start_close is None or start_close == 0:
+    quote = _fetch_quote(finnhub_sym, api_key, min_call_interval)
+    if not isinstance(quote, dict):
         return None, None
 
-    next_day = _next_trading_day(
-        finnhub_sym, briefing_date, api_key, min_call_interval
-    )
-    if next_day is None:
-        if is_vix:
-            return None, start_close
+    def _num(key: str) -> float | None:
+        val = quote.get(key)
+        try:
+            return float(val) if val is not None else None
+        except (TypeError, ValueError):
+            return None
+
+    current_close = _num("c")
+    prev_close = _num("pc")
+    dp = _num("dp")
+
+    # Finnhub returns c == 0 / pc == 0 for an unknown symbol — treat as no data.
+    if not current_close:  # None or 0.0
         return None, None
 
-    _, end_close = next_day
-    pct_change = ((end_close - start_close) / start_close) * 100.0
+    if dp is not None:
+        pct_change = dp
+    elif prev_close:  # not None and not 0.0
+        pct_change = ((current_close - prev_close) / prev_close) * 100.0
+    else:
+        # We have a level but no usable change (e.g. pc missing). For VIX the
+        # level is still useful to the prompt; for equities it isn't.
+        return None, (current_close if is_vix else None)
 
     if is_vix:
-        return pct_change, end_close
+        return pct_change, current_close
     return pct_change, None

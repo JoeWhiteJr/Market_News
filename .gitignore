@@ -30,3 +30,7 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+# Agent worktrees + dev-cycle internal state (never commit these)
+.claude/
+.workflow/
