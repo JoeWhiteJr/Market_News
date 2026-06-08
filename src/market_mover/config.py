@@ -117,6 +117,11 @@ class MarketMoverSettings(BaseSettings):
     # Deterministic lexicon score, no extra LLM call. Off = hide the badges.
     hype_detector_enabled: bool = True
 
+    # Pre-Market Earnings Card (creative #14) — notable companies reporting
+    # earnings today, via Finnhub's free /calendar/earnings. Off = hide it.
+    earnings_card_enabled: bool = True
+    earnings_card_max: int = 5
+
     # --- Cycle 4A Yesterday-Index ------------------------------------------
     # Path to the append-only JSONL of daily briefing records. Relative paths
     # are resolved against the repo root via :attr:`briefings_jsonl_full_path`.

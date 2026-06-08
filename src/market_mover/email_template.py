@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from .hype import HypeScore
 from .models import ContrarianCoda, RankedArticle, SparklineSeries
+from .sources.earnings_source import EarningsEntry
 from .scorecard import (
     BriefingRecord,
     render_scorecard_html,
@@ -151,6 +152,7 @@ def render_email_html(
     yesterday: BriefingRecord | None = None,
     hype_scores: dict[int, HypeScore] | None = None,
     paper_stats: dict | None = None,
+    earnings: list["EarningsEntry"] | None = None,
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -184,6 +186,7 @@ def render_email_html(
     sparkline_block = _render_sparkline_block(sparklines or {})
     scorecard_block = render_scorecard_html(yesterday, now_local.date())
     scorecard_block += _render_paper_block_html(paper_stats)
+    earnings_block = _render_earnings_block_html(earnings or [])
 
     if articles:
         preheader_raw = _first_sentence(articles[0].market_impact_summary) or articles[0].title
@@ -276,6 +279,7 @@ def render_email_html(
 </td>
 </tr>
 {scorecard_block}
+{earnings_block}
 <!-- Articles -->
 <tr>
 <td style="padding:24px 32px;">
@@ -435,6 +439,7 @@ def render_plain_text(
     yesterday: BriefingRecord | None = None,
     hype_scores: dict[int, HypeScore] | None = None,
     paper_stats: dict | None = None,
+    earnings: list["EarningsEntry"] | None = None,
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -473,6 +478,11 @@ def render_plain_text(
     paper_line = _render_paper_block_plain(paper_stats)
     if paper_line:
         lines.append(paper_line)
+        lines.append("")
+
+    earnings_text = _render_earnings_block_plain(earnings or [])
+    if earnings_text:
+        lines.append(earnings_text)
         lines.append("")
 
     lines.extend([
@@ -638,6 +648,72 @@ def _render_paper_block_plain(paper_stats: dict | None) -> str:
         if win_rate is not None:
             parts.append(f"Win {win_rate:.0f}% ({paper_stats.get('wins') or 0}/{n})")
     return "  •  ".join(parts)
+
+
+def _fmt_revenue(value: float | None) -> str:
+    """Format a revenue estimate as ``$1.2B`` / ``$345M`` / ``$1.2K``."""
+    if not value:
+        return ""
+    for unit, div in (("B", 1e9), ("M", 1e6), ("K", 1e3)):
+        if abs(value) >= div:
+            return f"${value / div:.1f}{unit}"
+    return f"${value:.0f}"
+
+
+def _render_earnings_block_html(entries: list[EarningsEntry]) -> str:
+    """Render the Pre-Market Earnings card (creative #14). Empty if no entries."""
+    if not entries:
+        return ""
+
+    rows = []
+    for e in entries:
+        ticker = html_escape(e.symbol)
+        meta_bits = [html_escape(e.when_label)]
+        if e.eps_estimate is not None:
+            meta_bits.append(f"EPS est {e.eps_estimate:.2f}")
+        rev = _fmt_revenue(e.revenue_estimate)
+        if rev:
+            meta_bits.append(f"Rev est {rev}")
+        meta = html_escape(" · ").join(meta_bits)
+        rows.append(
+            f'<tr><td style="padding:3px 0;font-size:13px;color:#333;">'
+            f'<strong style="color:#1a1a2e;">{ticker}</strong>'
+            f'<span style="color:#777;"> &nbsp;{meta}</span></td></tr>'
+        )
+
+    return f"""
+<tr>
+<td style="padding:0 32px 4px;">
+  <section data-block="earnings">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
+  <tr>
+  <td style="padding:12px 14px;background-color:#fbf7ef;border-left:4px solid #b8860b;border-radius:0 6px 6px 0;">
+    <div style="font-size:12px;font-weight:700;color:#8a6400;margin-bottom:6px;">&#128197; REPORTING EARNINGS TODAY</div>
+    <table width="100%" cellpadding="0" cellspacing="0">
+    {"".join(rows)}
+    </table>
+  </td>
+  </tr>
+  </table>
+  </section>
+</td>
+</tr>"""
+
+
+def _render_earnings_block_plain(entries: list[EarningsEntry]) -> str:
+    """Plain-text Pre-Market Earnings card. Empty if no entries."""
+    if not entries:
+        return ""
+    lines = ["EARNINGS TODAY", "-" * 60]
+    for e in entries:
+        bits = [e.when_label]
+        if e.eps_estimate is not None:
+            bits.append(f"EPS est {e.eps_estimate:.2f}")
+        rev = _fmt_revenue(e.revenue_estimate)
+        if rev:
+            bits.append(f"Rev est {rev}")
+        lines.append(f"  {e.symbol} — {' · '.join(bits)}")
+    return "\n".join(lines)
 
 
 def _render_article_block(
