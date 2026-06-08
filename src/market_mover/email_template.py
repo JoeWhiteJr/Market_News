@@ -150,6 +150,7 @@ def render_email_html(
     coda: ContrarianCoda | None = None,
     yesterday: BriefingRecord | None = None,
     hype_scores: dict[int, HypeScore] | None = None,
+    paper_stats: dict | None = None,
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -182,6 +183,7 @@ def render_email_html(
     )
     sparkline_block = _render_sparkline_block(sparklines or {})
     scorecard_block = render_scorecard_html(yesterday, now_local.date())
+    scorecard_block += _render_paper_block_html(paper_stats)
 
     if articles:
         preheader_raw = _first_sentence(articles[0].market_impact_summary) or articles[0].title
@@ -432,6 +434,7 @@ def render_plain_text(
     coda: ContrarianCoda | None = None,
     yesterday: BriefingRecord | None = None,
     hype_scores: dict[int, HypeScore] | None = None,
+    paper_stats: dict | None = None,
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -465,6 +468,11 @@ def render_plain_text(
     scorecard_text = render_scorecard_plain_text(yesterday, now_local.date())
     if scorecard_text:
         lines.append(scorecard_text)
+        lines.append("")
+
+    paper_line = _render_paper_block_plain(paper_stats)
+    if paper_line:
+        lines.append(paper_line)
         lines.append("")
 
     lines.extend([
@@ -572,6 +580,64 @@ def _render_hype_badge(hype: HypeScore | None) -> str:
         'border-radius:3px;margin-bottom:8px;margin-left:6px;">'
         f"&#9888; {safe_label}</span>"
     )
+
+
+def _render_paper_block_html(paper_stats: dict | None) -> str:
+    """Render the compact "Paper Portfolio" track-record line (Cycle 6).
+
+    Returns an empty string until there's an equity snapshot to show. P&L and
+    win-rate only appear once at least one trade has closed.
+    """
+    if not paper_stats or paper_stats.get("equity") is None:
+        return ""
+
+    equity = paper_stats["equity"]
+    n = paper_stats.get("n_trades") or 0
+    total_pnl = paper_stats.get("total_pnl") or 0.0
+    win_rate = paper_stats.get("win_rate")
+    wins = paper_stats.get("wins") or 0
+
+    bits = [f"Equity ${equity:,.0f}"]
+    if n > 0:
+        pnl_color = "#1a7f37" if total_pnl >= 0 else "#b91c1c"
+        sign = "+" if total_pnl >= 0 else "−"
+        bits.append(
+            f'<span style="color:{pnl_color};font-weight:700;">P&amp;L {sign}'
+            f"${abs(total_pnl):,.0f}</span>"
+        )
+        if win_rate is not None:
+            bits.append(f"Win {win_rate:.0f}% ({wins}/{n})")
+    inner = " &nbsp;&bull;&nbsp; ".join(bits)
+
+    return f"""
+  <section data-block="paper">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;">
+  <tr>
+  <td style="padding:10px 14px;background-color:#f4f7fb;border-left:4px solid #2d5fa0;border-radius:0 6px 6px 0;">
+    <span style="font-size:12px;font-weight:700;color:#2d5fa0;">&#128200; PAPER PORTFOLIO</span>
+    <span style="font-size:11px;color:#888;"> &mdash; paper money, picks auto-traded</span>
+    <div style="font-size:13px;color:#333;padding-top:4px;">{inner}</div>
+  </td>
+  </tr>
+  </table>
+  </section>"""
+
+
+def _render_paper_block_plain(paper_stats: dict | None) -> str:
+    """Plain-text "Paper Portfolio" line (Cycle 6). Empty until equity exists."""
+    if not paper_stats or paper_stats.get("equity") is None:
+        return ""
+    equity = paper_stats["equity"]
+    n = paper_stats.get("n_trades") or 0
+    parts = [f"PAPER PORTFOLIO (paper money) — Equity ${equity:,.0f}"]
+    if n > 0:
+        total_pnl = paper_stats.get("total_pnl") or 0.0
+        win_rate = paper_stats.get("win_rate")
+        sign = "+" if total_pnl >= 0 else "-"
+        parts.append(f"P&L {sign}${abs(total_pnl):,.0f}")
+        if win_rate is not None:
+            parts.append(f"Win {win_rate:.0f}% ({paper_stats.get('wins') or 0}/{n})")
+    return "  •  ".join(parts)
 
 
 def _render_article_block(

@@ -18,6 +18,7 @@ from .config import MarketMoverSettings  # noqa: E402
 from .email_sender import send_email  # noqa: E402
 from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
 from .hype import HypeScore, score_hype  # noqa: E402
+from .paper_trading import compute_paper_stats, load_cycles, run_paper_cycle  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
 from .mimicry import mimicry_voice_for, mimicry_voice_to_voice_spec  # noqa: E402
 from .models import RawArticle, SparklineSeries  # noqa: E402
@@ -381,6 +382,22 @@ def run_pipeline() -> None:
         flagged = sum(1 for h in hype_scores.values() if h.score > 0)
         logger.info(f"Overhype Detector: {flagged}/{len(hype_scores)} stories flagged")
 
+    # Paper-trading cycle (Cycle 6 / ADR 0003): close yesterday's paper
+    # positions, open today's eligible picks, snapshot equity. Wrapped so a
+    # broker hiccup never breaks the send. Runs before render so the scorecard
+    # can show the up-to-date track record.
+    paper_stats: dict | None = None
+    if settings.paper_trading_enabled and settings.has_alpaca_creds:
+        try:
+            run_paper_cycle(ranked, settings, today)
+            paper_stats = compute_paper_stats(
+                load_cycles(settings.paper_trades_jsonl_full_path)
+            )
+            logger.info("Paper track record: %s", paper_stats)
+        except Exception as e:
+            logger.warning("Paper-trading cycle raised (%s) — continuing", e)
+            paper_stats = None
+
     html_body = render_email_html(
         ranked,
         sparklines=sparklines,
@@ -388,6 +405,7 @@ def run_pipeline() -> None:
         coda=coda,
         yesterday=yesterday_record,
         hype_scores=hype_scores,
+        paper_stats=paper_stats,
     )
     plain_text = render_plain_text(
         ranked,
@@ -396,6 +414,7 @@ def run_pipeline() -> None:
         coda=coda,
         yesterday=yesterday_record,
         hype_scores=hype_scores,
+        paper_stats=paper_stats,
     )
     subject = build_subject(
         ranked,

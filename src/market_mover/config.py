@@ -49,6 +49,22 @@ class MarketMoverSettings(BaseSettings):
         """True when both Alpaca data credentials are configured."""
         return bool(self.alpaca_api_key_id and self.alpaca_api_secret_key)
 
+    # Paper-trading track record (Cycle 6 / ADR 0003). PAPER ONLY — there is no
+    # live-trading endpoint wired anywhere in this codebase.
+    paper_trading_enabled: bool = True
+    # Equal-weight notional per position, in paper dollars.
+    paper_notional_per_position: float = 1000.0
+    # Append-only ledger, one cycle record per trading day.
+    paper_trades_jsonl_path: str = "data/paper_trades.jsonl"
+    # Paper trading API base — hard-coded to the paper host as a safety rail.
+    alpaca_paper_base_url: str = "https://paper-api.alpaca.markets"
+
+    @property
+    def paper_trades_jsonl_full_path(self) -> Path:
+        """Absolute path to the paper-trades ledger."""
+        p = Path(self.paper_trades_jsonl_path)
+        return p if p.is_absolute() else _PROJECT_ROOT / p
+
     # LLM config
     claude_model: str = "claude-sonnet-4-20250514"
     gemini_model: str = "gemini-2.5-flash"

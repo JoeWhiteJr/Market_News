@@ -6,6 +6,21 @@ from market_mover.config import MarketMoverSettings
 from market_mover.models import RankedArticle, RawArticle, SourceType
 
 
+@pytest.fixture(autouse=True)
+def _no_real_alpaca(monkeypatch):
+    """SAFETY: never let a test reach the real Alpaca paper account.
+
+    ``MarketMoverSettings`` loads the developer's real ``.env`` (which holds
+    live Alpaca keys), so without this an end-to-end pipeline test would place
+    real paper orders + write the real ledger. Forcing the creds empty makes
+    ``has_alpaca_creds`` False everywhere, so the price/paper paths no-op unless
+    a test explicitly injects a fake client. Tests that exercise those paths
+    pass creds/clients directly and are unaffected.
+    """
+    monkeypatch.setenv("ALPACA_API_KEY_ID", "")
+    monkeypatch.setenv("ALPACA_API_SECRET_KEY", "")
+
+
 @pytest.fixture
 def mock_settings(monkeypatch):
     """Settings with test API keys."""
