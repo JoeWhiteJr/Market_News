@@ -29,6 +29,12 @@ from .scorecard import (  # noqa: E402
     load_yesterday,
 )
 from .server import _deduplicate_articles  # noqa: E402
+from .sources.earnings_source import (  # noqa: E402
+    EarningsEntry,
+    default_window as earnings_default_window,
+    fetch_earnings_calendar,
+    notable_earnings_for,
+)
 from .sources.finnhub_source import fetch_finnhub_articles  # noqa: E402
 from .sources.newsapi_source import fetch_newsapi_articles  # noqa: E402
 from .sources.quotes_source import fetch_sparkline_data  # noqa: E402
@@ -398,6 +404,23 @@ def run_pipeline() -> None:
             logger.warning("Paper-trading cycle raised (%s) — continuing", e)
             paper_stats = None
 
+    # Pre-Market Earnings Card (creative #14): notable companies reporting
+    # earnings today, via Finnhub's free calendar. Best-effort — a fetch
+    # failure just hides the card.
+    todays_earnings: list[EarningsEntry] = []
+    if settings.earnings_card_enabled and settings.finnhub_api_key:
+        try:
+            start, end = earnings_default_window(today)
+            cal = fetch_earnings_calendar(
+                settings.finnhub_api_key, start, end,
+                min_call_interval=settings.min_call_interval_secs,
+            )
+            todays_earnings = notable_earnings_for(cal, today, settings.earnings_card_max)
+            logger.info(f"Pre-Market Earnings: {len(todays_earnings)} notable reporters today")
+        except Exception as e:
+            logger.warning(f"Earnings card fetch raised ({e}) — hiding card")
+            todays_earnings = []
+
     html_body = render_email_html(
         ranked,
         sparklines=sparklines,
@@ -406,6 +429,7 @@ def run_pipeline() -> None:
         yesterday=yesterday_record,
         hype_scores=hype_scores,
         paper_stats=paper_stats,
+        earnings=todays_earnings,
     )
     plain_text = render_plain_text(
         ranked,
@@ -415,6 +439,7 @@ def run_pipeline() -> None:
         yesterday=yesterday_record,
         hype_scores=hype_scores,
         paper_stats=paper_stats,
+        earnings=todays_earnings,
     )
     subject = build_subject(
         ranked,
