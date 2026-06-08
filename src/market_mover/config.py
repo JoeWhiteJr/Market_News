@@ -84,6 +84,10 @@ class MarketMoverSettings(BaseSettings):
     # Off = skip the coda entirely (no second LLM call).
     contrarian_coda_enabled: bool = True
 
+    # Overhype Detector (creative #5) — advisory per-story hype-language badge.
+    # Deterministic lexicon score, no extra LLM call. Off = hide the badges.
+    hype_detector_enabled: bool = True
+
     # --- Cycle 4A Yesterday-Index ------------------------------------------
     # Path to the append-only JSONL of daily briefing records. Relative paths
     # are resolved against the repo root via :attr:`briefings_jsonl_full_path`.

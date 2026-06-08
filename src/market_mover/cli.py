@@ -17,12 +17,12 @@ from datetime import date  # noqa: E402
 from .config import MarketMoverSettings  # noqa: E402
 from .email_sender import send_email  # noqa: E402
 from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
+from .hype import HypeScore, score_hype  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
 from .mimicry import mimicry_voice_for, mimicry_voice_to_voice_spec  # noqa: E402
 from .models import RawArticle, SparklineSeries  # noqa: E402
 from .judge import JUDGE_PROMPT_VERSION, judge_yesterday, now_iso_utc  # noqa: E402
 from .scorecard import (  # noqa: E402
-    append_record,
     build_record_from_pipeline,
     commit_daily_record,
     load_yesterday,
@@ -369,12 +369,23 @@ def run_pipeline() -> None:
                 )
                 yesterday_judgments = None
 
+    # Overhype Detector (creative #5): advisory per-story hype-language score.
+    # Deterministic — no LLM call. Disabled => empty map => no badges render.
+    hype_scores: dict[int, HypeScore] = {}
+    if settings.hype_detector_enabled:
+        hype_scores = {
+            a.rank: score_hype(a.title, a.market_impact_summary) for a in ranked
+        }
+        flagged = sum(1 for h in hype_scores.values() if h.score > 0)
+        logger.info(f"Overhype Detector: {flagged}/{len(hype_scores)} stories flagged")
+
     html_body = render_email_html(
         ranked,
         sparklines=sparklines,
         voice=effective_voice,
         coda=coda,
         yesterday=yesterday_record,
+        hype_scores=hype_scores,
     )
     plain_text = render_plain_text(
         ranked,
@@ -382,6 +393,7 @@ def run_pipeline() -> None:
         voice=effective_voice,
         coda=coda,
         yesterday=yesterday_record,
+        hype_scores=hype_scores,
     )
     subject = build_subject(
         ranked,

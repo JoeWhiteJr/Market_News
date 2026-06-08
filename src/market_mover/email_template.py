@@ -9,6 +9,7 @@ from urllib.parse import quote as url_quote
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
+from .hype import HypeScore
 from .models import ContrarianCoda, RankedArticle, SparklineSeries
 from .scorecard import (
     BriefingRecord,
@@ -148,6 +149,7 @@ def render_email_html(
     voice: dict | None = None,
     coda: ContrarianCoda | None = None,
     yesterday: BriefingRecord | None = None,
+    hype_scores: dict[int, HypeScore] | None = None,
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -164,6 +166,9 @@ def render_email_html(
             present, a scorecard section is rendered between the sparkline
             strip (top) and the Top 3 articles. Phase A shows placeholder
             verdicts; Phase B will fill in real verdicts.
+        hype_scores: Optional mapping of article rank -> :class:`HypeScore`
+            (Overhype Detector, creative #5). When provided, an advisory
+            hype-language badge renders next to each story's impact badge.
 
     Returns:
         Complete HTML string for the email body.
@@ -171,7 +176,10 @@ def render_email_html(
     now_local = _now_local()
     date_str = html_escape(now_local.strftime("%B %d, %Y"))
     time_str = html_escape(now_local.strftime("%I:%M %p %Z"))
-    article_blocks = "\n".join(_render_article_block(a) for a in articles[:3])
+    hype_scores = hype_scores or {}
+    article_blocks = "\n".join(
+        _render_article_block(a, hype_scores.get(a.rank)) for a in articles[:3]
+    )
     sparkline_block = _render_sparkline_block(sparklines or {})
     scorecard_block = render_scorecard_html(yesterday, now_local.date())
 
@@ -423,6 +431,7 @@ def render_plain_text(
     voice: dict | None = None,
     coda: ContrarianCoda | None = None,
     yesterday: BriefingRecord | None = None,
+    hype_scores: dict[int, HypeScore] | None = None,
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -434,10 +443,14 @@ def render_plain_text(
         coda: Optional contrarian coda — appended as a "Bear Case" section.
         yesterday: Optional previous-day record. When present, a scorecard
             section is appended between the sparkline strip and the Top 3.
+        hype_scores: Optional mapping of article rank -> :class:`HypeScore`
+            (Overhype Detector). When present, an advisory hype line is added
+            under each story.
 
     Returns:
         Plain text string for the email body.
     """
+    hype_scores = hype_scores or {}
     now_local = _now_local()
     date_str = now_local.strftime("%B %d, %Y")
     lines = []
@@ -463,8 +476,12 @@ def render_plain_text(
     for article in articles[:3]:
         action = "Watch" if article.is_video else "Read"
         source = _derive_source_name(article.url) or article.source_name
+        hype = hype_scores.get(article.rank)
+        impact_line = f"#{article.rank} — Impact: {article.impact_score}/10"
+        if hype is not None and hype.score > 0:
+            impact_line += f"  [! {hype.label}]"
         lines.extend([
-            f"#{article.rank} — Impact: {article.impact_score}/10",
+            impact_line,
             f"  {article.title}",
             f"  Source: {source}",
             f"  {article.market_impact_summary}",
@@ -520,8 +537,52 @@ def build_subject(
     return subject
 
 
-def _render_article_block(article: RankedArticle) -> str:
-    """Render a single article block as HTML."""
+# Overhype Detector badge colors, keyed by band. Muted on purpose — the badge
+# is advisory and must not out-shout the rank/impact badge.
+_HYPE_BAND_COLORS = {
+    "low": "#6b7280",     # slate gray — measured language
+    "medium": "#b45309",  # amber — getting punchy
+    "high": "#b91c1c",    # red — breathless
+}
+
+
+def _render_hype_badge(hype: HypeScore | None) -> str:
+    """Render the advisory Overhype badge as an inline HTML span.
+
+    Returns an empty string when ``hype`` is ``None`` (feature disabled) or
+    the score is 0 (nothing to flag — a clean headline shouldn't carry a
+    "Hype 0/10" badge). Matched terms go in the ``title`` attribute as a
+    hover tooltip and the ``aria-label`` for screen readers.
+    """
+    if hype is None or hype.score <= 0:
+        return ""
+
+    color = _HYPE_BAND_COLORS.get(hype.band, "#6b7280")
+    safe_label = html_escape(hype.label)
+    if hype.matched_terms:
+        terms = ", ".join(hype.matched_terms)
+        tooltip = html_escape(f"Hype language flagged: {terms}")
+    else:
+        tooltip = html_escape("Hype language score")
+
+    return (
+        f'<span role="img" aria-label="{tooltip}" title="{tooltip}" '
+        f'style="display:inline-block;border:1px solid {color};color:{color};'
+        "background-color:#fff;font-size:11px;font-weight:700;padding:1px 7px;"
+        'border-radius:3px;margin-bottom:8px;margin-left:6px;">'
+        f"&#9888; {safe_label}</span>"
+    )
+
+
+def _render_article_block(
+    article: RankedArticle, hype: HypeScore | None = None
+) -> str:
+    """Render a single article block as HTML.
+
+    When ``hype`` is provided (Overhype Detector, creative #5), an advisory
+    hype-language badge is rendered next to the impact badge. It's purely
+    informational — it never alters the story's prose or ranking.
+    """
     color = RANK_COLORS.get(article.rank, "#888888")
     action_label = "Watch" if article.is_video else "Read"
     action_icon = "&#9654;" if article.is_video else "&#8594;"
@@ -533,6 +594,7 @@ def _render_article_block(article: RankedArticle) -> str:
     safe_score = html_escape(f"{article.impact_score}")
 
     badge_aria = f"Rank {article.rank} story, impact score {safe_score} out of 10"
+    hype_badge = _render_hype_badge(hype)
 
     return f"""
   <!-- Article #{article.rank} -->
@@ -544,7 +606,7 @@ def _render_article_block(article: RankedArticle) -> str:
       <td>
         <span role="img" aria-label="{badge_aria}" style="display:inline-block;background-color:{color};color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
           #{article.rank} &bull; Impact: {safe_score}/10
-        </span>
+        </span>{hype_badge}
       </td>
     </tr>
     <tr>
