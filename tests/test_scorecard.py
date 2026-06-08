@@ -17,13 +17,10 @@ from market_mover.models import ContrarianCoda, RankedArticle, RawArticle, Sourc
 from market_mover.scorecard import (
     SCHEMA_VERSION,
     BriefingRecord,
-    Judgment,
-    PriceData,
     ScorecardContrarian,
     ScorecardPick,
     append_record,
     build_record_from_pipeline,
-    commit_daily_record,
     compute_running_stats,
     load_yesterday,
     render_scorecard_html,
@@ -456,7 +453,12 @@ class TestCliPersistsAfterSend:
     def test_persistence_failure_does_not_break_send(
         self, mock_send_email, mock_settings, sample_raw_articles, tmp_path
     ):
-        """If append_record raises, the run still succeeds."""
+        """If the persistence write raises, the run still succeeds.
+
+        The pipeline sends the email (Step 4) before persisting the record
+        (Step 5, ``commit_daily_record``), and wraps the write in a try/except
+        so a disk failure can't crash a run whose email already went out.
+        """
         mock_send_email.return_value = True
         mock_settings.briefings_jsonl_path = str(tmp_path / "x.jsonl")
 
@@ -490,7 +492,7 @@ class TestCliPersistsAfterSend:
             patch.object(cli, "fetch_youtube_videos", return_value=[]), \
             patch.object(cli, "fetch_sparkline_data", return_value={}), \
             patch.object(cli, "LLMClient", _FakeClient), \
-            patch.object(cli, "append_record", side_effect=OSError("disk full")), \
+            patch.object(cli, "commit_daily_record", side_effect=OSError("disk full")), \
             patch("market_mover.cli.MarketMoverSettings", return_value=mock_settings):
             # Must not raise.
             cli.run_pipeline()
