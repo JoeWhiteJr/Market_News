@@ -341,14 +341,16 @@ def judge_pick(
     primary_ticker = _resolve_primary_ticker(pick)
     sector_etf = _resolve_sector_etf(pick)
 
-    # ---- Fetch price data ----
+    # ---- Fetch price data (Alpaca daily bars — ADR 0002) ----
+    akid = settings.alpaca_api_key_id
+    asec = settings.alpaca_api_secret_key
+    feed = settings.alpaca_data_feed
+    mci = settings.min_call_interval_secs
+
     primary_pct: float | None = None
     if primary_ticker:
         primary_pct, _ = fetch_24h_close_change(
-            primary_ticker,
-            briefing_date,
-            settings.finnhub_api_key,
-            min_call_interval=settings.min_call_interval_secs,
+            primary_ticker, briefing_date, akid, asec, feed=feed, min_call_interval=mci
         )
 
     spy_pct: float | None = None
@@ -357,26 +359,18 @@ def judge_pick(
         spy_pct = primary_pct
     else:
         spy_pct, _ = fetch_24h_close_change(
-            "SPY",
-            briefing_date,
-            settings.finnhub_api_key,
-            min_call_interval=settings.min_call_interval_secs,
+            "SPY", briefing_date, akid, asec, feed=feed, min_call_interval=mci
         )
 
+    # VIX is proxied by the VIXY ETF for direction only — vix_close stays None.
     vix_pct, vix_close = fetch_24h_close_change(
-        "VIX",
-        briefing_date,
-        settings.finnhub_api_key,
-        min_call_interval=settings.min_call_interval_secs,
+        "VIX", briefing_date, akid, asec, feed=feed, min_call_interval=mci
     )
 
     sector_pct: float | None = None
     if sector_etf:
         sector_pct, _ = fetch_24h_close_change(
-            sector_etf,
-            briefing_date,
-            settings.finnhub_api_key,
-            min_call_interval=settings.min_call_interval_secs,
+            sector_etf, briefing_date, akid, asec, feed=feed, min_call_interval=mci
         )
 
     prompt = _build_judge_prompt(

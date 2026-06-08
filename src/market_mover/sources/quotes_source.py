@@ -1,282 +1,197 @@
-"""Quotes source — fetches recent daily close prices from Finnhub for sparklines + judge."""
+"""Quotes source — daily closes for sparklines + the judge, via Alpaca (ADR 0002).
+
+The HTTP layer lives in :mod:`alpaca_source`; this module shapes Alpaca daily
+bars into the two things the app needs:
+
+- :func:`fetch_sparkline_data` — last N daily closes per ticker for the top strip.
+- :func:`fetch_24h_close_change` — the briefing-day session's close-to-close move
+  for the Yesterday-Index judge.
+
+VIX handling (Joe's call, ADR 0002): the CBOE VIX *index* isn't on Alpaca, so we
+proxy it with the ``VIXY`` ETF for **direction only**. The judge gets the proxy's
+percent move as ``vix_pct`` but the VIX *level* stays ``None`` — we never feed the
+ETF's price into the prompt's "VIX level" slot (it isn't the VIX level).
+"""
 
 import logging
-import time
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta
 
 from ..models import SparklineSeries
+from .alpaca_source import fetch_daily_bars, trailing_window
 
 logger = logging.getLogger("market_mover.sources.quotes")
 
-# Same 20s HTTP timeout convention used by the news sources since Cycle 1.
-_HTTP_TIMEOUT_SECS = 20
-
-# Anything within +/- this percent is rendered as "flat" rather than up/down.
+# Anything within +/- this percent renders as "flat" rather than up/down.
 _FLAT_THRESHOLD_PCT = 0.1
 
-# Per-call rate limit shared across all sparkline requests in this process.
-_last_call_time: float = 0.0
-
-# Finnhub VIX symbol — they prefix non-equity indices with a caret. Used by the
-# Phase B judge to pull the absolute VIX close level + 24h change.
-_FINNHUB_VIX_SYMBOLS = ("^VIX", "VIX")
+# VIX index isn't on Alpaca; proxy with this ETF for direction only.
+_VIX_SYMBOLS = {"VIX", "^VIX"}
+_VIX_PROXY_ETF = "VIXY"
 
 
-def fetch_sparkline_data(
-    tickers: list[str],
-    days: int = 5,
-    api_key: str = "",
-    min_call_interval: float = 1.0,
-) -> dict[str, SparklineSeries]:
-    """Fetch the last ``days`` daily close prices for each ticker.
-
-    Args:
-        tickers: Symbols to fetch (e.g. ``["SPY", "QQQ", "DIA", "VIX", "IWM"]``).
-        days: How many trading days of data to request. We pad the calendar
-            window to ``days * 3`` to cover weekends / holidays and then keep
-            the last ``days`` closes returned.
-        api_key: Finnhub API key. Empty -> returns ``{}``.
-        min_call_interval: Minimum seconds between Finnhub HTTP calls.
-
-    Returns:
-        Mapping of ticker -> :class:`SparklineSeries`. Tickers with no data or
-        an HTTP failure are silently omitted. A total fetch failure returns
-        ``{}`` (callers should treat empty as "skip the strip").
-    """
-    if not api_key:
-        logger.info("Finnhub API key not set, skipping sparkline fetch")
-        return {}
-    if not tickers:
-        return {}
-
+def _bar_date(bar: dict) -> date | None:
+    """Parse an Alpaca bar's ``t`` (RFC-3339) into a calendar date."""
+    raw = bar.get("t") if isinstance(bar, dict) else None
+    if not isinstance(raw, str):
+        return None
     try:
-        import requests
-    except Exception as e:  # pragma: no cover — defensive; requests is a transitive dep
-        logger.warning(f"Sparkline fetch unavailable (requests import failed): {e}")
-        return {}
+        # Bars are day-stamped, e.g. "2026-06-05T04:00:00Z" — the date prefix
+        # is all we need.
+        return datetime.fromisoformat(raw.replace("Z", "+00:00")).date()
+    except ValueError:
+        return None
 
-    # Finnhub's /stock/candle endpoint expects Unix seconds. Pad the window
-    # generously so weekends and holidays still yield ``days`` real closes.
-    now = datetime.now(timezone.utc)
-    window_start = now - timedelta(days=max(days * 3, 10))
-    params_from = int(window_start.timestamp())
-    params_to = int(now.timestamp())
 
-    results: dict[str, SparklineSeries] = {}
-
-    for raw_ticker in tickers:
-        ticker = (raw_ticker or "").strip().upper()
-        if not ticker:
-            continue
-
-        _enforce_rate_limit(min_call_interval)
-
+def _closes(bars: list[dict]) -> list[float]:
+    """Extract close prices from a list of Alpaca bars, oldest-first."""
+    out: list[float] = []
+    for b in bars:
         try:
-            resp = requests.get(
-                "https://finnhub.io/api/v1/stock/candle",
-                params={
-                    "symbol": ticker,
-                    "resolution": "D",
-                    "from": params_from,
-                    "to": params_to,
-                    "token": api_key,
-                },
-                timeout=_HTTP_TIMEOUT_SECS,
-            )
-            resp.raise_for_status()
-            payload = resp.json()
-        except Exception as e:
-            logger.warning(f"Sparkline fetch failed for {ticker}: {e}")
+            out.append(float(b["c"]))
+        except (KeyError, TypeError, ValueError):
             continue
-
-        series = _build_series(ticker, payload, days)
-        if series is not None:
-            results[ticker] = series
-
-    logger.info(f"Fetched sparkline data for {len(results)}/{len(tickers)} tickers")
-    return results
-
-
-def _build_series(
-    ticker: str, payload: dict, days: int
-) -> SparklineSeries | None:
-    """Convert a Finnhub candle payload into a :class:`SparklineSeries`.
-
-    Returns ``None`` if the payload has no usable data — Finnhub signals
-    "no data" with ``{"s": "no_data"}``.
-    """
-    if not isinstance(payload, dict):
-        return None
-    if payload.get("s") != "ok":
-        return None
-
-    closes_raw = payload.get("c") or []
-    if not isinstance(closes_raw, list) or len(closes_raw) < 2:
-        return None
-
-    # Keep only the last ``days`` closes; coerce to float defensively.
-    try:
-        closes = [float(c) for c in closes_raw[-days:]]
-    except (TypeError, ValueError):
-        return None
-
-    if len(closes) < 2 or closes[0] == 0:
-        return None
-
-    pct_change = ((closes[-1] - closes[0]) / closes[0]) * 100.0
-    direction = _classify_direction(pct_change)
-
-    return SparklineSeries(
-        ticker=ticker,
-        close_prices=closes,
-        pct_change=pct_change,
-        direction=direction,
-    )
+    return out
 
 
 def _classify_direction(pct_change: float) -> str:
     """Classify a percent change as ``up`` / ``down`` / ``flat``.
 
     Flat is reserved for very small moves (default <0.1% in either direction)
-    so a 0.02% drift on VIX doesn't render as a tiny red arrow.
+    so a 0.02% drift doesn't render as a tiny arrow.
     """
     if abs(pct_change) < _FLAT_THRESHOLD_PCT:
         return "flat"
     return "up" if pct_change > 0 else "down"
 
 
-def _enforce_rate_limit(min_interval: float) -> None:
-    """Enforce minimum interval between Finnhub HTTP calls."""
-    global _last_call_time
-    now = time.monotonic()
-    elapsed = now - _last_call_time
-    if _last_call_time > 0 and elapsed < min_interval:
-        time.sleep(min_interval - elapsed)
-    _last_call_time = time.monotonic()
+def fetch_sparkline_data(
+    tickers: list[str],
+    days: int = 5,
+    api_key_id: str = "",
+    api_secret_key: str = "",
+    feed: str = "iex",
+    min_call_interval: float = 1.0,
+) -> dict[str, SparklineSeries]:
+    """Fetch the last ``days`` daily closes for each ticker as sparklines.
 
+    One batched Alpaca request for all tickers. ``VIX`` is transparently
+    fetched and labeled as ``VIXY`` (its tradeable proxy). Tickers with fewer
+    than 2 closes are omitted; a total failure returns ``{}`` (callers treat
+    empty as "skip the strip").
 
-# ---------------------------------------------------------------------------
-# Cycle 4 Phase B/C — judge price-data fetches
-# ---------------------------------------------------------------------------
-#
-# NOTE on the data source (Cycle 4c): Finnhub's ``/stock/candle`` endpoint is
-# premium-only on our current plan — it returns HTTP 403 ("You don't have
-# access to this resource"). The free ``/quote`` endpoint works and returns a
-# single snapshot: current close ``c``, previous close ``pc``, and the session
-# percent change ``dp``. We grade against that snapshot's session.
-#
-# Why a snapshot is the right window: the daily cron grades YESTERDAY's
-# briefing pre-market (~06:00 MDT, before the 09:30 ET open). At that moment
-# the most-recent COMPLETED session is the one that followed yesterday's
-# pre-market briefing — exactly the "close-to-close, ~24h after the briefing"
-# window the ADR locks. ``dp`` is that session's move; ``c`` is its close
-# (used as the VIX level). ``briefing_date`` is retained for signature
-# stability + a staleness guard, not for historical lookup (``/quote`` has no
-# history).
-
-
-def _fetch_quote(
-    ticker: str,
-    api_key: str,
-    min_call_interval: float,
-) -> dict | None:
-    """Make a single Finnhub ``/quote`` GET. Returns the parsed JSON payload,
-    or ``None`` on any failure (HTTP error, no requests lib, bad JSON). The
-    judge-side callers treat ``None`` as "no data — pass null through to the
-    LLM."
-
-    A successful ``/quote`` for a real symbol returns non-zero ``c`` and
-    ``pc``. Finnhub returns ``c == 0`` (and ``pc == 0``) for an unknown
-    symbol, which callers treat as "no data".
+    Args:
+        tickers: Symbols for the strip (e.g. ``["SPY","QQQ","DIA","VIX","IWM"]``).
+        days: Trading days of history to keep. We over-fetch the calendar
+            window so weekends/holidays still yield ``days`` real closes.
+        api_key_id / api_secret_key: Alpaca data credentials. Missing -> ``{}``.
+        feed: Alpaca data feed ("iex" on free plans).
+        min_call_interval: Min seconds between Alpaca HTTP calls.
     """
-    try:
-        import requests
-    except Exception as e:  # pragma: no cover — defensive; requests is transitive
-        logger.warning(f"Quote fetch unavailable (requests import failed): {e}")
-        return None
+    if not (api_key_id and api_secret_key) or not tickers:
+        if not (api_key_id and api_secret_key):
+            logger.info("Alpaca creds not set, skipping sparkline fetch")
+        return {}
 
-    _enforce_rate_limit(min_call_interval)
+    # Map VIX -> VIXY for both the fetch and the displayed label.
+    fetch_syms: list[str] = []
+    for raw in tickers:
+        t = (raw or "").strip().upper()
+        if not t:
+            continue
+        fetch_syms.append(_VIX_PROXY_ETF if t in _VIX_SYMBOLS else t)
+    if not fetch_syms:
+        return {}
 
-    try:
-        resp = requests.get(
-            "https://finnhub.io/api/v1/quote",
-            params={"symbol": ticker, "token": api_key},
-            timeout=_HTTP_TIMEOUT_SECS,
+    start, end = trailing_window(max(days * 3, 12))
+    bars_map = fetch_daily_bars(
+        fetch_syms, start, end, api_key_id, api_secret_key, feed, min_call_interval
+    )
+
+    results: dict[str, SparklineSeries] = {}
+    for sym, bars in bars_map.items():
+        closes = _closes(bars)[-days:]
+        if len(closes) < 2 or closes[0] == 0:
+            continue
+        pct_change = ((closes[-1] - closes[0]) / closes[0]) * 100.0
+        results[sym] = SparklineSeries(
+            ticker=sym,
+            close_prices=closes,
+            pct_change=pct_change,
+            direction=_classify_direction(pct_change),
         )
-        resp.raise_for_status()
-        return resp.json()
-    except Exception as e:
-        logger.warning(f"Quote fetch failed for {ticker}: {e}")
-        return None
+
+    logger.info(f"Fetched sparkline data for {len(results)}/{len(fetch_syms)} tickers")
+    return results
+
+
+# ---------------------------------------------------------------------------
+# Yesterday-Index judge price-data fetch (ADR 0001 window, ADR 0002 source)
+# ---------------------------------------------------------------------------
 
 
 def fetch_24h_close_change(
     ticker: str,
     briefing_date: date,
-    api_key: str,
+    api_key_id: str,
+    api_secret_key: str,
+    feed: str = "iex",
     min_call_interval: float = 1.0,
 ) -> tuple[float | None, float | None]:
-    """Return ``(pct_change, vix_level_if_ticker_is_VIX_else_None)``.
+    """Return ``(pct_change, vix_level_or_None)`` for the briefing-day session.
 
-    Implements the ADR's locked close-to-close window via Finnhub ``/quote``
-    (see the module note above for why a snapshot is the correct window when
-    graded pre-market the next day). ``pct_change`` is the session percent
-    move (``dp``, falling back to ``(c - pc) / pc`` when ``dp`` is absent).
+    Implements ADR 0001's locked close-to-close window using real Alpaca daily
+    bars: the percent move from the trading day *before* ``briefing_date`` to
+    ``briefing_date``'s close — i.e. the session that immediately followed the
+    pre-market briefing. (Same window the Cycle 4c ``/quote`` path produced,
+    now from true history instead of a snapshot.)
 
-    For VIX (``"VIX"`` / ``"^VIX"``), also returns the absolute close level
-    ``c`` — the judge prompt needs both the level (``vix_close``) and the
-    change (``vix_pct``).
+    VIX (``"VIX"``/``"^VIX"``) is proxied by the ``VIXY`` ETF for **direction
+    only**: the proxy's percent move is returned as ``pct_change`` and the VIX
+    *level* stays ``None`` (the ETF price is not the VIX level). For every
+    other symbol the second element is always ``None``.
 
-    Returns ``(None, None)`` when the underlying data isn't available — the
-    judge LLM still produces a verdict (typically ``NOT_APPLICABLE`` or
-    ``TOO_EARLY``) when the prices are null. For VIX with a usable level but
-    no clean change, returns ``(None, level)`` so the prompt still shows the
-    VIX level.
+    Returns ``(None, None)`` when fewer than two usable bars are available — the
+    judge LLM then sees ``null`` and typically returns ``NOT_APPLICABLE``.
 
     Args:
-        ticker: Symbol to fetch (case-insensitive). VIX special-cased.
-        briefing_date: The day the briefing was sent. Retained for signature
-            stability; ``/quote`` has no historical lookup so the fetch uses
-            the latest completed session (see module note).
-        api_key: Finnhub API key. Empty -> ``(None, None)``.
-        min_call_interval: Min seconds between Finnhub HTTP calls.
+        ticker: Symbol (case-insensitive). VIX special-cased to its proxy.
+        briefing_date: The day the briefing was sent — the session being graded.
+        api_key_id / api_secret_key: Alpaca data credentials. Missing ->
+            ``(None, None)``.
+        feed: Alpaca data feed ("iex" on free plans).
+        min_call_interval: Min seconds between Alpaca HTTP calls.
     """
-    if not api_key or not ticker:
+    if not (api_key_id and api_secret_key) or not ticker:
         return None, None
 
     sym = ticker.strip().upper()
-    is_vix = sym in {"VIX", "^VIX"}
-    # Finnhub uses the ^VIX symbol for the index itself.
-    finnhub_sym = "^VIX" if is_vix else sym
+    fetch_sym = _VIX_PROXY_ETF if sym in _VIX_SYMBOLS else sym
 
-    quote = _fetch_quote(finnhub_sym, api_key, min_call_interval)
-    if not isinstance(quote, dict):
+    # Over-fetch ~10 calendar days so we always capture the briefing-day bar
+    # plus the prior trading bar across weekends/holidays.
+    start = briefing_date - timedelta(days=10)
+    bars_map = fetch_daily_bars(
+        [fetch_sym], start, briefing_date, api_key_id, api_secret_key, feed, min_call_interval
+    )
+    bars = bars_map.get(fetch_sym) or []
+
+    # Keep bars on/before the briefing date (defensive: never grade with a bar
+    # from after the session we're measuring), oldest-first.
+    usable = [
+        b for b in bars
+        if (d := _bar_date(b)) is not None and d <= briefing_date
+    ]
+    if len(usable) < 2:
         return None, None
 
-    def _num(key: str) -> float | None:
-        val = quote.get(key)
-        try:
-            return float(val) if val is not None else None
-        except (TypeError, ValueError):
-            return None
-
-    current_close = _num("c")
-    prev_close = _num("pc")
-    dp = _num("dp")
-
-    # Finnhub returns c == 0 / pc == 0 for an unknown symbol — treat as no data.
-    if not current_close:  # None or 0.0
+    try:
+        prev_close = float(usable[-2]["c"])
+        last_close = float(usable[-1]["c"])
+    except (KeyError, TypeError, ValueError):
+        return None, None
+    if prev_close == 0:
         return None, None
 
-    if dp is not None:
-        pct_change = dp
-    elif prev_close:  # not None and not 0.0
-        pct_change = ((current_close - prev_close) / prev_close) * 100.0
-    else:
-        # We have a level but no usable change (e.g. pc missing). For VIX the
-        # level is still useful to the prompt; for equities it isn't.
-        return None, (current_close if is_vix else None)
-
-    if is_vix:
-        return pct_change, current_close
+    pct_change = ((last_close - prev_close) / prev_close) * 100.0
+    # VIX proxy: direction only — the level stays null by design.
     return pct_change, None
