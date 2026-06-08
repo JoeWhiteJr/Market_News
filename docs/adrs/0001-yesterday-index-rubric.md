@@ -155,6 +155,10 @@ If any locked item must change, bump `judge_prompt_version` and re-run all histo
 - **Macro story tickers**: For "inflation surges" or "Fed cuts rates," the natural ticker is SPY + TLT + DXY rather than a single asset. Phase B's category→tickers mapping will be defined in a follow-up section of this ADR before Phase B ships.
 - **Earnings stories**: A "TSLA earnings beat" story's 24h window crosses the earnings release itself. Phase B may need to use a different window (T+0 close to T+1 close where T = release day, not briefing day) for these. Tracked in the spec; not yet locked.
 
+> **Superseded by ADR 0002 (Cycle 5, 2026-06-08):** the Finnhub `/quote`
+> mechanism below was replaced by Alpaca daily bars. The *window* is unchanged
+> (briefing-day close-to-close) — only the data source moved. See ADR 0002.
+
 ## Implementation note — price source (Cycle 4c, 2026-06-05)
 
 Phase B originally fetched the close-to-close window via Finnhub `/stock/candle`

@@ -543,77 +543,93 @@ class TestJudgeYesterday:
 
 
 # ---------------------------------------------------------------------------
-# Quote-based price fetch (Cycle 4c): /stock/candle is premium-only (403), so
-# the judge grades against the free /quote snapshot's session. Tested at the
-# quotes_source level since judge_pick uses it directly.
+# Alpaca-based price fetch (Cycle 5 / ADR 0002): real daily bars give the
+# briefing-day session's close-to-close move. VIX -> VIXY proxy, direction
+# only (level stays None). Tested at the quotes_source level since judge_pick
+# uses it directly.
 # ---------------------------------------------------------------------------
 
+_BARS_FN = "market_mover.sources.quotes_source.fetch_daily_bars"
 
-class TestQuotePriceFetch:
-    """fetch_24h_close_change reads Finnhub /quote: dp = session % move, c = close."""
 
-    @staticmethod
-    def _mock_requests_returning(payload):
-        def fake_get(url, params=None, timeout=None, **kw):
-            assert url.endswith("/quote"), f"expected /quote, got {url}"
-            resp = MagicMock()
-            resp.raise_for_status.return_value = None
-            resp.json.return_value = payload
-            return resp
+def _bars(*pairs):
+    """Build Alpaca daily bars from (date_str, close) pairs, oldest-first."""
+    return [
+        {"t": f"{d}T04:00:00Z", "o": c, "h": c, "l": c, "c": c, "v": 100}
+        for d, c in pairs
+    ]
 
-        mock_requests = MagicMock()
-        mock_requests.get.side_effect = fake_get
-        return mock_requests
 
-    def test_equity_returns_dp_as_pct_change(self):
+class TestAlpacaPriceFetch:
+    """fetch_24h_close_change computes briefing-day close-to-close from bars."""
+
+    def test_equity_close_to_close(self):
         from market_mover.sources.quotes_source import fetch_24h_close_change
 
-        # SPY closed 510 from a 500 prior close -> dp +2.0%.
-        payload = {"c": 510.0, "pc": 500.0, "d": 10.0, "dp": 2.0}
-        with patch.dict("sys.modules", {"requests": self._mock_requests_returning(payload)}):
+        # Prior close 500 -> briefing-day close 510 = +2.0%.
+        bars = {"SPY": _bars(("2026-05-14", 500.0), ("2026-05-15", 510.0))}
+        with patch(_BARS_FN, return_value=bars):
             pct_change, vix_level = fetch_24h_close_change(
-                "SPY", date(2026, 5, 15), api_key="test", min_call_interval=0.0
+                "SPY", date(2026, 5, 15), "k", "s", min_call_interval=0.0
             )
         assert pct_change is not None
         assert abs(pct_change - 2.0) < 1e-3
         assert vix_level is None  # SPY isn't VIX
 
-    def test_falls_back_to_pc_when_dp_missing(self):
+    def test_vix_proxied_to_vixy_direction_only(self):
         from market_mover.sources.quotes_source import fetch_24h_close_change
 
-        # No dp field -> compute (c - pc) / pc * 100 = +2.0%.
-        payload = {"c": 510.0, "pc": 500.0, "d": 10.0}
-        with patch.dict("sys.modules", {"requests": self._mock_requests_returning(payload)}):
+        bars = {"VIXY": _bars(("2026-05-14", 14.0), ("2026-05-15", 15.0))}
+        with patch(_BARS_FN, return_value=bars) as mock_bars:
             pct_change, vix_level = fetch_24h_close_change(
-                "SPY", date(2026, 5, 15), api_key="test", min_call_interval=0.0
+                "VIX", date(2026, 5, 15), "k", "s", min_call_interval=0.0
+            )
+        # Alpaca was queried for the VIXY proxy, not VIX.
+        assert mock_bars.call_args[0][0] == ["VIXY"]
+        assert pct_change is not None
+        assert abs(pct_change - (1.0 / 14.0 * 100)) < 1e-3
+        # Direction only — the VIX *level* is never the ETF price.
+        assert vix_level is None
+
+    def test_only_uses_bars_on_or_before_briefing_date(self):
+        from market_mover.sources.quotes_source import fetch_24h_close_change
+
+        # A bar dated AFTER the briefing must be ignored: the graded move is
+        # 100 -> 110 (the 05-15 session), not anything from 05-18.
+        bars = {
+            "SPY": _bars(
+                ("2026-05-14", 100.0),
+                ("2026-05-15", 110.0),
+                ("2026-05-18", 999.0),
+            )
+        }
+        with patch(_BARS_FN, return_value=bars):
+            pct_change, _ = fetch_24h_close_change(
+                "SPY", date(2026, 5, 15), "k", "s", min_call_interval=0.0
             )
         assert pct_change is not None
-        assert abs(pct_change - 2.0) < 1e-3
+        assert abs(pct_change - 10.0) < 1e-3
 
-    def test_vix_returns_level_and_change(self):
+    def test_insufficient_bars_returns_none(self):
         from market_mover.sources.quotes_source import fetch_24h_close_change
 
-        payload = {"c": 15.0, "pc": 14.0, "dp": 7.142857}
-        with patch.dict("sys.modules", {"requests": self._mock_requests_returning(payload)}):
+        bars = {"SPY": _bars(("2026-05-15", 510.0))}  # only one bar
+        with patch(_BARS_FN, return_value=bars):
             pct_change, vix_level = fetch_24h_close_change(
-                "VIX", date(2026, 5, 15), api_key="test", min_call_interval=0.0
-            )
-        assert pct_change is not None
-        assert abs(pct_change - 7.142857) < 1e-3
-        assert vix_level is not None
-        assert abs(vix_level - 15.0) < 1e-6  # absolute VIX level for the prompt
-
-    def test_unknown_symbol_zero_close_returns_none(self):
-        from market_mover.sources.quotes_source import fetch_24h_close_change
-
-        # Finnhub returns c == 0 for an unknown symbol -> treat as no data.
-        payload = {"c": 0, "pc": 0, "d": None, "dp": None}
-        with patch.dict("sys.modules", {"requests": self._mock_requests_returning(payload)}):
-            pct_change, vix_level = fetch_24h_close_change(
-                "ZZZZ", date(2026, 5, 15), api_key="test", min_call_interval=0.0
+                "SPY", date(2026, 5, 15), "k", "s", min_call_interval=0.0
             )
         assert pct_change is None
         assert vix_level is None
+
+    def test_no_creds_returns_none_without_fetch(self):
+        from market_mover.sources.quotes_source import fetch_24h_close_change
+
+        with patch(_BARS_FN) as mock_bars:
+            pct_change, vix_level = fetch_24h_close_change(
+                "SPY", date(2026, 5, 15), "", "", min_call_interval=0.0
+            )
+        assert (pct_change, vix_level) == (None, None)
+        mock_bars.assert_not_called()
 
 
 # ---------------------------------------------------------------------------

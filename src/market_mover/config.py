@@ -36,6 +36,19 @@ class MarketMoverSettings(BaseSettings):
     finnhub_api_key: str = ""
     youtube_api_key: str = ""
 
+    # Alpaca market data (Cycle 5 / ADR 0002) — replaces Finnhub for prices.
+    # Paper keys are fine for data; the data API is the same for paper + live.
+    alpaca_api_key_id: str = ""
+    alpaca_api_secret_key: str = ""
+    alpaca_paper: bool = True
+    # Free plans get the IEX feed; "sip" requires a paid subscription.
+    alpaca_data_feed: str = "iex"
+
+    @property
+    def has_alpaca_creds(self) -> bool:
+        """True when both Alpaca data credentials are configured."""
+        return bool(self.alpaca_api_key_id and self.alpaca_api_secret_key)
+
     # LLM config
     claude_model: str = "claude-sonnet-4-20250514"
     gemini_model: str = "gemini-2.5-flash"

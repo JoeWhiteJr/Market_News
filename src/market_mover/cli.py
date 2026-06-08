@@ -137,10 +137,12 @@ def _gather_articles(
     ]
 
     sparkline_task: Callable[[], dict[str, SparklineSeries]] | None = None
-    if settings.sparkline_enabled and settings.finnhub_api_key:
+    if settings.sparkline_enabled and settings.has_alpaca_creds:
         sparkline_task = lambda: fetch_sparkline_data(  # noqa: E731
             settings.sparkline_ticker_list,
-            api_key=settings.finnhub_api_key,
+            api_key_id=settings.alpaca_api_key_id,
+            api_secret_key=settings.alpaca_api_secret_key,
+            feed=settings.alpaca_data_feed,
             min_call_interval=settings.min_call_interval_secs,
         )
 
