@@ -122,6 +122,12 @@ class MarketMoverSettings(BaseSettings):
     earnings_card_enabled: bool = True
     earnings_card_max: int = 5
 
+    # Sentiment vs Price Divergence flag (creative #15) — flag picks whose
+    # narrative fights the tape. Conservative thresholds avoid false positives.
+    divergence_flag_enabled: bool = True
+    divergence_threshold_pct: float = 2.0
+    divergence_lookback_days: int = 5
+
     # --- Cycle 4A Yesterday-Index ------------------------------------------
     # Path to the append-only JSONL of daily briefing records. Relative paths
     # are resolved against the repo root via :attr:`briefings_jsonl_full_path`.

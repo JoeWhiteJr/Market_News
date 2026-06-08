@@ -17,6 +17,7 @@ from datetime import date  # noqa: E402
 from .config import MarketMoverSettings  # noqa: E402
 from .email_sender import send_email  # noqa: E402
 from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
+from .divergence import DivergenceFlag, analyze_divergences  # noqa: E402
 from .hype import HypeScore, score_hype  # noqa: E402
 from .paper_trading import compute_paper_stats, load_cycles, run_paper_cycle  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
@@ -421,6 +422,26 @@ def run_pipeline() -> None:
             logger.warning(f"Earnings card fetch raised ({e}) — hiding card")
             todays_earnings = []
 
+    # Sentiment vs Price Divergence (creative #15): flag picks whose narrative
+    # fights the recent tape. Uses Alpaca price data; best-effort.
+    divergences: list[DivergenceFlag] = []
+    if settings.divergence_flag_enabled and settings.has_alpaca_creds:
+        try:
+            divergences = analyze_divergences(
+                ranked,
+                settings.alpaca_api_key_id,
+                settings.alpaca_api_secret_key,
+                today,
+                feed=settings.alpaca_data_feed,
+                threshold_pct=settings.divergence_threshold_pct,
+                lookback=settings.divergence_lookback_days,
+                min_call_interval=settings.min_call_interval_secs,
+            )
+            logger.info(f"Divergence flags: {len(divergences)}")
+        except Exception as e:
+            logger.warning(f"Divergence analysis raised ({e}) — hiding flags")
+            divergences = []
+
     html_body = render_email_html(
         ranked,
         sparklines=sparklines,
@@ -430,6 +451,7 @@ def run_pipeline() -> None:
         hype_scores=hype_scores,
         paper_stats=paper_stats,
         earnings=todays_earnings,
+        divergences=divergences,
     )
     plain_text = render_plain_text(
         ranked,
@@ -440,6 +462,7 @@ def run_pipeline() -> None:
         hype_scores=hype_scores,
         paper_stats=paper_stats,
         earnings=todays_earnings,
+        divergences=divergences,
     )
     subject = build_subject(
         ranked,

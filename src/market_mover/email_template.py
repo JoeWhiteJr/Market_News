@@ -9,6 +9,7 @@ from urllib.parse import quote as url_quote
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
+from .divergence import DivergenceFlag
 from .hype import HypeScore
 from .models import ContrarianCoda, RankedArticle, SparklineSeries
 from .sources.earnings_source import EarningsEntry
@@ -153,6 +154,7 @@ def render_email_html(
     hype_scores: dict[int, HypeScore] | None = None,
     paper_stats: dict | None = None,
     earnings: list["EarningsEntry"] | None = None,
+    divergences: list["DivergenceFlag"] | None = None,
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -187,6 +189,7 @@ def render_email_html(
     scorecard_block = render_scorecard_html(yesterday, now_local.date())
     scorecard_block += _render_paper_block_html(paper_stats)
     earnings_block = _render_earnings_block_html(earnings or [])
+    divergence_block = _render_divergence_block_html(divergences or [])
 
     if articles:
         preheader_raw = _first_sentence(articles[0].market_impact_summary) or articles[0].title
@@ -278,6 +281,7 @@ def render_email_html(
   <p class="mm-header-sub" style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; {date_str}</p>
 </td>
 </tr>
+{divergence_block}
 {scorecard_block}
 {earnings_block}
 <!-- Articles -->
@@ -440,6 +444,7 @@ def render_plain_text(
     hype_scores: dict[int, HypeScore] | None = None,
     paper_stats: dict | None = None,
     earnings: list["EarningsEntry"] | None = None,
+    divergences: list["DivergenceFlag"] | None = None,
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -462,6 +467,10 @@ def render_plain_text(
     now_local = _now_local()
     date_str = now_local.strftime("%B %d, %Y")
     lines = []
+    divergence_text = _render_divergence_block_plain(divergences or [])
+    if divergence_text:
+        lines.append(divergence_text)
+        lines.append("")
     if sparklines:
         parts = []
         for series in sparklines.values():
@@ -648,6 +657,48 @@ def _render_paper_block_plain(paper_stats: dict | None) -> str:
         if win_rate is not None:
             parts.append(f"Win {win_rate:.0f}% ({paper_stats.get('wins') or 0}/{n})")
     return "  •  ".join(parts)
+
+
+def _render_divergence_block_html(flags: list[DivergenceFlag]) -> str:
+    """Render the Narrative-vs-Tape divergence flag (creative #15). Empty if none."""
+    if not flags:
+        return ""
+    rows = []
+    for f in flags:
+        ticker = html_escape(f.ticker)
+        note = html_escape(f.note)
+        rows.append(
+            f'<tr><td style="padding:3px 0;font-size:13px;color:#333;">'
+            f'<strong style="color:#7a3a00;">{ticker}</strong>'
+            f'<span style="color:#555;"> &mdash; {note}</span></td></tr>'
+        )
+    return f"""
+<tr>
+<td style="padding:0 32px 4px;">
+  <section data-block="divergence">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
+  <tr>
+  <td style="padding:12px 14px;background-color:#fff4e8;border-left:4px solid #d2691e;border-radius:0 6px 6px 0;">
+    <div style="font-size:12px;font-weight:700;color:#a0480a;margin-bottom:6px;">&#9889; NARRATIVE vs TAPE</div>
+    <table width="100%" cellpadding="0" cellspacing="0">
+    {"".join(rows)}
+    </table>
+  </td>
+  </tr>
+  </table>
+  </section>
+</td>
+</tr>"""
+
+
+def _render_divergence_block_plain(flags: list[DivergenceFlag]) -> str:
+    """Plain-text divergence flag. Empty if none."""
+    if not flags:
+        return ""
+    lines = ["NARRATIVE vs TAPE", "-" * 60]
+    for f in flags:
+        lines.append(f"  {f.ticker} — {f.note}")
+    return "\n".join(lines)
 
 
 def _fmt_revenue(value: float | None) -> str:
