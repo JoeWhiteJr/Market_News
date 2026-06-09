@@ -419,7 +419,7 @@ class TestCliPersistsAfterSend:
             def __init__(self, *args, **kwargs):
                 pass
 
-            def analyze_articles(self, articles, voice=None):
+            def analyze_articles(self, articles, voice=None, macro_mode=False):
                 from market_mover.voices import get_voice
 
                 return sample_ranked, "claude-sonnet-4-20250514", get_voice("vinny")
@@ -478,7 +478,7 @@ class TestCliPersistsAfterSend:
             def __init__(self, *args, **kwargs):
                 pass
 
-            def analyze_articles(self, articles, voice=None):
+            def analyze_articles(self, articles, voice=None, macro_mode=False):
                 from market_mover.voices import get_voice
 
                 return sample_ranked, "claude-sonnet-4-20250514", get_voice("vinny")

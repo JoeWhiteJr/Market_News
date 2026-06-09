@@ -19,6 +19,7 @@ from .email_sender import send_email  # noqa: E402
 from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
 from .divergence import DivergenceFlag, analyze_divergences  # noqa: E402
 from .hype import HypeScore, score_hype  # noqa: E402
+from .macro_mode import MacroSignal, detect_macro_mode  # noqa: E402
 from .paper_trading import compute_paper_stats, load_cycles, run_paper_cycle  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
 from .mimicry import mimicry_voice_for, mimicry_voice_to_voice_spec  # noqa: E402
@@ -277,7 +278,21 @@ def run_pipeline() -> None:
         mimicry_label = None
         logger.info(f"Voice: {active_voice.get('name')}")
 
-    ranked, model_used, effective_voice = client.analyze_articles(deduped, voice=active_voice)
+    # Geographic / Macro Mode (creative #18): auto-detect a macro-heavy day from
+    # the candidate headlines and bias the ranking toward macro stories.
+    macro_signal = MacroSignal(active=False, matched_count=0, total=0, themes=[])
+    if settings.macro_mode_enabled:
+        macro_signal = detect_macro_mode(
+            deduped,
+            min_count=settings.macro_mode_min_count,
+            min_fraction=settings.macro_mode_min_fraction,
+        )
+        if macro_signal.active:
+            logger.info("Macro Mode ON for today's ranking")
+
+    ranked, model_used, effective_voice = client.analyze_articles(
+        deduped, voice=active_voice, macro_mode=macro_signal.active
+    )
     logger.info(f"Top 3 ranked by {model_used} (effective voice: {effective_voice.get('name')})")
     model_family = _model_family_label(model_used)
 
@@ -473,6 +488,7 @@ def run_pipeline() -> None:
         earnings=todays_earnings,
         divergences=divergences,
         insider_buys=insider_buys,
+        macro_mode=macro_signal.active,
     )
     plain_text = render_plain_text(
         ranked,
@@ -485,6 +501,7 @@ def run_pipeline() -> None:
         earnings=todays_earnings,
         divergences=divergences,
         insider_buys=insider_buys,
+        macro_mode=macro_signal.active,
     )
     subject = build_subject(
         ranked,

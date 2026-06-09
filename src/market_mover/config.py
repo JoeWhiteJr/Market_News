@@ -135,6 +135,12 @@ class MarketMoverSettings(BaseSettings):
     insider_min_value: float = 100_000.0
     insider_max: int = 3
 
+    # Geographic / Macro Mode (creative #18) — auto-detect macro-heavy days and
+    # bias the ranking toward macro/international stories.
+    macro_mode_enabled: bool = True
+    macro_mode_min_count: int = 3
+    macro_mode_min_fraction: float = 0.30
+
     # --- Cycle 4A Yesterday-Index ------------------------------------------
     # Path to the append-only JSONL of daily briefing records. Relative paths
     # are resolved against the repo root via :attr:`briefings_jsonl_full_path`.

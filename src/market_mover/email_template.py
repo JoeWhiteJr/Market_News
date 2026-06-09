@@ -157,6 +157,7 @@ def render_email_html(
     earnings: list["EarningsEntry"] | None = None,
     divergences: list["DivergenceFlag"] | None = None,
     insider_buys: list["InsiderBuy"] | None = None,
+    macro_mode: bool = False,
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -193,6 +194,12 @@ def render_email_html(
     earnings_block = _render_earnings_block_html(earnings or [])
     divergence_block = _render_divergence_block_html(divergences or [])
     insider_block = _render_insider_block_html(insider_buys or [])
+    macro_badge = (
+        '<span style="display:inline-block;margin-top:8px;background-color:#2d3a8c;'
+        'color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;">'
+        "&#127757; MACRO MODE</span>"
+        if macro_mode else ""
+    )
 
     if articles:
         preheader_raw = _first_sentence(articles[0].market_impact_summary) or articles[0].title
@@ -282,6 +289,7 @@ def render_email_html(
 <td class="mm-header" style="background-color:#1a1a2e;padding:24px 32px;text-align:center;">
   <h1 class="mm-header-title" style="color:#ffffff;margin:0;font-size:24px;font-weight:700;">Market Mover</h1>
   <p class="mm-header-sub" style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; {date_str}</p>
+  {macro_badge}
 </td>
 </tr>
 {divergence_block}
@@ -450,6 +458,7 @@ def render_plain_text(
     earnings: list["EarningsEntry"] | None = None,
     divergences: list["DivergenceFlag"] | None = None,
     insider_buys: list["InsiderBuy"] | None = None,
+    macro_mode: bool = False,
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -504,8 +513,9 @@ def render_plain_text(
         lines.append(insider_text)
         lines.append("")
 
+    macro_tag = "  [MACRO MODE]" if macro_mode else ""
     lines.extend([
-        f"MARKET MOVER — Top 3 Market-Moving Stories — {date_str}",
+        f"MARKET MOVER — Top 3 Market-Moving Stories — {date_str}{macro_tag}",
         "=" * 60,
         "",
     ])
