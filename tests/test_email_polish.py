@@ -341,9 +341,9 @@ class TestScorecardSlot:
         # TBD placeholder for each pick.
         assert html.count("TBD") >= 3
 
-    def test_scorecard_slot_is_between_sparkline_and_articles(self):
-        """Order: sparkline (top) -> scorecard -> articles (Top 3) -> contrarian."""
-        # Use a minimal sparkline so the marker is present.
+    def test_layout_order_sparkline_articles_then_scorecard(self):
+        """Layout pass order: sparkline (glance, top) -> articles (core) ->
+        scorecard (reference zone, demoted below the stories)."""
         from market_mover.models import SparklineSeries
 
         sparklines = {
@@ -359,15 +359,50 @@ class TestScorecardSlot:
             [article], sparklines=sparklines, yesterday=_yesterday_record()
         )
         spark_idx = html.find('data-block="sparkline"')
-        scorecard_idx = html.find('data-block="scorecard"')
         article_idx = html.find("Today top story headline")
+        scorecard_idx = html.find('data-block="scorecard"')
         assert spark_idx != -1, "sparkline block missing"
         assert scorecard_idx != -1, "scorecard block missing"
         assert article_idx != -1, "article block missing"
-        assert spark_idx < scorecard_idx < article_idx, (
-            f"Expected sparkline ({spark_idx}) < scorecard ({scorecard_idx}) "
-            f"< articles ({article_idx})"
+        # Stories are the core and now sit ABOVE the retrospective scorecard.
+        assert spark_idx < article_idx < scorecard_idx, (
+            f"Expected sparkline ({spark_idx}) < articles ({article_idx}) "
+            f"< scorecard ({scorecard_idx})"
         )
+
+
+    def test_alerts_above_stories_reference_below(self):
+        """Zone order (layout pass): alerts (divergence/insider) -> stories ->
+        reference (scorecard/paper/earnings)."""
+        from market_mover.divergence import DivergenceFlag
+        from market_mover.sources.earnings_source import EarningsEntry
+        from market_mover.sources.insider_source import InsiderBuy
+
+        article = _make_article(title="Core story headline here")
+        html = render_email_html(
+            [article],
+            yesterday=_yesterday_record(),
+            paper_stats={"equity": 100000.0, "n_trades": 0, "wins": 0,
+                         "win_rate": None, "total_pnl": 0.0},
+            earnings=[EarningsEntry(symbol="ORCL", date="2026-06-10", hour="amc",
+                                    eps_estimate=2.0, revenue_estimate=19e9)],
+            divergences=[DivergenceFlag(ticker="NVDA", sentiment="bullish",
+                                        price_pct=-3.0, lookback=5, headline="x",
+                                        note="x")],
+            insider_buys=[InsiderBuy(ticker="USO", insider="J", shares=1,
+                                     price=1.0, value=200000.0,
+                                     transaction_date="2026-06-10")],
+        )
+        story = html.find("Core story headline here")
+        divergence = html.find('data-block="divergence"')
+        insider = html.find('data-block="insider"')
+        scorecard = html.find('data-block="scorecard"')
+        paper = html.find('data-block="paper"')
+        earnings = html.find('data-block="earnings"')
+        # Alerts above the story:
+        assert divergence < story and insider < story
+        # Reference cards below the story:
+        assert story < scorecard and story < paper and story < earnings
 
 
 class TestUnusedImportShim:
