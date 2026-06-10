@@ -649,8 +649,10 @@ def _render_paper_block_html(paper_stats: dict | None) -> str:
     inner = " &nbsp;&bull;&nbsp; ".join(bits)
 
     return f"""
+<tr>
+<td style="padding:8px 32px 0;">
   <section data-block="paper">
-  <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
   <tr>
   <td style="padding:10px 14px;background-color:#f4f7fb;border-left:4px solid #2d5fa0;border-radius:0 6px 6px 0;">
     <span style="font-size:12px;font-weight:700;color:#2d5fa0;">&#128200; PAPER PORTFOLIO</span>
@@ -659,7 +661,9 @@ def _render_paper_block_html(paper_stats: dict | None) -> str:
   </td>
   </tr>
   </table>
-  </section>"""
+  </section>
+</td>
+</tr>"""
 
 
 def _render_paper_block_plain(paper_stats: dict | None) -> str:

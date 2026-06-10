@@ -588,7 +588,10 @@ def _render_price_snapshot(judgment: Judgment) -> str:
         parts.append(f"SPY {spy_sign}{pd.spy_pct:.1f}%")
     vix_sign = "+" if pd.vix_pct_change >= 0 else ""
     parts.append(f"VIX {vix_sign}{pd.vix_pct_change:.1f}%")
-    if pd.sector_etf and pd.sector_pct is not None:
+    # Skip the sector ETF when it's the same ticker we already listed as primary
+    # (e.g. a macro/TLT pick whose sector proxy is also TLT) — no double-listing.
+    sector_is_primary = (pd.sector_etf or "").upper() == (pd.primary_ticker or "").upper()
+    if pd.sector_etf and pd.sector_pct is not None and not sector_is_primary:
         sector_sign = "+" if pd.sector_pct >= 0 else ""
         parts.append(
             f"{html_escape(pd.sector_etf)} {sector_sign}{pd.sector_pct:.1f}%"

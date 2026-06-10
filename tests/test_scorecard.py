@@ -500,6 +500,34 @@ class TestCliPersistsAfterSend:
         assert mock_send_email.called
 
 
+class TestPriceSnapshotRender:
+    def test_sector_not_double_listed_when_equal_to_primary(self):
+        # Regression: a macro/TLT pick whose sector proxy is also TLT must not
+        # render "TLT ... · TLT ..." twice in the snapshot.
+        from market_mover.scorecard import Judgment, PriceData, _render_price_snapshot
+        j = Judgment(
+            rank=3, verdict="PARTIAL", justification="x",
+            price_data=PriceData(
+                primary_ticker="TLT", primary_pct_change_24h=0.6, spy_pct=-0.3,
+                vix_close=0.0, vix_pct_change=1.6, sector_etf="TLT", sector_pct=0.6,
+            ),
+        )
+        snapshot = _render_price_snapshot(j)
+        assert snapshot.count("TLT") == 1
+
+    def test_distinct_sector_still_listed(self):
+        from market_mover.scorecard import Judgment, PriceData, _render_price_snapshot
+        j = Judgment(
+            rank=1, verdict="HIT", justification="x",
+            price_data=PriceData(
+                primary_ticker="NVDA", primary_pct_change_24h=2.0, spy_pct=0.5,
+                vix_close=0.0, vix_pct_change=-1.0, sector_etf="XLK", sector_pct=1.5,
+            ),
+        )
+        snapshot = _render_price_snapshot(j)
+        assert "NVDA" in snapshot and "XLK" in snapshot
+
+
 # ---------------------------------------------------------------------------
 # Unused-import shim
 # ---------------------------------------------------------------------------
