@@ -292,11 +292,10 @@ def render_email_html(
   {macro_badge}
 </td>
 </tr>
+<!-- Alerts: high-signal, act-on-today flags sit directly under the header -->
 {divergence_block}
-{scorecard_block}
-{earnings_block}
 {insider_block}
-<!-- Articles -->
+<!-- Top 3 stories — the core, kept high so it's the first thing after alerts -->
 <tr>
 <td style="padding:24px 32px;">
 {article_blocks}
@@ -304,6 +303,9 @@ def render_email_html(
 </tr>
 
 {contrarian_block}
+<!-- Reference zone: retrospective + context, demoted below the stories -->
+{scorecard_block}
+{earnings_block}
 <!-- Footer -->
 <tr>
 <td class="mm-footer" style="background-color:#f8f8fa;padding:16px 32px;text-align:center;border-top:1px solid #eaeaea;">
@@ -654,9 +656,9 @@ def _render_paper_block_html(paper_stats: dict | None) -> str:
   <section data-block="paper">
   <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
   <tr>
-  <td style="padding:10px 14px;background-color:#f4f7fb;border-left:4px solid #2d5fa0;border-radius:0 6px 6px 0;">
-    <span style="font-size:12px;font-weight:700;color:#2d5fa0;">&#128200; PAPER PORTFOLIO</span>
-    <span style="font-size:11px;color:#888;"> &mdash; paper money, picks auto-traded</span>
+  <td style="padding:10px 14px;background-color:#f4f5f8;border-left:4px solid #8a93a8;border-radius:0 6px 6px 0;">
+    <span style="font-size:12px;font-weight:700;color:#5b6473;">&#128200; PAPER PORTFOLIO</span>
+    <span style="font-size:11px;color:#9aa0ad;"> &mdash; paper money, picks auto-traded</span>
     <div style="font-size:13px;color:#333;padding-top:4px;">{inner}</div>
   </td>
   </tr>
@@ -806,8 +808,8 @@ def _render_earnings_block_html(entries: list[EarningsEntry]) -> str:
   <section data-block="earnings">
   <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
   <tr>
-  <td style="padding:12px 14px;background-color:#fbf7ef;border-left:4px solid #b8860b;border-radius:0 6px 6px 0;">
-    <div style="font-size:12px;font-weight:700;color:#8a6400;margin-bottom:6px;">&#128197; REPORTING EARNINGS TODAY</div>
+  <td style="padding:12px 14px;background-color:#f4f5f8;border-left:4px solid #8a93a8;border-radius:0 6px 6px 0;">
+    <div style="font-size:12px;font-weight:700;color:#5b6473;margin-bottom:6px;">&#128197; REPORTING EARNINGS TODAY</div>
     <table width="100%" cellpadding="0" cellspacing="0">
     {"".join(rows)}
     </table>

@@ -379,7 +379,11 @@ def compute_running_stats(
 # reads as its own beat — distinct from the rank colors (#c0392b / #a05a00 /
 # #2470a8) and the sparkline strip. WCAG-AA verified against #fafafa
 # (light card body) and #232734 (dark mode override).
-_SCORECARD_ACCENT = "#3a3f4d"
+# Reference-zone slate: dark enough for readable eyebrow text (~6:1 on white),
+# paired with a lighter #8a93a8 left-border so the card reads as quiet/secondary
+# (the colorful alerts + ranked stories carry the eye). Shared with the paper +
+# earnings cards in email_template for a unified "reference zone".
+_SCORECARD_ACCENT = "#5b6473"
 _SCORECARD_PLACEHOLDER = "TBD — judging launches in Phase B"
 
 # Per-verdict visual styling for the scorecard badge. The light-mode colors
@@ -452,7 +456,7 @@ def render_scorecard_html(
   <section data-block="scorecard" aria-label="Yesterday's picks scorecard">
   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:8px;">
   <tr>
-  <td class="mm-scorecard-card" style="padding:16px;border-left:4px solid {_SCORECARD_ACCENT};background-color:#f3f4f7;border-radius:0 6px 6px 0;">
+  <td class="mm-scorecard-card" style="padding:16px;border-left:4px solid #8a93a8;background-color:#f4f5f8;border-radius:0 6px 6px 0;">
     <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td>
