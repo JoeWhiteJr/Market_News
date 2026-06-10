@@ -19,6 +19,7 @@ from .email_sender import send_email  # noqa: E402
 from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
 from .divergence import DivergenceFlag, analyze_divergences  # noqa: E402
 from .hype import HypeScore, score_hype  # noqa: E402
+from .macro_mode import MacroSignal, detect_macro_mode  # noqa: E402
 from .paper_trading import compute_paper_stats, load_cycles, run_paper_cycle  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
 from .mimicry import mimicry_voice_for, mimicry_voice_to_voice_spec  # noqa: E402
@@ -37,6 +38,7 @@ from .sources.earnings_source import (  # noqa: E402
     notable_earnings_for,
 )
 from .sources.finnhub_source import fetch_finnhub_articles  # noqa: E402
+from .sources.insider_source import InsiderBuy, notable_insider_buys  # noqa: E402
 from .sources.newsapi_source import fetch_newsapi_articles  # noqa: E402
 from .sources.quotes_source import fetch_sparkline_data  # noqa: E402
 from .sources.rss_source import fetch_rss_articles  # noqa: E402
@@ -276,7 +278,21 @@ def run_pipeline() -> None:
         mimicry_label = None
         logger.info(f"Voice: {active_voice.get('name')}")
 
-    ranked, model_used, effective_voice = client.analyze_articles(deduped, voice=active_voice)
+    # Geographic / Macro Mode (creative #18): auto-detect a macro-heavy day from
+    # the candidate headlines and bias the ranking toward macro stories.
+    macro_signal = MacroSignal(active=False, matched_count=0, total=0, themes=[])
+    if settings.macro_mode_enabled:
+        macro_signal = detect_macro_mode(
+            deduped,
+            min_count=settings.macro_mode_min_count,
+            min_fraction=settings.macro_mode_min_fraction,
+        )
+        if macro_signal.active:
+            logger.info("Macro Mode ON for today's ranking")
+
+    ranked, model_used, effective_voice = client.analyze_articles(
+        deduped, voice=active_voice, macro_mode=macro_signal.active
+    )
     logger.info(f"Top 3 ranked by {model_used} (effective voice: {effective_voice.get('name')})")
     model_family = _model_family_label(model_used)
 
@@ -442,6 +458,25 @@ def run_pipeline() -> None:
             logger.warning(f"Divergence analysis raised ({e}) — hiding flags")
             divergences = []
 
+    # Insider / Form 4 Spotlight (creative #16): notable recent insider buys on
+    # the day's pick tickers (Finnhub free insider-transactions). Best-effort.
+    insider_buys: list[InsiderBuy] = []
+    if settings.insider_spotlight_enabled and settings.finnhub_api_key:
+        try:
+            insider_buys = notable_insider_buys(
+                ranked,
+                settings.finnhub_api_key,
+                today,
+                lookback_days=settings.insider_lookback_days,
+                min_value=settings.insider_min_value,
+                limit=settings.insider_max,
+                min_call_interval=settings.min_call_interval_secs,
+            )
+            logger.info(f"Insider Spotlight: {len(insider_buys)} notable buy(s)")
+        except Exception as e:
+            logger.warning(f"Insider spotlight raised ({e}) — hiding card")
+            insider_buys = []
+
     html_body = render_email_html(
         ranked,
         sparklines=sparklines,
@@ -452,6 +487,8 @@ def run_pipeline() -> None:
         paper_stats=paper_stats,
         earnings=todays_earnings,
         divergences=divergences,
+        insider_buys=insider_buys,
+        macro_mode=macro_signal.active,
     )
     plain_text = render_plain_text(
         ranked,
@@ -463,6 +500,8 @@ def run_pipeline() -> None:
         paper_stats=paper_stats,
         earnings=todays_earnings,
         divergences=divergences,
+        insider_buys=insider_buys,
+        macro_mode=macro_signal.active,
     )
     subject = build_subject(
         ranked,

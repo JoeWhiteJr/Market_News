@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 from .config import MarketMoverSettings
 from .exceptions import AnalysisParsingError, EmptyLLMResponse, LLMError
 from .models import ContrarianCoda, RankedArticle, RawArticle
+from .macro_mode import MACRO_BIAS_INSTRUCTION
 from .voices import (
     NEUTRAL_VOICE,
     VoiceSpec,
@@ -132,6 +133,7 @@ class LLMClient:
         self,
         articles: list[RawArticle],
         voice: VoiceSpec | None = None,
+        macro_mode: bool = False,
     ) -> tuple[list[RankedArticle], str, VoiceSpec]:
         """Analyze and rank articles by market impact using Claude with Gemini fallback.
 
@@ -153,6 +155,9 @@ class LLMClient:
         """
         active_voice: VoiceSpec = voice if voice is not None else get_voice(self._settings.briefing_voice)
         system_prompt = _build_system_prompt(RANKING_SYSTEM_PROMPT, active_voice)
+        if macro_mode:
+            # Geographic / Macro Mode (creative #18): bias toward macro stories.
+            system_prompt = f"{system_prompt}\n\n{MACRO_BIAS_INSTRUCTION}"
 
         articles_json = json.dumps(
             [a.model_dump(mode="json") for a in articles],

@@ -13,6 +13,7 @@ from .divergence import DivergenceFlag
 from .hype import HypeScore
 from .models import ContrarianCoda, RankedArticle, SparklineSeries
 from .sources.earnings_source import EarningsEntry
+from .sources.insider_source import InsiderBuy
 from .scorecard import (
     BriefingRecord,
     render_scorecard_html,
@@ -155,6 +156,8 @@ def render_email_html(
     paper_stats: dict | None = None,
     earnings: list["EarningsEntry"] | None = None,
     divergences: list["DivergenceFlag"] | None = None,
+    insider_buys: list["InsiderBuy"] | None = None,
+    macro_mode: bool = False,
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -190,6 +193,13 @@ def render_email_html(
     scorecard_block += _render_paper_block_html(paper_stats)
     earnings_block = _render_earnings_block_html(earnings or [])
     divergence_block = _render_divergence_block_html(divergences or [])
+    insider_block = _render_insider_block_html(insider_buys or [])
+    macro_badge = (
+        '<span style="display:inline-block;margin-top:8px;background-color:#2d3a8c;'
+        'color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:10px;">'
+        "&#127757; MACRO MODE</span>"
+        if macro_mode else ""
+    )
 
     if articles:
         preheader_raw = _first_sentence(articles[0].market_impact_summary) or articles[0].title
@@ -279,11 +289,13 @@ def render_email_html(
 <td class="mm-header" style="background-color:#1a1a2e;padding:24px 32px;text-align:center;">
   <h1 class="mm-header-title" style="color:#ffffff;margin:0;font-size:24px;font-weight:700;">Market Mover</h1>
   <p class="mm-header-sub" style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; {date_str}</p>
+  {macro_badge}
 </td>
 </tr>
 {divergence_block}
 {scorecard_block}
 {earnings_block}
+{insider_block}
 <!-- Articles -->
 <tr>
 <td style="padding:24px 32px;">
@@ -445,6 +457,8 @@ def render_plain_text(
     paper_stats: dict | None = None,
     earnings: list["EarningsEntry"] | None = None,
     divergences: list["DivergenceFlag"] | None = None,
+    insider_buys: list["InsiderBuy"] | None = None,
+    macro_mode: bool = False,
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -494,8 +508,14 @@ def render_plain_text(
         lines.append(earnings_text)
         lines.append("")
 
+    insider_text = _render_insider_block_plain(insider_buys or [])
+    if insider_text:
+        lines.append(insider_text)
+        lines.append("")
+
+    macro_tag = "  [MACRO MODE]" if macro_mode else ""
     lines.extend([
-        f"MARKET MOVER — Top 3 Market-Moving Stories — {date_str}",
+        f"MARKET MOVER — Top 3 Market-Moving Stories — {date_str}{macro_tag}",
         "=" * 60,
         "",
     ])
@@ -629,8 +649,10 @@ def _render_paper_block_html(paper_stats: dict | None) -> str:
     inner = " &nbsp;&bull;&nbsp; ".join(bits)
 
     return f"""
+<tr>
+<td style="padding:8px 32px 0;">
   <section data-block="paper">
-  <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 20px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
   <tr>
   <td style="padding:10px 14px;background-color:#f4f7fb;border-left:4px solid #2d5fa0;border-radius:0 6px 6px 0;">
     <span style="font-size:12px;font-weight:700;color:#2d5fa0;">&#128200; PAPER PORTFOLIO</span>
@@ -639,7 +661,9 @@ def _render_paper_block_html(paper_stats: dict | None) -> str:
   </td>
   </tr>
   </table>
-  </section>"""
+  </section>
+</td>
+</tr>"""
 
 
 def _render_paper_block_plain(paper_stats: dict | None) -> str:
@@ -657,6 +681,50 @@ def _render_paper_block_plain(paper_stats: dict | None) -> str:
         if win_rate is not None:
             parts.append(f"Win {win_rate:.0f}% ({paper_stats.get('wins') or 0}/{n})")
     return "  •  ".join(parts)
+
+
+def _render_insider_block_html(buys: list[InsiderBuy]) -> str:
+    """Render the Insider Spotlight card (creative #16). Empty if none."""
+    if not buys:
+        return ""
+    rows = []
+    for b in buys:
+        ticker = html_escape(b.ticker)
+        insider = html_escape(b.insider)
+        value = _fmt_revenue(b.value)
+        meta = html_escape(f"{insider} bought {value} ({b.transaction_date})")
+        rows.append(
+            f'<tr><td style="padding:3px 0;font-size:13px;color:#333;">'
+            f'<strong style="color:#1a6b3a;">{ticker}</strong>'
+            f'<span style="color:#555;"> &mdash; {meta}</span></td></tr>'
+        )
+    return f"""
+<tr>
+<td style="padding:0 32px 4px;">
+  <section data-block="insider">
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
+  <tr>
+  <td style="padding:12px 14px;background-color:#eef7f0;border-left:4px solid #1a6b3a;border-radius:0 6px 6px 0;">
+    <div style="font-size:12px;font-weight:700;color:#14582f;margin-bottom:6px;">&#128081; INSIDER BUYING</div>
+    <table width="100%" cellpadding="0" cellspacing="0">
+    {"".join(rows)}
+    </table>
+  </td>
+  </tr>
+  </table>
+  </section>
+</td>
+</tr>"""
+
+
+def _render_insider_block_plain(buys: list[InsiderBuy]) -> str:
+    """Plain-text Insider Spotlight. Empty if none."""
+    if not buys:
+        return ""
+    lines = ["INSIDER BUYING", "-" * 60]
+    for b in buys:
+        lines.append(f"  {b.ticker} — {b.insider} bought {_fmt_revenue(b.value)} ({b.transaction_date})")
+    return "\n".join(lines)
 
 
 def _render_divergence_block_html(flags: list[DivergenceFlag]) -> str:

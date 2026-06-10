@@ -141,6 +141,23 @@ class TestRunPaperCycle:
         assert cycles[0].opened[0].ticker == "NVDA"
 
 
+class TestPaperBlockRender:
+    def test_block_wrapped_in_table_row(self):
+        # Regression: the Paper Portfolio block sits inside the card <table>,
+        # so it must be a <tr><td> row (not a bare <table>) for Outlook etc.
+        from market_mover.email_template import _render_paper_block_html
+        out = _render_paper_block_html(
+            {"equity": 100000.0, "n_trades": 3, "wins": 1, "win_rate": 33.3, "total_pnl": -27.0}
+        ).strip()
+        assert out.startswith("<tr>")
+        assert out.endswith("</tr>")
+
+    def test_empty_block_when_no_equity(self):
+        from market_mover.email_template import _render_paper_block_html
+        assert _render_paper_block_html(None) == ""
+        assert _render_paper_block_html({"equity": None}) == ""
+
+
 class TestComputePaperStats:
     def test_aggregates_wins_and_pnl(self):
         cycles = [
