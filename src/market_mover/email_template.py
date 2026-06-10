@@ -267,6 +267,16 @@ def render_email_html(
     .mm-scorecard-meta {{ color: #9aa0ad !important; }}
     .mm-scorecard-verdict {{ background-color: #2c3140 !important; color: #b3bcd1 !important; }}
     /* Badges already use a dark-saturated background and #fff text — keep them. */
+    /* Cycle 5/6 + creative cards: give the newer light cards real dark surfaces.
+       Inline colors on children override parent classes, so each colored element
+       carries its own class. */
+    .mm-darkcard {{ background-color: #232734 !important; }}
+    .mm-darktext {{ color: #c8cdd6 !important; }}
+    .mm-darkticker {{ color: #e8ebf0 !important; }}
+    .mm-darklabel-ref {{ color: #b3bcd1 !important; }}
+    .mm-darklabel-warn {{ color: #e0944f !important; }}
+    .mm-darklabel-bull {{ color: #6ee7a0 !important; }}
+    .mm-darkborder-bull {{ border-left-color: #3fae6a !important; }}
   }}
   /* Mobile: stack the sparkline cells vertically so labels stay legible. */
   @media (max-width: 600px) {{
@@ -656,10 +666,10 @@ def _render_paper_block_html(paper_stats: dict | None) -> str:
   <section data-block="paper">
   <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
   <tr>
-  <td style="padding:10px 14px;background-color:#f4f5f8;border-left:4px solid #8a93a8;border-radius:0 6px 6px 0;">
-    <span style="font-size:12px;font-weight:700;color:#5b6473;">&#128200; PAPER PORTFOLIO</span>
+  <td class="mm-darkcard" style="padding:10px 14px;background-color:#f4f5f8;border-left:4px solid #8a93a8;border-radius:0 6px 6px 0;">
+    <span class="mm-darklabel-ref" style="font-size:12px;font-weight:700;color:#5b6473;">&#128200; PAPER PORTFOLIO</span>
     <span style="font-size:11px;color:#9aa0ad;"> &mdash; paper money, picks auto-traded</span>
-    <div style="font-size:13px;color:#333;padding-top:4px;">{inner}</div>
+    <div class="mm-darktext" style="font-size:13px;color:#333;padding-top:4px;">{inner}</div>
   </td>
   </tr>
   </table>
@@ -697,8 +707,8 @@ def _render_insider_block_html(buys: list[InsiderBuy]) -> str:
         meta = html_escape(f"{insider} bought {value} ({b.transaction_date})")
         rows.append(
             f'<tr><td style="padding:3px 0;font-size:13px;color:#333;">'
-            f'<strong style="color:#1a6b3a;">{ticker}</strong>'
-            f'<span style="color:#555;"> &mdash; {meta}</span></td></tr>'
+            f'<strong class="mm-darklabel-bull" style="color:#1a6b3a;">{ticker}</strong>'
+            f'<span class="mm-darktext" style="color:#555;"> &mdash; {meta}</span></td></tr>'
         )
     return f"""
 <tr>
@@ -706,8 +716,8 @@ def _render_insider_block_html(buys: list[InsiderBuy]) -> str:
   <section data-block="insider">
   <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
   <tr>
-  <td style="padding:12px 14px;background-color:#eef7f0;border-left:4px solid #1a6b3a;border-radius:0 6px 6px 0;">
-    <div style="font-size:12px;font-weight:700;color:#14582f;margin-bottom:6px;">&#128081; INSIDER BUYING</div>
+  <td class="mm-darkcard mm-darkborder-bull" style="padding:12px 14px;background-color:#eef7f0;border-left:4px solid #1a6b3a;border-radius:0 6px 6px 0;">
+    <div class="mm-darklabel-bull" style="font-size:12px;font-weight:700;color:#14582f;margin-bottom:6px;">&#128081; INSIDER BUYING</div>
     <table width="100%" cellpadding="0" cellspacing="0">
     {"".join(rows)}
     </table>
@@ -739,8 +749,8 @@ def _render_divergence_block_html(flags: list[DivergenceFlag]) -> str:
         note = html_escape(f.note)
         rows.append(
             f'<tr><td style="padding:3px 0;font-size:13px;color:#333;">'
-            f'<strong style="color:#7a3a00;">{ticker}</strong>'
-            f'<span style="color:#555;"> &mdash; {note}</span></td></tr>'
+            f'<strong class="mm-darkticker" style="color:#7a3a00;">{ticker}</strong>'
+            f'<span class="mm-darktext" style="color:#555;"> &mdash; {note}</span></td></tr>'
         )
     return f"""
 <tr>
@@ -748,8 +758,8 @@ def _render_divergence_block_html(flags: list[DivergenceFlag]) -> str:
   <section data-block="divergence">
   <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
   <tr>
-  <td style="padding:12px 14px;background-color:#fff4e8;border-left:4px solid #d2691e;border-radius:0 6px 6px 0;">
-    <div style="font-size:12px;font-weight:700;color:#a0480a;margin-bottom:6px;">&#9889; NARRATIVE vs TAPE</div>
+  <td class="mm-darkcard" style="padding:12px 14px;background-color:#fff4e8;border-left:4px solid #d2691e;border-radius:0 6px 6px 0;">
+    <div class="mm-darklabel-warn" style="font-size:12px;font-weight:700;color:#a0480a;margin-bottom:6px;">&#9889; NARRATIVE vs TAPE</div>
     <table width="100%" cellpadding="0" cellspacing="0">
     {"".join(rows)}
     </table>
@@ -798,8 +808,8 @@ def _render_earnings_block_html(entries: list[EarningsEntry]) -> str:
         meta = html_escape(" · ").join(meta_bits)
         rows.append(
             f'<tr><td style="padding:3px 0;font-size:13px;color:#333;">'
-            f'<strong style="color:#1a1a2e;">{ticker}</strong>'
-            f'<span style="color:#777;"> &nbsp;{meta}</span></td></tr>'
+            f'<strong class="mm-darkticker" style="color:#1a1a2e;">{ticker}</strong>'
+            f'<span class="mm-darktext" style="color:#777;"> &nbsp;{meta}</span></td></tr>'
         )
 
     return f"""
@@ -808,8 +818,8 @@ def _render_earnings_block_html(entries: list[EarningsEntry]) -> str:
   <section data-block="earnings">
   <table width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">
   <tr>
-  <td style="padding:12px 14px;background-color:#f4f5f8;border-left:4px solid #8a93a8;border-radius:0 6px 6px 0;">
-    <div style="font-size:12px;font-weight:700;color:#5b6473;margin-bottom:6px;">&#128197; REPORTING EARNINGS TODAY</div>
+  <td class="mm-darkcard" style="padding:12px 14px;background-color:#f4f5f8;border-left:4px solid #8a93a8;border-radius:0 6px 6px 0;">
+    <div class="mm-darklabel-ref" style="font-size:12px;font-weight:700;color:#5b6473;margin-bottom:6px;">&#128197; REPORTING EARNINGS TODAY</div>
     <table width="100%" cellpadding="0" cellspacing="0">
     {"".join(rows)}
     </table>

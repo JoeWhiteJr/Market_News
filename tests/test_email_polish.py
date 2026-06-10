@@ -405,6 +405,33 @@ class TestScorecardSlot:
         assert story < scorecard and story < paper and story < earnings
 
 
+    def test_newer_cards_carry_dark_mode_hooks(self):
+        """The Cycle-5/6 + creative cards must carry dark-mode classes so they
+        don't render as bright boxes in a dark-mode client."""
+        from market_mover.divergence import DivergenceFlag
+        from market_mover.sources.earnings_source import EarningsEntry
+        from market_mover.sources.insider_source import InsiderBuy
+
+        html = render_email_html(
+            [_make_article()],
+            paper_stats={"equity": 100000.0, "n_trades": 1, "wins": 1,
+                         "win_rate": 100.0, "total_pnl": 5.0},
+            earnings=[EarningsEntry(symbol="ORCL", date="2026-06-10", hour="amc",
+                                    eps_estimate=2.0, revenue_estimate=19e9)],
+            divergences=[DivergenceFlag(ticker="NVDA", sentiment="bullish",
+                                        price_pct=-3.0, lookback=5, headline="x", note="x")],
+            insider_buys=[InsiderBuy(ticker="USO", insider="J", shares=1, price=1.0,
+                                     value=200000.0, transaction_date="2026-06-10")],
+        )
+        # The dark-mode CSS rules exist...
+        assert ".mm-darkcard {" in html
+        # ...and the four cards are tagged so the overrides bite (4 dark cards).
+        assert html.count('class="mm-darkcard') == 4
+        assert "mm-darklabel-warn" in html   # divergence label
+        assert "mm-darklabel-bull" in html   # insider label
+        assert "mm-darkticker" in html       # earnings/divergence tickers
+
+
 class TestUnusedImportShim:
     """Keep static-analysis happy about test-only imports."""
 
