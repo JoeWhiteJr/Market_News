@@ -1,0 +1,20 @@
+MARKET MOVER — Top 3 Market-Moving Stories — June 18, 2026
+============================================================
+
+#1 — Impact: 9.5/10
+  US-Iran Peace Deal Signed at Versailles, Reopening Strait of Hormuz
+  Source: nbcnews.com
+  President Trump and Iran signed a landmark peace deal at Versailles, ending the Iran war and reopening the Strait of Hormuz — which carries 20% of global oil and gas supplies. Brent crude fell 1.6% to $78 on the news, reversing the inflation spike that pushed CPI to 4.2% in May. This reshapes the global energy picture, benefiting airlines, industrials, and consumer sectors while pressuring energy stocks.
+  Read: https://www.nbcnews.com/world/iran/strait-hormuz-reopen-us-lift-iran-sanctions-14-point-deal-seeking-end-rcna350513
+
+#2 — Impact: 9.0/10
+  Fed Holds Rates But Signals Possible Hike, Warsh Skips Dot Plot in New Era
+  Source: CNBC
+  New Fed Chair Kevin Warsh held the benchmark rate at 3.50%-3.75% but median dot-plot projections shifted to 3.8%, putting a 2026 rate hike squarely on the table. Warsh broke with tradition by withholding his own dot, then announced five policy task forces signaling a sweeping operational review. Rate-sensitive sectors — tech, real estate, and financials — face renewed pressure as cut expectations for 2026 were erased and pushed to 2027-2028.
+  Read: https://www.cnbc.com/2026/06/17/fed-interest-rate-decision-june-2026.html
+
+#3 — Impact: 8.0/10
+  Trump Confirms Apple-Intel US Chip Manufacturing Deal, Intel Surges 9%
+  Source: CNBC
+  President Trump announced Apple will partner with Intel to design and manufacture chips on US soil, marking a historic shift in Apple supply chain away from TSMC. Intel surged 9% in premarket trading, extending a roughly threefold gain year-to-date. The deal accelerates US semiconductor onshoring and stands to reshape competitive dynamics across the chip sector — lifting Intel, squeezing TSMC-dependent rivals, and further validating the domestic manufacturing push.
+  Read: https://www.cnbc.com/amp/2026/06/18/trump-intel-apple-chip-design-deal.html

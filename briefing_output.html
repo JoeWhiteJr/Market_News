@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<style>
+  /* Dark-mode overrides for clients that honor prefers-color-scheme
+     (Apple Mail, iOS Mail, Outlook.com web, recent Gmail web).
+     Gmail iOS still auto-inverts; the meta tags above opt us out where supported. */
+  @media (prefers-color-scheme: dark) {
+    body, .mm-bg { background-color: #0f1116 !important; }
+    .mm-card { background-color: #1a1d24 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important; }
+    .mm-header { background-color: #11131a !important; }
+    .mm-header-title { color: #e8ebf0 !important; }
+    .mm-header-sub { color: #9aa0ad !important; }
+    .mm-article-wrap { background-color: #232734 !important; }
+    .mm-title { color: #e8ebf0 !important; }
+    .mm-source { color: #9aa0ad !important; }
+    .mm-summary { color: #c8cdd6 !important; }
+    .mm-footer { background-color: #11131a !important; border-top-color: #232734 !important; }
+    .mm-footer-text { color: #7a8090 !important; }
+    /* Sparkline strip: swap to higher-contrast tones against the dark card bg. */
+    .mm-spark-wrap { background-color: #1a1d24 !important; border-bottom-color: #232734 !important; }
+    .mm-spark-ticker { color: #e8ebf0 !important; }
+    .mm-spark-up { color: #7bd99a !important; }
+    .mm-spark-up-stroke { stroke: #7bd99a !important; }
+    .mm-spark-down { color: #ff7a6b !important; }
+    .mm-spark-down-stroke { stroke: #ff7a6b !important; }
+    .mm-spark-flat { color: #a8aeb8 !important; }
+    .mm-spark-flat-stroke { stroke: #a8aeb8 !important; }
+    /* Contrarian "Bear Case" section. */
+    .mm-contrarian-wrap { background-color: #1a1d24 !important; border-top-color: #232734 !important; }
+    .mm-contrarian-card { background-color: #232734 !important; border-left-color: #b9863d !important; }
+    .mm-contrarian-eyebrow { color: #b9863d !important; }
+    .mm-contrarian-headline { color: #e8ebf0 !important; }
+    .mm-contrarian-argument { color: #c8cdd6 !important; }
+    .mm-contrarian-source { color: #9aa0ad !important; }
+    /* Yesterday-Index scorecard (Cycle 4 Phase A). */
+    .mm-scorecard-wrap { background-color: #1a1d24 !important; }
+    .mm-scorecard-card { background-color: #232734 !important; border-left-color: #8a93a8 !important; }
+    .mm-scorecard-eyebrow { color: #b3bcd1 !important; }
+    .mm-scorecard-sub { color: #9aa0ad !important; }
+    .mm-scorecard-row { border-bottom-color: #2c3140 !important; }
+    .mm-scorecard-title { color: #e8ebf0 !important; }
+    .mm-scorecard-meta { color: #9aa0ad !important; }
+    .mm-scorecard-verdict { background-color: #2c3140 !important; color: #b3bcd1 !important; }
+    /* Badges already use a dark-saturated background and #fff text — keep them. */
+    /* Cycle 5/6 + creative cards: give the newer light cards real dark surfaces.
+       Inline colors on children override parent classes, so each colored element
+       carries its own class. */
+    .mm-darkcard { background-color: #232734 !important; }
+    .mm-darktext { color: #c8cdd6 !important; }
+    .mm-darkticker { color: #e8ebf0 !important; }
+    .mm-darklabel-ref { color: #b3bcd1 !important; }
+    .mm-darklabel-warn { color: #e0944f !important; }
+    .mm-darklabel-bull { color: #6ee7a0 !important; }
+    .mm-darkborder-bull { border-left-color: #3fae6a !important; }
+  }
+  /* Mobile: stack the sparkline cells vertically so labels stay legible. */
+  @media (max-width: 600px) {
+    .mm-spark-cell { display:block !important; width:100% !important; padding:6px 0 !important; }
+    .mm-spark-row { display:block !important; width:100% !important; }
+  }
+</style>
+</head>
+<body class="mm-bg" style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#f4f4f4;opacity:0;">
+President Trump and Iran signed a landmark peace deal at Versailles, ending the Iran war and reopening the Strait of Hormuz — which carries…
+</div>
+
+<table width="100%" cellpadding="0" cellspacing="0" class="mm-bg" style="background-color:#f4f4f4;padding:20px 0;">
+<tr><td align="center">
+<table width="600" cellpadding="0" cellspacing="0" class="mm-card" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+
+<!-- Header -->
+<tr>
+<td class="mm-header" style="background-color:#1a1a2e;padding:24px 32px;text-align:center;">
+  <h1 class="mm-header-title" style="color:#ffffff;margin:0;font-size:24px;font-weight:700;">Market Mover</h1>
+  <p class="mm-header-sub" style="color:#a0a0b0;margin:8px 0 0;font-size:14px;">Top 3 Market-Moving Stories &mdash; June 18, 2026</p>
+  
+</td>
+</tr>
+<!-- Alerts: high-signal, act-on-today flags sit directly under the header -->
+
+
+<!-- Top 3 stories — the core, kept high so it's the first thing after alerts -->
+<tr>
+<td style="padding:24px 32px;">
+
+  <!-- Article #1 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #c0392b;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 1 story, impact score 9.5 out of 10" style="display:inline-block;background-color:#c0392b;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #1 &bull; Impact: 9.5/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.nbcnews.com/world/iran/strait-hormuz-reopen-us-lift-iran-sanctions-14-point-deal-seeking-end-rcna350513" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          US-Iran Peace Deal Signed at Versailles, Reopening Strait of Hormuz
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">nbcnews.com</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          President Trump and Iran signed a landmark peace deal at Versailles, ending the Iran war and reopening the Strait of Hormuz — which carries 20% of global oil and gas supplies. Brent crude fell 1.6% to $78 on the news, reversing the inflation spike that pushed CPI to 4.2% in May. This reshapes the global energy picture, benefiting airlines, industrials, and consumer sectors while pressuring energy stocks.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.nbcnews.com/world/iran/strait-hormuz-reopen-us-lift-iran-sanctions-14-point-deal-seeking-end-rcna350513" style="color:#c0392b;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+
+  <!-- Article #2 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #a05a00;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 2 story, impact score 9.0 out of 10" style="display:inline-block;background-color:#a05a00;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #2 &bull; Impact: 9.0/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.cnbc.com/2026/06/17/fed-interest-rate-decision-june-2026.html" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          Fed Holds Rates But Signals Possible Hike, Warsh Skips Dot Plot in New Era
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">CNBC</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          New Fed Chair Kevin Warsh held the benchmark rate at 3.50%-3.75% but median dot-plot projections shifted to 3.8%, putting a 2026 rate hike squarely on the table. Warsh broke with tradition by withholding his own dot, then announced five policy task forces signaling a sweeping operational review. Rate-sensitive sectors — tech, real estate, and financials — face renewed pressure as cut expectations for 2026 were erased and pushed to 2027-2028.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.cnbc.com/2026/06/17/fed-interest-rate-decision-june-2026.html" style="color:#a05a00;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+
+  <!-- Article #3 -->
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+  <tr>
+  <td class="mm-article-wrap" style="padding:16px;border-left:4px solid #2470a8;background-color:#fafafa;border-radius:0 6px 6px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <span role="img" aria-label="Rank 3 story, impact score 8.0 out of 10" style="display:inline-block;background-color:#2470a8;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;">
+          #3 &bull; Impact: 8.0/10
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <a href="https://www.cnbc.com/amp/2026/06/18/trump-intel-apple-chip-design-deal.html" class="mm-title" style="color:#1a1a2e;font-size:16px;font-weight:600;text-decoration:none;line-height:1.3;">
+          Trump Confirms Apple-Intel US Chip Manufacturing Deal, Intel Surges 9%
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:4px;">
+        <span class="mm-source" style="color:#888;font-size:12px;">CNBC</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:8px;">
+        <p class="mm-summary" style="color:#444;font-size:14px;line-height:1.5;margin:0;">
+          President Trump announced Apple will partner with Intel to design and manufacture chips on US soil, marking a historic shift in Apple supply chain away from TSMC. Intel surged 9% in premarket trading, extending a roughly threefold gain year-to-date. The deal accelerates US semiconductor onshoring and stands to reshape competitive dynamics across the chip sector — lifting Intel, squeezing TSMC-dependent rivals, and further validating the domestic manufacturing push.
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-top:12px;">
+        <a href="https://www.cnbc.com/amp/2026/06/18/trump-intel-apple-chip-design-deal.html" style="color:#2470a8;font-size:13px;font-weight:600;text-decoration:none;">
+          &#8594; Read full article
+        </a>
+      </td>
+    </tr>
+    </table>
+  </td>
+  </tr>
+  </table>
+</td>
+</tr>
+
+
+<!-- Reference zone: retrospective + context, demoted below the stories -->
+
+
+<!-- Footer -->
+<tr>
+<td class="mm-footer" style="background-color:#f8f8fa;padding:16px 32px;text-align:center;border-top:1px solid #eaeaea;">
+  
+  <p class="mm-footer-text" style="color:#888;font-size:12px;margin:0;">
+    Generated by Market Mover MCP &bull; 06:09 AM MDT
+  </p>
+</td>
+</tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
