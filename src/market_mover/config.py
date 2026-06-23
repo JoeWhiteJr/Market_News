@@ -75,7 +75,7 @@ class MarketMoverSettings(BaseSettings):
     learning_window_days: int = 0
 
     # LLM config
-    claude_model: str = "claude-sonnet-4-20250514"
+    claude_model: str = "claude-sonnet-4-6"
     gemini_model: str = "gemini-2.5-flash"
     max_tokens: int = 4096
     temperature: float = 0.2
@@ -162,10 +162,13 @@ class MarketMoverSettings(BaseSettings):
     # --- Cycle 4B Yesterday-Index judge ------------------------------------
     # Anthropic model used by the Phase B judge. Logged per-row as
     # ``judge_model`` so historical comparisons stay apples-to-apples.
-    # IMPORTANT: per ADR 0001 the rubric+prompt are LOCKED. If you change
-    # this model, also bump ``JUDGE_PROMPT_VERSION`` in judge.py and
-    # manually re-grade history (no automated migration).
-    judge_model: str = "claude-sonnet-4-20250514"
+    # Per ADR 0001 the rubric + prompt + thresholds are LOCKED, but the model
+    # is NOT — it's logged per-row as ``judge_model`` for provenance. This was
+    # force-migrated from the retired ``claude-sonnet-4-20250514`` (now 404) to
+    # ``claude-sonnet-4-6`` so grading could resume. The prompt is unchanged, so
+    # JUDGE_PROMPT_VERSION stays 1; a *voluntary* model/prompt change still
+    # requires bumping the version and re-grading history.
+    judge_model: str = "claude-sonnet-4-6"
 
     @property
     def briefings_jsonl_full_path(self) -> Path:

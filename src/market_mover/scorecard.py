@@ -270,7 +270,7 @@ def commit_daily_record(
             previous row, or ``None`` if the judge didn't run / failed.
         path: Destination JSONL (typically ``data/briefings.jsonl``).
         judge_model: Anthropic model identifier used (e.g.
-            ``"claude-sonnet-4-20250514"``). Stamped onto the patched row.
+            ``"claude-sonnet-4-6"``). Stamped onto the patched row.
         judge_prompt_version: Locked integer per the ADR. Stamped onto the
             patched row alongside ``judge_model``.
         graded_at: ISO-8601 timestamp of when the judging completed.

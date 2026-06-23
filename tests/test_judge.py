@@ -263,7 +263,7 @@ class TestParseJudgeResponse:
 # ---------------------------------------------------------------------------
 
 
-def _make_mock_settings(judge_model: str = "claude-sonnet-4-20250514"):
+def _make_mock_settings(judge_model: str = "claude-sonnet-4-6"):
     """Build a stand-in MarketMoverSettings-like object for the judge.
 
     The judge only reads ``finnhub_api_key``, ``min_call_interval_secs``,
