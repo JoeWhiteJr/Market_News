@@ -90,3 +90,52 @@ jobs:
           gh issue create \
             --title "[daily-briefing failed] ${DATE}" \
             --body "The daily market briefing workflow failed on ${DATE}. Run: ${RUN_URL}"
+
+      - name: Email failure alert
+        # Best-effort SMTP alert so an outage is caught the next morning instead
+        # of going unnoticed for days (the 2026-06-16..23 retired-model outage
+        # ran silent for a week). Pure stdlib smtplib — works even if the app
+        # code is what broke. Never fails the job (already failed; this is just
+        # notification).
+        if: failure()
+        env:
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+        run: |
+          python3 - <<'PY'
+          import os, smtplib, ssl
+          from datetime import datetime, timezone
+          from email.message import EmailMessage
+
+          user = os.environ.get("SMTP_USERNAME", "")
+          pw = os.environ.get("SMTP_APP_PASSWORD", "")
+          if not user or not pw:
+              print("No SMTP creds in env; skipping failure alert.")
+              raise SystemExit(0)
+
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          run_url = (
+              f"{os.environ.get('GITHUB_SERVER_URL','https://github.com')}/"
+              f"{os.environ.get('GITHUB_REPOSITORY','')}/actions/runs/"
+              f"{os.environ.get('GITHUB_RUN_ID','')}"
+          )
+          msg = EmailMessage()
+          msg["Subject"] = f"[ALERT] Market Mover briefing FAILED - {date}"
+          msg["From"] = user
+          msg["To"] = user  # alert the operator, not the subscriber list
+          msg.set_content(
+              f"The daily Market Mover briefing FAILED on {date} and no email was "
+              f"sent to recipients.\n\n"
+              f"Run logs: {run_url}\n\n"
+              "Most likely causes: a retired LLM model (404), an expired API key, "
+              "or an upstream timeout. Check the 'Run pipeline' step in the logs.\n"
+          )
+          try:
+              with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as s:
+                  s.starttls(context=ssl.create_default_context())
+                  s.login(user, pw)
+                  s.send_message(msg)
+              print(f"Failure alert emailed to {user}")
+          except Exception as e:
+              print(f"Failure alert send failed (non-fatal): {e}")
+          PY
