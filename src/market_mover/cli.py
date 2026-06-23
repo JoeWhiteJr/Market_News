@@ -19,6 +19,11 @@ from .email_sender import send_email  # noqa: E402
 from .email_template import build_subject, render_email_html, render_plain_text  # noqa: E402
 from .divergence import DivergenceFlag, analyze_divergences  # noqa: E402
 from .hype import HypeScore, score_hype  # noqa: E402
+from .learning import (  # noqa: E402
+    compute_category_performance,
+    format_category_readout,
+    load_briefing_records,
+)
 from .macro_mode import MacroSignal, detect_macro_mode  # noqa: E402
 from .paper_trading import compute_paper_stats, load_cycles, run_paper_cycle  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
@@ -560,6 +565,22 @@ def run_pipeline() -> None:
                 "email already sent, continuing",
                 e,
             )
+
+    # Step 6: Learning loop (Phase 0) — log Bayesian-pooled hit-quality by
+    # category. Measurement only; never affects the send. Reads the ledger we
+    # just updated, so the readout reflects today's grading.
+    if settings.learning_enabled:
+        try:
+            report = compute_category_performance(
+                load_briefing_records(jsonl_path),
+                today,
+                prior_strength=settings.learning_prior_strength,
+                window_days=settings.learning_window_days,
+            )
+            for line in format_category_readout(report).splitlines():
+                logger.info(line)
+        except Exception as e:
+            logger.warning("Learning readout raised (%s) — skipping", e)
 
 
 if __name__ == "__main__":
