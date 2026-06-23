@@ -422,7 +422,7 @@ class TestCliPersistsAfterSend:
             def analyze_articles(self, articles, voice=None, macro_mode=False):
                 from market_mover.voices import get_voice
 
-                return sample_ranked, "claude-sonnet-4-20250514", get_voice("vinny")
+                return sample_ranked, "claude-sonnet-4-6", get_voice("vinny")
 
             def generate_contrarian_coda(self, top_story, all_articles):
                 return None
@@ -481,7 +481,7 @@ class TestCliPersistsAfterSend:
             def analyze_articles(self, articles, voice=None, macro_mode=False):
                 from market_mover.voices import get_voice
 
-                return sample_ranked, "claude-sonnet-4-20250514", get_voice("vinny")
+                return sample_ranked, "claude-sonnet-4-6", get_voice("vinny")
 
             def generate_contrarian_coda(self, top_story, all_articles):
                 return None
