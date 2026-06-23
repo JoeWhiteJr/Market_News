@@ -158,6 +158,34 @@ class TestPaperBlockRender:
         assert _render_paper_block_html({"equity": None}) == ""
 
 
+class TestCategoryPersistence:
+    def test_opened_positions_carry_category(self, tmp_path):
+        ledger = tmp_path / "paper.jsonl"
+        client = _FakeClient()
+        picks = [_pick(1, "NVDA", "single_name"), _pick(2, "USO", "commodity")]
+        rec = run_paper_cycle(picks, _Settings(ledger), date(2026, 6, 18), client=client)
+        by_ticker = {o.ticker: o.category for o in rec.opened}
+        assert by_ticker == {"NVDA": "single_name", "USO": "commodity"}
+
+    def test_closed_trades_inherit_prior_category(self, tmp_path):
+        ledger = tmp_path / "paper.jsonl"
+        s = _Settings(ledger)
+        # Cycle 1: open NVDA (single_name).
+        run_paper_cycle([_pick(1, "NVDA", "single_name")], s, date(2026, 6, 18),
+                        client=_FakeClient())
+        # Cycle 2: NVDA is now an open position to close; category comes from
+        # the prior cycle's opened record.
+        positions = [{
+            "symbol": "NVDA", "qty": "2", "avg_entry_price": "100",
+            "current_price": "110", "unrealized_pl": "20", "unrealized_plpc": "0.10",
+        }]
+        rec2 = run_paper_cycle([_pick(1, "TSLA", "single_name")], s, date(2026, 6, 19),
+                               client=_FakeClient(positions=positions))
+        assert len(rec2.closed) == 1
+        assert rec2.closed[0].ticker == "NVDA"
+        assert rec2.closed[0].category == "single_name"
+
+
 class TestComputePaperStats:
     def test_aggregates_wins_and_pnl(self):
         cycles = [

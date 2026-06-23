@@ -44,6 +44,10 @@ class ClosedPaperTrade(BaseModel):
     exit_price: float
     pnl_abs: float
     pnl_pct: float
+    # The pick's category (carried from when it was opened) so P&L pools by
+    # category without a join back to briefings.jsonl. Null on legacy rows /
+    # positions we can't map. (Phase 0 / ADR 0004.)
+    category: str | None = None
 
 
 class OpenedPaperPosition(BaseModel):
@@ -53,6 +57,7 @@ class OpenedPaperPosition(BaseModel):
     rank: int
     notional: float
     order_id: str | None = None
+    category: str | None = None  # the pick's category (Phase 0 / ADR 0004)
 
 
 class PaperCycleRecord(BaseModel):
@@ -141,8 +146,15 @@ def compute_paper_stats(cycles: list[PaperCycleRecord]) -> dict:
     }
 
 
-def _close_open_positions(client: AlpacaTradingClient) -> list[ClosedPaperTrade]:
-    """Mark + liquidate every open paper position (the prior run's opens)."""
+def _close_open_positions(
+    client: AlpacaTradingClient, category_by_ticker: dict[str, str] | None = None
+) -> list[ClosedPaperTrade]:
+    """Mark + liquidate every open paper position (the prior run's opens).
+
+    ``category_by_ticker`` (from the prior cycle's opened positions) lets each
+    closed trade carry the pick's category so P&L pools by category.
+    """
+    category_by_ticker = category_by_ticker or {}
     closed: list[ClosedPaperTrade] = []
     for pos in client.list_positions():
         try:
@@ -159,6 +171,7 @@ def _close_open_positions(client: AlpacaTradingClient) -> list[ClosedPaperTrade]
             ClosedPaperTrade(
                 ticker=ticker, qty=qty, entry_price=entry, exit_price=exit_price,
                 pnl_abs=pnl_abs, pnl_pct=pnl_pct,
+                category=category_by_ticker.get(ticker.upper()),
             )
         )
         client.close_position(ticker)
@@ -189,8 +202,14 @@ def run_paper_cycle(
 
     client = client or AlpacaTradingClient(settings)
 
-    # 1) Close the prior run's positions (the ~24h exit).
-    closed = _close_open_positions(client)
+    # 1) Close the prior run's positions (the ~24h exit). Carry each pick's
+    # category from the prior cycle's opened positions so closed P&L pools.
+    prior_categories: dict[str, str] = {}
+    if cycles:
+        for op in cycles[-1].opened:
+            if op.category:
+                prior_categories[op.ticker.upper()] = op.category
+    closed = _close_open_positions(client, prior_categories)
 
     # 2) Open today's eligible picks, equal-weight notional.
     opened: list[OpenedPaperPosition] = []
@@ -205,6 +224,7 @@ def run_paper_cycle(
                 rank=int(p.rank),
                 notional=settings.paper_notional_per_position,
                 order_id=(order or {}).get("id") if isinstance(order, dict) else None,
+                category=getattr(p, "category", None),
             )
         )
 

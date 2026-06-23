@@ -65,6 +65,15 @@ class MarketMoverSettings(BaseSettings):
         p = Path(self.paper_trades_jsonl_path)
         return p if p.is_absolute() else _PROJECT_ROOT / p
 
+    # Learning loop (Phase 0 / ADR 0004) — Bayesian-pooled performance by
+    # category. Measurement only for now (logged each run; no feedback yet).
+    learning_enabled: bool = True
+    # Prior strength (pseudo-observations) shrinking each category toward the
+    # global hit-rate. Higher = more pooling (better when data is thin).
+    learning_prior_strength: float = 4.0
+    # Rolling window in days; 0 = use all history.
+    learning_window_days: int = 0
+
     # LLM config
     claude_model: str = "claude-sonnet-4-20250514"
     gemini_model: str = "gemini-2.5-flash"
