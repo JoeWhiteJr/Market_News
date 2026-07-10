@@ -21,6 +21,19 @@ def _no_real_alpaca(monkeypatch):
     monkeypatch.setenv("ALPACA_API_SECRET_KEY", "")
 
 
+@pytest.fixture(autouse=True)
+def _sandbox_scores_page(monkeypatch, tmp_path):
+    """SAFETY: never let a test overwrite the committed ``docs/scores.html``.
+
+    ``scores_page_path`` defaults to a tracked repo file so the CI run can
+    publish it, but any end-to-end ``run_pipeline`` test (which loads the real
+    ``.env``-backed settings) would otherwise regenerate that real file from
+    whatever tmp ledger the test used — clobbering the checked-in page. Redirect
+    it to a throwaway path, mirroring the ``_no_real_alpaca`` guard above.
+    """
+    monkeypatch.setenv("SCORES_PAGE_PATH", str(tmp_path / "scores.html"))
+
+
 @pytest.fixture
 def mock_settings(monkeypatch):
     """Settings with test API keys."""

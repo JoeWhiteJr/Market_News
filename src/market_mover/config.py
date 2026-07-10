@@ -74,6 +74,18 @@ class MarketMoverSettings(BaseSettings):
     # Rolling window in days; 0 = use all history.
     learning_window_days: int = 0
 
+    # Scores & grades history page (MM-T003) — a browsable HTML view of the
+    # full Yesterday-Index grading history, regenerated each run and published
+    # via GitHub Pages. Off = skip generation.
+    scores_page_enabled: bool = True
+    scores_page_path: str = "docs/scores.html"
+
+    @property
+    def scores_page_full_path(self) -> Path:
+        """Absolute path to the generated scores history page."""
+        p = Path(self.scores_page_path)
+        return p if p.is_absolute() else _PROJECT_ROOT / p
+
     # LLM config
     claude_model: str = "claude-sonnet-4-6"
     gemini_model: str = "gemini-2.5-flash"

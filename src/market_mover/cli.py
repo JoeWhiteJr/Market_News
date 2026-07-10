@@ -35,6 +35,7 @@ from .scorecard import (  # noqa: E402
     commit_daily_record,
     load_yesterday,
 )
+from .scores_page import write_scores_page  # noqa: E402
 from .server import _deduplicate_articles  # noqa: E402
 from .sources.earnings_source import (  # noqa: E402
     EarningsEntry,
@@ -581,6 +582,17 @@ def run_pipeline() -> None:
                 logger.info(line)
         except Exception as e:
             logger.warning("Learning readout raised (%s) — skipping", e)
+
+    # Step 7: Scores history page (MM-T003) — regenerate the browsable HTML view
+    # of the full grading history from the ledger we just updated. Best-effort;
+    # the writer never raises, so a bad render can't affect the completed send.
+    if settings.scores_page_enabled:
+        write_scores_page(
+            jsonl_path,
+            settings.scores_page_full_path,
+            today=today,
+            generated_label=now_iso_utc(),
+        )
 
 
 if __name__ == "__main__":
