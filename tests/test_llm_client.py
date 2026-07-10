@@ -56,6 +56,28 @@ class TestLLMClient:
         assert ranked[0].impact_score == 9.0
         assert "claude" in model.lower() or "sonnet" in model.lower()
 
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_track_record_appended_to_system_prompt(
+        self, mock_claude, llm_client, sample_articles
+    ):
+        """Phase 1 (ADR 0005): a non-empty track_record must reach the prompt."""
+        mock_claude.return_value = VALID_LLM_RESPONSE
+        block = "YOUR TRACK RECORD — macro: 22% over 19 graded picks"
+        llm_client.analyze_articles(sample_articles, track_record=block)
+        system_prompt = mock_claude.call_args.args[0]
+        assert block in system_prompt
+
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_no_track_record_leaves_prompt_unchanged(
+        self, mock_claude, llm_client, sample_articles
+    ):
+        """Feedback-off baseline: None/empty track_record adds nothing."""
+        mock_claude.return_value = VALID_LLM_RESPONSE
+        llm_client.analyze_articles(sample_articles, track_record=None)
+        assert "YOUR TRACK RECORD" not in mock_claude.call_args.args[0]
+        llm_client.analyze_articles(sample_articles, track_record="")
+        assert "YOUR TRACK RECORD" not in mock_claude.call_args.args[0]
+
     @patch("market_mover.llm_client.LLMClient._call_gemini")
     @patch("market_mover.llm_client.LLMClient._call_claude")
     def test_falls_back_to_gemini(self, mock_claude, mock_gemini, llm_client, sample_articles):

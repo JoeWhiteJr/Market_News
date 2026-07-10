@@ -264,6 +264,44 @@ def format_category_readout(report: CategoryReport) -> str:
     return "\n".join(lines)
 
 
+def format_track_record_for_prompt(report: CategoryReport, min_n: int = 8) -> str:
+    """Render a *calibration* block for the ranking prompt (Phase 1 / ADR 0005).
+
+    Only categories with at least ``min_n`` graded picks are included — thin,
+    noisy categories are omitted rather than fed as if they were signal. The
+    block is framed as confidence calibration, deliberately NOT as a category
+    preference, so the model keeps picking the genuinely most market-moving
+    stories while tempering confidence where its hit-rate has been weak.
+
+    Returns an empty string when no category clears ``min_n`` (caller should
+    then leave the prompt unchanged — i.e. behave as feedback-off).
+    """
+    eligible = [c for c in report.categories if c.n >= min_n]
+    if not eligible:
+        return ""
+    # Best-performing first — the model reads the strong categories, then the
+    # weak ones it should be more selective in.
+    eligible = sorted(eligible, key=lambda c: -c.posterior_mean)
+    lines = [
+        "YOUR TRACK RECORD — how your past picks actually performed, graded by "
+        "an independent judge against next-day price action "
+        f"(pooled hit-quality; HIT=1, PARTIAL=½, MISS=0; global "
+        f"{report.global_mean:.0%} over {report.total_gradeable} graded picks):"
+    ]
+    for c in eligible:
+        lines.append(
+            f"  - {c.category}: {c.posterior_mean:.0%} over {c.n} graded picks"
+        )
+    lines.append(
+        "This is CALIBRATION feedback, not a category preference. Keep picking "
+        "the genuinely most market-moving stories. But be more selective and "
+        "assign lower impact_score where your hit-rate has been weak, and you "
+        "may be more confident where it has been strong. Never let this override "
+        "a clearly dominant story in any category."
+    )
+    return "\n".join(lines)
+
+
 def _main() -> None:  # pragma: no cover — thin CLI wrapper
     """Print the current category readout: ``python3 -m market_mover.learning``."""
     from datetime import date as _date
