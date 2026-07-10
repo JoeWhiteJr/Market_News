@@ -1,0 +1,11 @@
+# Pre-commit hooks for market-mover-mcp.
+# Primary purpose (MM-T004): a gitleaks secret-scan guard so credential-bearing
+# files can never be committed (or re-stashed) into history again.
+#
+# Setup:  python3 -m pip install --user pre-commit && pre-commit install
+# Scan:   pre-commit run --all-files
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0  # pinned; refresh with `pre-commit autoupdate`
+    hooks:
+      - id: gitleaks
