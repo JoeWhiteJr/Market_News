@@ -134,6 +134,7 @@ class LLMClient:
         articles: list[RawArticle],
         voice: VoiceSpec | None = None,
         macro_mode: bool = False,
+        track_record: str | None = None,
     ) -> tuple[list[RankedArticle], str, VoiceSpec]:
         """Analyze and rank articles by market impact using Claude with Gemini fallback.
 
@@ -143,6 +144,11 @@ class LLMClient:
                 ``settings.briefing_voice`` is loaded. The persona's
                 ``system_prompt_suffix`` is appended to the ranking prompt;
                 the JSON output contract is unchanged.
+            macro_mode: When True, append the macro-bias instruction.
+            track_record: Optional calibration block (Phase 1 / ADR 0005). When
+                a non-empty string, it is appended to the system prompt so the
+                model can temper its confidence by category. The JSON output
+                contract is unchanged.
 
         Returns:
             Tuple of (list of top 3 RankedArticle, model name used, effective voice).
@@ -158,6 +164,11 @@ class LLMClient:
         if macro_mode:
             # Geographic / Macro Mode (creative #18): bias toward macro stories.
             system_prompt = f"{system_prompt}\n\n{MACRO_BIAS_INSTRUCTION}"
+        if track_record:
+            # Learning feedback (Phase 1 / ADR 0005): calibration context from
+            # the category track-record. Soft — the model adjusts its own
+            # confidence; the JSON contract is unchanged.
+            system_prompt = f"{system_prompt}\n\n{track_record}"
 
         articles_json = json.dumps(
             [a.model_dump(mode="json") for a in articles],

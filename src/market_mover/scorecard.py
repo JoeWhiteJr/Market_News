@@ -105,6 +105,11 @@ class BriefingRecord(BaseModel):
     mimicry_voice: MimicryVoiceName | None = None
     picks: list[ScorecardPick] = Field(min_length=1, max_length=3)
     contrarian: ScorecardContrarian | None = None
+    # Learning feedback (Phase 1 / ADR 0005): True when the category track-record
+    # calibration block was fed into this run's ranking prompt. Absent on all
+    # pre-2026-07 records → defaults False, which is exactly the feedback-off
+    # baseline we measure lift against. Additive default; no schema bump.
+    learning_feedback_active: bool = False
     # Phase B fills these. Stay nullable forever so the schema doesn't bump.
     graded_at: str | None = None
     judge_model: str | None = None
@@ -686,6 +691,7 @@ def build_record_from_pipeline(
     model_used: Literal["claude", "gemini"],
     voice: str,
     mimicry_voice: str | None,
+    learning_feedback_active: bool = False,
 ) -> BriefingRecord:
     """Compose a :class:`BriefingRecord` from the pipeline's outputs.
 
@@ -735,6 +741,7 @@ def build_record_from_pipeline(
         mimicry_voice=mimicry_voice,  # type: ignore[arg-type]
         picks=picks,
         contrarian=contrarian,
+        learning_feedback_active=learning_feedback_active,
         graded_at=None,
         judge_model=None,
         judge_prompt_version=None,

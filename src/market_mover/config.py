@@ -74,6 +74,16 @@ class MarketMoverSettings(BaseSettings):
     # Rolling window in days; 0 = use all history.
     learning_window_days: int = 0
 
+    # Learning FEEDBACK (Phase 1 / ADR 0005) — close the loop by feeding the
+    # category track-record into the ranking prompt as *calibration* context
+    # (soft: the LLM adjusts its own confidence; NO mechanical score change).
+    # Off = the ranking prompt is unchanged (feedback-off baseline).
+    learning_feedback_enabled: bool = True
+    # Minimum graded picks a category needs before it appears in the prompt —
+    # keeps thin, noisy categories (e.g. commodity n=3) from being fed as if
+    # they were signal.
+    learning_feedback_min_n: int = 8
+
     # Scores & grades history page (MM-T003) — a browsable HTML view of the
     # full Yesterday-Index grading history, regenerated each run and published
     # via GitHub Pages. Off = skip generation.

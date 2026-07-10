@@ -249,6 +249,9 @@ class TestSchemaSerialization:
             "mimicry_voice",
             "picks",
             "contrarian",
+            # Additive, backward-compatible field (ADR 0005). Absent on legacy
+            # rows → defaults False; does not bump schema_version.
+            "learning_feedback_active",
             "graded_at",
             "judge_model",
             "judge_prompt_version",
@@ -353,6 +356,46 @@ class TestBuildRecordFromPipeline:
         assert record.picks[0].primary_ticker == "SPY"
         assert record.picks[0].category == "macro"
         assert record.contrarian is None
+        # Learning feedback (ADR 0005) defaults to the feedback-off baseline.
+        assert record.learning_feedback_active is False
+
+    def test_learning_feedback_active_is_recorded(self):
+        """ADR 0005: the flag must persist so lift can be measured later."""
+        ranked = [
+            RankedArticle(
+                rank=1,
+                title="t",
+                url="https://example.com/1",
+                source_name="example.com",
+                market_impact_summary="s",
+                impact_score=8.0,
+                category="macro",
+            )
+        ]
+        record = build_record_from_pipeline(
+            today=date(2026, 7, 10),
+            ranked=ranked,
+            coda=None,
+            model_used="claude",
+            voice="vinny",
+            mimicry_voice=None,
+            learning_feedback_active=True,
+        )
+        assert record.learning_feedback_active is True
+        # Survives a JSONL round-trip.
+        restored = BriefingRecord.model_validate_json(record.model_dump_json())
+        assert restored.learning_feedback_active is True
+
+    def test_legacy_record_without_flag_defaults_false(self):
+        """Pre-ADR-0005 rows lack the field → must load as the False baseline."""
+        legacy = (
+            '{"date":"2026-06-01","schema_version":1,"model_used":"claude",'
+            '"voice":"vinny","picks":[{"rank":1,"title":"t","summary":"s",'
+            '"impact_score":8.0,"primary_ticker":"SPY","category":"macro",'
+            '"source_url":"https://example.com/1","source_name":"example.com"}]}'
+        )
+        restored = BriefingRecord.model_validate_json(legacy)
+        assert restored.learning_feedback_active is False
 
     def test_maps_coda_to_scorecard_contrarian(self):
         ranked = [
@@ -419,7 +462,7 @@ class TestCliPersistsAfterSend:
             def __init__(self, *args, **kwargs):
                 pass
 
-            def analyze_articles(self, articles, voice=None, macro_mode=False):
+            def analyze_articles(self, articles, voice=None, macro_mode=False, track_record=None):
                 from market_mover.voices import get_voice
 
                 return sample_ranked, "claude-sonnet-4-6", get_voice("vinny")
@@ -478,7 +521,7 @@ class TestCliPersistsAfterSend:
             def __init__(self, *args, **kwargs):
                 pass
 
-            def analyze_articles(self, articles, voice=None, macro_mode=False):
+            def analyze_articles(self, articles, voice=None, macro_mode=False, track_record=None):
                 from market_mover.voices import get_voice
 
                 return sample_ranked, "claude-sonnet-4-6", get_voice("vinny")

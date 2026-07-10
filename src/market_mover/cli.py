@@ -22,6 +22,7 @@ from .hype import HypeScore, score_hype  # noqa: E402
 from .learning import (  # noqa: E402
     compute_category_performance,
     format_category_readout,
+    format_track_record_for_prompt,
     load_briefing_records,
 )
 from .macro_mode import MacroSignal, detect_macro_mode  # noqa: E402
@@ -296,8 +297,43 @@ def run_pipeline() -> None:
         if macro_signal.active:
             logger.info("Macro Mode ON for today's ranking")
 
+    # Learning feedback (Phase 1 / ADR 0005): build a calibration block from the
+    # graded track-record and feed it to the ranking prompt. Best-effort — any
+    # failure here just falls back to the feedback-off baseline. We record
+    # whether it was actually applied so lift can be measured later.
+    track_record = None
+    learning_feedback_active = False
+    if settings.learning_feedback_enabled:
+        try:
+            fb_report = compute_category_performance(
+                load_briefing_records(settings.briefings_jsonl_full_path),
+                date.today(),
+                prior_strength=settings.learning_prior_strength,
+                window_days=settings.learning_window_days,
+            )
+            block = format_track_record_for_prompt(
+                fb_report, min_n=settings.learning_feedback_min_n
+            )
+            if block:
+                track_record = block
+                learning_feedback_active = True
+                logger.info(
+                    "Learning feedback ON — %d categories in prompt (min_n=%d)",
+                    block.count("\n  - "),
+                    settings.learning_feedback_min_n,
+                )
+            else:
+                logger.info(
+                    "Learning feedback: no category clears min_n=%d yet — "
+                    "baseline prompt",
+                    settings.learning_feedback_min_n,
+                )
+        except Exception as e:
+            logger.warning("Learning feedback build raised (%s) — baseline prompt", e)
+
     ranked, model_used, effective_voice = client.analyze_articles(
-        deduped, voice=active_voice, macro_mode=macro_signal.active
+        deduped, voice=active_voice, macro_mode=macro_signal.active,
+        track_record=track_record,
     )
     logger.info(f"Top 3 ranked by {model_used} (effective voice: {effective_voice.get('name')})")
     model_family = _model_family_label(model_used)
@@ -545,6 +581,7 @@ def run_pipeline() -> None:
                 model_used=model_family,
                 voice=_persona_voice_key(effective_voice),
                 mimicry_voice=mim_key,
+                learning_feedback_active=learning_feedback_active,
             )
             commit_daily_record(
                 today_record=record,

@@ -8,6 +8,7 @@ from market_mover.learning import (
     betainc,
     compute_category_performance,
     format_category_readout,
+    format_track_record_for_prompt,
     load_briefing_records,
 )
 
@@ -128,6 +129,54 @@ class TestReadout:
         out = format_category_readout(compute_category_performance(recs, date(2026, 6, 19)))
         assert "macro" in out and "geopolitical" in out
         assert "pooled=" in out
+
+
+class TestTrackRecordForPrompt:
+    """Phase 1 calibration block fed into the ranking prompt (ADR 0005)."""
+
+    TODAY = date(2026, 7, 10)
+
+    def _many(self, category, verdict, n, start_rank=1):
+        """n single-pick records, all one category/verdict, unique dates."""
+        return [
+            _record(f"2026-05-{d:02d}", (start_rank, category, verdict))
+            for d in range(1, n + 1)
+        ]
+
+    def test_empty_report_returns_empty_string(self):
+        rep = compute_category_performance([], self.TODAY)
+        assert format_track_record_for_prompt(rep, min_n=8) == ""
+
+    def test_thin_categories_are_excluded(self):
+        # macro: 10 picks (>= min_n); commodity: 3 picks (< min_n).
+        recs = self._many("macro", "HIT", 10) + self._many("commodity", "MISS", 3)
+        rep = compute_category_performance(recs, self.TODAY)
+        block = format_track_record_for_prompt(rep, min_n=8)
+        assert "macro" in block
+        assert "commodity" not in block
+
+    def test_no_category_clears_threshold_returns_empty(self):
+        recs = self._many("macro", "HIT", 5)  # below min_n=8
+        rep = compute_category_performance(recs, self.TODAY)
+        assert format_track_record_for_prompt(rep, min_n=8) == ""
+
+    def test_is_framed_as_calibration_not_preference(self):
+        recs = self._many("macro", "HIT", 10)
+        block = format_track_record_for_prompt(
+            compute_category_performance(recs, self.TODAY), min_n=8
+        )
+        assert "CALIBRATION" in block
+        # Must preserve diversity — explicitly not a category preference.
+        assert "not a category preference" in block
+        assert "most market-moving" in block
+
+    def test_best_category_listed_first(self):
+        # geopolitical all-HIT (high) vs macro all-MISS (low), both >= min_n.
+        recs = self._many("geopolitical", "HIT", 10) + self._many("macro", "MISS", 10)
+        block = format_track_record_for_prompt(
+            compute_category_performance(recs, self.TODAY), min_n=8
+        )
+        assert block.index("geopolitical") < block.index("macro")
 
 
 class TestLoadRecords:
