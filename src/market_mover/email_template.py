@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from .divergence import DivergenceFlag
 from .hype import HypeScore
+from .learning import CategoryReport
 from .models import ContrarianCoda, RankedArticle, SparklineSeries
 from .sources.earnings_source import EarningsEntry
 from .sources.insider_source import InsiderBuy
@@ -18,6 +19,16 @@ from .scorecard import (
     BriefingRecord,
     render_scorecard_html,
     render_scorecard_plain_text,
+)
+from .visuals import (
+    render_category_card_html,
+    render_category_card_plain,
+    render_index_strip_html,
+    render_index_strip_plain,
+    render_sector_heatmap_html,
+    render_sector_heatmap_plain,
+    render_streak_row_html,
+    render_streak_row_plain,
 )
 
 RANK_COLORS = {
@@ -30,15 +41,6 @@ RANK_COLORS = {
 # the white email body (#ffffff); dark-mode overrides (defined in the
 # @prefers-color-scheme block below) must pass against the dark card bg
 # (#1a1d24). The `flat` color is a neutral mid-gray that reads on both.
-SPARKLINE_COLORS = {
-    "up_light": "#0a6f38",     # Forest green on #ffffff -> ~6.1:1
-    "down_light": "#c0392b",   # Same red as RANK_COLORS[1] -> ~4.66:1 on #ffffff
-    "flat_light": "#5a6068",   # Slate gray on #ffffff -> ~5.6:1
-    "up_dark": "#7bd99a",      # Mint on #1a1d24 -> ~7.5:1
-    "down_dark": "#ff7a6b",    # Coral on #1a1d24 -> ~5.5:1
-    "flat_dark": "#a8aeb8",    # Light slate on #1a1d24 -> ~7.4:1
-}
-
 # Small whitelist mapping common netlocs to nicer display names.
 # Anything not in the map falls back to the bare netloc (with leading "www." stripped).
 _SOURCE_NAME_MAP = {
@@ -158,6 +160,9 @@ def render_email_html(
     divergences: list["DivergenceFlag"] | None = None,
     insider_buys: list["InsiderBuy"] | None = None,
     macro_mode: bool = False,
+    sector_moves: list[tuple[str, str, float]] | None = None,
+    category_report: CategoryReport | None = None,
+    streak_records: list[dict] | None = None,
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -188,7 +193,25 @@ def render_email_html(
     article_blocks = "\n".join(
         _render_article_block(a, hype_scores.get(a.rank)) for a in articles[:3]
     )
-    sparkline_block = _render_sparkline_block(sparklines or {})
+    # Gmail-safe index strip (MM-T006): replaces the old inline-SVG sparklines,
+    # which Gmail strips entirely. Colored table cells render everywhere.
+    sparkline_block = render_index_strip_html(sparklines or {})
+
+    # "Insights" visuals (MM-T006): sector heat-map, recent-form streak, and the
+    # category report card — all colored-table-cell blocks. Wrapped as one card
+    # row in the reference zone; each sub-block hides itself when it has no data.
+    heatmap_html = render_sector_heatmap_html(sector_moves or [])
+    streak_html = render_streak_row_html(streak_records or [])
+    card_html = (
+        render_category_card_html(category_report) if category_report is not None else ""
+    )
+    insights_inner = heatmap_html + streak_html + card_html
+    insights_block = (
+        f'<tr><td class="mm-darkcard" style="padding:8px 32px 4px;">{insights_inner}</td></tr>'
+        if insights_inner
+        else ""
+    )
+
     scorecard_block = render_scorecard_html(yesterday, now_local.date())
     scorecard_block += _render_paper_block_html(paper_stats)
     earnings_block = _render_earnings_block_html(earnings or [])
@@ -241,15 +264,6 @@ def render_email_html(
     .mm-summary {{ color: #c8cdd6 !important; }}
     .mm-footer {{ background-color: #11131a !important; border-top-color: #232734 !important; }}
     .mm-footer-text {{ color: #7a8090 !important; }}
-    /* Sparkline strip: swap to higher-contrast tones against the dark card bg. */
-    .mm-spark-wrap {{ background-color: #1a1d24 !important; border-bottom-color: #232734 !important; }}
-    .mm-spark-ticker {{ color: #e8ebf0 !important; }}
-    .mm-spark-up {{ color: {SPARKLINE_COLORS["up_dark"]} !important; }}
-    .mm-spark-up-stroke {{ stroke: {SPARKLINE_COLORS["up_dark"]} !important; }}
-    .mm-spark-down {{ color: {SPARKLINE_COLORS["down_dark"]} !important; }}
-    .mm-spark-down-stroke {{ stroke: {SPARKLINE_COLORS["down_dark"]} !important; }}
-    .mm-spark-flat {{ color: {SPARKLINE_COLORS["flat_dark"]} !important; }}
-    .mm-spark-flat-stroke {{ stroke: {SPARKLINE_COLORS["flat_dark"]} !important; }}
     /* Contrarian "Bear Case" section. */
     .mm-contrarian-wrap {{ background-color: #1a1d24 !important; border-top-color: #232734 !important; }}
     .mm-contrarian-card {{ background-color: #232734 !important; border-left-color: #b9863d !important; }}
@@ -277,11 +291,6 @@ def render_email_html(
     .mm-darklabel-warn {{ color: #e0944f !important; }}
     .mm-darklabel-bull {{ color: #6ee7a0 !important; }}
     .mm-darkborder-bull {{ border-left-color: #3fae6a !important; }}
-  }}
-  /* Mobile: stack the sparkline cells vertically so labels stay legible. */
-  @media (max-width: 600px) {{
-    .mm-spark-cell {{ display:block !important; width:100% !important; padding:6px 0 !important; }}
-    .mm-spark-row {{ display:block !important; width:100% !important; }}
   }}
 </style>
 </head>
@@ -314,6 +323,7 @@ def render_email_html(
 
 {contrarian_block}
 <!-- Reference zone: retrospective + context, demoted below the stories -->
+{insights_block}
 {scorecard_block}
 {earnings_block}
 <!-- Footer -->
@@ -333,132 +343,6 @@ def render_email_html(
 </html>"""
 
 
-def _render_sparkline_block(sparklines: dict[str, SparklineSeries]) -> str:
-    """Render the 5-cell sparkline strip that sits above the date header.
-
-    Returns an empty string when no sparkline data is available — that way the
-    email still ships when Finnhub is down or the feature is disabled.
-
-    The block is wrapped in ``<section data-block="sparkline">`` so concurrent
-    edits (e.g. Dev A's contrarian-coda block at the bottom) don't touch the
-    same line ranges.
-
-    Layout uses a single ``<table>`` row with one ``<td>`` per ticker — modern
-    layout (flex/grid) isn't reliable across email clients, but tables are.
-    Mobile (max-width: 600px) flips each cell to ``display:block`` for a
-    vertical stack via the stylesheet above.
-    """
-    if not sparklines:
-        return ""
-
-    cells = []
-    text_parts = []
-    for series in sparklines.values():
-        cells.append(_render_sparkline_cell(series))
-        sign = "+" if series.pct_change >= 0 else ""
-        text_parts.append(
-            f"{html_escape(series.ticker)} {sign}{series.pct_change:.1f}%"
-        )
-
-    # Outlook desktop / Word-engine clients refuse inline SVG. Inside an
-    # `mso 9` conditional we hand them a plain text strip so Joe still sees
-    # the day's moves; everyone else hides the comment and renders the SVGs.
-    mso_fallback_text = html_escape("  ".join(text_parts))
-
-    return f"""
-<section data-block="sparkline">
-<!--[if mso]>
-<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-bottom:1px solid #eaeaea;">
-<tr><td align="center" style="padding:10px 16px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#333;">
-{mso_fallback_text}
-</td></tr>
-</table>
-<![endif]-->
-<!--[if !mso]><!-->
-<table width="100%" cellpadding="0" cellspacing="0" class="mm-spark-wrap" style="background-color:#ffffff;border-bottom:1px solid #eaeaea;">
-<tr><td align="center" style="padding:10px 16px;">
-  <table width="600" cellpadding="0" cellspacing="0" class="mm-spark-row" style="max-width:600px;width:100%;">
-  <tr>
-{"".join(cells)}
-  </tr>
-  </table>
-</td></tr>
-</table>
-<!--<![endif]-->
-</section>
-"""
-
-
-def _render_sparkline_cell(series: SparklineSeries) -> str:
-    """Render a single ticker cell (label + SVG polyline + pct change)."""
-    direction = series.direction
-    if direction == "up":
-        color = SPARKLINE_COLORS["up_light"]
-        text_class = "mm-spark-up"
-        stroke_class = "mm-spark-up-stroke"
-    elif direction == "down":
-        color = SPARKLINE_COLORS["down_light"]
-        text_class = "mm-spark-down"
-        stroke_class = "mm-spark-down-stroke"
-    else:
-        color = SPARKLINE_COLORS["flat_light"]
-        text_class = "mm-spark-flat"
-        stroke_class = "mm-spark-flat-stroke"
-
-    points = _polyline_points(series.close_prices, width=80, height=24, pad=2)
-    sign = "+" if series.pct_change >= 0 else ""
-    pct_text = html_escape(f"{sign}{series.pct_change:.1f}%")
-    ticker_text = html_escape(series.ticker)
-    aria = html_escape(
-        f"{series.ticker} 5-day change {sign}{series.pct_change:.1f} percent, "
-        f"trending {direction}"
-    )
-
-    return f"""    <td class="mm-spark-cell" align="center" valign="middle" width="20%" style="padding:4px 6px;font-family:Arial,Helvetica,sans-serif;">
-      <div role="img" aria-label="{aria}" style="line-height:1;">
-        <span class="mm-spark-ticker" style="display:inline-block;font-size:12px;font-weight:700;color:#1a1a2e;letter-spacing:0.3px;">{ticker_text}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="24" viewBox="0 0 80 24" style="display:inline-block;vertical-align:middle;margin:0 6px;" aria-hidden="true">
-          <polyline points="{points}" fill="none" stroke="{color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="{stroke_class}"/>
-        </svg>
-        <span class="{text_class}" style="display:inline-block;font-size:12px;font-weight:600;color:{color};">{pct_text}</span>
-      </div>
-    </td>
-"""
-
-
-def _polyline_points(
-    close_prices: list[float], width: int, height: int, pad: int
-) -> str:
-    """Map ``close_prices`` onto an SVG viewBox and return a ``points`` string.
-
-    The Y-axis is inverted (SVG origin is top-left) so visually-up prices go
-    UP on the page. A perfectly flat series renders as a horizontal line at
-    mid-height instead of crashing on division by zero.
-    """
-    n = len(close_prices)
-    if n == 0:
-        return ""
-    if n == 1:
-        return f"{pad},{height // 2}"
-
-    lo = min(close_prices)
-    hi = max(close_prices)
-    span = hi - lo
-    usable_w = width - 2 * pad
-    usable_h = height - 2 * pad
-
-    coords: list[str] = []
-    for idx, price in enumerate(close_prices):
-        x = pad + (idx * usable_w / (n - 1))
-        if span == 0:
-            y = height / 2
-        else:
-            # Higher price -> smaller y (top of SVG).
-            y = pad + usable_h * (1 - (price - lo) / span)
-        coords.append(f"{x:.1f},{y:.1f}")
-    return " ".join(coords)
-
-
 def render_plain_text(
     articles: list[RankedArticle],
     sparklines: dict[str, SparklineSeries] | None = None,
@@ -471,6 +355,9 @@ def render_plain_text(
     divergences: list["DivergenceFlag"] | None = None,
     insider_buys: list["InsiderBuy"] | None = None,
     macro_mode: bool = False,
+    sector_moves: list[tuple[str, str, float]] | None = None,
+    category_report: CategoryReport | None = None,
+    streak_records: list[dict] | None = None,
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -497,12 +384,9 @@ def render_plain_text(
     if divergence_text:
         lines.append(divergence_text)
         lines.append("")
-    if sparklines:
-        parts = []
-        for series in sparklines.values():
-            sign = "+" if series.pct_change >= 0 else ""
-            parts.append(f"{series.ticker} {sign}{series.pct_change:.1f}%")
-        lines.append("  ".join(parts))
+    index_line = render_index_strip_plain(sparklines or {})
+    if index_line:
+        lines.append(index_line)
         lines.append("")
 
     scorecard_text = render_scorecard_plain_text(yesterday, now_local.date())
@@ -514,6 +398,16 @@ def render_plain_text(
     if paper_line:
         lines.append(paper_line)
         lines.append("")
+
+    # Insights (MM-T006): sector heatmap, recent-form streak, category card.
+    for block_text in (
+        render_sector_heatmap_plain(sector_moves or []),
+        render_streak_row_plain(streak_records or []),
+        render_category_card_plain(category_report) if category_report is not None else "",
+    ):
+        if block_text:
+            lines.append(block_text)
+            lines.append("")
 
     earnings_text = _render_earnings_block_plain(earnings or [])
     if earnings_text:

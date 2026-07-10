@@ -84,6 +84,13 @@ class MarketMoverSettings(BaseSettings):
     # they were signal.
     learning_feedback_min_n: int = 8
 
+    # Email visuals pack (MM-T006) — Gmail-safe colored-table-cell blocks.
+    # Each toggles independently. The old inline-SVG sparklines were stripped by
+    # Gmail; the index strip that replaces them is always on with the sparklines.
+    sector_heatmap_enabled: bool = True   # "Market Weather" 11-ETF grid
+    streak_row_enabled: bool = True        # recent-form verdict spark-row
+    category_card_enabled: bool = True     # per-category hit-quality bars
+
     # Scores & grades history page (MM-T003) — a browsable HTML view of the
     # full Yesterday-Index grading history, regenerated each run and published
     # via GitHub Pages. Off = skip generation.

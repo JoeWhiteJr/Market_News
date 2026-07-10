@@ -1,22 +1,13 @@
-"""Tests for the Cycle 3 sparkline feature.
+"""Tests for the sparkline DATA layer + the Gmail-safe index strip that renders it.
 
-Covers:
-- Finnhub candle fetch (mocked) -> ``SparklineSeries`` shape
-- Per-ticker failure isolation (bad ticker omitted, others succeed)
-- Total failure -> empty dict -> email still renders without the strip
-- Direction classification (up / down / flat thresholds)
-- SVG ``<polyline>`` carries the right number of points
-- WCAG AA contrast of the shipped up/down colors against both light and dark backgrounds
+The data fetch (`fetch_sparkline_data`) is unchanged. The rendering moved from
+an inline-SVG polyline (stripped by Gmail) to a colored-table-cell "index strip"
+in MM-T006 — the render tests below assert the new, Gmail-safe contract.
 """
 
 from unittest.mock import patch
 
-from market_mover.email_template import (
-    SPARKLINE_COLORS,
-    _polyline_points,
-    render_email_html,
-    render_plain_text,
-)
+from market_mover.email_template import render_email_html, render_plain_text
 from market_mover.models import RankedArticle, SparklineSeries
 from market_mover.sources.quotes_source import (
     _classify_direction,
@@ -135,33 +126,10 @@ class TestFetchSparklineData:
         assert result == {}
 
 
-class TestPolylinePoints:
-    def test_correct_point_count(self):
-        points_str = _polyline_points([100.0, 101.0, 99.0, 102.0, 105.0], 80, 24, 2)
-        # 5 input points -> 5 "x,y" pairs separated by spaces.
-        assert len(points_str.split(" ")) == 5
+class TestRenderIndexStrip:
+    """MM-T006: the Gmail-safe colored-cell replacement for the SVG sparklines."""
 
-    def test_monotonic_up_series_ends_higher_visually(self):
-        """In SVG coords, smaller Y = higher on the page. A rising series should
-        have its first point's Y greater than its last point's Y."""
-        points_str = _polyline_points([100.0, 110.0, 120.0, 130.0, 140.0], 80, 24, 2)
-        pairs = [tuple(map(float, p.split(","))) for p in points_str.split(" ")]
-        first_y = pairs[0][1]
-        last_y = pairs[-1][1]
-        assert first_y > last_y
-
-    def test_flat_series_renders_horizontal(self):
-        points_str = _polyline_points([100.0, 100.0, 100.0, 100.0, 100.0], 80, 24, 2)
-        pairs = [tuple(map(float, p.split(","))) for p in points_str.split(" ")]
-        ys = {pair[1] for pair in pairs}
-        assert len(ys) == 1  # all the same y
-
-    def test_empty_series_returns_empty_string(self):
-        assert _polyline_points([], 80, 24, 2) == ""
-
-
-class TestRenderEmailWithSparkline:
-    def test_renders_polyline_with_5_points(self):
+    def test_renders_index_strip_block_no_svg(self):
         series = SparklineSeries(
             ticker="SPY",
             close_prices=[100.0, 101.0, 102.0, 103.0, 105.0],
@@ -169,69 +137,48 @@ class TestRenderEmailWithSparkline:
             direction="up",
         )
         html = render_email_html([_make_article()], sparklines={"SPY": series})
-        assert 'data-block="sparkline"' in html
-        assert "<polyline" in html
-        # The polyline points attribute should hold 5 comma-separated pairs.
-        points_attr_start = html.find('points="') + len('points="')
-        points_attr_end = html.find('"', points_attr_start)
-        points_str = html[points_attr_start:points_attr_end]
-        assert len(points_str.split(" ")) == 5
+        assert 'data-block="index-strip"' in html
+        assert "SPY" in html
+        assert "+5.0%" in html
+        # The whole point of the rewrite: no inline SVG (Gmail strips it).
+        assert "<svg" not in html
+        assert "<polyline" not in html
 
-    def test_sparkline_block_appears_before_date_header(self):
+    def test_index_strip_appears_before_date_header(self):
         series = SparklineSeries(
-            ticker="SPY",
-            close_prices=[100.0, 102.0],
-            pct_change=2.0,
-            direction="up",
+            ticker="SPY", close_prices=[100.0, 102.0], pct_change=2.0, direction="up"
         )
         html = render_email_html([_make_article()], sparklines={"SPY": series})
-        spark_pos = html.find('data-block="sparkline"')
+        strip_pos = html.find('data-block="index-strip"')
         header_pos = html.find("Top 3 Market-Moving Stories")
-        assert 0 < spark_pos < header_pos
+        assert 0 < strip_pos < header_pos
 
-    def test_no_sparkline_block_when_empty(self):
-        """Email still renders cleanly when there is no sparkline data."""
+    def test_uses_background_color_cells(self):
+        """Colored table cells are the Gmail-safe technique — verify bgcolor is used."""
+        series = SparklineSeries(
+            ticker="SPY", close_prices=[100.0, 105.0], pct_change=5.0, direction="up"
+        )
+        html = render_email_html([_make_article()], sparklines={"SPY": series})
+        assert "bgcolor=" in html
+        assert "background-color:" in html
+
+    def test_no_strip_when_empty(self):
         html = render_email_html([_make_article()], sparklines={})
-        assert 'data-block="sparkline"' not in html
-        # Sanity: the rest of the email still renders.
+        assert 'data-block="index-strip"' not in html
         assert "Top 3 Market-Moving Stories" in html
 
-    def test_no_sparkline_block_when_none(self):
+    def test_no_strip_when_none(self):
         html = render_email_html([_make_article()])  # default arg
-        assert 'data-block="sparkline"' not in html
+        assert 'data-block="index-strip"' not in html
 
-    def test_up_color_is_green_in_light_mode(self):
+    def test_dark_mode_media_query_still_present(self):
         series = SparklineSeries(
             ticker="SPY", close_prices=[100.0, 105.0], pct_change=5.0, direction="up"
         )
         html = render_email_html([_make_article()], sparklines={"SPY": series})
-        assert SPARKLINE_COLORS["up_light"] in html
+        assert "@media (prefers-color-scheme: dark)" in html
 
-    def test_down_color_is_red_in_light_mode(self):
-        series = SparklineSeries(
-            ticker="QQQ", close_prices=[200.0, 190.0], pct_change=-5.0, direction="down"
-        )
-        html = render_email_html([_make_article()], sparklines={"QQQ": series})
-        assert SPARKLINE_COLORS["down_light"] in html
-
-    def test_outlook_mso_fallback_present(self):
-        """Outlook desktop ignores SVG — verify the MSO conditional + text fallback."""
-        series = SparklineSeries(
-            ticker="SPY", close_prices=[100.0, 105.0], pct_change=5.0, direction="up"
-        )
-        html = render_email_html([_make_article()], sparklines={"SPY": series})
-        assert "<!--[if mso]>" in html
-        assert "SPY +5.0%" in html
-
-    def test_mobile_media_query_present(self):
-        series = SparklineSeries(
-            ticker="SPY", close_prices=[100.0, 105.0], pct_change=5.0, direction="up"
-        )
-        html = render_email_html([_make_article()], sparklines={"SPY": series})
-        assert "@media (max-width: 600px)" in html
-        assert "mm-spark-cell" in html
-
-    def test_plain_text_includes_sparkline_strip(self):
+    def test_plain_text_includes_index_strip(self):
         series_a = SparklineSeries(
             ticker="SPY", close_prices=[100.0, 101.2], pct_change=1.2, direction="up"
         )
@@ -243,62 +190,3 @@ class TestRenderEmailWithSparkline:
         )
         assert "SPY +1.2%" in text
         assert "VIX -2.1%" in text
-
-
-# ---------------------------------------------------------------------------
-# WCAG AA contrast — the up/down colors we ship must be readable on both the
-# light email body (#ffffff) and the dark-mode card background (#1a1d24).
-# ---------------------------------------------------------------------------
-
-
-def _relative_luminance(hex_color: str) -> float:
-    """Compute WCAG relative luminance for an ``#rrggbb`` color."""
-    h = hex_color.lstrip("#")
-    r, g, b = (int(h[i : i + 2], 16) / 255.0 for i in (0, 2, 4))
-
-    def channel(c: float) -> float:
-        return c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
-
-    return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b)
-
-
-def _contrast_ratio(fg: str, bg: str) -> float:
-    l1 = _relative_luminance(fg)
-    l2 = _relative_luminance(bg)
-    lighter, darker = max(l1, l2), min(l1, l2)
-    return (lighter + 0.05) / (darker + 0.05)
-
-
-WCAG_AA_NORMAL = 4.5
-
-
-class TestSparklineColorsPassWCAG:
-    """The shipped colors must clear WCAG AA (4.5:1) against the backgrounds
-    they're actually rendered on."""
-
-    LIGHT_BG = "#ffffff"
-    DARK_BG = "#1a1d24"  # `.mm-card` background in the dark-mode block
-
-    def test_up_light_passes_against_white(self):
-        ratio = _contrast_ratio(SPARKLINE_COLORS["up_light"], self.LIGHT_BG)
-        assert ratio >= WCAG_AA_NORMAL, f"up_light contrast {ratio:.2f}:1 fails AA on white"
-
-    def test_down_light_passes_against_white(self):
-        ratio = _contrast_ratio(SPARKLINE_COLORS["down_light"], self.LIGHT_BG)
-        assert ratio >= WCAG_AA_NORMAL, f"down_light contrast {ratio:.2f}:1 fails AA on white"
-
-    def test_flat_light_passes_against_white(self):
-        ratio = _contrast_ratio(SPARKLINE_COLORS["flat_light"], self.LIGHT_BG)
-        assert ratio >= WCAG_AA_NORMAL, f"flat_light contrast {ratio:.2f}:1 fails AA on white"
-
-    def test_up_dark_passes_against_dark_bg(self):
-        ratio = _contrast_ratio(SPARKLINE_COLORS["up_dark"], self.DARK_BG)
-        assert ratio >= WCAG_AA_NORMAL, f"up_dark contrast {ratio:.2f}:1 fails AA on dark"
-
-    def test_down_dark_passes_against_dark_bg(self):
-        ratio = _contrast_ratio(SPARKLINE_COLORS["down_dark"], self.DARK_BG)
-        assert ratio >= WCAG_AA_NORMAL, f"down_dark contrast {ratio:.2f}:1 fails AA on dark"
-
-    def test_flat_dark_passes_against_dark_bg(self):
-        ratio = _contrast_ratio(SPARKLINE_COLORS["flat_dark"], self.DARK_BG)
-        assert ratio >= WCAG_AA_NORMAL, f"flat_dark contrast {ratio:.2f}:1 fails AA on dark"

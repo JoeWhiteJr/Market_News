@@ -28,6 +28,13 @@ _FLAT_THRESHOLD_PCT = 0.1
 _VIX_SYMBOLS = {"VIX", "^VIX"}
 _VIX_PROXY_ETF = "VIXY"
 
+# The 11 SPDR sector ETFs, in a fixed display order (MM-T006 "Market Weather").
+SECTOR_ETFS: list[tuple[str, str]] = [
+    ("XLK", "Tech"), ("XLF", "Financials"), ("XLE", "Energy"), ("XLV", "Health"),
+    ("XLY", "Cons Disc"), ("XLI", "Industrials"), ("XLC", "Comms"), ("XLP", "Staples"),
+    ("XLU", "Utilities"), ("XLB", "Materials"), ("XLRE", "Real Estate"),
+]
+
 
 def _bar_date(bar: dict) -> date | None:
     """Parse an Alpaca bar's ``t`` (RFC-3339) into a calendar date."""
@@ -122,6 +129,38 @@ def fetch_sparkline_data(
 
     logger.info(f"Fetched sparkline data for {len(results)}/{len(fetch_syms)} tickers")
     return results
+
+
+def fetch_sector_moves(
+    api_key_id: str = "",
+    api_secret_key: str = "",
+    feed: str = "iex",
+    min_call_interval: float = 1.0,
+) -> list[tuple[str, str, float]]:
+    """Last completed session's close-to-close % move for each sector ETF.
+
+    Returns ``[(ticker, label, pct), ...]`` in :data:`SECTOR_ETFS` order,
+    omitting any ETF Alpaca didn't return ≥2 closes for. Total failure or
+    missing creds → ``[]`` (caller hides the heatmap).
+    """
+    if not (api_key_id and api_secret_key):
+        logger.info("Alpaca creds not set, skipping sector heatmap fetch")
+        return []
+    symbols = [t for t, _ in SECTOR_ETFS]
+    # Over-fetch the calendar window so weekends/holidays still yield 2 closes.
+    start, end = trailing_window(12)
+    bars_map = fetch_daily_bars(
+        symbols, start, end, api_key_id, api_secret_key, feed, min_call_interval
+    )
+    out: list[tuple[str, str, float]] = []
+    for ticker, label in SECTOR_ETFS:
+        closes = _closes(bars_map.get(ticker, []))
+        if len(closes) < 2 or closes[-2] == 0:
+            continue
+        pct = ((closes[-1] - closes[-2]) / closes[-2]) * 100.0
+        out.append((ticker, label, pct))
+    logger.info(f"Fetched sector moves for {len(out)}/{len(SECTOR_ETFS)} ETFs")
+    return out
 
 
 # ---------------------------------------------------------------------------

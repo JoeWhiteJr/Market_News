@@ -47,7 +47,7 @@ from .sources.earnings_source import (  # noqa: E402
 from .sources.finnhub_source import fetch_finnhub_articles  # noqa: E402
 from .sources.insider_source import InsiderBuy, notable_insider_buys  # noqa: E402
 from .sources.newsapi_source import fetch_newsapi_articles  # noqa: E402
-from .sources.quotes_source import fetch_sparkline_data  # noqa: E402
+from .sources.quotes_source import fetch_sector_moves, fetch_sparkline_data  # noqa: E402
 from .sources.rss_source import fetch_rss_articles  # noqa: E402
 from .sources.youtube_source import fetch_youtube_videos  # noqa: E402
 from .voices import get_voice  # noqa: E402
@@ -519,6 +519,37 @@ def run_pipeline() -> None:
             logger.warning(f"Insider spotlight raised ({e}) — hiding card")
             insider_buys = []
 
+    # Email visuals pack (MM-T006): sector heat-map (fresh Alpaca fetch),
+    # recent-form streak + category report card (from the ledger we already
+    # load). All best-effort — a failure just hides that block.
+    sector_moves: list[tuple[str, str, float]] = []
+    if settings.sector_heatmap_enabled and settings.has_alpaca_creds:
+        try:
+            sector_moves = fetch_sector_moves(
+                settings.alpaca_api_key_id,
+                settings.alpaca_api_secret_key,
+                feed=settings.alpaca_data_feed,
+                min_call_interval=settings.min_call_interval_secs,
+            )
+            logger.info("Sector heatmap: %d ETFs", len(sector_moves))
+        except Exception as e:
+            logger.warning("Sector heatmap fetch raised (%s) — hiding block", e)
+            sector_moves = []
+
+    visuals_records = load_briefing_records(settings.briefings_jsonl_full_path)
+    streak_records = visuals_records if settings.streak_row_enabled else []
+    visuals_category_report = None
+    if settings.category_card_enabled:
+        try:
+            visuals_category_report = compute_category_performance(
+                visuals_records,
+                today,
+                prior_strength=settings.learning_prior_strength,
+                window_days=settings.learning_window_days,
+            )
+        except Exception as e:
+            logger.warning("Category card compute raised (%s) — hiding block", e)
+
     html_body = render_email_html(
         ranked,
         sparklines=sparklines,
@@ -531,6 +562,9 @@ def run_pipeline() -> None:
         divergences=divergences,
         insider_buys=insider_buys,
         macro_mode=macro_signal.active,
+        sector_moves=sector_moves,
+        category_report=visuals_category_report,
+        streak_records=streak_records,
     )
     plain_text = render_plain_text(
         ranked,
@@ -544,6 +578,9 @@ def run_pipeline() -> None:
         divergences=divergences,
         insider_buys=insider_buys,
         macro_mode=macro_signal.active,
+        sector_moves=sector_moves,
+        category_report=visuals_category_report,
+        streak_records=streak_records,
     )
     subject = build_subject(
         ranked,
