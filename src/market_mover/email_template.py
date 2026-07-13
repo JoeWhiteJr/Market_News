@@ -163,6 +163,7 @@ def render_email_html(
     sector_moves: list[tuple[str, str, float]] | None = None,
     category_report: CategoryReport | None = None,
     streak_records: list[dict] | None = None,
+    prediction_block: str = "",
 ) -> str:
     """Render top 3 ranked articles into an HTML email body.
 
@@ -321,6 +322,8 @@ def render_email_html(
 </td>
 </tr>
 
+<!-- The Call · Beat the Bot — the daily game, right under the core stories -->
+{prediction_block}
 {contrarian_block}
 <!-- Reference zone: retrospective + context, demoted below the stories -->
 {insights_block}
@@ -358,6 +361,7 @@ def render_plain_text(
     sector_moves: list[tuple[str, str, float]] | None = None,
     category_report: CategoryReport | None = None,
     streak_records: list[dict] | None = None,
+    prediction_block: str = "",
 ) -> str:
     """Render top 3 ranked articles as plain text fallback.
 
@@ -441,6 +445,10 @@ def render_plain_text(
             f"  {action}: {article.url}",
             "",
         ])
+
+    if prediction_block:
+        lines.append(prediction_block)
+        lines.append("")
 
     if coda is not None:
         coda_source = _derive_source_name(coda.source_url) or coda.source_name

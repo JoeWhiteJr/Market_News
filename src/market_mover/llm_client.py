@@ -7,7 +7,11 @@ import itertools
 import json
 import logging
 import re
+from typing import TYPE_CHECKING
 from urllib.parse import urlparse
+
+if TYPE_CHECKING:
+    from .predictions import DailyCall
 
 from .config import MarketMoverSettings
 from .exceptions import AnalysisParsingError, EmptyLLMResponse, LLMError
@@ -115,6 +119,33 @@ Return ONLY a JSON object in this exact format:
 }
 
 Keep the argument honest and non-conspiratorial. Never recommend trades."""
+
+
+DAILY_CALL_SYSTEM_PROMPT = """You are a markets analyst making ONE bold, \
+falsifiable 24-hour prediction — "The Call" — that a scorekeeper will grade \
+tomorrow against real closing prices. It must be mechanically checkable from a \
+single exchange-traded ticker's close-to-close move today.
+
+You will receive today's Top 3 ranked stories. Pick the single most conviction- \
+worthy directional call and express it as ONE ticker closing UP or DOWN today.
+
+Rules:
+- Use a real, liquid, exchange-traded ticker (e.g. "MU", "SPY", "USO"). No \
+indices that aren't tradeable, no options, no baskets.
+- direction is exactly "UP" or "DOWN" (will it close green or red today?).
+- confidence is an integer 50-95 (you're picking a side, so never below 50).
+- statement is one punchy sentence a human would enjoy reading, naming the \
+ticker and the direction — no hedging, no "may/could/might", no advice.
+
+Return ONLY a JSON object in this exact format:
+{
+  "ticker": "MU",
+  "direction": "UP",
+  "confidence": 68,
+  "statement": "Micron closes green today as the memory super-cycle steamrolls the shorts."
+}
+
+Never recommend that anyone trade. This is a game, not advice."""
 
 
 class LLMClient:
@@ -337,6 +368,63 @@ class LLMClient:
             argument=argument,
             source_url=source_url,
             source_name=_source_name_from_url(source_url),
+        )
+
+    def generate_daily_call(self, ranked: list[RankedArticle]) -> "DailyCall | None":
+        """Generate today's single 24h prediction ("The Call", MM-T007).
+
+        Uses the same Claude→Gemini fallback chain. Any failure (LLM error,
+        parse error, bad direction/ticker) returns ``None`` — the game block is
+        simply hidden that day; the daily send is never affected.
+        """
+        from .predictions import DailyCall
+
+        if not ranked:
+            return None
+        stories = "\n\n".join(
+            f"#{a.rank} [{a.impact_score}/10] {a.title}\n"
+            f"ticker: {a.primary_ticker or 'n/a'} | category: {a.category}\n"
+            f"{a.market_impact_summary}"
+            for a in ranked[:3]
+        )
+        user_prompt = f"TODAY'S TOP 3 STORIES:\n\n{stories}\n\nReturn the JSON object as specified."
+
+        raw_response: str | None = None
+        if self._claude_key_cycle is not None:
+            try:
+                raw_response = self._call_claude(DAILY_CALL_SYSTEM_PROMPT, user_prompt)
+            except Exception as e:
+                logger.warning(f"The Call Claude request failed: {e}, trying Gemini")
+        if raw_response is None and self._gemini_key_cycle is not None:
+            try:
+                raw_response = self._call_gemini(DAILY_CALL_SYSTEM_PROMPT, user_prompt)
+            except Exception as e:
+                logger.warning(f"The Call Gemini request also failed: {e}")
+                return None
+        if raw_response is None:
+            return None
+
+        try:
+            parsed = _parse_json_loose(raw_response)
+        except ValueError as e:
+            logger.warning(f"The Call parse failed: {e}")
+            return None
+        if not isinstance(parsed, dict):
+            return None
+
+        ticker = str(parsed.get("ticker", "")).strip().upper()
+        direction = str(parsed.get("direction", "")).strip().upper()
+        statement = strip_profanity(str(parsed.get("statement", "")).strip())
+        try:
+            confidence = int(parsed.get("confidence", 0))
+        except (TypeError, ValueError):
+            confidence = 0
+        if not ticker or direction not in ("UP", "DOWN") or not statement:
+            logger.warning("The Call missing/invalid fields; skipping")
+            return None
+        confidence = max(50, min(95, confidence))
+        return DailyCall(
+            ticker=ticker, direction=direction, confidence=confidence, statement=statement
         )
 
     def _call_claude(self, system_prompt: str, user_prompt: str) -> str:
