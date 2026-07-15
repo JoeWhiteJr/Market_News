@@ -1,14 +1,14 @@
 ---
 id: MM-T006
 title: Email visuals pack — Gmail-safe charts + sparkline fix
-status: in-progress
+status: done
 priority: medium
 type: feature
 owner: joe
 assigned-team: Builder
 created: 2026-07-10
-updated: 2026-07-10
-related-pr:
+updated: 2026-07-15
+related-pr: "#31"
 related-tickets: MM-T003
 ---
 
@@ -47,4 +47,12 @@ everywhere) and fix the broken sparklines.
   `learning.compute_category_performance` (report card).
 
 ## Retrospective
-_Fill in when moving to done/._
+**Shipped 2026-07-15 (PR #31); live in the real morning emails since.** The big
+win was uncovering that the *existing* sparklines were inline `<svg>` — invisible
+in Gmail — so this was a bug fix as much as a feature. Colored table cells are
+the reliable email-visual primitive; every block uses them.
+
+**Lesson:** verify a "working" feature actually renders in the recipient's real
+client. The sparklines had passed tests and looked fine in Apple Mail for months
+while showing nothing to the Gmail majority. Tests asserted the SVG existed, not
+that it rendered.
