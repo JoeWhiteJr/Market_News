@@ -358,10 +358,10 @@ class TestScorecardSlot:
         html = render_email_html(
             [article], sparklines=sparklines, yesterday=_yesterday_record()
         )
-        spark_idx = html.find('data-block="sparkline"')
+        spark_idx = html.find('data-block="index-strip"')
         article_idx = html.find("Today top story headline")
         scorecard_idx = html.find('data-block="scorecard"')
-        assert spark_idx != -1, "sparkline block missing"
+        assert spark_idx != -1, "index-strip block missing"
         assert scorecard_idx != -1, "scorecard block missing"
         assert article_idx != -1, "article block missing"
         # Stories are the core and now sit ABOVE the retrospective scorecard.
