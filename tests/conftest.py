@@ -32,6 +32,9 @@ def _sandbox_scores_page(monkeypatch, tmp_path):
     it to a throwaway path, mirroring the ``_no_real_alpaca`` guard above.
     """
     monkeypatch.setenv("SCORES_PAGE_PATH", str(tmp_path / "scores.html"))
+    # Same guard for the prediction-game ledger (MM-T007) — a run_pipeline test
+    # must never write the committed data/predictions.jsonl.
+    monkeypatch.setenv("PREDICTIONS_JSONL_PATH", str(tmp_path / "predictions.jsonl"))
 
 
 @pytest.fixture
