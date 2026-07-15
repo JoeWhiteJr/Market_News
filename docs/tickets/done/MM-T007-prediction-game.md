@@ -1,14 +1,14 @@
 ---
 id: MM-T007
 title: The Call · Beat the Bot — daily prediction game
-status: in-progress
+status: done
 priority: medium
 type: feature
 owner: joe
 assigned-team: Builder
 created: 2026-07-12
-updated: 2026-07-12
-related-pr:
+updated: 2026-07-15
+related-pr: "#32, #33"
 related-tickets: MM-T002, MM-T006
 ---
 
@@ -50,4 +50,14 @@ Inbound auto-tally deferred to Phase 2.
 - Stacked on MM-T006 (shares email_template/cli/config edits).
 
 ## Retrospective
-_Fill in when moving to done/._
+**Shipped 2026-07-15.** Reused the existing judge price-window (`fetch_24h_close_
+change`) as the free automatic referee — the whole game rides infrastructure we
+already trusted, so it was cheap to build. The bot-always-plays design means the
+scoreboard is alive on day one even before any human votes.
+
+**Process miss (fixed):** PR #32 was stacked on the #31 (visuals) branch, and
+got merged into that branch instead of `main` — so the game briefly didn't reach
+main. Recovered by cherry-picking the identical commit onto main as #33 (zero
+conflicts). **Lesson:** don't leave a stacked PR's base pointing at the parent
+branch when merging — retarget to `main` first, or don't stack; the 20-second
+window between merging #31 and #32 was enough to lose the work.
