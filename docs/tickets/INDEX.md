@@ -8,11 +8,13 @@ _Last updated: 2026-07-10_
 |----|-------|----------|-------|---------|
 | [MM-T002](open/MM-T002-stocks-club-ritual-with-jared.md) | Turn the daily briefing into a 2-person stocks-club ritual with Jared | low | joe | 2026-06-03 |
 
-## In Progress (1)
+## In Progress (3)
 
 | ID | Title | Priority | Owner | Created |
 |----|-------|----------|-------|---------|
 | [MM-T001](in-progress/MM-T001-recover-and-merge-cycle-4b-judge.md) | Recover and merge Cycle 4b Yesterday-Index Judge | high | joe | 2026-06-03 |
+| [MM-T006](in-progress/MM-T006-email-visuals-pack.md) | Email visuals pack — Gmail-safe charts + sparkline fix | medium | joe | 2026-07-10 |
+| [MM-T007](in-progress/MM-T007-prediction-game.md) | The Call · Beat the Bot — daily prediction game | medium | joe | 2026-07-12 |
 
 ## Done (3) — last 10
 

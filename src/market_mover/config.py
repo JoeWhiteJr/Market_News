@@ -91,6 +91,17 @@ class MarketMoverSettings(BaseSettings):
     streak_row_enabled: bool = True        # recent-form verdict spark-row
     category_card_enabled: bool = True     # per-category hit-quality bars
 
+    # The Call · Beat the Bot prediction game (MM-T007). The bot makes one
+    # graded 24h prediction; recipients play via one-tap UP/DOWN mailto buttons.
+    prediction_game_enabled: bool = True
+    predictions_jsonl_path: str = "data/predictions.jsonl"
+
+    @property
+    def predictions_jsonl_full_path(self) -> Path:
+        """Absolute path to the prediction-game ledger."""
+        p = Path(self.predictions_jsonl_path)
+        return p if p.is_absolute() else _PROJECT_ROOT / p
+
     # Scores & grades history page (MM-T003) — a browsable HTML view of the
     # full Yesterday-Index grading history, regenerated each run and published
     # via GitHub Pages. Off = skip generation.

@@ -78,6 +78,32 @@ class TestLLMClient:
         llm_client.analyze_articles(sample_articles, track_record="")
         assert "YOUR TRACK RECORD" not in mock_claude.call_args.args[0]
 
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_generate_daily_call_parses_and_clamps(self, mock_claude, llm_client, sample_ranked_articles):
+        """MM-T007: The Call parses a valid prediction and clamps confidence."""
+        import json as _json
+        mock_claude.return_value = _json.dumps({
+            "ticker": "mu", "direction": "up", "confidence": 140,
+            "statement": "Micron closes green today.",
+        })
+        call = llm_client.generate_daily_call(sample_ranked_articles)
+        assert call is not None
+        assert call.ticker == "MU"        # upper-cased
+        assert call.direction == "UP"
+        assert call.confidence == 95      # clamped to [50, 95]
+        assert "Micron" in call.statement
+
+    @patch("market_mover.llm_client.LLMClient._call_claude")
+    def test_generate_daily_call_rejects_bad_direction(self, mock_claude, llm_client, sample_ranked_articles):
+        import json as _json
+        mock_claude.return_value = _json.dumps({
+            "ticker": "MU", "direction": "SIDEWAYS", "confidence": 60, "statement": "x",
+        })
+        assert llm_client.generate_daily_call(sample_ranked_articles) is None
+
+    def test_generate_daily_call_empty_articles_returns_none(self, llm_client):
+        assert llm_client.generate_daily_call([]) is None
+
     @patch("market_mover.llm_client.LLMClient._call_gemini")
     @patch("market_mover.llm_client.LLMClient._call_claude")
     def test_falls_back_to_gemini(self, mock_claude, mock_gemini, llm_client, sample_articles):

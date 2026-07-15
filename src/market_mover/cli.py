@@ -37,6 +37,15 @@ from .scorecard import (  # noqa: E402
     load_yesterday,
 )
 from .scores_page import write_scores_page  # noqa: E402
+from .predictions import (  # noqa: E402
+    PredictionRecord,
+    load_predictions,
+    render_prediction_html,
+    render_prediction_plain,
+    resolve_call,
+    rewrite_predictions,
+    season_stats,
+)
 from .server import _deduplicate_articles  # noqa: E402
 from .sources.earnings_source import (  # noqa: E402
     EarningsEntry,
@@ -550,6 +559,56 @@ def run_pipeline() -> None:
         except Exception as e:
             logger.warning("Category card compute raised (%s) — hiding block", e)
 
+    # The Call · Beat the Bot (MM-T007): generate today's prediction, resolve
+    # yesterday's against real prices, compute the season scoreboard. All
+    # best-effort — a failure just hides the game block, never breaks the send.
+    prediction_today: PredictionRecord | None = None
+    prediction_yesterday: PredictionRecord | None = None
+    prediction_stats: dict = {}
+    prediction_records: list[PredictionRecord] = []
+    prediction_dirty = False
+    if settings.prediction_game_enabled:
+        try:
+            pred_path = settings.predictions_jsonl_full_path
+            prediction_records = load_predictions(pred_path)
+            # Resolve any still-unresolved past calls (usually just yesterday's).
+            if settings.has_alpaca_creds:
+                for i, rec in enumerate(prediction_records):
+                    if not rec.resolved and rec.date < today:
+                        resolved = resolve_call(
+                            rec, settings.alpaca_api_key_id, settings.alpaca_api_secret_key,
+                            feed=settings.alpaca_data_feed,
+                            min_call_interval=settings.min_call_interval_secs,
+                        )
+                        if resolved.resolved:
+                            prediction_records[i] = resolved
+                            prediction_dirty = True
+            # Yesterday = the most recent record strictly before today.
+            past = [r for r in prediction_records if r.date < today]
+            if past:
+                prediction_yesterday = past[-1]
+            # Today's Call — skip if we already recorded one today (double-run guard).
+            already_today = any(r.date == today for r in prediction_records)
+            if not already_today:
+                call = client.generate_daily_call(ranked)
+                if call is not None:
+                    prediction_today = PredictionRecord(date=today, call=call)
+                    prediction_records.append(prediction_today)
+                    prediction_dirty = True
+                    logger.info("The Call: %s %s (%d%%)", call.ticker, call.direction, call.confidence)
+            else:
+                prediction_today = next(r for r in prediction_records if r.date == today)
+            prediction_stats = season_stats(prediction_records)
+        except Exception as e:
+            logger.warning("Prediction game raised (%s) — hiding block", e)
+
+    prediction_block_html = render_prediction_html(
+        prediction_today, prediction_yesterday, prediction_stats, settings.recipient_list
+    )
+    prediction_block_text = render_prediction_plain(
+        prediction_today, prediction_yesterday, prediction_stats, settings.recipient_list
+    )
+
     html_body = render_email_html(
         ranked,
         sparklines=sparklines,
@@ -565,6 +624,7 @@ def run_pipeline() -> None:
         sector_moves=sector_moves,
         category_report=visuals_category_report,
         streak_records=streak_records,
+        prediction_block=prediction_block_html,
     )
     plain_text = render_plain_text(
         ranked,
@@ -581,6 +641,7 @@ def run_pipeline() -> None:
         sector_moves=sector_moves,
         category_report=visuals_category_report,
         streak_records=streak_records,
+        prediction_block=prediction_block_text,
     )
     subject = build_subject(
         ranked,
@@ -640,6 +701,17 @@ def run_pipeline() -> None:
                 "email already sent, continuing",
                 e,
             )
+
+    # Step 5b: Persist the prediction-game ledger (today's Call + any freshly
+    # resolved past calls). Best-effort — the email already shipped.
+    if settings.prediction_game_enabled and prediction_dirty:
+        try:
+            rewrite_predictions(prediction_records, settings.predictions_jsonl_full_path)
+            logger.info(
+                "The Call: persisted %d prediction record(s)", len(prediction_records)
+            )
+        except Exception as e:
+            logger.warning("The Call: failed to persist ledger (%s) — continuing", e)
 
     # Step 6: Learning loop (Phase 0) — log Bayesian-pooled hit-quality by
     # category. Measurement only; never affects the send. Reads the ledger we
