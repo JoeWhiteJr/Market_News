@@ -14,10 +14,11 @@ _Last updated: 2026-07-15_
 |----|-------|----------|-------|---------|
 | [MM-T001](in-progress/MM-T001-recover-and-merge-cycle-4b-judge.md) | Recover and merge Cycle 4b Yesterday-Index Judge | high | joe | 2026-06-03 |
 
-## Done (5) — last 10
+## Done (6) — last 10
 
 | ID | Title | Priority | Owner | Created |
 |----|-------|----------|-------|---------|
+| [MM-T008](done/MM-T008-briefing-missed-run-watchdog.md) | Watchdog alert when the daily briefing never runs | medium | joe | 2026-07-15 |
 | [MM-T007](done/MM-T007-prediction-game.md) | The Call · Beat the Bot — daily prediction game | medium | joe | 2026-07-12 |
 | [MM-T006](done/MM-T006-email-visuals-pack.md) | Email visuals pack — Gmail-safe charts + sparkline fix | medium | joe | 2026-07-10 |
 | [MM-T005](done/MM-T005-learning-feedback-calibration.md) | Close the learning loop (Phase 1) — soft calibration feedback | medium | joe | 2026-07-10 |
