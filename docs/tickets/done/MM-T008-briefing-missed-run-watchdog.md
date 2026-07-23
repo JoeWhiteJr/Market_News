@@ -1,5 +1,5 @@
 ---
-id: MM-T007
+id: MM-T008
 title: Watchdog alert when the daily briefing never runs
 status: done
 priority: medium
@@ -10,6 +10,7 @@ created: 2026-07-15
 updated: 2026-07-15
 related-pr:
 related-tickets:
+note: "Renumbered from MM-T007 → MM-T008 on 2026-07-15 to resolve an ID collision with the prediction-game ticket (both grabbed MM-T007 in parallel sessions)."
 ---
 
 # Watchdog alert when the daily briefing never runs
