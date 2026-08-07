@@ -17,6 +17,7 @@ Design constraints:
 from __future__ import annotations
 
 import html
+import json
 import logging
 from datetime import date
 from pathlib import Path
@@ -131,7 +132,81 @@ def _overall_stats(records: list[dict]) -> tuple[int, int]:
     return graded, len(records)
 
 
-def render_scores_html(records: list[dict], *, today: date, generated_label: str = "") -> str:
+def _pnl_series(cycles: list[dict]) -> list[tuple[str, float]]:
+    """Cumulative realized P&L per cycle date, oldest→newest, starting at 0."""
+    ordered = sorted(cycles, key=lambda c: c.get("cycle_date", ""))
+    series: list[tuple[str, float]] = []
+    running = 0.0
+    for c in ordered:
+        for closed in c.get("closed", []) or []:
+            pnl = closed.get("pnl_abs")
+            if isinstance(pnl, (int, float)):
+                running += pnl
+        series.append((c.get("cycle_date", ""), round(running, 2)))
+    return series
+
+
+def _render_pnl_chart(series: list[tuple[str, float]]) -> str:
+    """A single-series line chart of cumulative realized paper P&L.
+
+    Change-over-time with polarity (profit/loss around zero): one line, a zero
+    baseline, colored green when the latest value is up and red when down, with
+    native SVG ``<title>`` tooltips per point (no JS). Empty series → "".
+    """
+    if len(series) < 2:
+        return ""
+    W, H = 760, 240
+    PAD_L, PAD_R, PAD_T, PAD_B = 8, 64, 16, 24
+    xs = list(range(len(series)))
+    ys = [v for _d, v in series]
+    lo, hi = min(ys + [0.0]), max(ys + [0.0])
+    span = (hi - lo) or 1.0
+    # Add 8% headroom so the line/labels don't touch the frame.
+    lo -= span * 0.08
+    hi += span * 0.08
+    span = hi - lo
+
+    def px(i: int) -> float:
+        return PAD_L + i * (W - PAD_L - PAD_R) / (len(series) - 1)
+
+    def py(v: float) -> float:
+        return PAD_T + (hi - v) * (H - PAD_T - PAD_B) / span
+
+    final = ys[-1]
+    cls = "pnl-pos" if final >= 0 else "pnl-neg"
+    zero_y = py(0.0)
+    line_pts = " ".join(f"{px(i):.1f},{py(v):.1f}" for i, v in zip(xs, ys))
+    area_pts = f"{px(0):.1f},{zero_y:.1f} " + line_pts + f" {px(xs[-1]):.1f},{zero_y:.1f}"
+    dots = "".join(
+        f'<circle cx="{px(i):.1f}" cy="{py(v):.1f}" r="2.5" class="{cls}-dot">'
+        f'<title>{html.escape(d)}: ${v:+,.2f}</title></circle>'
+        for i, (d, v) in enumerate(series)
+    )
+    end_x, end_y = px(xs[-1]), py(final)
+    return f"""
+    <div class="chartwrap">
+      <svg viewBox="0 0 {W} {H}" width="100%" role="img"
+           aria-label="Cumulative realized paper P&amp;L, latest ${final:+,.2f}">
+        <line x1="{PAD_L}" y1="{zero_y:.1f}" x2="{W - PAD_R}" y2="{zero_y:.1f}" class="pnl-zero"/>
+        <polygon points="{area_pts}" class="{cls}-area"/>
+        <polyline points="{line_pts}" class="{cls}-line" fill="none"/>
+        {dots}
+        <circle cx="{end_x:.1f}" cy="{end_y:.1f}" r="4" class="{cls}-dot"/>
+        <text x="{end_x + 6:.1f}" y="{end_y + 4:.1f}" class="pnl-endlabel {cls}-fg">${final:+,.0f}</text>
+        <text x="{PAD_L}" y="{py(hi) + 10:.1f}" class="pnl-axis">${hi:+,.0f}</text>
+        <text x="{PAD_L}" y="{py(lo) - 3:.1f}" class="pnl-axis">${lo:+,.0f}</text>
+      </svg>
+      <div class="chartx"><span>{html.escape(series[0][0])}</span><span>{html.escape(series[-1][0])}</span></div>
+    </div>"""
+
+
+def render_scores_html(
+    records: list[dict],
+    *,
+    today: date,
+    generated_label: str = "",
+    pnl_series: list[tuple[str, float]] | None = None,
+) -> str:
     """Render the full scores-history page as a self-contained HTML string."""
     report = compute_category_performance(records, today)
     graded, total_days = _overall_stats(records)
@@ -140,6 +215,19 @@ def render_scores_html(records: list[dict], *, today: date, generated_label: str
     ordered = sorted(records, key=lambda r: r.get("date", ""), reverse=True)
     history_rows = "".join(row for r in ordered for row in _pick_rows(r))
     gen = html.escape(generated_label) if generated_label else html.escape(str(today))
+
+    series = pnl_series or []
+    pnl_chart = _render_pnl_chart(series)
+    pnl_card = (
+        '<div class="card">'
+        '<h2 style="margin-top:0">Paper P&amp;L — cumulative realized</h2>'
+        f'<p class="muted" style="margin:0">Latest: '
+        f'<strong>${series[-1][1]:+,.2f}</strong> over {len(series)} trading days · '
+        'paper money, $15k/pick · not investment advice.</p>'
+        f'{pnl_chart}</div>'
+        if pnl_chart
+        else ""
+    )
 
     return f"""<!doctype html>
 <html lang="en">
@@ -207,6 +295,28 @@ def render_scores_html(records: list[dict], *, today: date, generated_label: str
   .badge-pending {{ background:var(--pending-bg); color:var(--pending-fg); }}
   .legend {{ margin:10px 0 0; }}
   footer {{ color:var(--muted); font-size:12px; margin-top:28px; text-align:center; }}
+  /* Paper P&L chart — single series, polarity around zero. */
+  .chartwrap {{ margin-top:8px; }}
+  .chartx {{ display:flex; justify-content:space-between; color:var(--muted); font-size:11px; margin-top:2px; }}
+  .pnl-zero {{ stroke:var(--line); stroke-width:1; stroke-dasharray:3 3; }}
+  .pnl-axis {{ fill:var(--muted); font-size:11px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }}
+  .pnl-endlabel {{ font-size:13px; font-weight:700; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }}
+  .pnl-pos-line {{ stroke:#1a7f37; stroke-width:2; }}
+  .pnl-neg-line {{ stroke:#cf222e; stroke-width:2; }}
+  .pnl-pos-area {{ fill:#1a7f37; opacity:.10; }}
+  .pnl-neg-area {{ fill:#cf222e; opacity:.10; }}
+  .pnl-pos-dot {{ fill:#1a7f37; }}
+  .pnl-neg-dot {{ fill:#cf222e; }}
+  .pnl-pos-fg {{ fill:#1a7f37; }}
+  .pnl-neg-fg {{ fill:#cf222e; }}
+  @media (prefers-color-scheme: dark) {{
+    .pnl-pos-line, .pnl-pos-dot {{ stroke:#4ade80; }}
+    .pnl-pos-dot, .pnl-pos-area {{ fill:#4ade80; }}
+    .pnl-pos-fg {{ fill:#4ade80; }}
+    .pnl-neg-line, .pnl-neg-dot {{ stroke:#f87171; }}
+    .pnl-neg-dot, .pnl-neg-area {{ fill:#f87171; }}
+    .pnl-neg-fg {{ fill:#f87171; }}
+  }}
 </style>
 </head>
 <body>
@@ -222,6 +332,8 @@ def render_scores_html(records: list[dict], *, today: date, generated_label: str
       <div class="stat"><div class="n">{_fmt_pct(report.global_mean)}</div><div class="l">Global hit-quality</div></div>
     </div>
   </div>
+
+  {pnl_card}
 
   <div class="card">
     <h2 style="margin-top:0">By category</h2>
@@ -248,8 +360,29 @@ def render_scores_html(records: list[dict], *, today: date, generated_label: str
 </html>"""
 
 
+def _load_pnl_series(paper_path: Path | None) -> list[tuple[str, float]]:
+    """Best-effort cumulative-P&L series from the paper-trades ledger."""
+    if paper_path is None or not paper_path.exists():
+        return []
+    cycles: list[dict] = []
+    try:
+        for line in paper_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line:
+                cycles.append(json.loads(line))
+    except Exception as e:
+        logger.warning("Scores page: could not read paper ledger (%s)", e)
+        return []
+    return _pnl_series(cycles)
+
+
 def write_scores_page(
-    jsonl_path: Path, out_path: Path, *, today: date, generated_label: str = ""
+    jsonl_path: Path,
+    out_path: Path,
+    *,
+    today: date,
+    generated_label: str = "",
+    paper_trades_path: Path | None = None,
 ) -> bool:
     """Render the scores page to ``out_path``. Best-effort — never raises.
 
@@ -258,7 +391,10 @@ def write_scores_page(
     try:
         records = load_briefing_records(jsonl_path)
         html_doc = render_scores_html(
-            records, today=today, generated_label=generated_label
+            records,
+            today=today,
+            generated_label=generated_label,
+            pnl_series=_load_pnl_series(paper_trades_path),
         )
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(html_doc, encoding="utf-8")
@@ -280,7 +416,8 @@ def _main() -> None:  # pragma: no cover — thin CLI wrapper
     settings = MarketMoverSettings()
     out = Path(__file__).resolve().parents[2] / "docs" / "scores.html"
     ok = write_scores_page(
-        settings.briefings_jsonl_full_path, out, today=_date.today()
+        settings.briefings_jsonl_full_path, out, today=_date.today(),
+        paper_trades_path=settings.paper_trades_jsonl_full_path,
     )
     print(f"{'wrote' if ok else 'FAILED'} {out}")
 

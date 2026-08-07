@@ -52,8 +52,13 @@ class MarketMoverSettings(BaseSettings):
     # Paper-trading track record (Cycle 6 / ADR 0003). PAPER ONLY — there is no
     # live-trading endpoint wired anywhere in this codebase.
     paper_trading_enabled: bool = True
-    # Equal-weight notional per position, in paper dollars.
-    paper_notional_per_position: float = 1000.0
+    # Equal-weight notional per position, in paper dollars. Raised 2026-07-23
+    # from $1k → $15k (~$45k of $100k deployed across 3 picks, ~55% cash) so the
+    # paper P&L is actually visible and reflects realistic drawdowns. NOTE: this
+    # amplifies variance, not edge — a bigger sizing over a still-breakeven
+    # strategy just produces a louder breakeven. Historical trades stay at $1k,
+    # so the P&L curve shows a regime change at this date.
+    paper_notional_per_position: float = 15000.0
     # Append-only ledger, one cycle record per trading day.
     paper_trades_jsonl_path: str = "data/paper_trades.jsonl"
     # Paper trading API base — hard-coded to the paper host as a safety rail.
