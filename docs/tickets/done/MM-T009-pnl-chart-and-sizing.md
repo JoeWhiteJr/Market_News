@@ -1,14 +1,14 @@
 ---
 id: MM-T009
 title: Paper P&L chart on the dashboard + bump position sizing to $15k
-status: in-progress
+status: done
 priority: medium
 type: feature
 owner: joe
 assigned-team: Builder
 created: 2026-08-02
-updated: 2026-08-02
-related-pr:
+updated: 2026-08-12
+related-pr: 36
 related-tickets: MM-T003
 ---
 
@@ -39,7 +39,7 @@ hoc, and (2) be more aggressive — the account was only deploying ~$3k of $100k
 - [x] Geometry bounds-checked (no viewBox overflow); light+dark
 - [x] Tests: cumulative/order, empty-hides, sign→color, zero-baseline+tooltips, card
 - [x] `ruff` clean, full suite green (432 passed)
-- [ ] Joe eyeballs `Downloads/Market Mover - Dashboard.html`
+- [x] Joe eyeballed `Downloads/Market Mover - Dashboard.html` and merged
 
 ## Context & Notes
 - Historical trades stay at $1k, so the P&L curve shows a regime change at the
@@ -47,4 +47,23 @@ hoc, and (2) be more aggressive — the account was only deploying ~$3k of $100k
 - Sizing change is PAPER ONLY (ADR 0003); no live endpoint exists anywhere.
 
 ## Retrospective
-_Fill in when moving to done/._
+Shipped clean in a **single PR to main** (#36) — deliberately avoided the stacked-PR
+pattern that stranded the game off main in MM-T007. Zero conflicts, merged first try.
+
+**What went well**
+- Followed the dataviz method (change-over-time + polarity → zero baseline, green/red,
+  single series = no legend). Geometry was bounds-checked before ship, so no viewBox
+  overflow on the live Pages render.
+- Kept the P&L loader best-effort: <2 points hides the card, a missing/garbled ledger
+  never breaks the page or the send. Regression-tested that contract.
+- Was honest with Joe up front that the sizing bump amplifies **variance, not edge** —
+  set the expectation that the curve gets ~15× louder without getting better.
+
+**What to watch**
+- The curve will show a **regime kink at 2026-08-12** (the $1k→$15k boundary). Expected,
+  not a bug — flagged in the config comment and to Joe.
+- The real open question this unblocks: over the next ~4 weeks, do the picks actually
+  pull ahead of zero now that the noise is visible? That's the "go live someday" signal.
+  Consider a check-back ticket around 2026-09-09.
+
+**Lesson reused:** one feature = one PR straight off main. Don't stack.
