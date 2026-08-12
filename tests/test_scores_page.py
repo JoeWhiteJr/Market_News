@@ -9,6 +9,8 @@ import pytest
 
 from market_mover.scores_page import (
     _overall_stats,
+    _pnl_series,
+    _render_pnl_chart,
     _verdict_badge,
     render_scores_html,
     write_scores_page,
@@ -127,6 +129,48 @@ def test_malformed_rows_do_not_crash_render(tmp_path):
     out = tmp_path / "scores.html"
     assert write_scores_page(jsonl, out, today=TODAY) is True
     assert out.exists()
+
+
+def _cycle(day: str, *pnls: float) -> dict:
+    return {"cycle_date": day, "closed": [{"ticker": "X", "pnl_abs": p} for p in pnls]}
+
+
+class TestPnlChart:
+    def test_series_is_cumulative(self):
+        cycles = [_cycle("2026-07-01", 100.0), _cycle("2026-07-02", -30.0, 10.0)]
+        assert _pnl_series(cycles) == [("2026-07-01", 100.0), ("2026-07-02", 80.0)]
+
+    def test_series_orders_by_date(self):
+        cycles = [_cycle("2026-07-02", 5.0), _cycle("2026-07-01", 10.0)]
+        assert [d for d, _ in _pnl_series(cycles)] == ["2026-07-01", "2026-07-02"]
+
+    def test_chart_needs_two_points(self):
+        assert _render_pnl_chart([]) == ""
+        assert _render_pnl_chart([("2026-07-01", 5.0)]) == ""
+
+    def test_chart_positive_is_green_negative_is_red(self):
+        up = _render_pnl_chart([("2026-07-01", 0.0), ("2026-07-02", 50.0)])
+        assert "pnl-pos-line" in up and "pnl-neg-line" not in up
+        down = _render_pnl_chart([("2026-07-01", 0.0), ("2026-07-02", -50.0)])
+        assert "pnl-neg-line" in down and "pnl-pos-line" not in down
+
+    def test_chart_has_zero_baseline_and_tooltips(self):
+        svg = _render_pnl_chart([("2026-07-01", 10.0), ("2026-07-02", 40.0)])
+        assert "pnl-zero" in svg          # zero reference line
+        assert "<title>" in svg           # native per-point tooltips
+        assert "2026-07-02: $+40.00" in svg
+
+    def test_page_shows_pnl_card_when_series_present(self):
+        html_doc = render_scores_html(
+            [], today=TODAY,
+            pnl_series=[("2026-07-01", 10.0), ("2026-07-02", 25.0)],
+        )
+        assert "Paper P&amp;L" in html_doc
+        assert "$+25.00" in html_doc
+
+    def test_page_hides_pnl_card_when_no_series(self):
+        html_doc = render_scores_html([], today=TODAY, pnl_series=[])
+        assert "Paper P&amp;L" not in html_doc
 
 
 def test_scores_page_path_is_sandboxed_in_tests():

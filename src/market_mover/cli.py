@@ -738,6 +738,7 @@ def run_pipeline() -> None:
             settings.scores_page_full_path,
             today=today,
             generated_label=now_iso_utc(),
+            paper_trades_path=settings.paper_trades_jsonl_full_path,
         )
 
 
