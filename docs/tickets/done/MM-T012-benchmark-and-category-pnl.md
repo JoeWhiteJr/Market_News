@@ -1,7 +1,7 @@
 ---
 id: MM-T012
 title: SPY benchmark chart + per-category P&L attribution on the dashboard
-status: in-progress
+status: done
 priority: medium
 type: feature
 owner: joe
@@ -69,4 +69,35 @@ best-effort Alpaca call; failure just hides that one chart):
   "make the model better" thread and MM-T010.
 
 ## Retrospective
-_Fill in when moving to done/._
+Shipped in a **single focused PR** (#37, squash-merged first try) — held the
+one-feature-one-PR discipline from the MM-T007 stacking mishap.
+
+**What went well**
+- The benchmark reframed the whole "is there edge?" question. The blended
+  realized-\$ line read flat; the per-dollar view showed **picks +8.72% vs SPY
+  +6.47% (+2.25% edge)** over 38 days. Same data, opposite gut read — cash drag
+  was hiding it. Exactly why "measure before you tune" was the right first move.
+- Category attribution immediately surfaced the **unmapped −\$145** bucket as the
+  top actionable lead, plus single_name (+\$183) as the clear breadwinner.
+- Best-effort SPY fetch kept the network out of the critical path: no creds → the
+  card just vanishes, page/send unaffected. Same contract as the P&L chart.
+- Followed the dataviz method (two series → legend, one % axis, diverging bars
+  with a neutral zero). Geometry bounds-checked before ship.
+
+**What surprised us**
+- **ID collision:** the parallel daisy-cron session had already taken MM-T011.
+  Renumbered mine → MM-T012 (third time this pattern has bitten — T007/T008, now
+  this). A shared next_id across concurrent sessions is the root cause; worth a
+  guard someday, but not urgent.
+- **Caught a latent bug while here:** MM-T008's watchdog was marked done but its
+  `.github/workflows/briefing-watchdog.yml` trigger is **not on main** — a false
+  "committed on main" from `git log` exiting 0 on no matches hid it. Filed as a
+  follow-up; the Python shipped but the cron trigger never did.
+
+**Follow-ups spun out**
+- Investigate the unmapped −\$145 bucket (real losing bucket vs mislabeled).
+- Deploy the missing watchdog trigger (separate from this ticket).
+- MM-T010 (Sept 9) now has the exact tooling to judge whether the +2.25% edge is
+  signal or noise.
+
+**Lesson reused:** attribution before optimization; one feature = one PR off main.
