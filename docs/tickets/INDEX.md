@@ -2,10 +2,11 @@
 
 _Last updated: 2026-08-12_
 
-## Open (1)
+## Open (2)
 
 | ID | Title | Priority | Owner | Created |
 |----|-------|----------|-------|---------|
+| [MM-T010](open/MM-T010-revisit-paper-edge-after-sizing-bump.md) | Revisit the paper-trading edge ~4 weeks after the $15k sizing bump (review after 2026-09-09) | medium | joe | 2026-08-12 |
 | [MM-T002](open/MM-T002-stocks-club-ritual-with-jared.md) | Turn the daily briefing into a 2-person stocks-club ritual with Jared | low | joe | 2026-06-03 |
 
 ## In Progress (1)
