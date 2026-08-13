@@ -36,7 +36,11 @@ from .scorecard import (  # noqa: E402
     commit_daily_record,
     load_yesterday,
 )
-from .scores_page import write_scores_page  # noqa: E402
+from .scores_page import (  # noqa: E402
+    _read_cycles,
+    fetch_spy_closes,
+    write_scores_page,
+)
 from .predictions import (  # noqa: E402
     PredictionRecord,
     load_predictions,
@@ -733,12 +737,22 @@ def run_pipeline() -> None:
     # of the full grading history from the ledger we just updated. Best-effort;
     # the writer never raises, so a bad render can't affect the completed send.
     if settings.scores_page_enabled:
+        # Best-effort SPY closes for the picks-vs-market benchmark chart (MM-T012);
+        # an empty dict just hides that one chart.
+        spy_closes = fetch_spy_closes(
+            _read_cycles(settings.paper_trades_jsonl_full_path),
+            api_key_id=settings.alpaca_api_key_id,
+            api_secret_key=settings.alpaca_api_secret_key,
+            feed=settings.alpaca_data_feed,
+            min_call_interval=settings.min_call_interval_secs,
+        )
         write_scores_page(
             jsonl_path,
             settings.scores_page_full_path,
             today=today,
             generated_label=now_iso_utc(),
             paper_trades_path=settings.paper_trades_jsonl_full_path,
+            spy_closes=spy_closes,
         )
 
 

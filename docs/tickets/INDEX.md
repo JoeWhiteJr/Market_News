@@ -2,18 +2,20 @@
 
 _Last updated: 2026-08-12_
 
-## Open (2)
+## Open (3)
 
 | ID | Title | Priority | Owner | Created |
 |----|-------|----------|-------|---------|
 | [MM-T010](open/MM-T010-revisit-paper-edge-after-sizing-bump.md) | Revisit the paper-trading edge ~4 weeks after the $15k sizing bump (review after 2026-09-09) | medium | joe | 2026-08-12 |
+| [MM-T011](open/MM-T011-optional-move-daily-cron-to-daisy-for-reliability.md) | Optional: move the daily-briefing cron to daisy (reliability, not cost) | low | joe | 2026-08-13 |
 | [MM-T002](open/MM-T002-stocks-club-ritual-with-jared.md) | Turn the daily briefing into a 2-person stocks-club ritual with Jared | low | joe | 2026-06-03 |
 
-## In Progress (1)
+## In Progress (2)
 
 | ID | Title | Priority | Owner | Created |
 |----|-------|----------|-------|---------|
 | [MM-T001](in-progress/MM-T001-recover-and-merge-cycle-4b-judge.md) | Recover and merge Cycle 4b Yesterday-Index Judge | high | joe | 2026-06-03 |
+| [MM-T012](in-progress/MM-T012-benchmark-and-category-pnl.md) | SPY benchmark chart + per-category P&L attribution on the dashboard | medium | joe | 2026-08-13 |
 
 ## Done (7) — last 10
 
