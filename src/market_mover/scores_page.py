@@ -200,12 +200,211 @@ def _render_pnl_chart(series: list[tuple[str, float]]) -> str:
     </div>"""
 
 
+def _pick_return_series(cycles: list[dict]) -> list[tuple[str, float]]:
+    """Per-cycle average realized *pct* return of that cycle's closed picks.
+
+    One point per cycle that actually closed something, oldest→newest. This is a
+    per-dollar figure (equal-weight mean of ``pnl_pct``), so it measures the
+    picks' selection skill independent of how much cash sat idle.
+    """
+    ordered = sorted(cycles, key=lambda c: c.get("cycle_date", ""))
+    out: list[tuple[str, float]] = []
+    for c in ordered:
+        pcts = [
+            t.get("pnl_pct")
+            for t in (c.get("closed") or [])
+            if isinstance(t.get("pnl_pct"), (int, float))
+        ]
+        if pcts:
+            out.append((c.get("cycle_date", ""), sum(pcts) / len(pcts)))
+    return out
+
+
+def _benchmark_pair(
+    cycles: list[dict], spy_closes: dict[str, float]
+) -> tuple[list[tuple[str, float]], list[tuple[str, float]]]:
+    """Cumulative return %, picks vs SPY buy-and-hold, over shared trading days.
+
+    Both curves are indexed to 0% at the first shared day. The picks line
+    compounds each day's average realized pick return; the SPY line is
+    ``close/base - 1`` over the same dates. Returns ``(picks_pts, spy_pts)``,
+    each ``[(date, cum_pct), …]``, or ``([], [])`` if fewer than two days line
+    up (best-effort — a missing SPY fetch just hides the chart).
+    """
+    picks = _pick_return_series(cycles)
+    aligned = [(d, r) for d, r in picks if d in spy_closes]
+    if len(aligned) < 2:
+        return [], []
+    base_spy = spy_closes.get(aligned[0][0]) or 0.0
+    if base_spy <= 0:
+        return [], []
+    picks_pts = [(aligned[0][0], 0.0)]
+    spy_pts = [(aligned[0][0], 0.0)]
+    mult = 1.0
+    for d, r in aligned[1:]:
+        mult *= 1.0 + r / 100.0
+        picks_pts.append((d, round((mult - 1.0) * 100.0, 3)))
+        spy_pts.append((d, round((spy_closes[d] / base_spy - 1.0) * 100.0, 3)))
+    return picks_pts, spy_pts
+
+
+def _render_benchmark_chart(
+    picks_pts: list[tuple[str, float]], spy_pts: list[tuple[str, float]]
+) -> str:
+    """Two-series line: cumulative pick return vs SPY buy-and-hold, both in %.
+
+    One shared % axis (never a dual axis), a zero baseline, a legend (two
+    series → identity is never color-alone), direct end-labels, and native
+    ``<title>`` tooltips per point. Empty/short input → "".
+    """
+    if len(picks_pts) < 2 or len(spy_pts) < 2 or len(picks_pts) != len(spy_pts):
+        return ""
+    W, H = 760, 240
+    PAD_L, PAD_R, PAD_T, PAD_B = 8, 78, 16, 24
+    n = len(picks_pts)
+    all_y = [v for _d, v in picks_pts] + [v for _d, v in spy_pts] + [0.0]
+    lo, hi = min(all_y), max(all_y)
+    span = (hi - lo) or 1.0
+    lo -= span * 0.10
+    hi += span * 0.10
+    span = hi - lo
+
+    def px(i: int) -> float:
+        return PAD_L + i * (W - PAD_L - PAD_R) / (n - 1)
+
+    def py(v: float) -> float:
+        return PAD_T + (hi - v) * (H - PAD_T - PAD_B) / span
+
+    def line(pts: list[tuple[str, float]]) -> str:
+        return " ".join(f"{px(i):.1f},{py(v):.1f}" for i, (_d, v) in enumerate(pts))
+
+    def dots(pts: list[tuple[str, float]], key: str) -> str:
+        return "".join(
+            f'<circle cx="{px(i):.1f}" cy="{py(v):.1f}" r="2.5" class="bm-{key}-dot">'
+            f"<title>{html.escape(d)} · {key.upper()}: {v:+.2f}%</title></circle>"
+            for i, (d, v) in enumerate(pts)
+        )
+
+    zero_y = py(0.0)
+    pf, sf = picks_pts[-1][1], spy_pts[-1][1]
+    ex = px(n - 1)
+    # Nudge the two end-labels apart if they'd collide.
+    py_p, py_s = py(pf), py(sf)
+    if abs(py_p - py_s) < 13:
+        if py_p <= py_s:
+            py_p, py_s = min(py_p, py_s) - 2, max(py_p, py_s) + 11
+        else:
+            py_s, py_p = min(py_p, py_s) - 2, max(py_p, py_s) + 11
+    alpha = pf - sf
+    acls = "bm-pos-fg" if alpha >= 0 else "bm-neg-fg"
+    return f"""
+    <div class="bm-legend">
+      <span class="k"><span class="sw bm-picks-sw"></span>Picks (per-dollar)</span>
+      <span class="k"><span class="sw bm-spy-sw"></span>SPY buy &amp; hold</span>
+      <span class="k">Edge vs SPY: <strong class="{acls}">{alpha:+.2f}%</strong></span>
+    </div>
+    <div class="chartwrap">
+      <svg viewBox="0 0 {W} {H}" width="100%" role="img"
+           aria-label="Cumulative pick return {pf:+.2f}% versus SPY {sf:+.2f}%">
+        <line x1="{PAD_L}" y1="{zero_y:.1f}" x2="{W - PAD_R}" y2="{zero_y:.1f}" class="pnl-zero"/>
+        <polyline points="{line(spy_pts)}" class="bm-spy-line" fill="none"/>
+        <polyline points="{line(picks_pts)}" class="bm-picks-line" fill="none"/>
+        {dots(spy_pts, "spy")}
+        {dots(picks_pts, "picks")}
+        <circle cx="{ex:.1f}" cy="{py(pf):.1f}" r="4" class="bm-picks-dot"/>
+        <circle cx="{ex:.1f}" cy="{py(sf):.1f}" r="4" class="bm-spy-dot"/>
+        <text x="{ex + 6:.1f}" y="{py_p + 4:.1f}" class="pnl-endlabel bm-picks-fg">{pf:+.1f}%</text>
+        <text x="{ex + 6:.1f}" y="{py_s + 4:.1f}" class="pnl-endlabel bm-spy-fg">{sf:+.1f}%</text>
+      </svg>
+      <div class="chartx"><span>{html.escape(picks_pts[0][0])}</span><span>{html.escape(picks_pts[-1][0])}</span></div>
+    </div>"""
+
+
+def _category_pnl(cycles: list[dict]) -> list[dict]:
+    """Realized P&L pooled by category across every closed trade in the ledger.
+
+    Returns rows sorted by total P&L descending, each with trade count, win
+    rate, total dollars, and average pct per trade. Legacy rows with no
+    category fall into ``"unmapped"``.
+    """
+    agg: dict[str, dict] = {}
+    for c in cycles:
+        for t in c.get("closed", []) or []:
+            pnl = t.get("pnl_abs")
+            if not isinstance(pnl, (int, float)):
+                continue
+            cat = t.get("category") or "unmapped"
+            a = agg.setdefault(
+                cat, {"category": cat, "total": 0.0, "trades": 0, "wins": 0, "pct_sum": 0.0}
+            )
+            a["total"] += pnl
+            a["trades"] += 1
+            if pnl > 0:
+                a["wins"] += 1
+            pct = t.get("pnl_pct")
+            if isinstance(pct, (int, float)):
+                a["pct_sum"] += pct
+    rows = []
+    for a in agg.values():
+        n = a["trades"]
+        rows.append(
+            {
+                "category": a["category"],
+                "total": round(a["total"], 2),
+                "trades": n,
+                "win_rate": (a["wins"] / n) if n else 0.0,
+                "avg_pct": (a["pct_sum"] / n) if n else 0.0,
+            }
+        )
+    rows.sort(key=lambda r: r["total"], reverse=True)
+    return rows
+
+
+def _render_category_pnl(rows: list[dict]) -> str:
+    """Diverging bars (green profit ▶ / ◀ red loss around zero) + a numeric table."""
+    if not rows:
+        return ""
+    maxabs = max((abs(r["total"]) for r in rows), default=0.0) or 1.0
+    BW, CX, HALF = 172, 86, 78
+    body = ""
+    for r in rows:
+        t = r["total"]
+        w = min(abs(t) / maxabs * HALF, HALF)
+        if t >= 0:
+            rect = f'<rect x="{CX}" y="4" width="{w:.1f}" height="12" rx="3" class="cat-pos"/>'
+        else:
+            rect = f'<rect x="{CX - w:.1f}" y="4" width="{w:.1f}" height="12" rx="3" class="cat-neg"/>'
+        bar = (
+            f'<svg viewBox="0 0 {BW} 20" width="{BW}" height="20" role="img" '
+            f'aria-label="{html.escape(r["category"])} total ${t:+,.2f}">'
+            f'<line x1="{CX}" y1="1" x2="{CX}" y2="19" class="cat-zero"/>{rect}</svg>'
+        )
+        tcls = "cat-pos-fg" if t >= 0 else "cat-neg-fg"
+        body += (
+            f'<tr><td class="ticker">{html.escape(r["category"])}</td>'
+            f'<td class="num">{r["trades"]}</td>'
+            f'<td class="num">{r["win_rate"] * 100:.0f}%</td>'
+            f'<td class="num strong {tcls}">${t:+,.2f}</td>'
+            f'<td class="num">{r["avg_pct"]:+.2f}%</td>'
+            f'<td class="catbar">{bar}</td></tr>'
+        )
+    return (
+        '<div class="scroll"><table><thead><tr>'
+        '<th>Category</th><th class="num">Trades</th><th class="num">Win%</th>'
+        '<th class="num">Total P&amp;L</th><th class="num">Avg/trade</th>'
+        "<th>◀ Loss · Profit ▶</th>"
+        f"</tr></thead><tbody>{body}</tbody></table></div>"
+    )
+
+
 def render_scores_html(
     records: list[dict],
     *,
     today: date,
     generated_label: str = "",
     pnl_series: list[tuple[str, float]] | None = None,
+    benchmark: tuple[list[tuple[str, float]], list[tuple[str, float]]] | None = None,
+    category_pnl: list[dict] | None = None,
 ) -> str:
     """Render the full scores-history page as a self-contained HTML string."""
     report = compute_category_performance(records, today)
@@ -226,6 +425,34 @@ def render_scores_html(
         'paper money, $15k/pick · not investment advice.</p>'
         f'{pnl_chart}</div>'
         if pnl_chart
+        else ""
+    )
+
+    # Benchmark: do the picks beat just holding SPY? (per-dollar, cash-drag out)
+    picks_pts, spy_pts = benchmark or ([], [])
+    bm_chart = _render_benchmark_chart(picks_pts, spy_pts)
+    bm_card = (
+        '<div class="card">'
+        '<h2 style="margin-top:0">Picks vs. the market</h2>'
+        '<p class="muted" style="margin:0 0 4px">Cumulative return per dollar in a pick '
+        'vs. buying &amp; holding SPY over the same trading days — the honest "is there '
+        'an edge?" test (cash drag removed). Above the SPY line = the picks are adding '
+        'value; at or below = you\'d have done as well owning the index.</p>'
+        f'{bm_chart}</div>'
+        if bm_chart
+        else ""
+    )
+
+    # Which categories actually make money (realized $ pooled by category).
+    cat_rows = category_pnl or []
+    cat_pnl_html = _render_category_pnl(cat_rows)
+    cat_pnl_card = (
+        '<div class="card">'
+        '<h2 style="margin-top:0">Where the money comes from</h2>'
+        '<p class="muted" style="margin:0 0 8px">Realized paper P&amp;L pooled by pick '
+        'category. Small trade counts are noisy — read the direction, not the decimals.</p>'
+        f'{cat_pnl_html}</div>'
+        if cat_pnl_html
         else ""
     )
 
@@ -317,6 +544,35 @@ def render_scores_html(
     .pnl-neg-dot, .pnl-neg-area {{ fill:#f87171; }}
     .pnl-neg-fg {{ fill:#f87171; }}
   }}
+  /* Picks-vs-SPY benchmark — two series, identity by color + legend. */
+  .bm-legend {{ display:flex; flex-wrap:wrap; gap:16px; align-items:center;
+    color:var(--muted); font-size:12px; margin:6px 0 2px; }}
+  .bm-legend .k {{ display:inline-flex; align-items:center; gap:6px; }}
+  .bm-legend .sw {{ width:16px; height:0; border-top-width:3px; border-top-style:solid; border-radius:2px; }}
+  .bm-picks-sw {{ border-top-color:var(--accent); }}
+  .bm-spy-sw {{ border-top-color:var(--muted); border-top-style:dashed; }}
+  .bm-picks-line {{ stroke:var(--accent); stroke-width:2; }}
+  .bm-picks-dot, .bm-picks-fg {{ fill:var(--accent); }}
+  .bm-spy-line {{ stroke:var(--muted); stroke-width:2; stroke-dasharray:5 3; }}
+  .bm-spy-dot, .bm-spy-fg {{ fill:var(--muted); }}
+  .bm-pos-fg {{ color:#1a7f37; }}
+  .bm-neg-fg {{ color:#cf222e; }}
+  /* Category P&L — diverging bars around a zero midpoint. */
+  td.catbar {{ width:180px; }}
+  td.catbar svg {{ display:block; }}
+  .cat-zero {{ stroke:var(--line); stroke-width:1; }}
+  .cat-pos {{ fill:#1a7f37; }}
+  .cat-neg {{ fill:#cf222e; }}
+  .cat-pos-fg {{ color:#1a7f37; }}
+  .cat-neg-fg {{ color:#cf222e; }}
+  @media (prefers-color-scheme: dark) {{
+    .bm-pos-fg {{ color:#4ade80; }}
+    .bm-neg-fg {{ color:#f87171; }}
+    .cat-pos {{ fill:#4ade80; }}
+    .cat-neg {{ fill:#f87171; }}
+    .cat-pos-fg {{ color:#4ade80; }}
+    .cat-neg-fg {{ color:#f87171; }}
+  }}
 </style>
 </head>
 <body>
@@ -334,6 +590,10 @@ def render_scores_html(
   </div>
 
   {pnl_card}
+
+  {bm_card}
+
+  {cat_pnl_card}
 
   <div class="card">
     <h2 style="margin-top:0">By category</h2>
@@ -360,8 +620,8 @@ def render_scores_html(
 </html>"""
 
 
-def _load_pnl_series(paper_path: Path | None) -> list[tuple[str, float]]:
-    """Best-effort cumulative-P&L series from the paper-trades ledger."""
+def _read_cycles(paper_path: Path | None) -> list[dict]:
+    """Best-effort load of the paper-trades ledger as a list of raw dicts."""
     if paper_path is None or not paper_path.exists():
         return []
     cycles: list[dict] = []
@@ -373,7 +633,42 @@ def _load_pnl_series(paper_path: Path | None) -> list[tuple[str, float]]:
     except Exception as e:
         logger.warning("Scores page: could not read paper ledger (%s)", e)
         return []
-    return _pnl_series(cycles)
+    return cycles
+
+
+def fetch_spy_closes(
+    cycles: list[dict],
+    *,
+    api_key_id: str,
+    api_secret_key: str,
+    feed: str = "iex",
+    min_call_interval: float = 1.0,
+) -> dict[str, float]:
+    """Daily SPY closes over the ledger's date span, as ``{iso_date: close}``.
+
+    One batched Alpaca call for the whole window. Best-effort: no creds, no
+    ledger, or any fetch failure returns ``{}`` and the benchmark chart is
+    simply hidden — the page never depends on the network.
+    """
+    dates = sorted(c.get("cycle_date", "") for c in cycles if c.get("cycle_date"))
+    if len(dates) < 2 or not (api_key_id and api_secret_key):
+        return {}
+    try:
+        start, end = date.fromisoformat(dates[0]), date.fromisoformat(dates[-1])
+    except ValueError:
+        return {}
+    from .sources.alpaca_source import fetch_daily_bars
+
+    bars = fetch_daily_bars(
+        ["SPY"], start, end, api_key_id, api_secret_key,
+        feed=feed, min_call_interval=min_call_interval,
+    )
+    out: dict[str, float] = {}
+    for bar in bars.get("SPY") or []:
+        t, c = bar.get("t"), bar.get("c")
+        if isinstance(t, str) and isinstance(c, (int, float)):
+            out[t[:10]] = float(c)
+    return out
 
 
 def write_scores_page(
@@ -383,6 +678,7 @@ def write_scores_page(
     today: date,
     generated_label: str = "",
     paper_trades_path: Path | None = None,
+    spy_closes: dict[str, float] | None = None,
 ) -> bool:
     """Render the scores page to ``out_path``. Best-effort — never raises.
 
@@ -390,11 +686,14 @@ def write_scores_page(
     """
     try:
         records = load_briefing_records(jsonl_path)
+        cycles = _read_cycles(paper_trades_path)
         html_doc = render_scores_html(
             records,
             today=today,
             generated_label=generated_label,
-            pnl_series=_load_pnl_series(paper_trades_path),
+            pnl_series=_pnl_series(cycles),
+            benchmark=_benchmark_pair(cycles, spy_closes or {}),
+            category_pnl=_category_pnl(cycles),
         )
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(html_doc, encoding="utf-8")
@@ -415,9 +714,18 @@ def _main() -> None:  # pragma: no cover — thin CLI wrapper
 
     settings = MarketMoverSettings()
     out = Path(__file__).resolve().parents[2] / "docs" / "scores.html"
+    cycles = _read_cycles(settings.paper_trades_jsonl_full_path)
+    spy = fetch_spy_closes(
+        cycles,
+        api_key_id=settings.alpaca_api_key_id,
+        api_secret_key=settings.alpaca_api_secret_key,
+        feed=settings.alpaca_data_feed,
+        min_call_interval=settings.min_call_interval_secs,
+    )
     ok = write_scores_page(
         settings.briefings_jsonl_full_path, out, today=_date.today(),
         paper_trades_path=settings.paper_trades_jsonl_full_path,
+        spy_closes=spy,
     )
     print(f"{'wrote' if ok else 'FAILED'} {out}")
 

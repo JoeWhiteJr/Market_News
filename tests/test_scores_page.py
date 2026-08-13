@@ -8,8 +8,13 @@ from datetime import date
 import pytest
 
 from market_mover.scores_page import (
+    _benchmark_pair,
+    _category_pnl,
     _overall_stats,
+    _pick_return_series,
     _pnl_series,
+    _render_benchmark_chart,
+    _render_category_pnl,
     _render_pnl_chart,
     _verdict_badge,
     render_scores_html,
@@ -171,6 +176,104 @@ class TestPnlChart:
     def test_page_hides_pnl_card_when_no_series(self):
         html_doc = render_scores_html([], today=TODAY, pnl_series=[])
         assert "Paper P&amp;L" not in html_doc
+
+
+def _cyc(day: str, trades: list[tuple[float, float, str]]) -> dict:
+    """Cycle with closed trades as (pnl_abs, pnl_pct, category) tuples."""
+    return {
+        "cycle_date": day,
+        "closed": [
+            {"ticker": "X", "pnl_abs": a, "pnl_pct": p, "category": c}
+            for a, p, c in trades
+        ],
+    }
+
+
+class TestBenchmark:
+    def test_pick_return_series_is_per_cycle_average(self):
+        cycles = [_cyc("2026-07-01", [(0, 1.0, "macro"), (0, 3.0, "macro")])]
+        assert _pick_return_series(cycles) == [("2026-07-01", 2.0)]
+
+    def test_pick_return_series_skips_cycles_with_no_closes(self):
+        cycles = [{"cycle_date": "2026-07-01", "closed": []},
+                  _cyc("2026-07-02", [(0, 1.0, "macro")])]
+        assert [d for d, _ in _pick_return_series(cycles)] == ["2026-07-02"]
+
+    def test_benchmark_pair_indexes_both_to_zero_and_compounds(self):
+        cycles = [
+            _cyc("2026-07-01", [(0, 5.0, "macro")]),   # baseline day (dropped to 0)
+            _cyc("2026-07-02", [(0, 10.0, "macro")]),  # +10% picks
+        ]
+        spy = {"2026-07-01": 100.0, "2026-07-02": 102.0}  # SPY +2%
+        picks_pts, spy_pts = _benchmark_pair(cycles, spy)
+        assert picks_pts[0] == ("2026-07-01", 0.0)
+        assert spy_pts[0] == ("2026-07-01", 0.0)
+        assert picks_pts[1] == ("2026-07-02", 10.0)
+        assert spy_pts[1] == ("2026-07-02", 2.0)
+
+    def test_benchmark_pair_needs_two_aligned_days(self):
+        cycles = [_cyc("2026-07-01", [(0, 5.0, "macro")]),
+                  _cyc("2026-07-02", [(0, 1.0, "macro")])]
+        # Only one day has a SPY close → not enough overlap → hidden.
+        assert _benchmark_pair(cycles, {"2026-07-01": 100.0}) == ([], [])
+
+    def test_benchmark_chart_has_legend_and_both_series(self):
+        picks = [("2026-07-01", 0.0), ("2026-07-02", 10.0)]
+        spy = [("2026-07-01", 0.0), ("2026-07-02", 2.0)]
+        svg = _render_benchmark_chart(picks, spy)
+        assert "bm-picks-line" in svg and "bm-spy-line" in svg  # both series
+        assert "bm-legend" in svg                                # identity not color-alone
+        assert "Edge vs SPY:" in svg and "+8.00%" in svg         # alpha = 10 - 2
+
+    def test_benchmark_chart_hidden_when_short(self):
+        assert _render_benchmark_chart([], []) == ""
+        assert _render_benchmark_chart([("d", 0.0)], [("d", 0.0)]) == ""
+
+    def test_page_shows_benchmark_card_when_present(self):
+        picks = [("2026-07-01", 0.0), ("2026-07-02", 10.0)]
+        spy = [("2026-07-01", 0.0), ("2026-07-02", 2.0)]
+        html_doc = render_scores_html([], today=TODAY, benchmark=(picks, spy))
+        assert "Picks vs. the market" in html_doc
+
+    def test_page_hides_benchmark_card_when_empty(self):
+        html_doc = render_scores_html([], today=TODAY, benchmark=([], []))
+        assert "Picks vs. the market" not in html_doc
+
+
+class TestCategoryPnl:
+    def test_pools_by_category_and_sorts_by_total(self):
+        cycles = [
+            _cyc("2026-07-01", [(100.0, 1.0, "macro"), (-40.0, -2.0, "single_name")]),
+            _cyc("2026-07-02", [(20.0, 0.5, "macro")]),
+        ]
+        rows = _category_pnl(cycles)
+        assert rows[0]["category"] == "macro"       # +120 sorts first
+        assert rows[0]["total"] == 120.0
+        assert rows[0]["trades"] == 2
+        assert rows[0]["win_rate"] == 1.0
+        assert rows[1]["category"] == "single_name"  # -40 last
+        assert rows[1]["total"] == -40.0
+        assert rows[1]["win_rate"] == 0.0
+
+    def test_missing_category_falls_into_unmapped(self):
+        cycles = [{"cycle_date": "2026-07-01",
+                   "closed": [{"ticker": "X", "pnl_abs": 5.0, "pnl_pct": 1.0}]}]
+        assert _category_pnl(cycles)[0]["category"] == "unmapped"
+
+    def test_render_shows_diverging_bars_and_sign_colors(self):
+        rows = _category_pnl([_cyc("2026-07-01",
+                                   [(100.0, 1.0, "macro"), (-40.0, -2.0, "energy")])])
+        out = _render_category_pnl(rows)
+        assert "cat-pos" in out and "cat-neg" in out   # both signs drawn
+        assert "$+100.00" in out and "$-40.00" in out
+
+    def test_render_empty_is_blank(self):
+        assert _render_category_pnl([]) == ""
+
+    def test_page_shows_category_pnl_card_when_present(self):
+        rows = _category_pnl([_cyc("2026-07-01", [(10.0, 1.0, "macro")])])
+        html_doc = render_scores_html([], today=TODAY, category_pnl=rows)
+        assert "Where the money comes from" in html_doc
 
 
 def test_scores_page_path_is_sandboxed_in_tests():
