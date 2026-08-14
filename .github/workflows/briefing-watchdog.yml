@@ -1,0 +1,115 @@
+name: Briefing Watchdog
+
+on:
+  schedule:
+    # 17:30 UTC weekdays = 11:30 AM MDT. The briefing is scheduled for 12:00
+    # UTC, but GitHub delays scheduled starts under load (worst observed start:
+    # 15:41 UTC on 2026-06-29) — and on 2026-07-11 it silently never started
+    # the run at all. Check well after any plausible late start.
+    - cron: "30 17 * * 1-5"
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  check-briefing-ran:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      issues: write
+
+    steps:
+      - name: Look for today's daily-briefing runs
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -e
+          TODAY=$(date -u +%Y-%m-%d)
+          RUNS=$(gh run list --workflow daily-briefing.yml \
+            --created "$TODAY" --limit 50 \
+            --json status,conclusion)
+          TOTAL=$(echo "$RUNS" | jq 'length')
+          SUCCESS=$(echo "$RUNS" | jq '[.[] | select(.conclusion == "success")] | length')
+          PENDING=$(echo "$RUNS" | jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "waiting")] | length')
+          echo "date=$TODAY" >> "$GITHUB_OUTPUT"
+          if [ "$SUCCESS" -ge 1 ]; then
+            echo "Briefing ran successfully today ($SUCCESS success / $TOTAL total)."
+            echo "verdict=ok" >> "$GITHUB_OUTPUT"
+          elif [ "$TOTAL" -eq 0 ]; then
+            echo "::warning::No daily-briefing run exists for $TODAY — GitHub never started the scheduled run."
+            echo "verdict=missed" >> "$GITHUB_OUTPUT"
+          elif [ "$PENDING" -ge 1 ]; then
+            # A very late scheduled start is still in flight. If it ends up
+            # failing, daily-briefing.yml's own failure alerts fire.
+            echo "Run(s) still pending at check time; deferring to the briefing's own alerts."
+            echo "verdict=pending" >> "$GITHUB_OUTPUT"
+          else
+            # Runs happened and none succeeded — daily-briefing.yml's failure
+            # issue + email already fired. Don't duplicate the alert.
+            echo "All $TOTAL run(s) today completed without success; failure alerts handled by daily-briefing.yml."
+            echo "verdict=failed-elsewhere" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open missed-run issue
+        if: steps.check.outputs.verdict == 'missed'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          DATE="${{ steps.check.outputs.date }}"
+          gh issue create \
+            --title "[daily-briefing MISSED] ${DATE}" \
+            --body "The daily market briefing never started on ${DATE} — GitHub dropped the scheduled run (as it did on 2026-07-11). No failure, no logs: the run simply doesn't exist.
+
+          To send today's briefing manually:
+          gh workflow run daily-briefing.yml -R ${GH_REPO}
+
+          Or trigger it from the Actions tab (Daily Market Briefing → Run workflow)." \
+            --label "automated,daily-briefing-failure" || \
+          gh issue create \
+            --title "[daily-briefing MISSED] ${DATE}" \
+            --body "The daily market briefing never started on ${DATE}. Trigger manually: gh workflow run daily-briefing.yml -R ${GH_REPO}"
+
+      - name: Email missed-run alert
+        # Same best-effort stdlib SMTP pattern as daily-briefing.yml's failure
+        # alert — alerts the operator only, never fails the job.
+        if: steps.check.outputs.verdict == 'missed'
+        env:
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
+          MISSED_DATE: ${{ steps.check.outputs.date }}
+        run: |
+          python3 - <<'PY'
+          import os, smtplib, ssl
+          from email.message import EmailMessage
+
+          user = os.environ.get("SMTP_USERNAME", "")
+          pw = os.environ.get("SMTP_APP_PASSWORD", "")
+          if not user or not pw:
+              print("No SMTP creds in env; skipping missed-run alert.")
+              raise SystemExit(0)
+
+          date = os.environ.get("MISSED_DATE", "today")
+          repo = os.environ.get("GITHUB_REPOSITORY", "")
+          msg = EmailMessage()
+          msg["Subject"] = f"[ALERT] Market Mover briefing NEVER RAN - {date}"
+          msg["From"] = user
+          msg["To"] = user  # alert the operator, not the subscriber list
+          msg.set_content(
+              f"GitHub never started the scheduled daily briefing on {date} — "
+              "the run doesn't exist, so no failure alert fired and no email "
+              "went to recipients.\n\n"
+              "Send it manually:\n"
+              f"  gh workflow run daily-briefing.yml -R {repo}\n\n"
+              f"Or via the Actions tab: https://github.com/{repo}/actions\n"
+          )
+          try:
+              with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as s:
+                  s.starttls(context=ssl.create_default_context())
+                  s.login(user, pw)
+                  s.send_message(msg)
+              print(f"Missed-run alert emailed to {user}")
+          except Exception as e:
+              print(f"Missed-run alert send failed (non-fatal): {e}")
+          PY
