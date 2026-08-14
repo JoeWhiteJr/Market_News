@@ -10,17 +10,17 @@ _Last updated: 2026-08-12_
 | [MM-T011](open/MM-T011-optional-move-daily-cron-to-daisy-for-reliability.md) | Optional: move the daily-briefing cron to daisy (reliability, not cost) | low | joe | 2026-08-13 |
 | [MM-T002](open/MM-T002-stocks-club-ritual-with-jared.md) | Turn the daily briefing into a 2-person stocks-club ritual with Jared | low | joe | 2026-06-03 |
 
-## In Progress (2)
+## In Progress (1)
 
 | ID | Title | Priority | Owner | Created |
 |----|-------|----------|-------|---------|
 | [MM-T001](in-progress/MM-T001-recover-and-merge-cycle-4b-judge.md) | Recover and merge Cycle 4b Yesterday-Index Judge | high | joe | 2026-06-03 |
-| [MM-T013](in-progress/MM-T013-deploy-watchdog-workflow-trigger.md) | Deploy the briefing-watchdog workflow trigger (MM-T008 shipped code, not the trigger) | high | joe | 2026-08-14 |
 
-## Done (8) — last 10
+## Done (9) — last 10
 
 | ID | Title | Priority | Owner | Created |
 |----|-------|----------|-------|---------|
+| [MM-T013](done/MM-T013-deploy-watchdog-workflow-trigger.md) | Deploy the briefing-watchdog workflow trigger (MM-T008 shipped code, not the trigger) | high | joe | 2026-08-14 |
 | [MM-T012](done/MM-T012-benchmark-and-category-pnl.md) | SPY benchmark chart + per-category P&L attribution on the dashboard | medium | joe | 2026-08-13 |
 | [MM-T009](done/MM-T009-pnl-chart-and-sizing.md) | Paper P&L chart on the dashboard + bump position sizing to $15k | medium | joe | 2026-08-02 |
 | [MM-T008](done/MM-T008-briefing-missed-run-watchdog.md) | Watchdog alert when the daily briefing never runs | medium | joe | 2026-07-15 |

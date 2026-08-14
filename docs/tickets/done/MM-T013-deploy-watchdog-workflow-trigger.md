@@ -1,7 +1,7 @@
 ---
 id: MM-T013
 title: Deploy the briefing-watchdog workflow trigger (MM-T008 shipped code, not the trigger)
-status: in-progress
+status: done
 priority: high
 type: fix
 owner: joe
@@ -49,10 +49,10 @@ with `git ls-tree`, not `git log`.
 - [x] Reuses secrets that already exist (`SMTP_USERNAME`, `SMTP_APP_PASSWORD`,
       auto `GITHUB_TOKEN`) — same names `daily-briefing.yml` uses
 - [x] YAML validates (`yaml.safe_load`)
-- [ ] Merged to `main` and confirmed tracked via `git ls-tree -r origin/main`
-      (NOT `git log`)
-- [ ] `workflow_dispatch` manual run triggers green (or a clean `ok`/`missed`
-      verdict) from the Actions tab
+- [x] Merged to `main` (#38) and confirmed tracked via `git ls-tree -r origin/main`
+      + `git cat-file -e` (NOT `git log`) — both workflows present ✓
+- [x] `workflow_dispatch` manual run **succeeded** (run @ 2026-08-14T22:55Z):
+      verdict `ok`, issue + email steps correctly **skipped**, no spurious alert
 
 ## Context & Notes
 - Root-cause lesson also logged: verify file-on-branch presence with
@@ -62,4 +62,25 @@ with `git ls-tree`, not `git log`.
   only artifact that was missing is the trigger itself.
 
 ## Retrospective
-_Fill in when moving to done/._
+Closed the alerting gap that had been silently open since MM-T008. Merged in a
+focused PR (#38), then **verified deployment the right way** — `git ls-tree` +
+`git cat-file -e` against `origin/main`, and a live `workflow_dispatch` that
+completed with verdict `ok` and correctly skipped the issue/email steps (no false
+alarm on a day the briefing did run).
+
+**Root cause (the real lesson):** MM-T008 was marked done on a **false positive**.
+`git log origin/main -- <path>` exits 0 with empty output when the path matches no
+commits, and that empty-but-successful result was read as "committed." A feature
+can look shipped while its trigger never left the working tree. **Verify
+file-on-branch presence with `git ls-tree`/`git cat-file -e`, never `git log
+<path>` alone.** Worth a `/ticketing:lesson` post-mortem so it outlives this ticket.
+
+**What went well**
+- The watchdog itself needed zero changes — it was complete all along, just
+  undeployed. Diagnosis (not coding) was the whole job.
+- Verified against the *remote* ref and with a real dispatch, not just a local
+  checkout — the same over-trust that caused the bug is what the fix had to avoid.
+
+**Follow-through**
+- The 17:30 UTC weekday schedule is now live; the next real test is the next time
+  GitHub drops a scheduled briefing — it should open an issue + email the operator.
