@@ -1,6 +1,8 @@
 """Tests for the paper-trading engine (Cycle 6 / ADR 0003)."""
 
+import json
 from datetime import date
+from pathlib import Path
 
 from market_mover.models import RankedArticle
 from market_mover.paper_trading import (
@@ -209,3 +211,32 @@ class TestComputePaperStats:
         assert stats["n_trades"] == 0
         assert stats["win_rate"] is None
         assert stats["equity"] is None
+
+
+class TestLedgerCategoryIntegrity:
+    """Guard against the 'unmapped' bucket regression (MM-T015).
+
+    Every closed paper trade must carry a category so the dashboard's
+    per-category P&L attribution stays truthful. A null category means a
+    pick was opened without one (the bug that hid the SPCX/ROKU losers in
+    an 'unmapped' bucket and overstated single_name). The legacy pre-2026-06-23
+    trades were backfilled from briefings.jsonl via
+    scripts/backfill_legacy_categories.py.
+    """
+
+    def _ledger_path(self):
+        return Path(__file__).resolve().parents[1] / "data" / "paper_trades.jsonl"
+
+    def test_no_closed_trade_missing_category(self):
+        path = self._ledger_path()
+        if not path.exists():
+            return  # ledger only present in the app repo, not in packaged installs
+        offenders = []
+        for line in path.read_text().splitlines():
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            for trade in row.get("closed", []):
+                if not trade.get("category"):
+                    offenders.append((row.get("cycle_date"), trade.get("ticker")))
+        assert not offenders, f"closed trades missing category: {offenders}"
