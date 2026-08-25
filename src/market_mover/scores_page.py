@@ -714,6 +714,37 @@ def write_scores_page(
 LATEST_JSON_DAYS = 5
 
 
+def _pick_to_headline(pick: dict, brief_date: str | None) -> dict:
+    """Map a briefing pick to the headline shape the dashboard's market-context route reads
+    (id, title, source, url, published_at, summary, tickers, sentiment)."""
+    ticker = (pick.get("primary_ticker") or "").strip().upper() or None
+    return {
+        "id": f"mm-{brief_date or 'undated'}-{pick.get('rank')}",
+        "title": pick.get("title"),
+        "source": pick.get("source_name") or "Market Mover",
+        "url": pick.get("source_url"),
+        "published_at": f"{brief_date}T12:00:00Z" if brief_date else None,
+        "summary": pick.get("summary"),
+        "tickers": [ticker] if ticker else [],
+        # The brief scores impact, not direction, so no sentiment is asserted. null renders neutral.
+        "sentiment": None,
+    }
+
+
+def _pick_to_mover(pick: dict) -> dict:
+    """Map a briefing pick to the Top Movers shape (the brief's ranked picks, verbatim)."""
+    ticker = (pick.get("primary_ticker") or "").strip().upper() or None
+    return {
+        "rank": pick.get("rank"),
+        "ticker": ticker,
+        "category": pick.get("category"),
+        "title": pick.get("title"),
+        "justification": pick.get("summary"),
+        # The brief carries no per-pick directional verdict; leave it null rather than infer one.
+        "verdict": None,
+    }
+
+
 def write_latest_json(
     jsonl_path: Path,
     out_path: Path,
@@ -721,25 +752,40 @@ def write_latest_json(
     generated_label: str = "",
     days: int = LATEST_JSON_DAYS,
 ) -> bool:
-    """Write the most recent briefing records to ``out_path`` as JSON. Best-effort, never raises.
+    """Write the newest brief to ``out_path`` in the shape the Wasden Watch market-context route reads.
 
-    Returns True on success, False if anything went wrong (logged as a warning). Records are newest
-    first by ISO ``date``; a row missing a date sorts last rather than crashing the sort.
+    The route serves ONE brief, so this derives top-level ``generated_at`` / ``brief_date`` /
+    ``macro_read`` / ``headlines`` (mapped from the newest brief's picks) plus ``top_movers`` (the
+    ranked picks) for the Market page's Top Movers card. Best-effort: returns True on success, False
+    if anything went wrong (logged), and never raises, mirroring ``write_scores_page``.
+
+    ``days`` bounds how far back to look for the newest dated record; a row missing a date sorts last
+    rather than crashing the sort.
     """
     try:
         records = load_briefing_records(jsonl_path)
         recent = sorted(records, key=lambda r: r.get("date", ""), reverse=True)[:days]
+        latest = recent[0] if recent else {}
+        brief_date = latest.get("date")
+        picks = sorted(
+            (latest.get("picks") or []),
+            key=lambda p: p.get("rank") if isinstance(p.get("rank"), int) else 1_000_000,
+        )
         payload = {
-            "schema_version": 1,
+            "schema_version": 2,
             "generated_at": generated_label,
-            "count": len(recent),
-            "briefings": recent,
+            "brief_date": brief_date,
+            # The brief carries no single macro read today; the route serves null and the page hides
+            # the banner rather than showing an empty one. Flows through if a brief later adds one.
+            "macro_read": latest.get("macro_read"),
+            "headlines": [_pick_to_headline(p, brief_date) for p in picks],
+            "top_movers": [_pick_to_mover(p) for p in picks],
         }
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(
             json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
         )
-        logger.info("Latest JSON: wrote %d briefing(s) to %s", len(recent), out_path)
+        logger.info("Latest JSON: wrote %d headline(s) to %s", len(payload["headlines"]), out_path)
         return True
     except Exception as e:  # pragma: no cover  (defensive; must never break the send)
         logger.warning("Latest JSON: write failed (%s), skipping", e)
