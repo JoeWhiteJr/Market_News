@@ -706,6 +706,46 @@ def write_scores_page(
         return False
 
 
+# The market-context feed the Robinhood-Agentic /market page consumes (WW integration, 2026-08-16).
+# Published as JSON next to scores.html on GitHub Pages, so the trading backend can GET a stable URL
+# once a day: no repo access, no keys, and its DB port stays closed (an outbound pull, not an inbound
+# connection). The picks[] on each record are the headline feed; the consumer derives its own
+# catalyst calendar from its earnings data. Kept small: only the most recent few days.
+LATEST_JSON_DAYS = 5
+
+
+def write_latest_json(
+    jsonl_path: Path,
+    out_path: Path,
+    *,
+    generated_label: str = "",
+    days: int = LATEST_JSON_DAYS,
+) -> bool:
+    """Write the most recent briefing records to ``out_path`` as JSON. Best-effort, never raises.
+
+    Returns True on success, False if anything went wrong (logged as a warning). Records are newest
+    first by ISO ``date``; a row missing a date sorts last rather than crashing the sort.
+    """
+    try:
+        records = load_briefing_records(jsonl_path)
+        recent = sorted(records, key=lambda r: r.get("date", ""), reverse=True)[:days]
+        payload = {
+            "schema_version": 1,
+            "generated_at": generated_label,
+            "count": len(recent),
+            "briefings": recent,
+        }
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        logger.info("Latest JSON: wrote %d briefing(s) to %s", len(recent), out_path)
+        return True
+    except Exception as e:  # pragma: no cover  (defensive; must never break the send)
+        logger.warning("Latest JSON: write failed (%s), skipping", e)
+        return False
+
+
 def _main() -> None:  # pragma: no cover — thin CLI wrapper
     """Regenerate the page locally: ``python3 -m market_mover.scores_page``."""
     from datetime import date as _date

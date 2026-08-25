@@ -37,6 +37,7 @@ from .scorecard import (  # noqa: E402
     load_yesterday,
 )
 from .scores_page import (  # noqa: E402
+    write_latest_json,
     _read_cycles,
     fetch_spy_closes,
     write_scores_page,
@@ -753,6 +754,17 @@ def run_pipeline() -> None:
             generated_label=now_iso_utc(),
             paper_trades_path=settings.paper_trades_jsonl_full_path,
             spy_closes=spy_closes,
+        )
+
+        # Step 7b: Publish the market-context feed the Robinhood-Agentic /market page consumes,
+        # as latest.json next to scores.html on GitHub Pages
+        # (https://joewhitejr.github.io/Market_News/latest.json). The trading backend GETs it
+        # once a day, so no repo access or keys change hands and its DB port stays closed.
+        # Best-effort; the writer never raises, so it can't affect the completed send.
+        write_latest_json(
+            jsonl_path,
+            settings.scores_page_full_path.with_name("latest.json"),
+            generated_label=now_iso_utc(),
         )
 
 
