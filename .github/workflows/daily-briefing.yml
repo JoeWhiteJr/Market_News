@@ -61,6 +61,10 @@ jobs:
           git add data/predictions.jsonl 2>/dev/null || true
           # Regenerated browsable scores page (MM-T003) — served via GitHub Pages.
           git add docs/scores.html 2>/dev/null || true
+          # Latest briefings as JSON (MM-T014) — served via GitHub Pages for the Wasden Watch
+          # Market page to pull. Without this add, the file is generated in the runner but never
+          # committed, so the Pages URL 404s.
+          git add docs/latest.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No data ledger changes this run; nothing to commit."
             exit 0
