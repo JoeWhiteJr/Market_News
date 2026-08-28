@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-08-28T16:09:54.826331+00:00",
+  "brief_date": "2026-08-28",
+  "macro_read": null,
+  "headlines": [
+    {
+      "id": "mm-2026-08-28-1",
+      "title": "Warsh Says Inflation Isn’t Slowing, Vows to Reach 2% Target",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-08-28/warsh-says-inflation-isn-t-slowing-vows-to-hit-to-2-target",
+      "published_at": "2026-08-28T12:00:00Z",
+      "summary": "Alright, listen up. Fed Chair Warsh just dropped a bomb at Jackson Hole, tellin' everyone inflation ain't slowing down and he's dead set on hitting that 2% target. This ain't no soft talk; the bond market's already reacting with yields jumping, and it means the Fed's got its finger on the rate hike trigger, which'll hit everything from growth stocks to your mortgage.",
+      "tickers": [
+        "SPY"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-08-28-2",
+      "title": "U.S. Navy blockade slashes Iran oil exports as Trump administration shifts to economic warfare",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/08/28/navy-blockade-iran-oil-exports-sanctions-trump.html",
+      "published_at": "2026-08-28T12:00:00Z",
+      "summary": "The Trump administration just cranked up the heat on Iran, with the Navy blockading oil exports and shifting to full-blown economic warfare. This ain't just saber-rattling; it's gonna send crude prices through the roof, hitting the energy sector hard and putting a squeeze on consumers at the pump, which means more inflation worries for everyone.",
+      "tickers": [
+        "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-08-28-3",
+      "title": "US Job Growth Marked Down in Preliminary Benchmark Estimate",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-08-28/us-job-growth-marked-down-79-000-in-preliminary-estimate",
+      "published_at": "2026-08-28T12:00:00Z",
+      "summary": "Turns out the job market wasn't as hot as we thought, with the government marking down job growth figures for the past year. This weaker labor picture could give the Fed something to chew on, but for now, it just paints a less rosy picture of the economy, which ain't great for overall market sentiment.",
+      "tickers": [
+        "SPY"
+      ],
+      "sentiment": null
+    }
+  ],
+  "top_movers": [
+    {
+      "rank": 1,
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Warsh Says Inflation Isn’t Slowing, Vows to Reach 2% Target",
+      "justification": "Alright, listen up. Fed Chair Warsh just dropped a bomb at Jackson Hole, tellin' everyone inflation ain't slowing down and he's dead set on hitting that 2% target. This ain't no soft talk; the bond market's already reacting with yields jumping, and it means the Fed's got its finger on the rate hike trigger, which'll hit everything from growth stocks to your mortgage.",
+      "verdict": null
+    },
+    {
+      "rank": 2,
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "U.S. Navy blockade slashes Iran oil exports as Trump administration shifts to economic warfare",
+      "justification": "The Trump administration just cranked up the heat on Iran, with the Navy blockading oil exports and shifting to full-blown economic warfare. This ain't just saber-rattling; it's gonna send crude prices through the roof, hitting the energy sector hard and putting a squeeze on consumers at the pump, which means more inflation worries for everyone.",
+      "verdict": null
+    },
+    {
+      "rank": 3,
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "US Job Growth Marked Down in Preliminary Benchmark Estimate",
+      "justification": "Turns out the job market wasn't as hot as we thought, with the government marking down job growth figures for the past year. This weaker labor picture could give the Fed something to chew on, but for now, it just paints a less rosy picture of the economy, which ain't great for overall market sentiment.",
+      "verdict": null
+    }
+  ]
+}
