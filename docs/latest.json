@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-08-28T16:09:54.826331+00:00",
-  "brief_date": "2026-08-28",
+  "generated_at": "2026-09-01T12:16:32.595503+00:00",
+  "brief_date": "2026-09-01",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-08-28-1",
-      "title": "Warsh Says Inflation Isn’t Slowing, Vows to Reach 2% Target",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-08-28/warsh-says-inflation-isn-t-slowing-vows-to-hit-to-2-target",
-      "published_at": "2026-08-28T12:00:00Z",
-      "summary": "Alright, listen up. Fed Chair Warsh just dropped a bomb at Jackson Hole, tellin' everyone inflation ain't slowing down and he's dead set on hitting that 2% target. This ain't no soft talk; the bond market's already reacting with yields jumping, and it means the Fed's got its finger on the rate hike trigger, which'll hit everything from growth stocks to your mortgage.",
-      "tickers": [
-        "SPY"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-08-28-2",
-      "title": "U.S. Navy blockade slashes Iran oil exports as Trump administration shifts to economic warfare",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/08/28/navy-blockade-iran-oil-exports-sanctions-trump.html",
-      "published_at": "2026-08-28T12:00:00Z",
-      "summary": "The Trump administration just cranked up the heat on Iran, with the Navy blockading oil exports and shifting to full-blown economic warfare. This ain't just saber-rattling; it's gonna send crude prices through the roof, hitting the energy sector hard and putting a squeeze on consumers at the pump, which means more inflation worries for everyone.",
+      "id": "mm-2026-09-01-1",
+      "title": "Trump threatens to blow Kharg Island 'to smithereens' as U.S. and Iran trade fresh strikes in the Gulf, driving up the price of oil",
+      "source": "fortune.com",
+      "url": "https://fortune.com/2026/08/31/trump-blow-kharg-island-smithereens-us-iran-strikes-gulf-oil/",
+      "published_at": "2026-09-01T12:00:00Z",
+      "summary": "This is the tape-mover of the morning — Brent punching through $90 with tankers getting hit in the Strait of Hormuz is a supply-shock story that touches everything: energy stocks, airlines, chemicals, and the long bond all at once. Kharg Island handles roughly 90% of Iran's oil exports, so any credible threat there sends the whole energy complex into a frenzy. Throw in the Fed's hawkish lean and you've got a double-barrel headwind for equities heading into a historically rough September.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-08-28-3",
-      "title": "US Job Growth Marked Down in Preliminary Benchmark Estimate",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-08-28/us-job-growth-marked-down-79-000-in-preliminary-estimate",
-      "published_at": "2026-08-28T12:00:00Z",
-      "summary": "Turns out the job market wasn't as hot as we thought, with the government marking down job growth figures for the past year. This weaker labor picture could give the Fed something to chew on, but for now, it just paints a less rosy picture of the economy, which ain't great for overall market sentiment.",
+      "id": "mm-2026-09-01-2",
+      "title": "U.S. Stock Futures Little Changed as Markets Weigh Warsh's Hawkish Remarks",
+      "source": "wsj.com",
+      "url": "https://www.wsj.com/finance/investing/u-s-stock-futures-little-changed-as-markets-weigh-warshs-hawkish-remarks-5a036994",
+      "published_at": "2026-09-01T12:00:00Z",
+      "summary": "When the Fed Chair says summer's cooler inflation prints haven't moved the needle on underlying trends, the market has to reprice the September meeting — and that's exactly what's happening in the bond pit right now. Rate-sensitive sectors like utilities, REITs, and housing get hit hardest, but frankly nothing in the equity market loves a surprise hike. This one compounds the oil shock and makes the risk-reward for bulls look ugly going into month-end.",
       "tickers": [
         "SPY"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-09-01-3",
+      "title": "Apple enters John Ternus era as AI challenges and memory crunch intensify",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/01/apple-enters-ternus-era-as-ai-challenges-and-memory-crunch-intensify.html",
+      "published_at": "2026-09-01T12:00:00Z",
+      "summary": "A CEO transition at the world's largest company by market cap is never a quiet event — Tim Cook stepping aside for Ternus on day one of September is a genuine leadership inflection point for AAPL, which anchors every major index. Memory price spikes are a margin headwind that hits the iPhone supply chain hard, and the AI competitive pressure from rivals means the new boss walks into a burning building on his first day. Watch how the stock trades relative to the broader selloff — it'll tell you a lot about how much goodwill Ternus gets from the Street.",
+      "tickers": [
+        "AAPL"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Warsh Says Inflation Isn’t Slowing, Vows to Reach 2% Target",
-      "justification": "Alright, listen up. Fed Chair Warsh just dropped a bomb at Jackson Hole, tellin' everyone inflation ain't slowing down and he's dead set on hitting that 2% target. This ain't no soft talk; the bond market's already reacting with yields jumping, and it means the Fed's got its finger on the rate hike trigger, which'll hit everything from growth stocks to your mortgage.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Trump threatens to blow Kharg Island 'to smithereens' as U.S. and Iran trade fresh strikes in the Gulf, driving up the price of oil",
+      "justification": "This is the tape-mover of the morning — Brent punching through $90 with tankers getting hit in the Strait of Hormuz is a supply-shock story that touches everything: energy stocks, airlines, chemicals, and the long bond all at once. Kharg Island handles roughly 90% of Iran's oil exports, so any credible threat there sends the whole energy complex into a frenzy. Throw in the Fed's hawkish lean and you've got a double-barrel headwind for equities heading into a historically rough September.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "U.S. Navy blockade slashes Iran oil exports as Trump administration shifts to economic warfare",
-      "justification": "The Trump administration just cranked up the heat on Iran, with the Navy blockading oil exports and shifting to full-blown economic warfare. This ain't just saber-rattling; it's gonna send crude prices through the roof, hitting the energy sector hard and putting a squeeze on consumers at the pump, which means more inflation worries for everyone.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "U.S. Stock Futures Little Changed as Markets Weigh Warsh's Hawkish Remarks",
+      "justification": "When the Fed Chair says summer's cooler inflation prints haven't moved the needle on underlying trends, the market has to reprice the September meeting — and that's exactly what's happening in the bond pit right now. Rate-sensitive sectors like utilities, REITs, and housing get hit hardest, but frankly nothing in the equity market loves a surprise hike. This one compounds the oil shock and makes the risk-reward for bulls look ugly going into month-end.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "US Job Growth Marked Down in Preliminary Benchmark Estimate",
-      "justification": "Turns out the job market wasn't as hot as we thought, with the government marking down job growth figures for the past year. This weaker labor picture could give the Fed something to chew on, but for now, it just paints a less rosy picture of the economy, which ain't great for overall market sentiment.",
+      "ticker": "AAPL",
+      "category": "single_name",
+      "title": "Apple enters John Ternus era as AI challenges and memory crunch intensify",
+      "justification": "A CEO transition at the world's largest company by market cap is never a quiet event — Tim Cook stepping aside for Ternus on day one of September is a genuine leadership inflection point for AAPL, which anchors every major index. Memory price spikes are a margin headwind that hits the iPhone supply chain hard, and the AI competitive pressure from rivals means the new boss walks into a burning building on his first day. Watch how the stock trades relative to the broader selloff — it'll tell you a lot about how much goodwill Ternus gets from the Street.",
       "verdict": null
     }
   ]
