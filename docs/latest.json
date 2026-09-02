@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-01T12:16:32.595503+00:00",
-  "brief_date": "2026-09-01",
+  "generated_at": "2026-09-02T12:16:28.193172+00:00",
+  "brief_date": "2026-09-02",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-01-1",
-      "title": "Trump threatens to blow Kharg Island 'to smithereens' as U.S. and Iran trade fresh strikes in the Gulf, driving up the price of oil",
-      "source": "fortune.com",
-      "url": "https://fortune.com/2026/08/31/trump-blow-kharg-island-smithereens-us-iran-strikes-gulf-oil/",
-      "published_at": "2026-09-01T12:00:00Z",
-      "summary": "This is the tape-mover of the morning — Brent punching through $90 with tankers getting hit in the Strait of Hormuz is a supply-shock story that touches everything: energy stocks, airlines, chemicals, and the long bond all at once. Kharg Island handles roughly 90% of Iran's oil exports, so any credible threat there sends the whole energy complex into a frenzy. Throw in the Fed's hawkish lean and you've got a double-barrel headwind for equities heading into a historically rough September.",
+      "id": "mm-2026-09-02-1",
+      "title": "Iran says two tankers have hit Hormuz naval mines, attacks regional targets in retaliation to U.S. strikes",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/02/us-iran-war-trump-hormuz-irgc-jordan-bahrain.html",
+      "published_at": "2026-09-02T12:00:00Z",
+      "summary": "Well now, when somebody starts dropping naval mines in the Strait of Hormuz — through which, as the Energy Secretary kindly reminded us, some 17 million barrels of oil pass on a quiet Monday — you don't need a weathervane to know which way the wind is blowing for energy prices, bond yields, and the general disposition of stock markets worldwide. This is the kind of development that, like a late frost on the Nebraska corn crop, touches nearly everything at once: oil above $90 pressures airlines, raises input costs for manufacturers, stokes the inflation that keeps the Fed's hand away from the rate-cut lever, and sends bond yields climbing in a way that JPMorgan's own Grace Peters warns could put equities at serious risk if the 10-year touches 5%. Energy stocks may find a friend here, but the broad market — particularly rate-sensitive growth names — is sitting in the path of a very stiff headwind.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-01-2",
-      "title": "U.S. Stock Futures Little Changed as Markets Weigh Warsh's Hawkish Remarks",
-      "source": "wsj.com",
-      "url": "https://www.wsj.com/finance/investing/u-s-stock-futures-little-changed-as-markets-weigh-warshs-hawkish-remarks-5a036994",
-      "published_at": "2026-09-01T12:00:00Z",
-      "summary": "When the Fed Chair says summer's cooler inflation prints haven't moved the needle on underlying trends, the market has to reprice the September meeting — and that's exactly what's happening in the bond pit right now. Rate-sensitive sectors like utilities, REITs, and housing get hit hardest, but frankly nothing in the equity market loves a surprise hike. This one compounds the oil shock and makes the risk-reward for bulls look ugly going into month-end.",
+      "id": "mm-2026-09-02-2",
+      "title": "10-year U.S. Treasury yield hits highest level since November 2023 as global bond sell-off continues",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/02/bond-yields-treasurys-inflation.html",
+      "published_at": "2026-09-02T12:00:00Z",
+      "summary": "Now, I've watched a good many bond markets in my time, and I'll tell you that when the 10-year Treasury yield climbs to its highest perch since late 2023 — with Japan's 10-year simultaneously crossing 3% for the first time in a generation and European gilts joining the rout — that's not a local squall, that's a system moving across the whole prairie. Rising yields tighten financial conditions for every borrower from the U.S. government on down to the young couple trying to afford a home on an adjustable-rate mortgage, and they make the earnings yields on stocks look a good deal less appetizing by comparison. The Fed's September meeting is now firmly in play as a potential hike, which would be the sort of surprise that tends to separate the patient investor from the fellow who bought on margin.",
       "tickers": [
-        "SPY"
+        "TLT"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-01-3",
-      "title": "Apple enters John Ternus era as AI challenges and memory crunch intensify",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/01/apple-enters-ternus-era-as-ai-challenges-and-memory-crunch-intensify.html",
-      "published_at": "2026-09-01T12:00:00Z",
-      "summary": "A CEO transition at the world's largest company by market cap is never a quiet event — Tim Cook stepping aside for Ternus on day one of September is a genuine leadership inflection point for AAPL, which anchors every major index. Memory price spikes are a margin headwind that hits the iPhone supply chain hard, and the AI competitive pressure from rivals means the new boss walks into a burning building on his first day. Watch how the stock trades relative to the broader selloff — it'll tell you a lot about how much goodwill Ternus gets from the Street.",
+      "id": "mm-2026-09-02-3",
+      "title": "Nvidia Nears $14 Billion Deal to Buy Hugging Face | The Pulse 9/2/2026",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/videos/2026-09-02/the-pulse-9-2-2026-video-video",
+      "published_at": "2026-09-02T12:00:00Z",
+      "summary": "A $14 billion acquisition by the most consequential semiconductor company of this era is the sort of thing that, as my old friend Charlie might say, concentrates the mind wonderfully — both for Nvidia shareholders and for every AI-adjacent company that suddenly finds itself either a potential partner or a potential competitor of a firm that now controls not just the picks and shovels of the AI gold rush, but the map of the mine itself. Hugging Face is the central marketplace for open-source AI models, meaning this deal touches the ambitions of every hyperscaler, every enterprise software company, and every startup that has been building on top of freely available models; it also raises the sort of antitrust questions that tend to keep lawyers employed and regulators animated for years. I'd watch NVDA, GOOGL, META, and MSFT for the ripples — and I'd watch the open-source AI community for the reaction, which may prove louder than the deal price suggests.",
       "tickers": [
-        "AAPL"
+        "NVDA"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "USO",
       "category": "geopolitical",
-      "title": "Trump threatens to blow Kharg Island 'to smithereens' as U.S. and Iran trade fresh strikes in the Gulf, driving up the price of oil",
-      "justification": "This is the tape-mover of the morning — Brent punching through $90 with tankers getting hit in the Strait of Hormuz is a supply-shock story that touches everything: energy stocks, airlines, chemicals, and the long bond all at once. Kharg Island handles roughly 90% of Iran's oil exports, so any credible threat there sends the whole energy complex into a frenzy. Throw in the Fed's hawkish lean and you've got a double-barrel headwind for equities heading into a historically rough September.",
+      "title": "Iran says two tankers have hit Hormuz naval mines, attacks regional targets in retaliation to U.S. strikes",
+      "justification": "Well now, when somebody starts dropping naval mines in the Strait of Hormuz — through which, as the Energy Secretary kindly reminded us, some 17 million barrels of oil pass on a quiet Monday — you don't need a weathervane to know which way the wind is blowing for energy prices, bond yields, and the general disposition of stock markets worldwide. This is the kind of development that, like a late frost on the Nebraska corn crop, touches nearly everything at once: oil above $90 pressures airlines, raises input costs for manufacturers, stokes the inflation that keeps the Fed's hand away from the rate-cut lever, and sends bond yields climbing in a way that JPMorgan's own Grace Peters warns could put equities at serious risk if the 10-year touches 5%. Energy stocks may find a friend here, but the broad market — particularly rate-sensitive growth names — is sitting in the path of a very stiff headwind.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
+      "ticker": "TLT",
       "category": "macro",
-      "title": "U.S. Stock Futures Little Changed as Markets Weigh Warsh's Hawkish Remarks",
-      "justification": "When the Fed Chair says summer's cooler inflation prints haven't moved the needle on underlying trends, the market has to reprice the September meeting — and that's exactly what's happening in the bond pit right now. Rate-sensitive sectors like utilities, REITs, and housing get hit hardest, but frankly nothing in the equity market loves a surprise hike. This one compounds the oil shock and makes the risk-reward for bulls look ugly going into month-end.",
+      "title": "10-year U.S. Treasury yield hits highest level since November 2023 as global bond sell-off continues",
+      "justification": "Now, I've watched a good many bond markets in my time, and I'll tell you that when the 10-year Treasury yield climbs to its highest perch since late 2023 — with Japan's 10-year simultaneously crossing 3% for the first time in a generation and European gilts joining the rout — that's not a local squall, that's a system moving across the whole prairie. Rising yields tighten financial conditions for every borrower from the U.S. government on down to the young couple trying to afford a home on an adjustable-rate mortgage, and they make the earnings yields on stocks look a good deal less appetizing by comparison. The Fed's September meeting is now firmly in play as a potential hike, which would be the sort of surprise that tends to separate the patient investor from the fellow who bought on margin.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "AAPL",
+      "ticker": "NVDA",
       "category": "single_name",
-      "title": "Apple enters John Ternus era as AI challenges and memory crunch intensify",
-      "justification": "A CEO transition at the world's largest company by market cap is never a quiet event — Tim Cook stepping aside for Ternus on day one of September is a genuine leadership inflection point for AAPL, which anchors every major index. Memory price spikes are a margin headwind that hits the iPhone supply chain hard, and the AI competitive pressure from rivals means the new boss walks into a burning building on his first day. Watch how the stock trades relative to the broader selloff — it'll tell you a lot about how much goodwill Ternus gets from the Street.",
+      "title": "Nvidia Nears $14 Billion Deal to Buy Hugging Face | The Pulse 9/2/2026",
+      "justification": "A $14 billion acquisition by the most consequential semiconductor company of this era is the sort of thing that, as my old friend Charlie might say, concentrates the mind wonderfully — both for Nvidia shareholders and for every AI-adjacent company that suddenly finds itself either a potential partner or a potential competitor of a firm that now controls not just the picks and shovels of the AI gold rush, but the map of the mine itself. Hugging Face is the central marketplace for open-source AI models, meaning this deal touches the ambitions of every hyperscaler, every enterprise software company, and every startup that has been building on top of freely available models; it also raises the sort of antitrust questions that tend to keep lawyers employed and regulators animated for years. I'd watch NVDA, GOOGL, META, and MSFT for the ripples — and I'd watch the open-source AI community for the reaction, which may prove louder than the deal price suggests.",
       "verdict": null
     }
   ]
