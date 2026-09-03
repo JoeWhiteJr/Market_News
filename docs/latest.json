@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-02T12:16:28.193172+00:00",
-  "brief_date": "2026-09-02",
+  "generated_at": "2026-09-03T12:17:15.335424+00:00",
+  "brief_date": "2026-09-03",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-02-1",
-      "title": "Iran says two tankers have hit Hormuz naval mines, attacks regional targets in retaliation to U.S. strikes",
+      "id": "mm-2026-09-03-1",
+      "title": "Nvidia agrees to buy Hugging Face for almost $13 billion, expanding further up AI stack",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/02/us-iran-war-trump-hormuz-irgc-jordan-bahrain.html",
-      "published_at": "2026-09-02T12:00:00Z",
-      "summary": "Well now, when somebody starts dropping naval mines in the Strait of Hormuz — through which, as the Energy Secretary kindly reminded us, some 17 million barrels of oil pass on a quiet Monday — you don't need a weathervane to know which way the wind is blowing for energy prices, bond yields, and the general disposition of stock markets worldwide. This is the kind of development that, like a late frost on the Nebraska corn crop, touches nearly everything at once: oil above $90 pressures airlines, raises input costs for manufacturers, stokes the inflation that keeps the Fed's hand away from the rate-cut lever, and sends bond yields climbing in a way that JPMorgan's own Grace Peters warns could put equities at serious risk if the 10-year touches 5%. Energy stocks may find a friend here, but the broad market — particularly rate-sensitive growth names — is sitting in the path of a very stiff headwind.",
+      "url": "https://www.cnbc.com/2026/09/03/nvidia-agrees-to-buy-hugging-face-for-almost-13-billion-ai-expansion.html",
+      "published_at": "2026-09-03T12:00:00Z",
+      "summary": "This is the kind of deal that moves the whole tape — Nvidia stepping up the AI stack from chips into the model hub and developer ecosystem is a genuine strategic shift, not just a headline. It rattles every AI software name from Hugging Face competitors to cloud providers, and it tells you Jensen Huang isn't done swinging. Watch NVDA, MSFT, GOOGL, and anything touching the open-source AI layer.",
+      "tickers": [
+        "NVDA"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-09-03-2",
+      "title": "Iran strikes Kuwait as Trump says renewed Mideast hostilities will not last 'too long'",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/03/us-iran-war-trump-hormuz-israel-middle-east-europe-kuwait.html",
+      "published_at": "2026-09-03T12:00:00Z",
+      "summary": "Iran expanding strikes to Kuwait is a genuine escalation — the Strait of Hormuz is already a choke point and now a neighboring Gulf state is in the crossfire, which means oil supply risk just got a zip code. This hits energy prices, shipping stocks, airline costs, and bond yields all at once, and Lloyd's is already counting a £1.4 billion loss. The whole risk complex is repricing around this one.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-02-2",
-      "title": "10-year U.S. Treasury yield hits highest level since November 2023 as global bond sell-off continues",
+      "id": "mm-2026-09-03-3",
+      "title": "Broadcom's stock drops 5% as weak guidance overshadows earnings beat",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/02/bond-yields-treasurys-inflation.html",
-      "published_at": "2026-09-02T12:00:00Z",
-      "summary": "Now, I've watched a good many bond markets in my time, and I'll tell you that when the 10-year Treasury yield climbs to its highest perch since late 2023 — with Japan's 10-year simultaneously crossing 3% for the first time in a generation and European gilts joining the rout — that's not a local squall, that's a system moving across the whole prairie. Rising yields tighten financial conditions for every borrower from the U.S. government on down to the young couple trying to afford a home on an adjustable-rate mortgage, and they make the earnings yields on stocks look a good deal less appetizing by comparison. The Fed's September meeting is now firmly in play as a potential hike, which would be the sort of surprise that tends to separate the patient investor from the fellow who bought on margin.",
+      "url": "https://www.cnbc.com/2026/09/02/broadcom-avgo-q3-earnings-report-2026.html",
+      "published_at": "2026-09-03T12:00:00Z",
+      "summary": "Broadcom is a bellwether for the entire AI semiconductor food chain — when its guidance disappoints, the whole sector gets a cold. A 5% drop on a beat-and-miss-guidance combo is the market telling you expectations are priced for perfection, and that's a warning shot for every chip name on the board. Keep an eye on how AVGO's weakness bleeds into MRVL, QCOM, and the SOX index.",
       "tickers": [
-        "TLT"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-09-02-3",
-      "title": "Nvidia Nears $14 Billion Deal to Buy Hugging Face | The Pulse 9/2/2026",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/videos/2026-09-02/the-pulse-9-2-2026-video-video",
-      "published_at": "2026-09-02T12:00:00Z",
-      "summary": "A $14 billion acquisition by the most consequential semiconductor company of this era is the sort of thing that, as my old friend Charlie might say, concentrates the mind wonderfully — both for Nvidia shareholders and for every AI-adjacent company that suddenly finds itself either a potential partner or a potential competitor of a firm that now controls not just the picks and shovels of the AI gold rush, but the map of the mine itself. Hugging Face is the central marketplace for open-source AI models, meaning this deal touches the ambitions of every hyperscaler, every enterprise software company, and every startup that has been building on top of freely available models; it also raises the sort of antitrust questions that tend to keep lawyers employed and regulators animated for years. I'd watch NVDA, GOOGL, META, and MSFT for the ripples — and I'd watch the open-source AI community for the reaction, which may prove louder than the deal price suggests.",
-      "tickers": [
-        "NVDA"
+        "AVGO"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Iran says two tankers have hit Hormuz naval mines, attacks regional targets in retaliation to U.S. strikes",
-      "justification": "Well now, when somebody starts dropping naval mines in the Strait of Hormuz — through which, as the Energy Secretary kindly reminded us, some 17 million barrels of oil pass on a quiet Monday — you don't need a weathervane to know which way the wind is blowing for energy prices, bond yields, and the general disposition of stock markets worldwide. This is the kind of development that, like a late frost on the Nebraska corn crop, touches nearly everything at once: oil above $90 pressures airlines, raises input costs for manufacturers, stokes the inflation that keeps the Fed's hand away from the rate-cut lever, and sends bond yields climbing in a way that JPMorgan's own Grace Peters warns could put equities at serious risk if the 10-year touches 5%. Energy stocks may find a friend here, but the broad market — particularly rate-sensitive growth names — is sitting in the path of a very stiff headwind.",
+      "ticker": "NVDA",
+      "category": "single_name",
+      "title": "Nvidia agrees to buy Hugging Face for almost $13 billion, expanding further up AI stack",
+      "justification": "This is the kind of deal that moves the whole tape — Nvidia stepping up the AI stack from chips into the model hub and developer ecosystem is a genuine strategic shift, not just a headline. It rattles every AI software name from Hugging Face competitors to cloud providers, and it tells you Jensen Huang isn't done swinging. Watch NVDA, MSFT, GOOGL, and anything touching the open-source AI layer.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "TLT",
-      "category": "macro",
-      "title": "10-year U.S. Treasury yield hits highest level since November 2023 as global bond sell-off continues",
-      "justification": "Now, I've watched a good many bond markets in my time, and I'll tell you that when the 10-year Treasury yield climbs to its highest perch since late 2023 — with Japan's 10-year simultaneously crossing 3% for the first time in a generation and European gilts joining the rout — that's not a local squall, that's a system moving across the whole prairie. Rising yields tighten financial conditions for every borrower from the U.S. government on down to the young couple trying to afford a home on an adjustable-rate mortgage, and they make the earnings yields on stocks look a good deal less appetizing by comparison. The Fed's September meeting is now firmly in play as a potential hike, which would be the sort of surprise that tends to separate the patient investor from the fellow who bought on margin.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Iran strikes Kuwait as Trump says renewed Mideast hostilities will not last 'too long'",
+      "justification": "Iran expanding strikes to Kuwait is a genuine escalation — the Strait of Hormuz is already a choke point and now a neighboring Gulf state is in the crossfire, which means oil supply risk just got a zip code. This hits energy prices, shipping stocks, airline costs, and bond yields all at once, and Lloyd's is already counting a £1.4 billion loss. The whole risk complex is repricing around this one.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "NVDA",
+      "ticker": "AVGO",
       "category": "single_name",
-      "title": "Nvidia Nears $14 Billion Deal to Buy Hugging Face | The Pulse 9/2/2026",
-      "justification": "A $14 billion acquisition by the most consequential semiconductor company of this era is the sort of thing that, as my old friend Charlie might say, concentrates the mind wonderfully — both for Nvidia shareholders and for every AI-adjacent company that suddenly finds itself either a potential partner or a potential competitor of a firm that now controls not just the picks and shovels of the AI gold rush, but the map of the mine itself. Hugging Face is the central marketplace for open-source AI models, meaning this deal touches the ambitions of every hyperscaler, every enterprise software company, and every startup that has been building on top of freely available models; it also raises the sort of antitrust questions that tend to keep lawyers employed and regulators animated for years. I'd watch NVDA, GOOGL, META, and MSFT for the ripples — and I'd watch the open-source AI community for the reaction, which may prove louder than the deal price suggests.",
+      "title": "Broadcom's stock drops 5% as weak guidance overshadows earnings beat",
+      "justification": "Broadcom is a bellwether for the entire AI semiconductor food chain — when its guidance disappoints, the whole sector gets a cold. A 5% drop on a beat-and-miss-guidance combo is the market telling you expectations are priced for perfection, and that's a warning shot for every chip name on the board. Keep an eye on how AVGO's weakness bleeds into MRVL, QCOM, and the SOX index.",
       "verdict": null
     }
   ]
