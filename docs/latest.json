@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-03T12:17:15.335424+00:00",
-  "brief_date": "2026-09-03",
+  "generated_at": "2026-09-04T12:16:11.580001+00:00",
+  "brief_date": "2026-09-04",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-03-1",
-      "title": "Nvidia agrees to buy Hugging Face for almost $13 billion, expanding further up AI stack",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/03/nvidia-agrees-to-buy-hugging-face-for-almost-13-billion-ai-expansion.html",
-      "published_at": "2026-09-03T12:00:00Z",
-      "summary": "This is the kind of deal that moves the whole tape — Nvidia stepping up the AI stack from chips into the model hub and developer ecosystem is a genuine strategic shift, not just a headline. It rattles every AI software name from Hugging Face competitors to cloud providers, and it tells you Jensen Huang isn't done swinging. Watch NVDA, MSFT, GOOGL, and anything touching the open-source AI layer.",
+      "id": "mm-2026-09-04-1",
+      "title": "US Stock Futures Steady Ahead of Key August Jobs Data",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-09-04/us-stock-futures-steady-ahead-of-key-august-jobs-data",
+      "published_at": "2026-09-04T12:00:00Z",
+      "summary": "The August payrolls print is the whole tape right now — with the Fed sitting on a live rate-hike decision and bond vigilantes already rattling the long end, a weak number could flip the script fast. Consensus is looking for just 53,000 jobs added, which tells you the labor market has cooled considerably; a miss or a beat moves every asset class simultaneously. This is the kind of number that sets the tone for September trading across SPY, TLT, and the dollar.",
       "tickers": [
-        "NVDA"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-03-2",
-      "title": "Iran strikes Kuwait as Trump says renewed Mideast hostilities will not last 'too long'",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/03/us-iran-war-trump-hormuz-israel-middle-east-europe-kuwait.html",
-      "published_at": "2026-09-03T12:00:00Z",
-      "summary": "Iran expanding strikes to Kuwait is a genuine escalation — the Strait of Hormuz is already a choke point and now a neighboring Gulf state is in the crossfire, which means oil supply risk just got a zip code. This hits energy prices, shipping stocks, airline costs, and bond yields all at once, and Lloyd's is already counting a £1.4 billion loss. The whole risk complex is repricing around this one.",
+      "id": "mm-2026-09-04-2",
+      "title": "Oil rallies for the week as U.S.-Iran fighting resumes; diesel hits record high",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOQVZJdUE0TzFvS2xtSUJLOVUxZUVRZVRpMi1aUlNuSFZzX3h5TW4zSGJya0w3SjFlSno4QUlvdU90cHBBOS1xRllCZjR2aVRnUW16ZmQyN3M1SlRVSl9BYlk2Z2dvWGIzdEo3cXdTZjdWZkIzYXRNRzk3ZkM2cWMwN2ZWMVh1T09pNnRKVVAwRDhNSnJnSTFwVi1MZXdMNUNwOFJTU215REpkR1V0X1pVa09vNkVHeG9oX2lpVjdoTVl1ajI5MzU0dUN3?oc=5",
+      "published_at": "2026-09-04T12:00:00Z",
+      "summary": "Renewed U.S.-Iran fighting with the Strait of Hormuz still choked is a genuine supply shock — retail diesel at a record $5.85 a gallon is already bleeding into transportation costs, airline bonds, and consumer inflation expectations. This hits energy names (USO, XLE) to the upside while hammering airlines, truckers, and any company with fat fuel bills; it also keeps the Fed's inflation problem alive heading into the September meeting. Geopolitical stories have been my best-performing category, and this one has real teeth.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-03-3",
-      "title": "Broadcom's stock drops 5% as weak guidance overshadows earnings beat",
+      "id": "mm-2026-09-04-3",
+      "title": "World's biggest sovereign wealth fund plans to cut U.S. Treasury holdings",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/02/broadcom-avgo-q3-earnings-report-2026.html",
-      "published_at": "2026-09-03T12:00:00Z",
-      "summary": "Broadcom is a bellwether for the entire AI semiconductor food chain — when its guidance disappoints, the whole sector gets a cold. A 5% drop on a beat-and-miss-guidance combo is the market telling you expectations are priced for perfection, and that's a warning shot for every chip name on the board. Keep an eye on how AVGO's weakness bleeds into MRVL, QCOM, and the SOX index.",
+      "url": "https://www.cnbc.com/2026/09/04/worlds-biggest-sovereign-wealth-fund-plans-to-cut-treasury-holdings.html",
+      "published_at": "2026-09-04T12:00:00Z",
+      "summary": "Norway's $2.3 trillion fund stepping back from Treasuries is a structural bid-removal story at exactly the wrong moment — bond vigilantes are already pushing yields higher and the market is fragile ahead of payrolls. A sovereign seller of this size adds fuel to the global bond selloff that El-Erian is warning isn't over, which ripples directly into equity valuations via the discount rate. Watch TLT and the long bond; if yields spike on this, the equity rally stalls fast.",
       "tickers": [
-        "AVGO"
+        "TLT"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "NVDA",
-      "category": "single_name",
-      "title": "Nvidia agrees to buy Hugging Face for almost $13 billion, expanding further up AI stack",
-      "justification": "This is the kind of deal that moves the whole tape — Nvidia stepping up the AI stack from chips into the model hub and developer ecosystem is a genuine strategic shift, not just a headline. It rattles every AI software name from Hugging Face competitors to cloud providers, and it tells you Jensen Huang isn't done swinging. Watch NVDA, MSFT, GOOGL, and anything touching the open-source AI layer.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "US Stock Futures Steady Ahead of Key August Jobs Data",
+      "justification": "The August payrolls print is the whole tape right now — with the Fed sitting on a live rate-hike decision and bond vigilantes already rattling the long end, a weak number could flip the script fast. Consensus is looking for just 53,000 jobs added, which tells you the labor market has cooled considerably; a miss or a beat moves every asset class simultaneously. This is the kind of number that sets the tone for September trading across SPY, TLT, and the dollar.",
       "verdict": null
     },
     {
       "rank": 2,
       "ticker": "USO",
       "category": "geopolitical",
-      "title": "Iran strikes Kuwait as Trump says renewed Mideast hostilities will not last 'too long'",
-      "justification": "Iran expanding strikes to Kuwait is a genuine escalation — the Strait of Hormuz is already a choke point and now a neighboring Gulf state is in the crossfire, which means oil supply risk just got a zip code. This hits energy prices, shipping stocks, airline costs, and bond yields all at once, and Lloyd's is already counting a £1.4 billion loss. The whole risk complex is repricing around this one.",
+      "title": "Oil rallies for the week as U.S.-Iran fighting resumes; diesel hits record high",
+      "justification": "Renewed U.S.-Iran fighting with the Strait of Hormuz still choked is a genuine supply shock — retail diesel at a record $5.85 a gallon is already bleeding into transportation costs, airline bonds, and consumer inflation expectations. This hits energy names (USO, XLE) to the upside while hammering airlines, truckers, and any company with fat fuel bills; it also keeps the Fed's inflation problem alive heading into the September meeting. Geopolitical stories have been my best-performing category, and this one has real teeth.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "AVGO",
-      "category": "single_name",
-      "title": "Broadcom's stock drops 5% as weak guidance overshadows earnings beat",
-      "justification": "Broadcom is a bellwether for the entire AI semiconductor food chain — when its guidance disappoints, the whole sector gets a cold. A 5% drop on a beat-and-miss-guidance combo is the market telling you expectations are priced for perfection, and that's a warning shot for every chip name on the board. Keep an eye on how AVGO's weakness bleeds into MRVL, QCOM, and the SOX index.",
+      "ticker": "TLT",
+      "category": "macro",
+      "title": "World's biggest sovereign wealth fund plans to cut U.S. Treasury holdings",
+      "justification": "Norway's $2.3 trillion fund stepping back from Treasuries is a structural bid-removal story at exactly the wrong moment — bond vigilantes are already pushing yields higher and the market is fragile ahead of payrolls. A sovereign seller of this size adds fuel to the global bond selloff that El-Erian is warning isn't over, which ripples directly into equity valuations via the discount rate. Watch TLT and the long bond; if yields spike on this, the equity rally stalls fast.",
       "verdict": null
     }
   ]
