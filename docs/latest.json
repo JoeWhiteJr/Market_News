@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-04T12:16:11.580001+00:00",
-  "brief_date": "2026-09-04",
+  "generated_at": "2026-09-07T12:16:18.171200+00:00",
+  "brief_date": "2026-09-07",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-04-1",
-      "title": "US Stock Futures Steady Ahead of Key August Jobs Data",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-09-04/us-stock-futures-steady-ahead-of-key-august-jobs-data",
-      "published_at": "2026-09-04T12:00:00Z",
-      "summary": "The August payrolls print is the whole tape right now — with the Fed sitting on a live rate-hike decision and bond vigilantes already rattling the long end, a weak number could flip the script fast. Consensus is looking for just 53,000 jobs added, which tells you the labor market has cooled considerably; a miss or a beat moves every asset class simultaneously. This is the kind of number that sets the tone for September trading across SPY, TLT, and the dollar.",
-      "tickers": [
-        "SPY"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-09-04-2",
-      "title": "Oil rallies for the week as U.S.-Iran fighting resumes; diesel hits record high",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOQVZJdUE0TzFvS2xtSUJLOVUxZUVRZVRpMi1aUlNuSFZzX3h5TW4zSGJya0w3SjFlSno4QUlvdU90cHBBOS1xRllCZjR2aVRnUW16ZmQyN3M1SlRVSl9BYlk2Z2dvWGIzdEo3cXdTZjdWZkIzYXRNRzk3ZkM2cWMwN2ZWMVh1T09pNnRKVVAwRDhNSnJnSTFwVi1MZXdMNUNwOFJTU215REpkR1V0X1pVa09vNkVHeG9oX2lpVjdoTVl1ajI5MzU0dUN3?oc=5",
-      "published_at": "2026-09-04T12:00:00Z",
-      "summary": "Renewed U.S.-Iran fighting with the Strait of Hormuz still choked is a genuine supply shock — retail diesel at a record $5.85 a gallon is already bleeding into transportation costs, airline bonds, and consumer inflation expectations. This hits energy names (USO, XLE) to the upside while hammering airlines, truckers, and any company with fat fuel bills; it also keeps the Fed's inflation problem alive heading into the September meeting. Geopolitical stories have been my best-performing category, and this one has real teeth.",
+      "id": "mm-2026-09-07-1",
+      "title": "Oil prices climb after reports of Saudi Aramco refinery being hit by Houthi rebels",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/oil-prices-hit-near-seven-week-highs-before-edging-lower-as-iran-plans-to-increase-control-of-hormuz-5070167c?mod=mw_rss_topstories",
+      "published_at": "2026-09-07T12:00:00Z",
+      "summary": "This is the whole tape right now — Houthi strikes on Saudi Aramco infrastructure, Hormuz traffic at multi-month lows, Iran threatening new restricted zones, and crude sitting near seven-week highs. Energy names, airlines, refiners, and the long bond are all getting repriced simultaneously. When the Strait of Hormuz sneezes, every asset class catches a cold.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-04-3",
-      "title": "World's biggest sovereign wealth fund plans to cut U.S. Treasury holdings",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/04/worlds-biggest-sovereign-wealth-fund-plans-to-cut-treasury-holdings.html",
-      "published_at": "2026-09-04T12:00:00Z",
-      "summary": "Norway's $2.3 trillion fund stepping back from Treasuries is a structural bid-removal story at exactly the wrong moment — bond vigilantes are already pushing yields higher and the market is fragile ahead of payrolls. A sovereign seller of this size adds fuel to the global bond selloff that El-Erian is warning isn't over, which ripples directly into equity valuations via the discount rate. Watch TLT and the long bond; if yields spike on this, the equity rally stalls fast.",
+      "id": "mm-2026-09-07-2",
+      "title": "Inflation data, Oracle earnings, and an energy supply crunch: What to watch this week",
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/economy/article/inflation-data-oracle-earnings-and-an-energy-supply-crunch-what-to-watch-this-week-120429533.html",
+      "published_at": "2026-09-07T12:00:00Z",
+      "summary": "The week's two biggest swing factors are sitting right here in one headline: a CPI print that could push the Fed toward a hike, and Oracle earnings that'll tell us whether Big Tech's AI capex story still has legs. Diesel prices feeding into core goods inflation is the sleeper here — the Morning Bid piece on diesel as the 'real spoiler for inflation doves' backs this up. Bonds, tech, and the whole rate-sensitive complex are on watch.",
       "tickers": [
-        "TLT"
+        "SPY"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-09-07-3",
+      "title": "Far-right AfD landslide in German state piles pressure on federal government",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/07/afd-germany-economy-merz.html",
+      "published_at": "2026-09-07T12:00:00Z",
+      "summary": "Called the 'most consequential German state-election result of the postwar era' — that's not hyperbole you ignore. European bond markets are already getting hit (Gilts, BTPs, OATs all selling off on energy shock and political risk), and a destabilized German federal government adds fiscal uncertainty to an already stressed eurozone. The euro and European equities are the direct plays; this one ripples into EM and dollar strength too.",
+      "tickers": [
+        "EWG"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "US Stock Futures Steady Ahead of Key August Jobs Data",
-      "justification": "The August payrolls print is the whole tape right now — with the Fed sitting on a live rate-hike decision and bond vigilantes already rattling the long end, a weak number could flip the script fast. Consensus is looking for just 53,000 jobs added, which tells you the labor market has cooled considerably; a miss or a beat moves every asset class simultaneously. This is the kind of number that sets the tone for September trading across SPY, TLT, and the dollar.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Oil prices climb after reports of Saudi Aramco refinery being hit by Houthi rebels",
+      "justification": "This is the whole tape right now — Houthi strikes on Saudi Aramco infrastructure, Hormuz traffic at multi-month lows, Iran threatening new restricted zones, and crude sitting near seven-week highs. Energy names, airlines, refiners, and the long bond are all getting repriced simultaneously. When the Strait of Hormuz sneezes, every asset class catches a cold.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Oil rallies for the week as U.S.-Iran fighting resumes; diesel hits record high",
-      "justification": "Renewed U.S.-Iran fighting with the Strait of Hormuz still choked is a genuine supply shock — retail diesel at a record $5.85 a gallon is already bleeding into transportation costs, airline bonds, and consumer inflation expectations. This hits energy names (USO, XLE) to the upside while hammering airlines, truckers, and any company with fat fuel bills; it also keeps the Fed's inflation problem alive heading into the September meeting. Geopolitical stories have been my best-performing category, and this one has real teeth.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Inflation data, Oracle earnings, and an energy supply crunch: What to watch this week",
+      "justification": "The week's two biggest swing factors are sitting right here in one headline: a CPI print that could push the Fed toward a hike, and Oracle earnings that'll tell us whether Big Tech's AI capex story still has legs. Diesel prices feeding into core goods inflation is the sleeper here — the Morning Bid piece on diesel as the 'real spoiler for inflation doves' backs this up. Bonds, tech, and the whole rate-sensitive complex are on watch.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "TLT",
-      "category": "macro",
-      "title": "World's biggest sovereign wealth fund plans to cut U.S. Treasury holdings",
-      "justification": "Norway's $2.3 trillion fund stepping back from Treasuries is a structural bid-removal story at exactly the wrong moment — bond vigilantes are already pushing yields higher and the market is fragile ahead of payrolls. A sovereign seller of this size adds fuel to the global bond selloff that El-Erian is warning isn't over, which ripples directly into equity valuations via the discount rate. Watch TLT and the long bond; if yields spike on this, the equity rally stalls fast.",
+      "ticker": "EWG",
+      "category": "geopolitical",
+      "title": "Far-right AfD landslide in German state piles pressure on federal government",
+      "justification": "Called the 'most consequential German state-election result of the postwar era' — that's not hyperbole you ignore. European bond markets are already getting hit (Gilts, BTPs, OATs all selling off on energy shock and political risk), and a destabilized German federal government adds fiscal uncertainty to an already stressed eurozone. The euro and European equities are the direct plays; this one ripples into EM and dollar strength too.",
       "verdict": null
     }
   ]
