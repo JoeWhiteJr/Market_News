@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-07T12:16:18.171200+00:00",
-  "brief_date": "2026-09-07",
+  "generated_at": "2026-09-08T12:16:24.787712+00:00",
+  "brief_date": "2026-09-08",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-07-1",
-      "title": "Oil prices climb after reports of Saudi Aramco refinery being hit by Houthi rebels",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/oil-prices-hit-near-seven-week-highs-before-edging-lower-as-iran-plans-to-increase-control-of-hormuz-5070167c?mod=mw_rss_topstories",
-      "published_at": "2026-09-07T12:00:00Z",
-      "summary": "This is the whole tape right now — Houthi strikes on Saudi Aramco infrastructure, Hormuz traffic at multi-month lows, Iran threatening new restricted zones, and crude sitting near seven-week highs. Energy names, airlines, refiners, and the long bond are all getting repriced simultaneously. When the Strait of Hormuz sneezes, every asset class catches a cold.",
+      "id": "mm-2026-09-08-1",
+      "title": "Saudi Arabia Halts Energy Sites as Houthis Claim New Attacks",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-09-08/saudi-arabia-says-several-energy-sites-halted-after-attacks",
+      "published_at": "2026-09-08T12:00:00Z",
+      "summary": "This is the real deal, folks — Houthi strikes shutting Saudi energy facilities with Brent knifing toward $100 is a five-alarm fire for the tape. Energy stocks catch a bid, airlines and industrials get hit, and every inflation-sensitive name on the board has to reprice. With the Fed already eyeing another hike, an oil shock is the last thing this market needs heading into CPI week.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-07-2",
-      "title": "Inflation data, Oracle earnings, and an energy supply crunch: What to watch this week",
-      "source": "finance.yahoo.com",
-      "url": "https://finance.yahoo.com/economy/article/inflation-data-oracle-earnings-and-an-energy-supply-crunch-what-to-watch-this-week-120429533.html",
-      "published_at": "2026-09-07T12:00:00Z",
-      "summary": "The week's two biggest swing factors are sitting right here in one headline: a CPI print that could push the Fed toward a hike, and Oracle earnings that'll tell us whether Big Tech's AI capex story still has legs. Diesel prices feeding into core goods inflation is the sleeper here — the Morning Bid piece on diesel as the 'real spoiler for inflation doves' backs this up. Bonds, tech, and the whole rate-sensitive complex are on watch.",
+      "id": "mm-2026-09-08-2",
+      "title": "US Stock Market: Wall Street braces for CPI test as Fed rate-hike bets hang in balance",
+      "source": "economictimes.indiatimes.com",
+      "url": "https://economictimes.indiatimes.com/markets/us-stocks/wall-street-guide/us-stock-market-wall-street-braces-for-cpi-test-as-fed-rate-hike-bets-hang-in-balance/articleshow/133862880.cms",
+      "published_at": "2026-09-08T12:00:00Z",
+      "summary": "Hot jobs data already has the Street sweating a September hike, and now the CPI print is the main event — every bond trader, equity desk, and rate-sensitive sector is holding its breath. A hotter-than-expected number could reprice the long bond fast and put real pressure on growth and rate-sensitive names. This is the macro catalyst that sets the tone for the whole week.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-07-3",
-      "title": "Far-right AfD landslide in German state piles pressure on federal government",
+      "id": "mm-2026-09-08-3",
+      "title": "Canada's retaliatory tariffs worth $27.6 billion take effect as trade rift with U.S. deepens",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/07/afd-germany-economy-merz.html",
-      "published_at": "2026-09-07T12:00:00Z",
-      "summary": "Called the 'most consequential German state-election result of the postwar era' — that's not hyperbole you ignore. European bond markets are already getting hit (Gilts, BTPs, OATs all selling off on energy shock and political risk), and a destabilized German federal government adds fiscal uncertainty to an already stressed eurozone. The euro and European equities are the direct plays; this one ripples into EM and dollar strength too.",
+      "url": "https://www.cnbc.com/2026/09/08/canada-retaliatory-tariffs.html",
+      "published_at": "2026-09-08T12:00:00Z",
+      "summary": "Canada just doubled steel and aluminum duties to 50% on U.S. goods — that's not a warning shot, that's a broadside. U.S. steel and aluminum producers get a short-term bid, but downstream manufacturers eating higher input costs are going to feel this in margins. With Bombardier already in the crosshairs and $27.6 billion on the table, this trade spat is moving from noise to real economic drag.",
       "tickers": [
-        "EWG"
+        "X"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "USO",
       "category": "geopolitical",
-      "title": "Oil prices climb after reports of Saudi Aramco refinery being hit by Houthi rebels",
-      "justification": "This is the whole tape right now — Houthi strikes on Saudi Aramco infrastructure, Hormuz traffic at multi-month lows, Iran threatening new restricted zones, and crude sitting near seven-week highs. Energy names, airlines, refiners, and the long bond are all getting repriced simultaneously. When the Strait of Hormuz sneezes, every asset class catches a cold.",
+      "title": "Saudi Arabia Halts Energy Sites as Houthis Claim New Attacks",
+      "justification": "This is the real deal, folks — Houthi strikes shutting Saudi energy facilities with Brent knifing toward $100 is a five-alarm fire for the tape. Energy stocks catch a bid, airlines and industrials get hit, and every inflation-sensitive name on the board has to reprice. With the Fed already eyeing another hike, an oil shock is the last thing this market needs heading into CPI week.",
       "verdict": null
     },
     {
       "rank": 2,
       "ticker": "SPY",
       "category": "macro",
-      "title": "Inflation data, Oracle earnings, and an energy supply crunch: What to watch this week",
-      "justification": "The week's two biggest swing factors are sitting right here in one headline: a CPI print that could push the Fed toward a hike, and Oracle earnings that'll tell us whether Big Tech's AI capex story still has legs. Diesel prices feeding into core goods inflation is the sleeper here — the Morning Bid piece on diesel as the 'real spoiler for inflation doves' backs this up. Bonds, tech, and the whole rate-sensitive complex are on watch.",
+      "title": "US Stock Market: Wall Street braces for CPI test as Fed rate-hike bets hang in balance",
+      "justification": "Hot jobs data already has the Street sweating a September hike, and now the CPI print is the main event — every bond trader, equity desk, and rate-sensitive sector is holding its breath. A hotter-than-expected number could reprice the long bond fast and put real pressure on growth and rate-sensitive names. This is the macro catalyst that sets the tone for the whole week.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "EWG",
+      "ticker": "X",
       "category": "geopolitical",
-      "title": "Far-right AfD landslide in German state piles pressure on federal government",
-      "justification": "Called the 'most consequential German state-election result of the postwar era' — that's not hyperbole you ignore. European bond markets are already getting hit (Gilts, BTPs, OATs all selling off on energy shock and political risk), and a destabilized German federal government adds fiscal uncertainty to an already stressed eurozone. The euro and European equities are the direct plays; this one ripples into EM and dollar strength too.",
+      "title": "Canada's retaliatory tariffs worth $27.6 billion take effect as trade rift with U.S. deepens",
+      "justification": "Canada just doubled steel and aluminum duties to 50% on U.S. goods — that's not a warning shot, that's a broadside. U.S. steel and aluminum producers get a short-term bid, but downstream manufacturers eating higher input costs are going to feel this in margins. With Bombardier already in the crosshairs and $27.6 billion on the table, this trade spat is moving from noise to real economic drag.",
       "verdict": null
     }
   ]
