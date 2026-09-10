@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-09T12:15:54.281201+00:00",
-  "brief_date": "2026-09-09",
+  "generated_at": "2026-09-10T12:15:34.400721+00:00",
+  "brief_date": "2026-09-10",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-09-1",
-      "title": "Brent Oil Tops $100 as US-Iran War Shows Little Sign of Abating",
+      "id": "mm-2026-09-10-1",
+      "title": "Saudis Tell OPEC That Output Slumped Again to Lowest Since 1990",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-09-08/latest-oil-market-news-and-analysis-for-sept-9",
-      "published_at": "2026-09-09T12:00:00Z",
-      "summary": "So, one: Brent crude has crossed $100 for the first time since July, which is the kind of round number that functions less as an economic data point and more as a psychological alarm clock for every asset class simultaneously (bonds, equities, currencies — all of them now awake and unhappy). Two: the proximate cause is the US military destroying five Iranian tankers, which Iran has responded to by attacking merchant vessels near the Strait of Hormuz, which carries roughly 20% of global oil supply through a body of water that is, and this is the funny part if you squint, apparently still open for business but only barely. Energy stocks catch a bid, airlines and industrials get repriced, and the Fed — which was maybe going to pause — now has to have a very awkward conversation about whether $100 oil is 'transitory' (a word they have sworn never to use again, and yet).",
+      "url": "https://www.bloomberg.com/news/articles/2026-09-10/saudis-tell-opec-that-output-slumped-again-to-lowest-since-1990",
+      "published_at": "2026-09-10T12:00:00Z",
+      "summary": "Saudi output at a 36-year low is the supply-side gut punch that keeps Brent above $100 and forces every central bank on the planet to reprice their inflation path. This hits energy stocks, airlines, trucking, consumer staples margins, and the long bond all at once — that's not a sector story, that's a tape story. The EIA already hiked its price forecasts; now the OPEC data confirms the supply hole is real, not just war-premium noise.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-09-2",
-      "title": "Treasuries Weaken as Rising Oil Prices Boost Rate-Hike Bets",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-09-09/treasuries-weaken-as-soaring-oil-prices-revive-rate-hike-worries",
-      "published_at": "2026-09-09T12:00:00Z",
-      "summary": "The bond market, which had been doing its best impression of a calm person in a waiting room, is now actively selling off as traders reprice the probability of a Fed rate hike as soon as next week — which is, structurally, the kind of thing that makes every duration-sensitive asset on the planet reconsider its life choices at once. The five-spots-to-watch piece from earlier in the feed was already flagging the creep toward 5% on the 10-year; now with oil at $100 feeding directly into inflation expectations, that creep has become something closer to a jog (and mortgage rates, per the Bloomberg piece, are already at a one-year-plus high of 6.85%, which is its own separate disaster for housing). Equities broadly, and rate-sensitive sectors like utilities, REITs, and long-duration tech specifically, are the transmission mechanism here.",
+      "id": "mm-2026-09-10-2",
+      "title": "An ECB rate hike is 'all but certain' — but investors divided on what comes next",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/10/ecb-interest-rate-hike-lagarde-iran.html",
+      "published_at": "2026-09-10T12:00:00Z",
+      "summary": "A central bank hiking into an oil shock while its own economy is getting squeezed — that's the kind of policy mistake that moves European equities, the euro, and sovereign spreads hard. The uncertainty about the terminal rate is what keeps traders honest; if Lagarde sounds hawkish beyond today, you'll feel it in U.S. Treasuries too as global rate expectations reprice. Watch the long bond — this ECB decision feeds directly into the U.S. yield story that's already rattling stocks.",
       "tickers": [
-        "TLT"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-09-3",
-      "title": "U.S. reveals import ban on slew of Canadian goods as trade war escalates",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/09/us-canada-trade-war-import-ban.html",
-      "published_at": "2026-09-09T12:00:00Z",
-      "summary": "Canada's CA$27.6 billion in retaliatory tariffs (doubling steel and aluminum duties to 50%) are now live, and the US has responded with import bans on motorcycles, alcohol, and dairy products effective September 29th — which is the kind of escalation ladder that, if you described it to someone in 2019, they would assume you were summarizing a satirical novel. The affected sectors are genuinely broad: steel and aluminum producers get a complicated mixed signal (protected domestically, but supply-chain costs rise), consumer staples with Canadian exposure get hit, and the auto sector (already navigating the Bombardier drama) faces renewed input cost anxiety. The September 29 effective date gives markets exactly three weeks to decide whether to price this in gradually or all at once, and historically they tend to choose 'all at once, at the worst possible moment.'",
+      "id": "mm-2026-09-10-3",
+      "title": "Treasuries Fall Ahead of Auction as Trump Pledges Payout",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-09-10/trump-payout-pledge-adds-to-bond-market-jitters-as-auction-looms",
+      "published_at": "2026-09-10T12:00:00Z",
+      "summary": "A $1 trillion-plus cash giveaway promise dropped right before a 30-year bond auction is the kind of fiscal recklessness that makes bond vigilantes reach for the sell button — and when the long bond sells off, everything with a multiple gets repriced. Bessent is already losing credibility with the market after his convention speech, and now the boss is promising checks to voters; that's a dangerous combo heading into a rate-sensitive tape. This one's got legs beyond today's auction.",
       "tickers": [
-        "SPY"
+        "TLT"
       ],
       "sentiment": null
     }
@@ -45,25 +45,25 @@
     {
       "rank": 1,
       "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Brent Oil Tops $100 as US-Iran War Shows Little Sign of Abating",
-      "justification": "So, one: Brent crude has crossed $100 for the first time since July, which is the kind of round number that functions less as an economic data point and more as a psychological alarm clock for every asset class simultaneously (bonds, equities, currencies — all of them now awake and unhappy). Two: the proximate cause is the US military destroying five Iranian tankers, which Iran has responded to by attacking merchant vessels near the Strait of Hormuz, which carries roughly 20% of global oil supply through a body of water that is, and this is the funny part if you squint, apparently still open for business but only barely. Energy stocks catch a bid, airlines and industrials get repriced, and the Fed — which was maybe going to pause — now has to have a very awkward conversation about whether $100 oil is 'transitory' (a word they have sworn never to use again, and yet).",
+      "category": "commodity",
+      "title": "Saudis Tell OPEC That Output Slumped Again to Lowest Since 1990",
+      "justification": "Saudi output at a 36-year low is the supply-side gut punch that keeps Brent above $100 and forces every central bank on the planet to reprice their inflation path. This hits energy stocks, airlines, trucking, consumer staples margins, and the long bond all at once — that's not a sector story, that's a tape story. The EIA already hiked its price forecasts; now the OPEC data confirms the supply hole is real, not just war-premium noise.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "TLT",
+      "ticker": "SPY",
       "category": "macro",
-      "title": "Treasuries Weaken as Rising Oil Prices Boost Rate-Hike Bets",
-      "justification": "The bond market, which had been doing its best impression of a calm person in a waiting room, is now actively selling off as traders reprice the probability of a Fed rate hike as soon as next week — which is, structurally, the kind of thing that makes every duration-sensitive asset on the planet reconsider its life choices at once. The five-spots-to-watch piece from earlier in the feed was already flagging the creep toward 5% on the 10-year; now with oil at $100 feeding directly into inflation expectations, that creep has become something closer to a jog (and mortgage rates, per the Bloomberg piece, are already at a one-year-plus high of 6.85%, which is its own separate disaster for housing). Equities broadly, and rate-sensitive sectors like utilities, REITs, and long-duration tech specifically, are the transmission mechanism here.",
+      "title": "An ECB rate hike is 'all but certain' — but investors divided on what comes next",
+      "justification": "A central bank hiking into an oil shock while its own economy is getting squeezed — that's the kind of policy mistake that moves European equities, the euro, and sovereign spreads hard. The uncertainty about the terminal rate is what keeps traders honest; if Lagarde sounds hawkish beyond today, you'll feel it in U.S. Treasuries too as global rate expectations reprice. Watch the long bond — this ECB decision feeds directly into the U.S. yield story that's already rattling stocks.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "SPY",
-      "category": "geopolitical",
-      "title": "U.S. reveals import ban on slew of Canadian goods as trade war escalates",
-      "justification": "Canada's CA$27.6 billion in retaliatory tariffs (doubling steel and aluminum duties to 50%) are now live, and the US has responded with import bans on motorcycles, alcohol, and dairy products effective September 29th — which is the kind of escalation ladder that, if you described it to someone in 2019, they would assume you were summarizing a satirical novel. The affected sectors are genuinely broad: steel and aluminum producers get a complicated mixed signal (protected domestically, but supply-chain costs rise), consumer staples with Canadian exposure get hit, and the auto sector (already navigating the Bombardier drama) faces renewed input cost anxiety. The September 29 effective date gives markets exactly three weeks to decide whether to price this in gradually or all at once, and historically they tend to choose 'all at once, at the worst possible moment.'",
+      "ticker": "TLT",
+      "category": "macro",
+      "title": "Treasuries Fall Ahead of Auction as Trump Pledges Payout",
+      "justification": "A $1 trillion-plus cash giveaway promise dropped right before a 30-year bond auction is the kind of fiscal recklessness that makes bond vigilantes reach for the sell button — and when the long bond sells off, everything with a multiple gets repriced. Bessent is already losing credibility with the market after his convention speech, and now the boss is promising checks to voters; that's a dangerous combo heading into a rate-sensitive tape. This one's got legs beyond today's auction.",
       "verdict": null
     }
   ]
