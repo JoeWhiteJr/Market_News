@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-10T12:15:34.400721+00:00",
-  "brief_date": "2026-09-10",
+  "generated_at": "2026-09-11T12:16:48.715309+00:00",
+  "brief_date": "2026-09-11",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-10-1",
-      "title": "Saudis Tell OPEC That Output Slumped Again to Lowest Since 1990",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-09-10/saudis-tell-opec-that-output-slumped-again-to-lowest-since-1990",
-      "published_at": "2026-09-10T12:00:00Z",
-      "summary": "Saudi output at a 36-year low is the supply-side gut punch that keeps Brent above $100 and forces every central bank on the planet to reprice their inflation path. This hits energy stocks, airlines, trucking, consumer staples margins, and the long bond all at once — that's not a sector story, that's a tape story. The EIA already hiked its price forecasts; now the OPEC data confirms the supply hole is real, not just war-premium noise.",
+      "id": "mm-2026-09-11-1",
+      "title": "Hormuz shipping traffic falls to single digits, data shows - Reuters",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQUXNiYVFqaWhNQW1zamxmTm9HMEtQSFZhUDAzX3pEVzk2NnJleHYwNDFXT1YyeWRUS3ZGOHhIbmRGd0NoNVVIenZhUTVrWnd6VzdFbWs2RnVKTi16Zk94TDkzRU9qcDhuY0UtU293SDAwUVk5Wm40UVpzWEFFZm1JZUxuOE5fUkg1Q2VfeEdOX2hNeEVsRjdCTWZXS1lRdGVsZm1sa2RQUC1GYjNG",
+      "published_at": "2026-09-11T12:00:00Z",
+      "summary": "Hormuz traffic in single digits is the tape-screaming headline of the week — that strait moves roughly 20% of the world's seaborne oil, and near-zero throughput is a five-alarm fire for energy markets, inflation, and every sector that runs on diesel. This feeds directly into the $6-a-gallon diesel record, the IEA's demand-slash, the ECB rate hike, and the 30-year Treasury yield pushing 5.3% — it's the root cause of the whole market selloff. Airlines, truckers, chemicals, and anyone with a supply chain feels this in the gut.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-10-2",
-      "title": "An ECB rate hike is 'all but certain' — but investors divided on what comes next",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/10/ecb-interest-rate-hike-lagarde-iran.html",
-      "published_at": "2026-09-10T12:00:00Z",
-      "summary": "A central bank hiking into an oil shock while its own economy is getting squeezed — that's the kind of policy mistake that moves European equities, the euro, and sovereign spreads hard. The uncertainty about the terminal rate is what keeps traders honest; if Lagarde sounds hawkish beyond today, you'll feel it in U.S. Treasuries too as global rate expectations reprice. Watch the long bond — this ECB decision feeds directly into the U.S. yield story that's already rattling stocks.",
+      "id": "mm-2026-09-11-2",
+      "title": "Stocks and Treasuries Regain Ground Ahead of CPI: Markets Wrap",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-09-10/stock-market-today-dow-s-p-live-updates",
+      "published_at": "2026-09-11T12:00:00Z",
+      "summary": "Friday's CPI print is the single most time-sensitive data point on the calendar right now — with the 10-year yield knocking on 5% and the Fed meeting next week, a hot number could tip the scales toward another hike and send the whole tape back down hard. The market is already on its worst weekly stretch since June, so this number lands on a bruised tape with no margin for error. Every sector from tech to housing to private credit is watching that 8:30 print like a hawk.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-10-3",
-      "title": "Treasuries Fall Ahead of Auction as Trump Pledges Payout",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-09-10/trump-payout-pledge-adds-to-bond-market-jitters-as-auction-looms",
-      "published_at": "2026-09-10T12:00:00Z",
-      "summary": "A $1 trillion-plus cash giveaway promise dropped right before a 30-year bond auction is the kind of fiscal recklessness that makes bond vigilantes reach for the sell button — and when the long bond sells off, everything with a multiple gets repriced. Bessent is already losing credibility with the market after his convention speech, and now the boss is promising checks to voters; that's a dangerous combo heading into a rate-sensitive tape. This one's got legs beyond today's auction.",
+      "id": "mm-2026-09-11-3",
+      "title": "Oracle jumps 6% after reporting 30% revenue growth fueled by AI cloud demand",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/11/oracle-stock-q1-earnings-ai-cloud.html",
+      "published_at": "2026-09-11T12:00:00Z",
+      "summary": "Oracle dropping a 30% revenue growth quarter with cloud infrastructure up 121% is a genuine shot in the arm for the AI trade at a moment when the broader market desperately needs good news. This lifts sentiment across the hyperscaler and AI infrastructure complex — think NVDA, MSFT, AMD — and confirms enterprise AI spending is real, not vaporware. On a week when oil and rates have been beating the market senseless, Oracle's beat is the one bright spot keeping tech bulls from throwing in the towel.",
       "tickers": [
-        "TLT"
+        "ORCL"
       ],
       "sentiment": null
     }
@@ -45,25 +45,25 @@
     {
       "rank": 1,
       "ticker": "USO",
-      "category": "commodity",
-      "title": "Saudis Tell OPEC That Output Slumped Again to Lowest Since 1990",
-      "justification": "Saudi output at a 36-year low is the supply-side gut punch that keeps Brent above $100 and forces every central bank on the planet to reprice their inflation path. This hits energy stocks, airlines, trucking, consumer staples margins, and the long bond all at once — that's not a sector story, that's a tape story. The EIA already hiked its price forecasts; now the OPEC data confirms the supply hole is real, not just war-premium noise.",
+      "category": "geopolitical",
+      "title": "Hormuz shipping traffic falls to single digits, data shows - Reuters",
+      "justification": "Hormuz traffic in single digits is the tape-screaming headline of the week — that strait moves roughly 20% of the world's seaborne oil, and near-zero throughput is a five-alarm fire for energy markets, inflation, and every sector that runs on diesel. This feeds directly into the $6-a-gallon diesel record, the IEA's demand-slash, the ECB rate hike, and the 30-year Treasury yield pushing 5.3% — it's the root cause of the whole market selloff. Airlines, truckers, chemicals, and anyone with a supply chain feels this in the gut.",
       "verdict": null
     },
     {
       "rank": 2,
       "ticker": "SPY",
       "category": "macro",
-      "title": "An ECB rate hike is 'all but certain' — but investors divided on what comes next",
-      "justification": "A central bank hiking into an oil shock while its own economy is getting squeezed — that's the kind of policy mistake that moves European equities, the euro, and sovereign spreads hard. The uncertainty about the terminal rate is what keeps traders honest; if Lagarde sounds hawkish beyond today, you'll feel it in U.S. Treasuries too as global rate expectations reprice. Watch the long bond — this ECB decision feeds directly into the U.S. yield story that's already rattling stocks.",
+      "title": "Stocks and Treasuries Regain Ground Ahead of CPI: Markets Wrap",
+      "justification": "Friday's CPI print is the single most time-sensitive data point on the calendar right now — with the 10-year yield knocking on 5% and the Fed meeting next week, a hot number could tip the scales toward another hike and send the whole tape back down hard. The market is already on its worst weekly stretch since June, so this number lands on a bruised tape with no margin for error. Every sector from tech to housing to private credit is watching that 8:30 print like a hawk.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "TLT",
-      "category": "macro",
-      "title": "Treasuries Fall Ahead of Auction as Trump Pledges Payout",
-      "justification": "A $1 trillion-plus cash giveaway promise dropped right before a 30-year bond auction is the kind of fiscal recklessness that makes bond vigilantes reach for the sell button — and when the long bond sells off, everything with a multiple gets repriced. Bessent is already losing credibility with the market after his convention speech, and now the boss is promising checks to voters; that's a dangerous combo heading into a rate-sensitive tape. This one's got legs beyond today's auction.",
+      "ticker": "ORCL",
+      "category": "single_name",
+      "title": "Oracle jumps 6% after reporting 30% revenue growth fueled by AI cloud demand",
+      "justification": "Oracle dropping a 30% revenue growth quarter with cloud infrastructure up 121% is a genuine shot in the arm for the AI trade at a moment when the broader market desperately needs good news. This lifts sentiment across the hyperscaler and AI infrastructure complex — think NVDA, MSFT, AMD — and confirms enterprise AI spending is real, not vaporware. On a week when oil and rates have been beating the market senseless, Oracle's beat is the one bright spot keeping tech bulls from throwing in the towel.",
       "verdict": null
     }
   ]
