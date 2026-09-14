@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-11T12:16:48.715309+00:00",
-  "brief_date": "2026-09-11",
+  "generated_at": "2026-09-14T12:16:32.591088+00:00",
+  "brief_date": "2026-09-14",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-11-1",
-      "title": "Hormuz shipping traffic falls to single digits, data shows - Reuters",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQUXNiYVFqaWhNQW1zamxmTm9HMEtQSFZhUDAzX3pEVzk2NnJleHYwNDFXT1YyeWRUS3ZGOHhIbmRGd0NoNVVIenZhUTVrWnd6VzdFbWs2RnVKTi16Zk94TDkzRU9qcDhuY0UtU293SDAwUVk5Wm40UVpzWEFFZm1JZUxuOE5fUkg1Q2VfeEdOX2hNeEVsRjdCTWZXS1lRdGVsZm1sa2RQUC1GYjNG",
-      "published_at": "2026-09-11T12:00:00Z",
-      "summary": "Hormuz traffic in single digits is the tape-screaming headline of the week — that strait moves roughly 20% of the world's seaborne oil, and near-zero throughput is a five-alarm fire for energy markets, inflation, and every sector that runs on diesel. This feeds directly into the $6-a-gallon diesel record, the IEA's demand-slash, the ECB rate hike, and the 30-year Treasury yield pushing 5.3% — it's the root cause of the whole market selloff. Airlines, truckers, chemicals, and anyone with a supply chain feels this in the gut.",
+      "id": "mm-2026-09-14-1",
+      "title": "Brent crude tops $108 after Saudi Arabia shuts down critical pipeline that bypasses Strait of Hormuz",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/13/oil-price-iran-war-strait-hormuz-saudi-pipeline.html",
+      "published_at": "2026-09-14T12:00:00Z",
+      "summary": "This is the tape-mover of the week — Brent north of $108 with the East-West pipeline offline means the Strait of Hormuz is now the only game in town for Saudi exports, and the market knows it. Energy names, airlines, trucking, and anything with a fuel bill are all in play, while the broader equity complex gets hit with a stagflation scare right before the Fed meeting. JPMorgan's strategists are already flagging a swift decline risk, and they're not wrong to sweat it.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-11-2",
-      "title": "Stocks and Treasuries Regain Ground Ahead of CPI: Markets Wrap",
+      "id": "mm-2026-09-14-2",
+      "title": "Stocks Slide as AI Slowdown Fears Hit Sentiment: Markets Wrap",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-09-10/stock-market-today-dow-s-p-live-updates",
-      "published_at": "2026-09-11T12:00:00Z",
-      "summary": "Friday's CPI print is the single most time-sensitive data point on the calendar right now — with the 10-year yield knocking on 5% and the Fed meeting next week, a hot number could tip the scales toward another hike and send the whole tape back down hard. The market is already on its worst weekly stretch since June, so this number lands on a bruised tape with no margin for error. Every sector from tech to housing to private credit is watching that 8:30 print like a hawk.",
+      "url": "https://www.bloomberg.com/news/articles/2026-09-13/us-stock-futures-fall-on-ai-warning-oil-gains-markets-wrap",
+      "published_at": "2026-09-14T12:00:00Z",
+      "summary": "When the biggest names in AI — Altman, Amodei, Musk — all stand up and say 'pump the brakes,' the market listens, because AI capex has been the engine driving the whole tech rally. Nvidia, the hyperscalers, the data center REITs — every name that rode the AI wave is now staring at potential earnings revision risk, and Citi is already waving the red flag. This isn't a one-day story; if the pause talk gains traction in Washington, the multiple compression could be ugly.",
       "tickers": [
-        "SPY"
+        "QQQ"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-11-3",
-      "title": "Oracle jumps 6% after reporting 30% revenue growth fueled by AI cloud demand",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/11/oracle-stock-q1-earnings-ai-cloud.html",
-      "published_at": "2026-09-11T12:00:00Z",
-      "summary": "Oracle dropping a 30% revenue growth quarter with cloud infrastructure up 121% is a genuine shot in the arm for the AI trade at a moment when the broader market desperately needs good news. This lifts sentiment across the hyperscaler and AI infrastructure complex — think NVDA, MSFT, AMD — and confirms enterprise AI spending is real, not vaporware. On a week when oil and rates have been beating the market senseless, Oracle's beat is the one bright spot keeping tech bulls from throwing in the towel.",
+      "id": "mm-2026-09-14-3",
+      "title": "A 5% Treasury Yield Raises New Risks for Markets, Economy",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-09-13/a-5-treasury-yield-is-raising-new-risks-for-markets-economy",
+      "published_at": "2026-09-14T12:00:00Z",
+      "summary": "The long bond knocking on 5% is the kind of thing that keeps CFOs and portfolio managers up at night — it reprices everything from mortgage rates to equity valuations, and it's happening right as the Fed is about to make a call with oil already on fire. Bessent dared the bond market to blink and it didn't; now the question is whether the Fed hikes into an oil shock or watches yields do the tightening for them. Either way, rate-sensitive sectors — utilities, REITs, homebuilders — are in the crosshairs.",
       "tickers": [
-        "ORCL"
+        "TLT"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "USO",
       "category": "geopolitical",
-      "title": "Hormuz shipping traffic falls to single digits, data shows - Reuters",
-      "justification": "Hormuz traffic in single digits is the tape-screaming headline of the week — that strait moves roughly 20% of the world's seaborne oil, and near-zero throughput is a five-alarm fire for energy markets, inflation, and every sector that runs on diesel. This feeds directly into the $6-a-gallon diesel record, the IEA's demand-slash, the ECB rate hike, and the 30-year Treasury yield pushing 5.3% — it's the root cause of the whole market selloff. Airlines, truckers, chemicals, and anyone with a supply chain feels this in the gut.",
+      "title": "Brent crude tops $108 after Saudi Arabia shuts down critical pipeline that bypasses Strait of Hormuz",
+      "justification": "This is the tape-mover of the week — Brent north of $108 with the East-West pipeline offline means the Strait of Hormuz is now the only game in town for Saudi exports, and the market knows it. Energy names, airlines, trucking, and anything with a fuel bill are all in play, while the broader equity complex gets hit with a stagflation scare right before the Fed meeting. JPMorgan's strategists are already flagging a swift decline risk, and they're not wrong to sweat it.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Stocks and Treasuries Regain Ground Ahead of CPI: Markets Wrap",
-      "justification": "Friday's CPI print is the single most time-sensitive data point on the calendar right now — with the 10-year yield knocking on 5% and the Fed meeting next week, a hot number could tip the scales toward another hike and send the whole tape back down hard. The market is already on its worst weekly stretch since June, so this number lands on a bruised tape with no margin for error. Every sector from tech to housing to private credit is watching that 8:30 print like a hawk.",
+      "ticker": "QQQ",
+      "category": "single_name",
+      "title": "Stocks Slide as AI Slowdown Fears Hit Sentiment: Markets Wrap",
+      "justification": "When the biggest names in AI — Altman, Amodei, Musk — all stand up and say 'pump the brakes,' the market listens, because AI capex has been the engine driving the whole tech rally. Nvidia, the hyperscalers, the data center REITs — every name that rode the AI wave is now staring at potential earnings revision risk, and Citi is already waving the red flag. This isn't a one-day story; if the pause talk gains traction in Washington, the multiple compression could be ugly.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "ORCL",
-      "category": "single_name",
-      "title": "Oracle jumps 6% after reporting 30% revenue growth fueled by AI cloud demand",
-      "justification": "Oracle dropping a 30% revenue growth quarter with cloud infrastructure up 121% is a genuine shot in the arm for the AI trade at a moment when the broader market desperately needs good news. This lifts sentiment across the hyperscaler and AI infrastructure complex — think NVDA, MSFT, AMD — and confirms enterprise AI spending is real, not vaporware. On a week when oil and rates have been beating the market senseless, Oracle's beat is the one bright spot keeping tech bulls from throwing in the towel.",
+      "ticker": "TLT",
+      "category": "macro",
+      "title": "A 5% Treasury Yield Raises New Risks for Markets, Economy",
+      "justification": "The long bond knocking on 5% is the kind of thing that keeps CFOs and portfolio managers up at night — it reprices everything from mortgage rates to equity valuations, and it's happening right as the Fed is about to make a call with oil already on fire. Bessent dared the bond market to blink and it didn't; now the question is whether the Fed hikes into an oil shock or watches yields do the tightening for them. Either way, rate-sensitive sectors — utilities, REITs, homebuilders — are in the crosshairs.",
       "verdict": null
     }
   ]
