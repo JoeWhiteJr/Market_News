@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-16T12:16:12.188184+00:00",
-  "brief_date": "2026-09-16",
+  "generated_at": "2026-09-17T12:15:57.324801+00:00",
+  "brief_date": "2026-09-17",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-16-1",
-      "title": "Stock futures fall as 10-year Treasury yield tops 5%",
-      "source": "qz.com",
-      "url": "https://qz.com/stock-futures-10-year-treasury-yield-5-percent-fed-091526",
-      "published_at": "2026-09-16T12:00:00Z",
-      "summary": "The 10-year yield cracking 5% — its highest since 2007 — is not a footnote, it is a REGIME CHANGE. Every equity valuation model on the planet uses that number as its discount rate, which means the consensus 'soft landing' story just got a lot harder to sell. With a Fed hike priced at 94% probability and oil simultaneously squeezing margins, the one-two punch hits everything from rate-sensitive REITs and utilities to leveraged tech multiples — there is NOWHERE to hide in the standard 60/40 playbook.",
+      "id": "mm-2026-09-17-1",
+      "title": "Fed delivers its first hike in 3 years. Plus, what's moving Starbucks and GE Vernova",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/16/fed-delivers-its-first-hike-in-3-years-plus-whats-moving-starbucks-and-ge-vernova.html",
+      "published_at": "2026-09-17T12:00:00Z",
+      "summary": "The Fed just pulled the trigger on its first rate hike in three years — that's the tape-mover of the decade, folks. Every sector from housing to tech to financials reprices when the cost of money shifts, and with Warsh signaling more tightening ahead, the long bond is going to stay under pressure. Trump's already jawboning about 1% rates, which adds a political wildcard that keeps volatility elevated across the board.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-16-2",
-      "title": "Saudi says Houthis targeted Mecca with a drone, Iran-backed group rejects claim",
+      "id": "mm-2026-09-17-2",
+      "title": "Amazon obtains right to buy stock in Generac, boosting power company's share price by over 40%",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/16/us-iran-war-trump-hormuz.html",
-      "published_at": "2026-09-16T12:00:00Z",
-      "summary": "A drone aimed at MECCA — Islam's holiest site — is not a routine escalation, it is the kind of event that rewrites geopolitical risk premiums overnight. Strait of Hormuz crossings already in single digits, Saudi pipeline offline, and now a strike on a target that could pull the entire Gulf Cooperation Council into a wider confrontation — the oil supply disruption thesis just found a new, uglier chapter. Energy names catch a bid while airlines, consumer discretionary, and anything dependent on Middle East logistics gets quietly repriced by people who are NOT telling you about it on television.",
+      "url": "https://www.cnbc.com/2026/09/16/amazon-obtains-right-to-buy-up-to-340m-of-generac-boosting-stock-.html",
+      "published_at": "2026-09-17T12:00:00Z",
+      "summary": "Amazon just handed Generac a $340 million warrant deal tied to data center backup power — and the stock ripped 40% on the news, which is about as clean a single-name catalyst as you'll see. This validates the AI infrastructure power-demand thesis in a big way, and it puts every other backup power and energy equipment name in play as the Street scrambles to find the next Generac. Watch the whole power-generation complex light up.",
       "tickers": [
-        "USO"
+        "GNRC"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-16-3",
-      "title": "Intel, SK Hynix shares jump on report they're discussing U.S. memory chip manufacturing",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/16/intel-sk-hynix-us-memory-chips.html",
-      "published_at": "2026-09-16T12:00:00Z",
-      "summary": "Intel desperately needs a marquee foundry customer and SK Hynix desperately needs U.S. soil to stay on the right side of export controls — so this partnership, if real, is MUTUALLY ASSURED RELEVANCE for two companies the market had largely written off as yesterday's news. The ripple hits the entire semiconductor supply chain: it validates domestic chip manufacturing subsidies, pressures TSMC's U.S. ambitions, and puts a floor under Intel's battered foundry narrative at exactly the moment the Philly Semi Index just posted its worst day in two months.",
+      "id": "mm-2026-09-17-3",
+      "title": "Number of ships transiting Strait of Hormuz falls to three on Wednesday, data shows",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPY040VUp0a3duZlRTZW9xeHNnQ0hIUm42eUZRUmZvcjFfaW53SWFZTFZlaElfaXM5bW0zdlhib2M1N3BqZGJUV2tHeGdydFlMMFg3dngyLUJtREtjZVFLUGxCZ2ZMX3FZSHp6MjlPS29sR2xwbkRvd2M4c3BGajFGWFZadkVORTdwWGxJYVVRc2RsTWxZY3ZLMXJJWUp1TlZMX0QtUUEyaE9Gc01hOHA5bHNyN3ZsdWZFWFV2bENmV3pkZw?oc=5",
+      "published_at": "2026-09-17T12:00:00Z",
+      "summary": "Three ships through the Strait of Hormuz — that's not a shipping lane, that's a parking lot. About 20% of the world's oil flows through that chokepoint, and when traffic drops to near-zero, every energy trader on the floor is watching crude, LNG, and tanker rates like a hawk. Saudi pipeline restoration is offering some relief, but this remains the single biggest supply-shock risk keeping oil elevated and bond markets on edge.",
       "tickers": [
-        "INTC"
+        "USO"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "SPY",
       "category": "macro",
-      "title": "Stock futures fall as 10-year Treasury yield tops 5%",
-      "justification": "The 10-year yield cracking 5% — its highest since 2007 — is not a footnote, it is a REGIME CHANGE. Every equity valuation model on the planet uses that number as its discount rate, which means the consensus 'soft landing' story just got a lot harder to sell. With a Fed hike priced at 94% probability and oil simultaneously squeezing margins, the one-two punch hits everything from rate-sensitive REITs and utilities to leveraged tech multiples — there is NOWHERE to hide in the standard 60/40 playbook.",
+      "title": "Fed delivers its first hike in 3 years. Plus, what's moving Starbucks and GE Vernova",
+      "justification": "The Fed just pulled the trigger on its first rate hike in three years — that's the tape-mover of the decade, folks. Every sector from housing to tech to financials reprices when the cost of money shifts, and with Warsh signaling more tightening ahead, the long bond is going to stay under pressure. Trump's already jawboning about 1% rates, which adds a political wildcard that keeps volatility elevated across the board.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Saudi says Houthis targeted Mecca with a drone, Iran-backed group rejects claim",
-      "justification": "A drone aimed at MECCA — Islam's holiest site — is not a routine escalation, it is the kind of event that rewrites geopolitical risk premiums overnight. Strait of Hormuz crossings already in single digits, Saudi pipeline offline, and now a strike on a target that could pull the entire Gulf Cooperation Council into a wider confrontation — the oil supply disruption thesis just found a new, uglier chapter. Energy names catch a bid while airlines, consumer discretionary, and anything dependent on Middle East logistics gets quietly repriced by people who are NOT telling you about it on television.",
+      "ticker": "GNRC",
+      "category": "single_name",
+      "title": "Amazon obtains right to buy stock in Generac, boosting power company's share price by over 40%",
+      "justification": "Amazon just handed Generac a $340 million warrant deal tied to data center backup power — and the stock ripped 40% on the news, which is about as clean a single-name catalyst as you'll see. This validates the AI infrastructure power-demand thesis in a big way, and it puts every other backup power and energy equipment name in play as the Street scrambles to find the next Generac. Watch the whole power-generation complex light up.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "INTC",
-      "category": "single_name",
-      "title": "Intel, SK Hynix shares jump on report they're discussing U.S. memory chip manufacturing",
-      "justification": "Intel desperately needs a marquee foundry customer and SK Hynix desperately needs U.S. soil to stay on the right side of export controls — so this partnership, if real, is MUTUALLY ASSURED RELEVANCE for two companies the market had largely written off as yesterday's news. The ripple hits the entire semiconductor supply chain: it validates domestic chip manufacturing subsidies, pressures TSMC's U.S. ambitions, and puts a floor under Intel's battered foundry narrative at exactly the moment the Philly Semi Index just posted its worst day in two months.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Number of ships transiting Strait of Hormuz falls to three on Wednesday, data shows",
+      "justification": "Three ships through the Strait of Hormuz — that's not a shipping lane, that's a parking lot. About 20% of the world's oil flows through that chokepoint, and when traffic drops to near-zero, every energy trader on the floor is watching crude, LNG, and tanker rates like a hawk. Saudi pipeline restoration is offering some relief, but this remains the single biggest supply-shock risk keeping oil elevated and bond markets on edge.",
       "verdict": null
     }
   ]
