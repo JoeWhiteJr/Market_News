@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-17T12:15:57.324801+00:00",
-  "brief_date": "2026-09-17",
+  "generated_at": "2026-09-18T12:15:01.163857+00:00",
+  "brief_date": "2026-09-18",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-17-1",
-      "title": "Fed delivers its first hike in 3 years. Plus, what's moving Starbucks and GE Vernova",
+      "id": "mm-2026-09-18-1",
+      "title": "Warren Buffett steps down as chairman of Berkshire Hathaway: 'Father Time always wins'",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/16/fed-delivers-its-first-hike-in-3-years-plus-whats-moving-starbucks-and-ge-vernova.html",
-      "published_at": "2026-09-17T12:00:00Z",
-      "summary": "The Fed just pulled the trigger on its first rate hike in three years — that's the tape-mover of the decade, folks. Every sector from housing to tech to financials reprices when the cost of money shifts, and with Warsh signaling more tightening ahead, the long bond is going to stay under pressure. Trump's already jawboning about 1% rates, which adds a political wildcard that keeps volatility elevated across the board.",
+      "url": "https://www.cnbc.com/2026/09/18/buffett-stepping-down-as-berkshire-chairman.html",
+      "published_at": "2026-09-18T12:00:00Z",
+      "summary": "When the Oracle hangs up his spurs, the whole tape notices — Berkshire is a $900-billion-plus conglomerate that touches insurance, rails, energy, financials, and consumer names. Son Howard stepping into the chairman seat is the succession plan, but markets hate uncertainty around icons, and you'll see BRK.B move on the open. Watch the ripple into every name Berkshire holds a big slug of.",
       "tickers": [
-        "SPY"
+        "BRK-B"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-17-2",
-      "title": "Amazon obtains right to buy stock in Generac, boosting power company's share price by over 40%",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/16/amazon-obtains-right-to-buy-up-to-340m-of-generac-boosting-stock-.html",
-      "published_at": "2026-09-17T12:00:00Z",
-      "summary": "Amazon just handed Generac a $340 million warrant deal tied to data center backup power — and the stock ripped 40% on the news, which is about as clean a single-name catalyst as you'll see. This validates the AI infrastructure power-demand thesis in a big way, and it puts every other backup power and energy equipment name in play as the Street scrambles to find the next Generac. Watch the whole power-generation complex light up.",
-      "tickers": [
-        "GNRC"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-09-17-3",
-      "title": "Number of ships transiting Strait of Hormuz falls to three on Wednesday, data shows",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPY040VUp0a3duZlRTZW9xeHNnQ0hIUm42eUZRUmZvcjFfaW53SWFZTFZlaElfaXM5bW0zdlhib2M1N3BqZGJUV2tHeGdydFlMMFg3dngyLUJtREtjZVFLUGxCZ2ZMX3FZSHp6MjlPS29sR2xwbkRvd2M4c3BGajFGWFZadkVORTdwWGxJYVVRc2RsTWxZY3ZLMXJJWUp1TlZMX0QtUUEyaE9Gc01hOHA5bHNyN3ZsdWZFWFV2bENmV3pkZw?oc=5",
-      "published_at": "2026-09-17T12:00:00Z",
-      "summary": "Three ships through the Strait of Hormuz — that's not a shipping lane, that's a parking lot. About 20% of the world's oil flows through that chokepoint, and when traffic drops to near-zero, every energy trader on the floor is watching crude, LNG, and tanker rates like a hawk. Saudi pipeline restoration is offering some relief, but this remains the single biggest supply-shock risk keeping oil elevated and bond markets on edge.",
+      "id": "mm-2026-09-18-2",
+      "title": "Saudis Tell European Refiners They'll Get No Crude Next Month",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-09-18/saudis-tell-european-refiners-they-ll-get-no-crude-next-month",
+      "published_at": "2026-09-18T12:00:00Z",
+      "summary": "Saudi Aramco cutting off European refinery allocations after a pipeline attack is a hard supply shock — not a rumor, not a threat. With oil already volatile on the Iran war, this is the kind of headline that puts a bid under Brent fast and squeezes refining margins across the continent. Energy stocks, airlines, and anything with a fuel cost line on the P&L are all in play.",
       "tickers": [
         "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-09-18-3",
+      "title": "Jensen Huang says Nvidia will sell twice as many chips next year",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/17/nvidia-huang-ai-chip-guidance.html",
+      "published_at": "2026-09-18T12:00:00Z",
+      "summary": "Huang doubling down on forward chip volume guidance is the kind of forward-looking signal that moves the whole semiconductor complex — NVDA, AMD, AVGO, AMAT, the works. After weeks of AI slowdown hand-wringing, this is the CEO of the most important company in the space saying the demand curve is still pointing straight up. Options desks were already lighting up; this is why.",
+      "tickers": [
+        "NVDA"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Fed delivers its first hike in 3 years. Plus, what's moving Starbucks and GE Vernova",
-      "justification": "The Fed just pulled the trigger on its first rate hike in three years — that's the tape-mover of the decade, folks. Every sector from housing to tech to financials reprices when the cost of money shifts, and with Warsh signaling more tightening ahead, the long bond is going to stay under pressure. Trump's already jawboning about 1% rates, which adds a political wildcard that keeps volatility elevated across the board.",
+      "ticker": "BRK-B",
+      "category": "single_name",
+      "title": "Warren Buffett steps down as chairman of Berkshire Hathaway: 'Father Time always wins'",
+      "justification": "When the Oracle hangs up his spurs, the whole tape notices — Berkshire is a $900-billion-plus conglomerate that touches insurance, rails, energy, financials, and consumer names. Son Howard stepping into the chairman seat is the succession plan, but markets hate uncertainty around icons, and you'll see BRK.B move on the open. Watch the ripple into every name Berkshire holds a big slug of.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "GNRC",
-      "category": "single_name",
-      "title": "Amazon obtains right to buy stock in Generac, boosting power company's share price by over 40%",
-      "justification": "Amazon just handed Generac a $340 million warrant deal tied to data center backup power — and the stock ripped 40% on the news, which is about as clean a single-name catalyst as you'll see. This validates the AI infrastructure power-demand thesis in a big way, and it puts every other backup power and energy equipment name in play as the Street scrambles to find the next Generac. Watch the whole power-generation complex light up.",
+      "ticker": "USO",
+      "category": "commodity",
+      "title": "Saudis Tell European Refiners They'll Get No Crude Next Month",
+      "justification": "Saudi Aramco cutting off European refinery allocations after a pipeline attack is a hard supply shock — not a rumor, not a threat. With oil already volatile on the Iran war, this is the kind of headline that puts a bid under Brent fast and squeezes refining margins across the continent. Energy stocks, airlines, and anything with a fuel cost line on the P&L are all in play.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Number of ships transiting Strait of Hormuz falls to three on Wednesday, data shows",
-      "justification": "Three ships through the Strait of Hormuz — that's not a shipping lane, that's a parking lot. About 20% of the world's oil flows through that chokepoint, and when traffic drops to near-zero, every energy trader on the floor is watching crude, LNG, and tanker rates like a hawk. Saudi pipeline restoration is offering some relief, but this remains the single biggest supply-shock risk keeping oil elevated and bond markets on edge.",
+      "ticker": "NVDA",
+      "category": "single_name",
+      "title": "Jensen Huang says Nvidia will sell twice as many chips next year",
+      "justification": "Huang doubling down on forward chip volume guidance is the kind of forward-looking signal that moves the whole semiconductor complex — NVDA, AMD, AVGO, AMAT, the works. After weeks of AI slowdown hand-wringing, this is the CEO of the most important company in the space saying the demand curve is still pointing straight up. Options desks were already lighting up; this is why.",
       "verdict": null
     }
   ]
