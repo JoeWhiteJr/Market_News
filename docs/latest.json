@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-18T12:15:01.163857+00:00",
-  "brief_date": "2026-09-18",
+  "generated_at": "2026-09-21T12:15:50.556926+00:00",
+  "brief_date": "2026-09-21",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-18-1",
-      "title": "Warren Buffett steps down as chairman of Berkshire Hathaway: 'Father Time always wins'",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/18/buffett-stepping-down-as-berkshire-chairman.html",
-      "published_at": "2026-09-18T12:00:00Z",
-      "summary": "When the Oracle hangs up his spurs, the whole tape notices — Berkshire is a $900-billion-plus conglomerate that touches insurance, rails, energy, financials, and consumer names. Son Howard stepping into the chairman seat is the succession plan, but markets hate uncertainty around icons, and you'll see BRK.B move on the open. Watch the ripple into every name Berkshire holds a big slug of.",
-      "tickers": [
-        "BRK-B"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-09-18-2",
-      "title": "Saudis Tell European Refiners They'll Get No Crude Next Month",
+      "id": "mm-2026-09-21-1",
+      "title": "Stocks Rise as US, China Hail Positive Talks Ahead of Trump-Xi Summit",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-09-18/saudis-tell-european-refiners-they-ll-get-no-crude-next-month",
-      "published_at": "2026-09-18T12:00:00Z",
-      "summary": "Saudi Aramco cutting off European refinery allocations after a pipeline attack is a hard supply shock — not a rumor, not a threat. With oil already volatile on the Iran war, this is the kind of headline that puts a bid under Brent fast and squeezes refining margins across the continent. Energy stocks, airlines, and anything with a fuel cost line on the P&L are all in play.",
+      "url": "https://www.bloomberg.com/news/videos/2026-09-21/bloomberg-brief-09-21-2026-video",
+      "published_at": "2026-09-21T12:00:00Z",
+      "summary": "The Trump-Xi summit is the biggest macro event on the tape this week — Bessent calling the weekend talks 'successful' is lighting a fire under risk assets across the board. You've got equities rallying, the long bond catching a bid, and US LNG names eyeing a tariff windfall if Beijing plays ball. Every sector from tech to agriculture to energy has skin in this game.",
       "tickers": [
-        "USO"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-18-3",
-      "title": "Jensen Huang says Nvidia will sell twice as many chips next year",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/17/nvidia-huang-ai-chip-guidance.html",
-      "published_at": "2026-09-18T12:00:00Z",
-      "summary": "Huang doubling down on forward chip volume guidance is the kind of forward-looking signal that moves the whole semiconductor complex — NVDA, AMD, AVGO, AMAT, the works. After weeks of AI slowdown hand-wringing, this is the CEO of the most important company in the space saying the demand curve is still pointing straight up. Options desks were already lighting up; this is why.",
+      "id": "mm-2026-09-21-2",
+      "title": "Fed's Goolsbee Says Path to 2% 'Unlikely to Be Painless'",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/videos/2026-09-21/fed-s-goolsbee-says-path-to-2-unlikely-to-be-painless-video",
+      "published_at": "2026-09-21T12:00:00Z",
+      "summary": "Goolsbee is putting the word 'stagflation' back in the room — that's a gut punch for anyone betting on a clean soft landing. When a Fed president starts talking about painful trade-offs between jobs and inflation, the rate path gets murky fast and bond traders get nervous. This hits everything from rate-sensitive growth stocks to the long bond.",
       "tickers": [
-        "NVDA"
+        "TLT"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-09-21-3",
+      "title": "Novo Nordisk's stock tumbles as doubts persist about Ozempic maker's goals for 2030",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/novo-nordisk-stock-tumbles-as-ozempic-maker-sets-out-2030-goals-8a5a8d2d?mod=mw_rss_topstories",
+      "published_at": "2026-09-21T12:00:00Z",
+      "summary": "Novo failing to excite the Street with its 2030 roadmap is a big deal — this stock has been the anchor of the entire GLP-1 trade, and when the pioneer stumbles, the whole obesity drug complex feels it. Watch for ripple effects on Eli Lilly and the broader biopharma tape as investors reassess how crowded this field is getting.",
+      "tickers": [
+        "NVO"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "BRK-B",
-      "category": "single_name",
-      "title": "Warren Buffett steps down as chairman of Berkshire Hathaway: 'Father Time always wins'",
-      "justification": "When the Oracle hangs up his spurs, the whole tape notices — Berkshire is a $900-billion-plus conglomerate that touches insurance, rails, energy, financials, and consumer names. Son Howard stepping into the chairman seat is the succession plan, but markets hate uncertainty around icons, and you'll see BRK.B move on the open. Watch the ripple into every name Berkshire holds a big slug of.",
+      "ticker": "SPY",
+      "category": "geopolitical",
+      "title": "Stocks Rise as US, China Hail Positive Talks Ahead of Trump-Xi Summit",
+      "justification": "The Trump-Xi summit is the biggest macro event on the tape this week — Bessent calling the weekend talks 'successful' is lighting a fire under risk assets across the board. You've got equities rallying, the long bond catching a bid, and US LNG names eyeing a tariff windfall if Beijing plays ball. Every sector from tech to agriculture to energy has skin in this game.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "commodity",
-      "title": "Saudis Tell European Refiners They'll Get No Crude Next Month",
-      "justification": "Saudi Aramco cutting off European refinery allocations after a pipeline attack is a hard supply shock — not a rumor, not a threat. With oil already volatile on the Iran war, this is the kind of headline that puts a bid under Brent fast and squeezes refining margins across the continent. Energy stocks, airlines, and anything with a fuel cost line on the P&L are all in play.",
+      "ticker": "TLT",
+      "category": "macro",
+      "title": "Fed's Goolsbee Says Path to 2% 'Unlikely to Be Painless'",
+      "justification": "Goolsbee is putting the word 'stagflation' back in the room — that's a gut punch for anyone betting on a clean soft landing. When a Fed president starts talking about painful trade-offs between jobs and inflation, the rate path gets murky fast and bond traders get nervous. This hits everything from rate-sensitive growth stocks to the long bond.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "NVDA",
+      "ticker": "NVO",
       "category": "single_name",
-      "title": "Jensen Huang says Nvidia will sell twice as many chips next year",
-      "justification": "Huang doubling down on forward chip volume guidance is the kind of forward-looking signal that moves the whole semiconductor complex — NVDA, AMD, AVGO, AMAT, the works. After weeks of AI slowdown hand-wringing, this is the CEO of the most important company in the space saying the demand curve is still pointing straight up. Options desks were already lighting up; this is why.",
+      "title": "Novo Nordisk's stock tumbles as doubts persist about Ozempic maker's goals for 2030",
+      "justification": "Novo failing to excite the Street with its 2030 roadmap is a big deal — this stock has been the anchor of the entire GLP-1 trade, and when the pioneer stumbles, the whole obesity drug complex feels it. Watch for ripple effects on Eli Lilly and the broader biopharma tape as investors reassess how crowded this field is getting.",
       "verdict": null
     }
   ]
