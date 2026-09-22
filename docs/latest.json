@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-21T12:15:50.556926+00:00",
-  "brief_date": "2026-09-21",
+  "generated_at": "2026-09-22T12:15:33.479695+00:00",
+  "brief_date": "2026-09-22",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-21-1",
-      "title": "Stocks Rise as US, China Hail Positive Talks Ahead of Trump-Xi Summit",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/videos/2026-09-21/bloomberg-brief-09-21-2026-video",
-      "published_at": "2026-09-21T12:00:00Z",
-      "summary": "The Trump-Xi summit is the biggest macro event on the tape this week — Bessent calling the weekend talks 'successful' is lighting a fire under risk assets across the board. You've got equities rallying, the long bond catching a bid, and US LNG names eyeing a tariff windfall if Beijing plays ball. Every sector from tech to agriculture to energy has skin in this game.",
+      "id": "mm-2026-09-22-1",
+      "title": "Iran reportedly says it can reopen Strait of Hormuz within 7 days if U.S. eases military pressure",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/22/us-iran-war-trump-hormuz.html",
+      "published_at": "2026-09-22T12:00:00Z",
+      "summary": "Listen up — the Strait of Hormuz is the jugular vein of global oil supply, and any credible signal it reopens sends crude into a tailspin and gives equities a shot of adrenaline. This headline moves energy stocks, airlines, truckers, refiners, and the whole commodity complex in one shot. The tape already showed futures mixed and oil lower on the news — this is the single biggest macro lever in the room right now.",
       "tickers": [
-        "SPY"
+        "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-21-2",
-      "title": "Fed's Goolsbee Says Path to 2% 'Unlikely to Be Painless'",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/videos/2026-09-21/fed-s-goolsbee-says-path-to-2-unlikely-to-be-painless-video",
-      "published_at": "2026-09-21T12:00:00Z",
-      "summary": "Goolsbee is putting the word 'stagflation' back in the room — that's a gut punch for anyone betting on a clean soft landing. When a Fed president starts talking about painful trade-offs between jobs and inflation, the rate path gets murky fast and bond traders get nervous. This hits everything from rate-sensitive growth stocks to the long bond.",
+      "id": "mm-2026-09-22-2",
+      "title": "Jamie Dimon says hyperscaler AI spending could hit $1 trillion next year",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/21/jamie-dimon-jpm-jpmorgan-indiaconference.html",
+      "published_at": "2026-09-22T12:00:00Z",
+      "summary": "When the most connected banker on the Street puts a $1 trillion number on AI capex, every data center play, chip name, and power utility on the tape gets a bid. This validates the entire AI infrastructure trade at a moment when the market was starting to wobble on whether the spending cycle was real. Nvidia, Broadcom, Microsoft, and the hyperscalers themselves all feel this one.",
       "tickers": [
-        "TLT"
+        "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-21-3",
-      "title": "Novo Nordisk's stock tumbles as doubts persist about Ozempic maker's goals for 2030",
+      "id": "mm-2026-09-22-3",
+      "title": "Oil could top $150 a barrel if supplies further tighten, Bank of America warns",
       "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/novo-nordisk-stock-tumbles-as-ozempic-maker-sets-out-2030-goals-8a5a8d2d?mod=mw_rss_topstories",
-      "published_at": "2026-09-21T12:00:00Z",
-      "summary": "Novo failing to excite the Street with its 2030 roadmap is a big deal — this stock has been the anchor of the entire GLP-1 trade, and when the pioneer stumbles, the whole obesity drug complex feels it. Watch for ripple effects on Eli Lilly and the broader biopharma tape as investors reassess how crowded this field is getting.",
+      "url": "https://www.marketwatch.com/story/oil-could-top-150-a-barrel-if-supplies-further-tighten-bank-of-america-warns-2fcd5bd3?mod=mw_rss_topstories",
+      "published_at": "2026-09-22T12:00:00Z",
+      "summary": "BofA slapping a $150 Brent scenario on the board is the kind of call that gets desks repositioning fast — it's a tail-risk number that touches everything from airline margins to Fed rate expectations to emerging market currencies. With diesel already at record highs and the Hormuz situation still fluid, this isn't just noise. Energy bulls get fuel, and anyone long duration bonds or consumer discretionary names has to sweat this one.",
       "tickers": [
-        "NVO"
+        "USO"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
+      "ticker": "USO",
       "category": "geopolitical",
-      "title": "Stocks Rise as US, China Hail Positive Talks Ahead of Trump-Xi Summit",
-      "justification": "The Trump-Xi summit is the biggest macro event on the tape this week — Bessent calling the weekend talks 'successful' is lighting a fire under risk assets across the board. You've got equities rallying, the long bond catching a bid, and US LNG names eyeing a tariff windfall if Beijing plays ball. Every sector from tech to agriculture to energy has skin in this game.",
+      "title": "Iran reportedly says it can reopen Strait of Hormuz within 7 days if U.S. eases military pressure",
+      "justification": "Listen up — the Strait of Hormuz is the jugular vein of global oil supply, and any credible signal it reopens sends crude into a tailspin and gives equities a shot of adrenaline. This headline moves energy stocks, airlines, truckers, refiners, and the whole commodity complex in one shot. The tape already showed futures mixed and oil lower on the news — this is the single biggest macro lever in the room right now.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "TLT",
-      "category": "macro",
-      "title": "Fed's Goolsbee Says Path to 2% 'Unlikely to Be Painless'",
-      "justification": "Goolsbee is putting the word 'stagflation' back in the room — that's a gut punch for anyone betting on a clean soft landing. When a Fed president starts talking about painful trade-offs between jobs and inflation, the rate path gets murky fast and bond traders get nervous. This hits everything from rate-sensitive growth stocks to the long bond.",
+      "ticker": "NVDA",
+      "category": "single_name",
+      "title": "Jamie Dimon says hyperscaler AI spending could hit $1 trillion next year",
+      "justification": "When the most connected banker on the Street puts a $1 trillion number on AI capex, every data center play, chip name, and power utility on the tape gets a bid. This validates the entire AI infrastructure trade at a moment when the market was starting to wobble on whether the spending cycle was real. Nvidia, Broadcom, Microsoft, and the hyperscalers themselves all feel this one.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "NVO",
-      "category": "single_name",
-      "title": "Novo Nordisk's stock tumbles as doubts persist about Ozempic maker's goals for 2030",
-      "justification": "Novo failing to excite the Street with its 2030 roadmap is a big deal — this stock has been the anchor of the entire GLP-1 trade, and when the pioneer stumbles, the whole obesity drug complex feels it. Watch for ripple effects on Eli Lilly and the broader biopharma tape as investors reassess how crowded this field is getting.",
+      "ticker": "USO",
+      "category": "commodity",
+      "title": "Oil could top $150 a barrel if supplies further tighten, Bank of America warns",
+      "justification": "BofA slapping a $150 Brent scenario on the board is the kind of call that gets desks repositioning fast — it's a tail-risk number that touches everything from airline margins to Fed rate expectations to emerging market currencies. With diesel already at record highs and the Hormuz situation still fluid, this isn't just noise. Energy bulls get fuel, and anyone long duration bonds or consumer discretionary names has to sweat this one.",
       "verdict": null
     }
   ]
