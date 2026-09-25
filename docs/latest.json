@@ -1,40 +1,40 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-24T12:16:13.981175+00:00",
-  "brief_date": "2026-09-24",
+  "generated_at": "2026-09-25T12:16:35.866264+00:00",
+  "brief_date": "2026-09-25",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-24-1",
-      "title": "30-year Treasury yield hits highest level since 2004 as bond market rout continues",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/24/us-treasury-yields-bonds-fed-inflation.html",
-      "published_at": "2026-09-24T12:00:00Z",
-      "summary": "Alright, listen up. The long bond is getting absolutely hammered, with the 30-year yield hitting levels we haven't seen since '04. This ain't just some bond geek's problem; higher yields mean higher borrowing costs for everyone — companies, consumers, the whole nine yards. It's a major headwind for equities, especially growth stocks, and signals the market's still worried about inflation and more Fed hikes.",
+      "id": "mm-2026-09-25-1",
+      "title": "Welcome to the New Era of Bond Yields at 5%",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/videos/2026-09-25/welcome-to-the-new-era-of-bond-yields-at-5-video",
+      "published_at": "2026-09-25T12:00:00Z",
+      "summary": "The long bond cracking 5% isn't a headline — it's a regime change. When Treasuries start competing with equities on yield, every discount rate model on the Street gets repriced, and the tape feels it from small caps to REITs to growth tech. This is the single biggest macro force in the room right now, and the 30-year mortgage jumping to 7.45% tells you the pain is already bleeding into the real economy.",
       "tickers": [
-        "SPY"
+        "TLT"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-24-2",
-      "title": "Meta's Muse reignites AI disruption fears. Traders are targeting this brokerage stock as next casualty",
+      "id": "mm-2026-09-25-2",
+      "title": "Iran offers to reopen Strait of Hormuz within 7 days and restart nuclear talks",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/23/metas-muse-ai-causes-schwab-selloff.html",
-      "published_at": "2026-09-24T12:00:00Z",
-      "summary": "Meta's new AI agent, Muse, is causing a stir, and not just for Meta. The Street's now looking at how this thing could disrupt entire industries, with brokerage firms and travel agencies already feeling the heat. This ain't just about one stock; it's a wake-up call for any business model that relies on traditional customer interaction. Keep an eye on financial services and consumer discretionary names.",
+      "url": "https://www.cnbc.com/2026/09/25/us-iran-trump-hormuz-.html",
+      "published_at": "2026-09-25T12:00:00Z",
+      "summary": "If Hormuz reopens, you're looking at an immediate bid-side collapse in crude — and that's the one variable that's been torching bond markets, equity multiples, and airline stocks simultaneously. A phased deal here is the single biggest potential relief valve for global inflation expectations, which means it touches everything from the Fed's next move to energy sector positioning. Don't get too excited yet — the Houthis are still lobbing missiles at Riyadh as we speak.",
       "tickers": [
-        "META"
+        "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-24-3",
-      "title": "Trump, Xi expected to talk Taiwan, AI, trade and Iran as DC summit kicks off",
+      "id": "mm-2026-09-25-3",
+      "title": "Warsh's regime change at the Fed pushes ahead – and meets resistance",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/24/trump-xi-meeting-china-washington.html",
-      "published_at": "2026-09-24T12:00:00Z",
-      "summary": "The big boys, Trump and Xi, are meeting up, and the agenda is packed: Taiwan, AI, trade, Iran. Any word out of this summit can move the tape, especially for tech and manufacturing sectors tied to global supply chains. While a trade truce extension offers some short-term relief, the underlying tensions, particularly around AI and chips, are still a major overhang for global markets.",
+      "url": "https://www.cnbc.com/2026/09/25/kevin-warsh-fed-interest-rates-balance-sheet.html",
+      "published_at": "2026-09-25T12:00:00Z",
+      "summary": "A new Fed chair driving rapid structural change while keeping further rate hikes on the table is not background noise — that's the bid under volatility for the foreseeable future. Markets have been trying to price in Warsh's framework all week, and the uncertainty premium is showing up in the long end of the curve. Every rate-sensitive sector from housing to financials to utilities is watching this one closely.",
       "tickers": [
         "SPY"
       ],
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
+      "ticker": "TLT",
       "category": "macro",
-      "title": "30-year Treasury yield hits highest level since 2004 as bond market rout continues",
-      "justification": "Alright, listen up. The long bond is getting absolutely hammered, with the 30-year yield hitting levels we haven't seen since '04. This ain't just some bond geek's problem; higher yields mean higher borrowing costs for everyone — companies, consumers, the whole nine yards. It's a major headwind for equities, especially growth stocks, and signals the market's still worried about inflation and more Fed hikes.",
+      "title": "Welcome to the New Era of Bond Yields at 5%",
+      "justification": "The long bond cracking 5% isn't a headline — it's a regime change. When Treasuries start competing with equities on yield, every discount rate model on the Street gets repriced, and the tape feels it from small caps to REITs to growth tech. This is the single biggest macro force in the room right now, and the 30-year mortgage jumping to 7.45% tells you the pain is already bleeding into the real economy.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "META",
-      "category": "other",
-      "title": "Meta's Muse reignites AI disruption fears. Traders are targeting this brokerage stock as next casualty",
-      "justification": "Meta's new AI agent, Muse, is causing a stir, and not just for Meta. The Street's now looking at how this thing could disrupt entire industries, with brokerage firms and travel agencies already feeling the heat. This ain't just about one stock; it's a wake-up call for any business model that relies on traditional customer interaction. Keep an eye on financial services and consumer discretionary names.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Iran offers to reopen Strait of Hormuz within 7 days and restart nuclear talks",
+      "justification": "If Hormuz reopens, you're looking at an immediate bid-side collapse in crude — and that's the one variable that's been torching bond markets, equity multiples, and airline stocks simultaneously. A phased deal here is the single biggest potential relief valve for global inflation expectations, which means it touches everything from the Fed's next move to energy sector positioning. Don't get too excited yet — the Houthis are still lobbing missiles at Riyadh as we speak.",
       "verdict": null
     },
     {
       "rank": 3,
       "ticker": "SPY",
-      "category": "geopolitical",
-      "title": "Trump, Xi expected to talk Taiwan, AI, trade and Iran as DC summit kicks off",
-      "justification": "The big boys, Trump and Xi, are meeting up, and the agenda is packed: Taiwan, AI, trade, Iran. Any word out of this summit can move the tape, especially for tech and manufacturing sectors tied to global supply chains. While a trade truce extension offers some short-term relief, the underlying tensions, particularly around AI and chips, are still a major overhang for global markets.",
+      "category": "macro",
+      "title": "Warsh's regime change at the Fed pushes ahead – and meets resistance",
+      "justification": "A new Fed chair driving rapid structural change while keeping further rate hikes on the table is not background noise — that's the bid under volatility for the foreseeable future. Markets have been trying to price in Warsh's framework all week, and the uncertainty premium is showing up in the long end of the curve. Every rate-sensitive sector from housing to financials to utilities is watching this one closely.",
       "verdict": null
     }
   ]
