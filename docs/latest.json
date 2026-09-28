@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T12:16:35.866264+00:00",
-  "brief_date": "2026-09-25",
+  "generated_at": "2026-09-28T12:18:22.690787+00:00",
+  "brief_date": "2026-09-28",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-09-25-1",
-      "title": "Welcome to the New Era of Bond Yields at 5%",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/videos/2026-09-25/welcome-to-the-new-era-of-bond-yields-at-5-video",
-      "published_at": "2026-09-25T12:00:00Z",
-      "summary": "The long bond cracking 5% isn't a headline — it's a regime change. When Treasuries start competing with equities on yield, every discount rate model on the Street gets repriced, and the tape feels it from small caps to REITs to growth tech. This is the single biggest macro force in the room right now, and the 30-year mortgage jumping to 7.45% tells you the pain is already bleeding into the real economy.",
-      "tickers": [
-        "TLT"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-09-25-2",
-      "title": "Iran offers to reopen Strait of Hormuz within 7 days and restart nuclear talks",
+      "id": "mm-2026-09-28-1",
+      "title": "Oil prices jump over 4% as Trump rejects Iranian proposal to reopen Strait of Hormuz",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/25/us-iran-trump-hormuz-.html",
-      "published_at": "2026-09-25T12:00:00Z",
-      "summary": "If Hormuz reopens, you're looking at an immediate bid-side collapse in crude — and that's the one variable that's been torching bond markets, equity multiples, and airline stocks simultaneously. A phased deal here is the single biggest potential relief valve for global inflation expectations, which means it touches everything from the Fed's next move to energy sector positioning. Don't get too excited yet — the Houthis are still lobbing missiles at Riyadh as we speak.",
+      "url": "https://www.cnbc.com/2026/09/28/oil-price-today-wti-brent-trump-iran.html",
+      "published_at": "2026-09-28T12:00:00Z",
+      "summary": "This is the tape-mover of the morning — a 4% crude spike touches everything from airlines and truckers to refiners and the long bond. With Brent already north of $104 and the Strait still choked, every day this drags on is another inflation print waiting to happen, and the Fed's October decision just got a lot more complicated.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-09-25-3",
-      "title": "Warsh's regime change at the Fed pushes ahead – and meets resistance",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/25/kevin-warsh-fed-interest-rates-balance-sheet.html",
-      "published_at": "2026-09-25T12:00:00Z",
-      "summary": "A new Fed chair driving rapid structural change while keeping further rate hikes on the table is not background noise — that's the bid under volatility for the foreseeable future. Markets have been trying to price in Warsh's framework all week, and the uncertainty premium is showing up in the long end of the curve. Every rate-sensitive sector from housing to financials to utilities is watching this one closely.",
+      "id": "mm-2026-09-28-2",
+      "title": "Nvidia makes a statement with historic $150 billion buyback announcement",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/nvidia-makes-a-statement-with-historic-150-billion-buyback-announcement-bfab5a22?mod=mw_rss_topstories",
+      "published_at": "2026-09-28T12:00:00Z",
+      "summary": "A $150 billion buyback is not a rounding error — that's a management team putting its money where its mouth is on the AI cycle, and it'll put a floor under NVDA shares when the rest of the tape is getting hit by oil and yield fears. Expect the whole semiconductor complex to catch a bid on the open as the Street reprices the confidence signal.",
       "tickers": [
-        "SPY"
+        "NVDA"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-09-28-3",
+      "title": "Trump 'very seriously' considering diesel export ban as global supply crunch worsens",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/09/28/diesel-oil-trump-export-ban-fuel-prices.html",
+      "published_at": "2026-09-28T12:00:00Z",
+      "summary": "If this export ban lands, refiners like Valero and Marathon get squeezed on margins while trucking and logistics costs rip higher across the whole economy — Goldman's already penciling in 30 cents a gallon at the pump. It's a policy wildcard that hits industrials, consumer staples, and inflation expectations all at once, and the Street hates uncertainty more than bad news.",
+      "tickers": [
+        "VLO"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "TLT",
-      "category": "macro",
-      "title": "Welcome to the New Era of Bond Yields at 5%",
-      "justification": "The long bond cracking 5% isn't a headline — it's a regime change. When Treasuries start competing with equities on yield, every discount rate model on the Street gets repriced, and the tape feels it from small caps to REITs to growth tech. This is the single biggest macro force in the room right now, and the 30-year mortgage jumping to 7.45% tells you the pain is already bleeding into the real economy.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Oil prices jump over 4% as Trump rejects Iranian proposal to reopen Strait of Hormuz",
+      "justification": "This is the tape-mover of the morning — a 4% crude spike touches everything from airlines and truckers to refiners and the long bond. With Brent already north of $104 and the Strait still choked, every day this drags on is another inflation print waiting to happen, and the Fed's October decision just got a lot more complicated.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Iran offers to reopen Strait of Hormuz within 7 days and restart nuclear talks",
-      "justification": "If Hormuz reopens, you're looking at an immediate bid-side collapse in crude — and that's the one variable that's been torching bond markets, equity multiples, and airline stocks simultaneously. A phased deal here is the single biggest potential relief valve for global inflation expectations, which means it touches everything from the Fed's next move to energy sector positioning. Don't get too excited yet — the Houthis are still lobbing missiles at Riyadh as we speak.",
+      "ticker": "NVDA",
+      "category": "single_name",
+      "title": "Nvidia makes a statement with historic $150 billion buyback announcement",
+      "justification": "A $150 billion buyback is not a rounding error — that's a management team putting its money where its mouth is on the AI cycle, and it'll put a floor under NVDA shares when the rest of the tape is getting hit by oil and yield fears. Expect the whole semiconductor complex to catch a bid on the open as the Street reprices the confidence signal.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Warsh's regime change at the Fed pushes ahead – and meets resistance",
-      "justification": "A new Fed chair driving rapid structural change while keeping further rate hikes on the table is not background noise — that's the bid under volatility for the foreseeable future. Markets have been trying to price in Warsh's framework all week, and the uncertainty premium is showing up in the long end of the curve. Every rate-sensitive sector from housing to financials to utilities is watching this one closely.",
+      "ticker": "VLO",
+      "category": "commodity",
+      "title": "Trump 'very seriously' considering diesel export ban as global supply crunch worsens",
+      "justification": "If this export ban lands, refiners like Valero and Marathon get squeezed on margins while trucking and logistics costs rip higher across the whole economy — Goldman's already penciling in 30 cents a gallon at the pump. It's a policy wildcard that hits industrials, consumer staples, and inflation expectations all at once, and the Street hates uncertainty more than bad news.",
       "verdict": null
     }
   ]
