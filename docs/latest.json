@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-01T12:17:33.590556+00:00",
-  "brief_date": "2026-10-01",
+  "generated_at": "2026-10-02T12:16:55.442032+00:00",
+  "brief_date": "2026-10-02",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-01-1",
-      "title": "10-year Treasury yield hits highest level since 2002 as global bond rout gathers pace",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/01/us-treasury-bond-yield.html",
-      "published_at": "2026-10-01T12:00:00Z",
-      "summary": "The 10-year hasn't seen these levels since 2002, and when the long bond moves like this, everything reprices — equities, credit, real estate, you name it. UK 30-year gilts cracking 6% for the first time since 1998 tells you this isn't a U.S. story, it's a global bond rout, and that changes the calculus for every portfolio manager on the planet. When yields scream higher this fast, the tape gets nervous fast.",
+      "id": "mm-2026-10-02-1",
+      "title": "French Bond Risk Hits Euro-Crisis Levels as Fiscal Concerns Grow",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-02/europe-s-bond-spread-blowout-prompts-bets-on-fewer-ecb-hikes",
+      "published_at": "2026-10-02T12:00:00Z",
+      "summary": "French OAT spreads blowing out to euro-crisis levels is the kind of tape that keeps sovereign desks up at night — this isn't noise, it's a structural crack in European fixed income that ripples into the euro, European bank stocks, and risk appetite globally. When France starts looking like 2012 Italy, the Swiss franc catches a bid and the ECB's rate path gets repriced in a hurry. Watch the long bond in Germany and any ETF with European bank exposure — this one's got legs.",
       "tickers": [
-        "TLT"
+        "EWQ"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-01-2",
-      "title": "Micron beats on earnings and issues strong guidance as data center revenue jumps 11-fold",
+      "id": "mm-2026-10-02-2",
+      "title": "U.S. to send third carrier group to Mideast as Trump warns of new Iran strikes",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/09/30/micron-mu-q4-earnings-report-2026.html",
-      "published_at": "2026-10-01T12:00:00Z",
-      "summary": "An 11-fold jump in data center revenue isn't a beat — that's a blowout, and it sends a loud signal across the entire memory and AI chip food chain, from Samsung to SK Hynix to Nvidia. Micron up 500% in a year and still printing strong guidance means the AI infrastructure buildout has more runway than the bears thought. Watch the semis tape open hot — this one's got legs.",
-      "tickers": [
-        "MU"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-01-3",
-      "title": "Three oil tankers hit by projectiles in Hormuz strait on Tuesday, Marisks says",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNMGxqUHRGWUpFZWo3eVZkQ1NnR2NZM05rLWhoWHNOOE5IaGhwSjk4QlNXRi16Q1BGYVlMc2VPWUh6dm55bHluMjg5WGxvY0dfcmdNcDJIaGc5UjFwaXVpZlFTd21VZDU5dkdpZUtteEtQVll0M09hVHRPMG4wZU56UlNMMjIxREx3dmJZOVNFZjE3R0ZrQ3Q0R0VaazBjWk9LcS1UOWR2S1BfRmc2M1FIeU1Qa3liNHZRcFJINWtYQ1c",
-      "published_at": "2026-10-01T12:00:00Z",
-      "summary": "Three tankers taking hits in the Strait of Hormuz is the kind of headline that sends Brent through the roof before the coffee's even brewed — roughly 20% of global oil supply transits that chokepoint. With Brent already flirting with triple digits and China suspending fuel exports on the same day, the supply shock narrative just got a lot louder. Energy names catch a bid; airlines and truckers feel the pain.",
+      "url": "https://www.cnbc.com/2026/10/02/us-iran-war-trump-hormuz-.html",
+      "published_at": "2026-10-02T12:00:00Z",
+      "summary": "Three carrier groups in the Gulf is a serious escalation signal — the kind that puts a floor under crude and a ceiling on airline stocks simultaneously. With Hormuz already a chokepoint and OPEC+ delaying its capacity review because of the Iran war, any hint of resumed bombing sends oil spiking and defense names screaming higher. This is the single biggest geopolitical wildcard in the room right now.",
       "tickers": [
         "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-02-3",
+      "title": "Nike shares plummet 10% after weak revenue outlook and layoff plans underway",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/02/nike-nke-stock-q1-earnings-layoffs.html",
+      "published_at": "2026-10-02T12:00:00Z",
+      "summary": "A 10% drop in Nike is a consumer bellwether moment — when the swoosh stumbles on revenue and starts cutting heads, the Street reads it as a demand warning across discretionary retail, not just one sneaker brand. This hits the XLY consumer discretionary ETF, puts pressure on Foot Locker and other wholesale partners, and gives the bears fresh ammo on the 'the consumer is cracking' narrative. Second straight day of declines tells you this isn't a one-day flush.",
+      "tickers": [
+        "NKE"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "TLT",
+      "ticker": "EWQ",
       "category": "macro",
-      "title": "10-year Treasury yield hits highest level since 2002 as global bond rout gathers pace",
-      "justification": "The 10-year hasn't seen these levels since 2002, and when the long bond moves like this, everything reprices — equities, credit, real estate, you name it. UK 30-year gilts cracking 6% for the first time since 1998 tells you this isn't a U.S. story, it's a global bond rout, and that changes the calculus for every portfolio manager on the planet. When yields scream higher this fast, the tape gets nervous fast.",
+      "title": "French Bond Risk Hits Euro-Crisis Levels as Fiscal Concerns Grow",
+      "justification": "French OAT spreads blowing out to euro-crisis levels is the kind of tape that keeps sovereign desks up at night — this isn't noise, it's a structural crack in European fixed income that ripples into the euro, European bank stocks, and risk appetite globally. When France starts looking like 2012 Italy, the Swiss franc catches a bid and the ECB's rate path gets repriced in a hurry. Watch the long bond in Germany and any ETF with European bank exposure — this one's got legs.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "MU",
-      "category": "single_name",
-      "title": "Micron beats on earnings and issues strong guidance as data center revenue jumps 11-fold",
-      "justification": "An 11-fold jump in data center revenue isn't a beat — that's a blowout, and it sends a loud signal across the entire memory and AI chip food chain, from Samsung to SK Hynix to Nvidia. Micron up 500% in a year and still printing strong guidance means the AI infrastructure buildout has more runway than the bears thought. Watch the semis tape open hot — this one's got legs.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "U.S. to send third carrier group to Mideast as Trump warns of new Iran strikes",
+      "justification": "Three carrier groups in the Gulf is a serious escalation signal — the kind that puts a floor under crude and a ceiling on airline stocks simultaneously. With Hormuz already a chokepoint and OPEC+ delaying its capacity review because of the Iran war, any hint of resumed bombing sends oil spiking and defense names screaming higher. This is the single biggest geopolitical wildcard in the room right now.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Three oil tankers hit by projectiles in Hormuz strait on Tuesday, Marisks says",
-      "justification": "Three tankers taking hits in the Strait of Hormuz is the kind of headline that sends Brent through the roof before the coffee's even brewed — roughly 20% of global oil supply transits that chokepoint. With Brent already flirting with triple digits and China suspending fuel exports on the same day, the supply shock narrative just got a lot louder. Energy names catch a bid; airlines and truckers feel the pain.",
+      "ticker": "NKE",
+      "category": "single_name",
+      "title": "Nike shares plummet 10% after weak revenue outlook and layoff plans underway",
+      "justification": "A 10% drop in Nike is a consumer bellwether moment — when the swoosh stumbles on revenue and starts cutting heads, the Street reads it as a demand warning across discretionary retail, not just one sneaker brand. This hits the XLY consumer discretionary ETF, puts pressure on Foot Locker and other wholesale partners, and gives the bears fresh ammo on the 'the consumer is cracking' narrative. Second straight day of declines tells you this isn't a one-day flush.",
       "verdict": null
     }
   ]
