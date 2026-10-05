@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T12:16:55.442032+00:00",
-  "brief_date": "2026-10-02",
+  "generated_at": "2026-10-05T12:17:53.430570+00:00",
+  "brief_date": "2026-10-05",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-02-1",
-      "title": "French Bond Risk Hits Euro-Crisis Levels as Fiscal Concerns Grow",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-02/europe-s-bond-spread-blowout-prompts-bets-on-fewer-ecb-hikes",
-      "published_at": "2026-10-02T12:00:00Z",
-      "summary": "French OAT spreads blowing out to euro-crisis levels is the kind of tape that keeps sovereign desks up at night — this isn't noise, it's a structural crack in European fixed income that ripples into the euro, European bank stocks, and risk appetite globally. When France starts looking like 2012 Italy, the Swiss franc catches a bid and the ECB's rate path gets repriced in a hurry. Watch the long bond in Germany and any ETF with European bank exposure — this one's got legs.",
-      "tickers": [
-        "EWQ"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-02-2",
-      "title": "U.S. to send third carrier group to Mideast as Trump warns of new Iran strikes",
+      "id": "mm-2026-10-05-1",
+      "title": "All U.S. bombers leave UK air base on concerns of suspected terror plots; more tankers struck near Iran in the Middle East",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/02/us-iran-war-trump-hormuz-.html",
-      "published_at": "2026-10-02T12:00:00Z",
-      "summary": "Three carrier groups in the Gulf is a serious escalation signal — the kind that puts a floor under crude and a ceiling on airline stocks simultaneously. With Hormuz already a chokepoint and OPEC+ delaying its capacity review because of the Iran war, any hint of resumed bombing sends oil spiking and defense names screaming higher. This is the single biggest geopolitical wildcard in the room right now.",
+      "url": "https://www.cnbc.com/2026/10/04/more-tankers-struck-in-gulf-waters-as-iran-reiterates-conditions.html",
+      "published_at": "2026-10-05T12:00:00Z",
+      "summary": "Tankers getting hit near Iran while U.S. bombers are repositioning — that's not background noise, that's the tape screaming. Energy names, defense contractors, and shipping stocks all move on this; oil supply disruption risk through the Strait of Hormuz is the kind of thing that reprices the whole energy complex overnight. The Aramco CEO already warned it could take two years to rebuild global oil inventories — this headline pours gasoline on that fire.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-02-3",
-      "title": "Nike shares plummet 10% after weak revenue outlook and layoff plans underway",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/02/nike-nke-stock-q1-earnings-layoffs.html",
-      "published_at": "2026-10-02T12:00:00Z",
-      "summary": "A 10% drop in Nike is a consumer bellwether moment — when the swoosh stumbles on revenue and starts cutting heads, the Street reads it as a demand warning across discretionary retail, not just one sneaker brand. This hits the XLY consumer discretionary ETF, puts pressure on Foot Locker and other wholesale partners, and gives the bears fresh ammo on the 'the consumer is cracking' narrative. Second straight day of declines tells you this isn't a one-day flush.",
+      "id": "mm-2026-10-05-2",
+      "title": "Traders Are Dusting Off The Contagion Playbook for European Bonds",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-10-05/traders-are-dusting-off-the-contagion-playbook-for-european-bonds",
+      "published_at": "2026-10-05T12:00:00Z",
+      "summary": "When the Street starts pulling out the contagion playbook, you pay attention — we've seen this movie before and it doesn't end well. The euro hitting a 17-month low, Spain calling a snap election, and French fiscal jitters all hitting at once is a recipe for a risk-off session that bleeds into U.S. Treasuries, financials, and multinationals with European exposure. This is the kind of macro backdrop that can turn a garden-variety selloff into something uglier.",
       "tickers": [
-        "NKE"
+        "FXE"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-05-3",
+      "title": "Musk hints TSMC may join his mega chip venture, and Intel's stock is taking a hit",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/musk-hints-tsmc-may-join-his-mega-chip-venture-and-intels-stock-is-taking-a-hit-61c67ef9?mod=mw_rss_topstories",
+      "published_at": "2026-10-05T12:00:00Z",
+      "summary": "Musk dangling TSMC's name into his Terafab story is a direct gut-punch to Intel, which has been desperately trying to sell itself as the domestic foundry champion — if TSMC is in the mix, Intel's whole strategic narrative takes a hit. This reshuffles the AI chip supply chain story and touches NVDA, AMD, and the broader semiconductor complex. Single-name impact on INTC is immediate; the ripple effects on the foundry pecking order are worth watching all week.",
+      "tickers": [
+        "INTC"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "EWQ",
-      "category": "macro",
-      "title": "French Bond Risk Hits Euro-Crisis Levels as Fiscal Concerns Grow",
-      "justification": "French OAT spreads blowing out to euro-crisis levels is the kind of tape that keeps sovereign desks up at night — this isn't noise, it's a structural crack in European fixed income that ripples into the euro, European bank stocks, and risk appetite globally. When France starts looking like 2012 Italy, the Swiss franc catches a bid and the ECB's rate path gets repriced in a hurry. Watch the long bond in Germany and any ETF with European bank exposure — this one's got legs.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "All U.S. bombers leave UK air base on concerns of suspected terror plots; more tankers struck near Iran in the Middle East",
+      "justification": "Tankers getting hit near Iran while U.S. bombers are repositioning — that's not background noise, that's the tape screaming. Energy names, defense contractors, and shipping stocks all move on this; oil supply disruption risk through the Strait of Hormuz is the kind of thing that reprices the whole energy complex overnight. The Aramco CEO already warned it could take two years to rebuild global oil inventories — this headline pours gasoline on that fire.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "U.S. to send third carrier group to Mideast as Trump warns of new Iran strikes",
-      "justification": "Three carrier groups in the Gulf is a serious escalation signal — the kind that puts a floor under crude and a ceiling on airline stocks simultaneously. With Hormuz already a chokepoint and OPEC+ delaying its capacity review because of the Iran war, any hint of resumed bombing sends oil spiking and defense names screaming higher. This is the single biggest geopolitical wildcard in the room right now.",
+      "ticker": "FXE",
+      "category": "macro",
+      "title": "Traders Are Dusting Off The Contagion Playbook for European Bonds",
+      "justification": "When the Street starts pulling out the contagion playbook, you pay attention — we've seen this movie before and it doesn't end well. The euro hitting a 17-month low, Spain calling a snap election, and French fiscal jitters all hitting at once is a recipe for a risk-off session that bleeds into U.S. Treasuries, financials, and multinationals with European exposure. This is the kind of macro backdrop that can turn a garden-variety selloff into something uglier.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "NKE",
+      "ticker": "INTC",
       "category": "single_name",
-      "title": "Nike shares plummet 10% after weak revenue outlook and layoff plans underway",
-      "justification": "A 10% drop in Nike is a consumer bellwether moment — when the swoosh stumbles on revenue and starts cutting heads, the Street reads it as a demand warning across discretionary retail, not just one sneaker brand. This hits the XLY consumer discretionary ETF, puts pressure on Foot Locker and other wholesale partners, and gives the bears fresh ammo on the 'the consumer is cracking' narrative. Second straight day of declines tells you this isn't a one-day flush.",
+      "title": "Musk hints TSMC may join his mega chip venture, and Intel's stock is taking a hit",
+      "justification": "Musk dangling TSMC's name into his Terafab story is a direct gut-punch to Intel, which has been desperately trying to sell itself as the domestic foundry champion — if TSMC is in the mix, Intel's whole strategic narrative takes a hit. This reshuffles the AI chip supply chain story and touches NVDA, AMD, and the broader semiconductor complex. Single-name impact on INTC is immediate; the ripple effects on the foundry pecking order are worth watching all week.",
       "verdict": null
     }
   ]
