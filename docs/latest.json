@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-05T12:17:53.430570+00:00",
-  "brief_date": "2026-10-05",
+  "generated_at": "2026-10-06T12:16:51.703883+00:00",
+  "brief_date": "2026-10-06",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-05-1",
-      "title": "All U.S. bombers leave UK air base on concerns of suspected terror plots; more tankers struck near Iran in the Middle East",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/04/more-tankers-struck-in-gulf-waters-as-iran-reiterates-conditions.html",
-      "published_at": "2026-10-05T12:00:00Z",
-      "summary": "Tankers getting hit near Iran while U.S. bombers are repositioning — that's not background noise, that's the tape screaming. Energy names, defense contractors, and shipping stocks all move on this; oil supply disruption risk through the Strait of Hormuz is the kind of thing that reprices the whole energy complex overnight. The Aramco CEO already warned it could take two years to rebuild global oil inventories — this headline pours gasoline on that fire.",
+      "id": "mm-2026-10-06-1",
+      "title": "US Yields Fall From 2002 High as Oil Dips, Bessent Vows On Debt",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-06/us-yields-fall-from-2002-high-as-oil-dips-bessent-vows-on-debt",
+      "published_at": "2026-10-06T12:00:00Z",
+      "summary": "Yields at 2002 highs is the kind of tape that keeps every portfolio manager up at night — when the long bond moves like this, nothing is safe, from REITs to growth stocks to credit spreads. The pullback off those highs, aided by oil sliding below $100 and Bessent talking down the debt load, gives the equity bid some breathing room, but this is the dominant macro story driving everything else right now. Watch the 10-year like a hawk — it's running the show.",
+      "tickers": [
+        "TLT"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-06-2",
+      "title": "Oil Inventories in Western Nations Exhausted, Vitol CEO Warns of Tight Market",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-06/vitol-ceo-says-oil-inventories-in-the-west-have-been-exhausted",
+      "published_at": "2026-10-06T12:00:00Z",
+      "summary": "When the boss of the world's biggest independent oil trader says the cupboard is bare, you listen — this isn't some analyst with a model, this is the guy who actually moves the barrels. Tight inventories heading into winter, with Mideast flows still at only 80% of pre-war levels per Shell's CEO, means energy stocks, airlines, truckers, and consumer discretionary all feel the squeeze. The G7's 100-million-barrel release is a band-aid on a bullet wound.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-05-2",
-      "title": "Traders Are Dusting Off The Contagion Playbook for European Bonds",
+      "id": "mm-2026-10-06-3",
+      "title": "DeepSeek to Raise Over $12 Billion in Tencent-Backed Funding",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/newsletters/2026-10-05/traders-are-dusting-off-the-contagion-playbook-for-european-bonds",
-      "published_at": "2026-10-05T12:00:00Z",
-      "summary": "When the Street starts pulling out the contagion playbook, you pay attention — we've seen this movie before and it doesn't end well. The euro hitting a 17-month low, Spain calling a snap election, and French fiscal jitters all hitting at once is a recipe for a risk-off session that bleeds into U.S. Treasuries, financials, and multinationals with European exposure. This is the kind of macro backdrop that can turn a garden-variety selloff into something uglier.",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-06/deepseek-to-raise-at-least-12-billion-in-tencent-backed-funding",
+      "published_at": "2026-10-06T12:00:00Z",
+      "summary": "Twelve billion dollars flowing into DeepSeek ahead of a 2027 Hong Kong IPO is a shot across the bow of every U.S. AI name — this validates the Chinese AI competitive threat and puts pressure on the Nvidia-to-hyperscaler trade to justify its valuations. Tencent's backing means Beijing is serious, and a $50 billion Moonshot AI valuation in the same news cycle tells you the AI arms race just got a second front. Semis, cloud, and the whole AI infrastructure complex need to reprice this risk.",
       "tickers": [
-        "FXE"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-05-3",
-      "title": "Musk hints TSMC may join his mega chip venture, and Intel's stock is taking a hit",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/musk-hints-tsmc-may-join-his-mega-chip-venture-and-intels-stock-is-taking-a-hit-61c67ef9?mod=mw_rss_topstories",
-      "published_at": "2026-10-05T12:00:00Z",
-      "summary": "Musk dangling TSMC's name into his Terafab story is a direct gut-punch to Intel, which has been desperately trying to sell itself as the domestic foundry champion — if TSMC is in the mix, Intel's whole strategic narrative takes a hit. This reshuffles the AI chip supply chain story and touches NVDA, AMD, and the broader semiconductor complex. Single-name impact on INTC is immediate; the ripple effects on the foundry pecking order are worth watching all week.",
-      "tickers": [
-        "INTC"
+        "NVDA"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "All U.S. bombers leave UK air base on concerns of suspected terror plots; more tankers struck near Iran in the Middle East",
-      "justification": "Tankers getting hit near Iran while U.S. bombers are repositioning — that's not background noise, that's the tape screaming. Energy names, defense contractors, and shipping stocks all move on this; oil supply disruption risk through the Strait of Hormuz is the kind of thing that reprices the whole energy complex overnight. The Aramco CEO already warned it could take two years to rebuild global oil inventories — this headline pours gasoline on that fire.",
+      "ticker": "TLT",
+      "category": "macro",
+      "title": "US Yields Fall From 2002 High as Oil Dips, Bessent Vows On Debt",
+      "justification": "Yields at 2002 highs is the kind of tape that keeps every portfolio manager up at night — when the long bond moves like this, nothing is safe, from REITs to growth stocks to credit spreads. The pullback off those highs, aided by oil sliding below $100 and Bessent talking down the debt load, gives the equity bid some breathing room, but this is the dominant macro story driving everything else right now. Watch the 10-year like a hawk — it's running the show.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "FXE",
-      "category": "macro",
-      "title": "Traders Are Dusting Off The Contagion Playbook for European Bonds",
-      "justification": "When the Street starts pulling out the contagion playbook, you pay attention — we've seen this movie before and it doesn't end well. The euro hitting a 17-month low, Spain calling a snap election, and French fiscal jitters all hitting at once is a recipe for a risk-off session that bleeds into U.S. Treasuries, financials, and multinationals with European exposure. This is the kind of macro backdrop that can turn a garden-variety selloff into something uglier.",
+      "ticker": "USO",
+      "category": "commodity",
+      "title": "Oil Inventories in Western Nations Exhausted, Vitol CEO Warns of Tight Market",
+      "justification": "When the boss of the world's biggest independent oil trader says the cupboard is bare, you listen — this isn't some analyst with a model, this is the guy who actually moves the barrels. Tight inventories heading into winter, with Mideast flows still at only 80% of pre-war levels per Shell's CEO, means energy stocks, airlines, truckers, and consumer discretionary all feel the squeeze. The G7's 100-million-barrel release is a band-aid on a bullet wound.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "INTC",
+      "ticker": "NVDA",
       "category": "single_name",
-      "title": "Musk hints TSMC may join his mega chip venture, and Intel's stock is taking a hit",
-      "justification": "Musk dangling TSMC's name into his Terafab story is a direct gut-punch to Intel, which has been desperately trying to sell itself as the domestic foundry champion — if TSMC is in the mix, Intel's whole strategic narrative takes a hit. This reshuffles the AI chip supply chain story and touches NVDA, AMD, and the broader semiconductor complex. Single-name impact on INTC is immediate; the ripple effects on the foundry pecking order are worth watching all week.",
+      "title": "DeepSeek to Raise Over $12 Billion in Tencent-Backed Funding",
+      "justification": "Twelve billion dollars flowing into DeepSeek ahead of a 2027 Hong Kong IPO is a shot across the bow of every U.S. AI name — this validates the Chinese AI competitive threat and puts pressure on the Nvidia-to-hyperscaler trade to justify its valuations. Tencent's backing means Beijing is serious, and a $50 billion Moonshot AI valuation in the same news cycle tells you the AI arms race just got a second front. Semis, cloud, and the whole AI infrastructure complex need to reprice this risk.",
       "verdict": null
     }
   ]
