@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-06T12:16:51.703883+00:00",
-  "brief_date": "2026-10-06",
+  "generated_at": "2026-10-07T12:17:36.474607+00:00",
+  "brief_date": "2026-10-07",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-06-1",
-      "title": "US Yields Fall From 2002 High as Oil Dips, Bessent Vows On Debt",
+      "id": "mm-2026-10-07-1",
+      "title": "US 30-Year Yields Return to 2002 High With Crude Back Above $100",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-06/us-yields-fall-from-2002-high-as-oil-dips-bessent-vows-on-debt",
-      "published_at": "2026-10-06T12:00:00Z",
-      "summary": "Yields at 2002 highs is the kind of tape that keeps every portfolio manager up at night — when the long bond moves like this, nothing is safe, from REITs to growth stocks to credit spreads. The pullback off those highs, aided by oil sliding below $100 and Bessent talking down the debt load, gives the equity bid some breathing room, but this is the dominant macro story driving everything else right now. Watch the 10-year like a hawk — it's running the show.",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-07/us-30-year-yields-return-to-2002-high-with-crude-back-above-100",
+      "published_at": "2026-10-07T12:00:00Z",
+      "summary": "Well now, if you wanted to find the one headline that touches every barn on the farm, this is it — the 30-year Treasury yield climbing back to its highest perch since 2002, all while crude oil crosses back above $100 on account of those Hormuz tanker troubles. That combination is about as welcome to a stock portfolio as a late frost in May: it raises the discount rate on every equity in the land, squeezes the housing market something fierce, and puts the Federal Reserve in the uncomfortable position of a fellow trying to put out two fires with one bucket. Growth stocks, real estate, utilities, and anything carrying a heavy debt load are all looking over their shoulders at once.",
       "tickers": [
         "TLT"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-06-2",
-      "title": "Oil Inventories in Western Nations Exhausted, Vitol CEO Warns of Tight Market",
+      "id": "mm-2026-10-07-2",
+      "title": "Stocks and Bonds Fall as Hormuz Attacks Lift Oil: Markets Wrap",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-06/vitol-ceo-says-oil-inventories-in-the-west-have-been-exhausted",
-      "published_at": "2026-10-06T12:00:00Z",
-      "summary": "When the boss of the world's biggest independent oil trader says the cupboard is bare, you listen — this isn't some analyst with a model, this is the guy who actually moves the barrels. Tight inventories heading into winter, with Mideast flows still at only 80% of pre-war levels per Shell's CEO, means energy stocks, airlines, truckers, and consumer discretionary all feel the squeeze. The G7's 100-million-barrel release is a band-aid on a bullet wound.",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-06/stock-market-today-dow-s-p-live-updates",
+      "published_at": "2026-10-07T12:00:00Z",
+      "summary": "The Strait of Hormuz is one of those choke points that, when it gets ornery, has a way of reminding the whole world that geography still matters more than any spreadsheet model — nearly 20 commercial vessels attacked in a month is not the sort of statistic that lets oil traders sleep soundly, and sure enough, crude prices are doing what crude prices do when supply routes get nervous. The ripple runs wide: energy stocks get a tailwind while airlines, chemicals, and consumer discretionary feel the headwind; and with bonds selling off in tandem, there is precious little shelter for the balanced-portfolio crowd. Ray Dalio warning of an AI bubble on the same morning is the kind of double-barreled news that tends to make even patient investors fidget.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-06-3",
-      "title": "DeepSeek to Raise Over $12 Billion in Tencent-Backed Funding",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-06/deepseek-to-raise-at-least-12-billion-in-tencent-backed-funding",
-      "published_at": "2026-10-06T12:00:00Z",
-      "summary": "Twelve billion dollars flowing into DeepSeek ahead of a 2027 Hong Kong IPO is a shot across the bow of every U.S. AI name — this validates the Chinese AI competitive threat and puts pressure on the Nvidia-to-hyperscaler trade to justify its valuations. Tencent's backing means Beijing is serious, and a $50 billion Moonshot AI valuation in the same news cycle tells you the AI arms race just got a second front. Semis, cloud, and the whole AI infrastructure complex need to reprice this risk.",
+      "id": "mm-2026-10-07-3",
+      "title": "India's central bank hikes rates for the first time since 2023 as inflation risks build",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/07/india-rbi-interest-rates-inflation.html",
+      "published_at": "2026-10-07T12:00:00Z",
+      "summary": "India joining the global rate-tightening parade for the first time in nearly four years is the sort of development that, like a neighbor finally painting his fence, signals the whole block is getting more serious about inflation — and Goldman Sachs and HSBC are already penciling in another hike come December. For emerging-market investors, a tighter RBI means pressure on Indian equities and the rupee, higher borrowing costs for Indian corporates, and a reminder that the easy-money era is not merely a Western phenomenon that has passed. The broader signal to global bond markets is that central banks from Mumbai to Frankfurt are still in the business of fighting inflation, which is not cheerful news for anyone hoping rate cuts are just around the corner.",
       "tickers": [
-        "NVDA"
+        "INDA"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "TLT",
       "category": "macro",
-      "title": "US Yields Fall From 2002 High as Oil Dips, Bessent Vows On Debt",
-      "justification": "Yields at 2002 highs is the kind of tape that keeps every portfolio manager up at night — when the long bond moves like this, nothing is safe, from REITs to growth stocks to credit spreads. The pullback off those highs, aided by oil sliding below $100 and Bessent talking down the debt load, gives the equity bid some breathing room, but this is the dominant macro story driving everything else right now. Watch the 10-year like a hawk — it's running the show.",
+      "title": "US 30-Year Yields Return to 2002 High With Crude Back Above $100",
+      "justification": "Well now, if you wanted to find the one headline that touches every barn on the farm, this is it — the 30-year Treasury yield climbing back to its highest perch since 2002, all while crude oil crosses back above $100 on account of those Hormuz tanker troubles. That combination is about as welcome to a stock portfolio as a late frost in May: it raises the discount rate on every equity in the land, squeezes the housing market something fierce, and puts the Federal Reserve in the uncomfortable position of a fellow trying to put out two fires with one bucket. Growth stocks, real estate, utilities, and anything carrying a heavy debt load are all looking over their shoulders at once.",
       "verdict": null
     },
     {
       "rank": 2,
       "ticker": "USO",
-      "category": "commodity",
-      "title": "Oil Inventories in Western Nations Exhausted, Vitol CEO Warns of Tight Market",
-      "justification": "When the boss of the world's biggest independent oil trader says the cupboard is bare, you listen — this isn't some analyst with a model, this is the guy who actually moves the barrels. Tight inventories heading into winter, with Mideast flows still at only 80% of pre-war levels per Shell's CEO, means energy stocks, airlines, truckers, and consumer discretionary all feel the squeeze. The G7's 100-million-barrel release is a band-aid on a bullet wound.",
+      "category": "geopolitical",
+      "title": "Stocks and Bonds Fall as Hormuz Attacks Lift Oil: Markets Wrap",
+      "justification": "The Strait of Hormuz is one of those choke points that, when it gets ornery, has a way of reminding the whole world that geography still matters more than any spreadsheet model — nearly 20 commercial vessels attacked in a month is not the sort of statistic that lets oil traders sleep soundly, and sure enough, crude prices are doing what crude prices do when supply routes get nervous. The ripple runs wide: energy stocks get a tailwind while airlines, chemicals, and consumer discretionary feel the headwind; and with bonds selling off in tandem, there is precious little shelter for the balanced-portfolio crowd. Ray Dalio warning of an AI bubble on the same morning is the kind of double-barreled news that tends to make even patient investors fidget.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "NVDA",
-      "category": "single_name",
-      "title": "DeepSeek to Raise Over $12 Billion in Tencent-Backed Funding",
-      "justification": "Twelve billion dollars flowing into DeepSeek ahead of a 2027 Hong Kong IPO is a shot across the bow of every U.S. AI name — this validates the Chinese AI competitive threat and puts pressure on the Nvidia-to-hyperscaler trade to justify its valuations. Tencent's backing means Beijing is serious, and a $50 billion Moonshot AI valuation in the same news cycle tells you the AI arms race just got a second front. Semis, cloud, and the whole AI infrastructure complex need to reprice this risk.",
+      "ticker": "INDA",
+      "category": "macro",
+      "title": "India's central bank hikes rates for the first time since 2023 as inflation risks build",
+      "justification": "India joining the global rate-tightening parade for the first time in nearly four years is the sort of development that, like a neighbor finally painting his fence, signals the whole block is getting more serious about inflation — and Goldman Sachs and HSBC are already penciling in another hike come December. For emerging-market investors, a tighter RBI means pressure on Indian equities and the rupee, higher borrowing costs for Indian corporates, and a reminder that the easy-money era is not merely a Western phenomenon that has passed. The broader signal to global bond markets is that central banks from Mumbai to Frankfurt are still in the business of fighting inflation, which is not cheerful news for anyone hoping rate cuts are just around the corner.",
       "verdict": null
     }
   ]
