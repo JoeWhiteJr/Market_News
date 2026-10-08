@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T12:17:36.474607+00:00",
-  "brief_date": "2026-10-07",
+  "generated_at": "2026-10-08T12:16:48.093077+00:00",
+  "brief_date": "2026-10-08",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-07-1",
-      "title": "US 30-Year Yields Return to 2002 High With Crude Back Above $100",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-07/us-30-year-yields-return-to-2002-high-with-crude-back-above-100",
-      "published_at": "2026-10-07T12:00:00Z",
-      "summary": "Well now, if you wanted to find the one headline that touches every barn on the farm, this is it — the 30-year Treasury yield climbing back to its highest perch since 2002, all while crude oil crosses back above $100 on account of those Hormuz tanker troubles. That combination is about as welcome to a stock portfolio as a late frost in May: it raises the discount rate on every equity in the land, squeezes the housing market something fierce, and puts the Federal Reserve in the uncomfortable position of a fellow trying to put out two fires with one bucket. Growth stocks, real estate, utilities, and anything carrying a heavy debt load are all looking over their shoulders at once.",
-      "tickers": [
-        "TLT"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-07-2",
-      "title": "Stocks and Bonds Fall as Hormuz Attacks Lift Oil: Markets Wrap",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-06/stock-market-today-dow-s-p-live-updates",
-      "published_at": "2026-10-07T12:00:00Z",
-      "summary": "The Strait of Hormuz is one of those choke points that, when it gets ornery, has a way of reminding the whole world that geography still matters more than any spreadsheet model — nearly 20 commercial vessels attacked in a month is not the sort of statistic that lets oil traders sleep soundly, and sure enough, crude prices are doing what crude prices do when supply routes get nervous. The ripple runs wide: energy stocks get a tailwind while airlines, chemicals, and consumer discretionary feel the headwind; and with bonds selling off in tandem, there is precious little shelter for the balanced-portfolio crowd. Ray Dalio warning of an AI bubble on the same morning is the kind of double-barreled news that tends to make even patient investors fidget.",
+      "id": "mm-2026-10-08-1",
+      "title": "Trump says he doesn't want Iran deal as U.S. reportedly prepares for 'massive bombing'",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/08/us-iran-war-trump-hormuz.html",
+      "published_at": "2026-10-08T12:00:00Z",
+      "summary": "This is the tape-mover of the morning — U.S. military escalation against Iran means the Strait of Hormuz stays in play, and oil above $105 is already telling you the market knows it. Energy stocks catch a bid, but everything else — airlines, industrials, the long bond — gets hit as the inflation shock compounds. When the President says no deal and the Pentagon starts war-gaming 'massive bombing,' you don't need a PhD to know risk-off is the trade.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-07-3",
-      "title": "India's central bank hikes rates for the first time since 2023 as inflation risks build",
+      "id": "mm-2026-10-08-2",
+      "title": "Fed officials see another hike coming, but no sign as to when, minutes show",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/07/india-rbi-interest-rates-inflation.html",
-      "published_at": "2026-10-07T12:00:00Z",
-      "summary": "India joining the global rate-tightening parade for the first time in nearly four years is the sort of development that, like a neighbor finally painting his fence, signals the whole block is getting more serious about inflation — and Goldman Sachs and HSBC are already penciling in another hike come December. For emerging-market investors, a tighter RBI means pressure on Indian equities and the rupee, higher borrowing costs for Indian corporates, and a reminder that the easy-money era is not merely a Western phenomenon that has passed. The broader signal to global bond markets is that central banks from Mumbai to Frankfurt are still in the business of fighting inflation, which is not cheerful news for anyone hoping rate cuts are just around the corner.",
+      "url": "https://www.cnbc.com/2026/10/07/fed-officials-see-another-hike-coming-but-no-sign-as-to-when-minutes-show.html",
+      "published_at": "2026-10-08T12:00:00Z",
+      "summary": "The Fed minutes confirmed what the bond market already suspected — another hike is on the table, and the committee isn't in any rush to tip its hand on timing. That ambiguity is its own kind of hawkish signal; rate-sensitive sectors like REITs, utilities, and small-caps take the hit while the long bond stays under pressure. Pair this with oil at $105 and you've got a stagflation cocktail that makes the Fed's job — and the bulls' job — a whole lot harder.",
       "tickers": [
-        "INDA"
+        "SPY"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-08-3",
+      "title": "French bonds are suffering through their worst decade since 1803 — and investors are bracing for more pain",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/french-bonds-are-suffering-through-its-worst-decade-since-1803-and-investors-are-bracing-for-more-pain-63df8fe7?mod=mw_rss_topstories",
+      "published_at": "2026-10-08T12:00:00Z",
+      "summary": "French OAT spreads blowing out to levels not seen since the euro crisis is not a footnote — European bank stocks are already in their worst two-day rout since March, and France is the second-largest economy in the eurozone. If Paris starts looking like Rome circa 2011, the contagion hits the euro, hits European financials, and eventually washes up on U.S. shores through credit markets. Keep one eye on the euro and the other on BNP and SocGen — this one has legs.",
+      "tickers": [
+        "EWQ"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "TLT",
-      "category": "macro",
-      "title": "US 30-Year Yields Return to 2002 High With Crude Back Above $100",
-      "justification": "Well now, if you wanted to find the one headline that touches every barn on the farm, this is it — the 30-year Treasury yield climbing back to its highest perch since 2002, all while crude oil crosses back above $100 on account of those Hormuz tanker troubles. That combination is about as welcome to a stock portfolio as a late frost in May: it raises the discount rate on every equity in the land, squeezes the housing market something fierce, and puts the Federal Reserve in the uncomfortable position of a fellow trying to put out two fires with one bucket. Growth stocks, real estate, utilities, and anything carrying a heavy debt load are all looking over their shoulders at once.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Trump says he doesn't want Iran deal as U.S. reportedly prepares for 'massive bombing'",
+      "justification": "This is the tape-mover of the morning — U.S. military escalation against Iran means the Strait of Hormuz stays in play, and oil above $105 is already telling you the market knows it. Energy stocks catch a bid, but everything else — airlines, industrials, the long bond — gets hit as the inflation shock compounds. When the President says no deal and the Pentagon starts war-gaming 'massive bombing,' you don't need a PhD to know risk-off is the trade.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Stocks and Bonds Fall as Hormuz Attacks Lift Oil: Markets Wrap",
-      "justification": "The Strait of Hormuz is one of those choke points that, when it gets ornery, has a way of reminding the whole world that geography still matters more than any spreadsheet model — nearly 20 commercial vessels attacked in a month is not the sort of statistic that lets oil traders sleep soundly, and sure enough, crude prices are doing what crude prices do when supply routes get nervous. The ripple runs wide: energy stocks get a tailwind while airlines, chemicals, and consumer discretionary feel the headwind; and with bonds selling off in tandem, there is precious little shelter for the balanced-portfolio crowd. Ray Dalio warning of an AI bubble on the same morning is the kind of double-barreled news that tends to make even patient investors fidget.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Fed officials see another hike coming, but no sign as to when, minutes show",
+      "justification": "The Fed minutes confirmed what the bond market already suspected — another hike is on the table, and the committee isn't in any rush to tip its hand on timing. That ambiguity is its own kind of hawkish signal; rate-sensitive sectors like REITs, utilities, and small-caps take the hit while the long bond stays under pressure. Pair this with oil at $105 and you've got a stagflation cocktail that makes the Fed's job — and the bulls' job — a whole lot harder.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "INDA",
+      "ticker": "EWQ",
       "category": "macro",
-      "title": "India's central bank hikes rates for the first time since 2023 as inflation risks build",
-      "justification": "India joining the global rate-tightening parade for the first time in nearly four years is the sort of development that, like a neighbor finally painting his fence, signals the whole block is getting more serious about inflation — and Goldman Sachs and HSBC are already penciling in another hike come December. For emerging-market investors, a tighter RBI means pressure on Indian equities and the rupee, higher borrowing costs for Indian corporates, and a reminder that the easy-money era is not merely a Western phenomenon that has passed. The broader signal to global bond markets is that central banks from Mumbai to Frankfurt are still in the business of fighting inflation, which is not cheerful news for anyone hoping rate cuts are just around the corner.",
+      "title": "French bonds are suffering through their worst decade since 1803 — and investors are bracing for more pain",
+      "justification": "French OAT spreads blowing out to levels not seen since the euro crisis is not a footnote — European bank stocks are already in their worst two-day rout since March, and France is the second-largest economy in the eurozone. If Paris starts looking like Rome circa 2011, the contagion hits the euro, hits European financials, and eventually washes up on U.S. shores through credit markets. Keep one eye on the euro and the other on BNP and SocGen — this one has legs.",
       "verdict": null
     }
   ]
