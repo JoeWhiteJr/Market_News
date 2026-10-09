@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T12:16:48.093077+00:00",
-  "brief_date": "2026-10-08",
+  "generated_at": "2026-10-09T12:15:59.019975+00:00",
+  "brief_date": "2026-10-09",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-08-1",
-      "title": "Trump says he doesn't want Iran deal as U.S. reportedly prepares for 'massive bombing'",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/08/us-iran-war-trump-hormuz.html",
-      "published_at": "2026-10-08T12:00:00Z",
-      "summary": "This is the tape-mover of the morning — U.S. military escalation against Iran means the Strait of Hormuz stays in play, and oil above $105 is already telling you the market knows it. Energy stocks catch a bid, but everything else — airlines, industrials, the long bond — gets hit as the inflation shock compounds. When the President says no deal and the Pentagon starts war-gaming 'massive bombing,' you don't need a PhD to know risk-off is the trade.",
-      "tickers": [
-        "USO"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-08-2",
-      "title": "Fed officials see another hike coming, but no sign as to when, minutes show",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/07/fed-officials-see-another-hike-coming-but-no-sign-as-to-when-minutes-show.html",
-      "published_at": "2026-10-08T12:00:00Z",
-      "summary": "The Fed minutes confirmed what the bond market already suspected — another hike is on the table, and the committee isn't in any rush to tip its hand on timing. That ambiguity is its own kind of hawkish signal; rate-sensitive sectors like REITs, utilities, and small-caps take the hit while the long bond stays under pressure. Pair this with oil at $105 and you've got a stagflation cocktail that makes the Fed's job — and the bulls' job — a whole lot harder.",
-      "tickers": [
-        "SPY"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-08-3",
-      "title": "French bonds are suffering through their worst decade since 1803 — and investors are bracing for more pain",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/french-bonds-are-suffering-through-its-worst-decade-since-1803-and-investors-are-bracing-for-more-pain-63df8fe7?mod=mw_rss_topstories",
-      "published_at": "2026-10-08T12:00:00Z",
-      "summary": "French OAT spreads blowing out to levels not seen since the euro crisis is not a footnote — European bank stocks are already in their worst two-day rout since March, and France is the second-largest economy in the eurozone. If Paris starts looking like Rome circa 2011, the contagion hits the euro, hits European financials, and eventually washes up on U.S. shores through credit markets. Keep one eye on the euro and the other on BNP and SocGen — this one has legs.",
+      "id": "mm-2026-10-09-1",
+      "title": "France's Bond Risk Is Outpacing Italy's by Most in Euro History",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-09/france-s-bond-risk-is-outpacing-italy-s-by-most-in-euro-history",
+      "published_at": "2026-10-09T12:00:00Z",
+      "summary": "When France starts trading wider than Italy on the credit tape, that's not a footnote — that's a five-alarm fire in the sovereign bond market. This hits European banks, the euro, and anything with EM contagion exposure; Krugman's 'too big to save' comment on the same day pours gasoline on it. Watch the CAC, European financials, and the long bond for the ripple.",
       "tickers": [
         "EWQ"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-09-2",
+      "title": "Delta Air Lines cuts 2026 forecast on fuel surge, but CEO says demand is still strong",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/09/delta-air-lines-dal-q3-2026-earnings.html",
+      "published_at": "2026-10-09T12:00:00Z",
+      "summary": "Delta missing the Street for the first time in two years and cutting its full-year number is the kind of print that moves the whole airline sector — United, American, Southwest all get dragged through the mud on sympathy. With Brent north of $100, this is a real-time earnings warning for every fuel-heavy business on the tape, not just the carriers.",
+      "tickers": [
+        "DAL"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-09-3",
+      "title": "SpaceX deal to acquire spectrum license hammers shares of AT&T, Verizon and T-Mobile",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/08/spacex-spectrum-license-att-verizon-tmobile.html",
+      "published_at": "2026-10-09T12:00:00Z",
+      "summary": "Starlink buying a nationwide 800 MHz spectrum portfolio is a direct shot across the bow of the big three telecoms — this isn't a satellite side hustle anymore, it's a land grab for the mobile market. AT&T, Verizon, and T-Mobile all take a hit while cell-tower names get a bid on the infrastructure angle. Competitive disruption stories like this have legs beyond one session.",
+      "tickers": [
+        "T"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "USO",
+      "ticker": "EWQ",
       "category": "geopolitical",
-      "title": "Trump says he doesn't want Iran deal as U.S. reportedly prepares for 'massive bombing'",
-      "justification": "This is the tape-mover of the morning — U.S. military escalation against Iran means the Strait of Hormuz stays in play, and oil above $105 is already telling you the market knows it. Energy stocks catch a bid, but everything else — airlines, industrials, the long bond — gets hit as the inflation shock compounds. When the President says no deal and the Pentagon starts war-gaming 'massive bombing,' you don't need a PhD to know risk-off is the trade.",
+      "title": "France's Bond Risk Is Outpacing Italy's by Most in Euro History",
+      "justification": "When France starts trading wider than Italy on the credit tape, that's not a footnote — that's a five-alarm fire in the sovereign bond market. This hits European banks, the euro, and anything with EM contagion exposure; Krugman's 'too big to save' comment on the same day pours gasoline on it. Watch the CAC, European financials, and the long bond for the ripple.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Fed officials see another hike coming, but no sign as to when, minutes show",
-      "justification": "The Fed minutes confirmed what the bond market already suspected — another hike is on the table, and the committee isn't in any rush to tip its hand on timing. That ambiguity is its own kind of hawkish signal; rate-sensitive sectors like REITs, utilities, and small-caps take the hit while the long bond stays under pressure. Pair this with oil at $105 and you've got a stagflation cocktail that makes the Fed's job — and the bulls' job — a whole lot harder.",
+      "ticker": "DAL",
+      "category": "single_name",
+      "title": "Delta Air Lines cuts 2026 forecast on fuel surge, but CEO says demand is still strong",
+      "justification": "Delta missing the Street for the first time in two years and cutting its full-year number is the kind of print that moves the whole airline sector — United, American, Southwest all get dragged through the mud on sympathy. With Brent north of $100, this is a real-time earnings warning for every fuel-heavy business on the tape, not just the carriers.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "EWQ",
-      "category": "macro",
-      "title": "French bonds are suffering through their worst decade since 1803 — and investors are bracing for more pain",
-      "justification": "French OAT spreads blowing out to levels not seen since the euro crisis is not a footnote — European bank stocks are already in their worst two-day rout since March, and France is the second-largest economy in the eurozone. If Paris starts looking like Rome circa 2011, the contagion hits the euro, hits European financials, and eventually washes up on U.S. shores through credit markets. Keep one eye on the euro and the other on BNP and SocGen — this one has legs.",
+      "ticker": "T",
+      "category": "single_name",
+      "title": "SpaceX deal to acquire spectrum license hammers shares of AT&T, Verizon and T-Mobile",
+      "justification": "Starlink buying a nationwide 800 MHz spectrum portfolio is a direct shot across the bow of the big three telecoms — this isn't a satellite side hustle anymore, it's a land grab for the mobile market. AT&T, Verizon, and T-Mobile all take a hit while cell-tower names get a bid on the infrastructure angle. Competitive disruption stories like this have legs beyond one session.",
       "verdict": null
     }
   ]
