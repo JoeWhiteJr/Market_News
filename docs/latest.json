@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-09T12:15:59.019975+00:00",
-  "brief_date": "2026-10-09",
+  "generated_at": "2026-10-12T12:23:21.567113+00:00",
+  "brief_date": "2026-10-12",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-09-1",
-      "title": "France's Bond Risk Is Outpacing Italy's by Most in Euro History",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-09/france-s-bond-risk-is-outpacing-italy-s-by-most-in-euro-history",
-      "published_at": "2026-10-09T12:00:00Z",
-      "summary": "When France starts trading wider than Italy on the credit tape, that's not a footnote — that's a five-alarm fire in the sovereign bond market. This hits European banks, the euro, and anything with EM contagion exposure; Krugman's 'too big to save' comment on the same day pours gasoline on it. Watch the CAC, European financials, and the long bond for the ripple.",
+      "id": "mm-2026-10-12-1",
+      "title": "Brent tops $105 as doubts grow over supply boost from Trump's 'energy ceasefire'",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/12/oil-prics-today-iran-us-saudi-arabia-crude-.html",
+      "published_at": "2026-10-12T12:00:00Z",
+      "summary": "Brent cracking $105 is the tape screaming at you — this isn't background noise, it's a supply shock in real time. Houthis hammering Riyadh's airport, Iran playing games on Hormuz, and Trump's diesel deal going nowhere fast means energy names, airlines, and anything with a fuel bill are all in play. The long bond doesn't like this either — $105 oil feeds right back into the inflation print everyone's already sweating on Wednesday.",
       "tickers": [
-        "EWQ"
+        "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-09-2",
-      "title": "Delta Air Lines cuts 2026 forecast on fuel surge, but CEO says demand is still strong",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/09/delta-air-lines-dal-q3-2026-earnings.html",
-      "published_at": "2026-10-09T12:00:00Z",
-      "summary": "Delta missing the Street for the first time in two years and cutting its full-year number is the kind of print that moves the whole airline sector — United, American, Southwest all get dragged through the mud on sympathy. With Brent north of $100, this is a real-time earnings warning for every fuel-heavy business on the tape, not just the carriers.",
+      "id": "mm-2026-10-12-2",
+      "title": "Fed officials want to hold off a rate hike this month. Will this week's inflation data let them?",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/fed-officials-want-to-hold-off-a-rate-hike-this-month-will-this-weeks-inflation-data-let-them-a82754d1?mod=mw_rss_topstories",
+      "published_at": "2026-10-12T12:00:00Z",
+      "summary": "Wednesday's CPI is the whole ballgame right now — the Fed wants to sit on their hands but $105 oil and a dollar near 18-month highs are making that a tough sell. A hot number could force Warsh's hand and reprice the entire rate path, hitting rate-sensitive sectors from housing to tech hard. Every desk on the Street is positioned around this print, so the vol into the number is going to be real.",
       "tickers": [
-        "DAL"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-09-3",
-      "title": "SpaceX deal to acquire spectrum license hammers shares of AT&T, Verizon and T-Mobile",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/08/spacex-spectrum-license-att-verizon-tmobile.html",
-      "published_at": "2026-10-09T12:00:00Z",
-      "summary": "Starlink buying a nationwide 800 MHz spectrum portfolio is a direct shot across the bow of the big three telecoms — this isn't a satellite side hustle anymore, it's a land grab for the mobile market. AT&T, Verizon, and T-Mobile all take a hit while cell-tower names get a bid on the infrastructure angle. Competitive disruption stories like this have legs beyond one session.",
+      "id": "mm-2026-10-12-3",
+      "title": "Bank earnings to shed the first light on how higher yields are affecting the economy",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/bank-earnings-to-shed-the-first-light-on-how-higher-yields-are-affecting-the-economy-cf3763ef?mod=mw_rss_topstories",
+      "published_at": "2026-10-12T12:00:00Z",
+      "summary": "The big banks step into the box Tuesday and they're the first real read on whether this high-yield environment is friend or foe to the economy — NIM expansion is the bull case, credit deterioration is the bear case, and the market needs to know which story is winning. JPM, GS, and the rest will set the tone for the entire earnings season and either confirm or blow up Goldman's freshly minted bullish call. This is the kind of tape-setter that moves the whole index, not just the financials.",
       "tickers": [
-        "T"
+        "XLF"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "EWQ",
-      "category": "geopolitical",
-      "title": "France's Bond Risk Is Outpacing Italy's by Most in Euro History",
-      "justification": "When France starts trading wider than Italy on the credit tape, that's not a footnote — that's a five-alarm fire in the sovereign bond market. This hits European banks, the euro, and anything with EM contagion exposure; Krugman's 'too big to save' comment on the same day pours gasoline on it. Watch the CAC, European financials, and the long bond for the ripple.",
+      "ticker": "USO",
+      "category": "commodity",
+      "title": "Brent tops $105 as doubts grow over supply boost from Trump's 'energy ceasefire'",
+      "justification": "Brent cracking $105 is the tape screaming at you — this isn't background noise, it's a supply shock in real time. Houthis hammering Riyadh's airport, Iran playing games on Hormuz, and Trump's diesel deal going nowhere fast means energy names, airlines, and anything with a fuel bill are all in play. The long bond doesn't like this either — $105 oil feeds right back into the inflation print everyone's already sweating on Wednesday.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "DAL",
-      "category": "single_name",
-      "title": "Delta Air Lines cuts 2026 forecast on fuel surge, but CEO says demand is still strong",
-      "justification": "Delta missing the Street for the first time in two years and cutting its full-year number is the kind of print that moves the whole airline sector — United, American, Southwest all get dragged through the mud on sympathy. With Brent north of $100, this is a real-time earnings warning for every fuel-heavy business on the tape, not just the carriers.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Fed officials want to hold off a rate hike this month. Will this week's inflation data let them?",
+      "justification": "Wednesday's CPI is the whole ballgame right now — the Fed wants to sit on their hands but $105 oil and a dollar near 18-month highs are making that a tough sell. A hot number could force Warsh's hand and reprice the entire rate path, hitting rate-sensitive sectors from housing to tech hard. Every desk on the Street is positioned around this print, so the vol into the number is going to be real.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "T",
+      "ticker": "XLF",
       "category": "single_name",
-      "title": "SpaceX deal to acquire spectrum license hammers shares of AT&T, Verizon and T-Mobile",
-      "justification": "Starlink buying a nationwide 800 MHz spectrum portfolio is a direct shot across the bow of the big three telecoms — this isn't a satellite side hustle anymore, it's a land grab for the mobile market. AT&T, Verizon, and T-Mobile all take a hit while cell-tower names get a bid on the infrastructure angle. Competitive disruption stories like this have legs beyond one session.",
+      "title": "Bank earnings to shed the first light on how higher yields are affecting the economy",
+      "justification": "The big banks step into the box Tuesday and they're the first real read on whether this high-yield environment is friend or foe to the economy — NIM expansion is the bull case, credit deterioration is the bear case, and the market needs to know which story is winning. JPM, GS, and the rest will set the tone for the entire earnings season and either confirm or blow up Goldman's freshly minted bullish call. This is the kind of tape-setter that moves the whole index, not just the financials.",
       "verdict": null
     }
   ]
