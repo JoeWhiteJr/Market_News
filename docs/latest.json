@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-12T12:23:21.567113+00:00",
-  "brief_date": "2026-10-12",
+  "generated_at": "2026-10-13T12:17:55.663261+00:00",
+  "brief_date": "2026-10-13",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-12-1",
-      "title": "Brent tops $105 as doubts grow over supply boost from Trump's 'energy ceasefire'",
+      "id": "mm-2026-10-13-1",
+      "title": "UnitedHealth Group tops estimates, hikes profit outlook as insurer manages high medical costs",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/12/oil-prics-today-iran-us-saudi-arabia-crude-.html",
-      "published_at": "2026-10-12T12:00:00Z",
-      "summary": "Brent cracking $105 is the tape screaming at you — this isn't background noise, it's a supply shock in real time. Houthis hammering Riyadh's airport, Iran playing games on Hormuz, and Trump's diesel deal going nowhere fast means energy names, airlines, and anything with a fuel bill are all in play. The long bond doesn't like this either — $105 oil feeds right back into the inflation print everyone's already sweating on Wednesday.",
+      "url": "https://www.cnbc.com/2026/10/13/unitedhealth-group-unh-earnings-q3-2026.html",
+      "published_at": "2026-10-13T12:00:00Z",
+      "summary": "UNH is the biggest name in managed care and a Dow component — when it beats and raises, the whole healthcare sector gets a bid. A hike to at least $20.50 EPS guidance is the kind of print that moves the tape on insurers, hospitals, and pharmacy benefit managers alike. This is the real deal, not a whisper number.",
+      "tickers": [
+        "UNH"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-13-2",
+      "title": "Micron, SoftBank and ASML slide as Wall Street chip rout spreads",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/13/sk-hynix-softbank-samsung-electronics-shares-tech-stocks-fall.html",
+      "published_at": "2026-10-13T12:00:00Z",
+      "summary": "A chip selloff that jumps continents — from Seoul to Amsterdam to New York — is not a one-day blip, it's a sector rotation story with real teeth. Semis are the engine of the AI trade, so when Micron, ASML, and SoftBank all get hit simultaneously, the Nasdaq feels it in the gut. Watch the SOX index; if it can't hold support, the broader market narrative gets a lot messier.",
+      "tickers": [
+        "MU"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-13-3",
+      "title": "Iran reportedly fortifies nuclear sites as it prepares for possible U.S. strikes after midterms",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/13/iran-us-war-houthis-saudi-arabia-airport.html",
+      "published_at": "2026-10-13T12:00:00Z",
+      "summary": "Riyadh airport attacks, Houthi missiles, Iran hardening nuclear sites — this is a full-blown Middle East escalation story that puts a floor under oil and a ceiling on risk appetite. Airlines, defense names, and energy stocks all move on this; the FAA warning over Saudi airspace alone is a direct hit to carriers with Gulf exposure. Geopolitical risk premiums don't price themselves.",
       "tickers": [
         "USO"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-12-2",
-      "title": "Fed officials want to hold off a rate hike this month. Will this week's inflation data let them?",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/fed-officials-want-to-hold-off-a-rate-hike-this-month-will-this-weeks-inflation-data-let-them-a82754d1?mod=mw_rss_topstories",
-      "published_at": "2026-10-12T12:00:00Z",
-      "summary": "Wednesday's CPI is the whole ballgame right now — the Fed wants to sit on their hands but $105 oil and a dollar near 18-month highs are making that a tough sell. A hot number could force Warsh's hand and reprice the entire rate path, hitting rate-sensitive sectors from housing to tech hard. Every desk on the Street is positioned around this print, so the vol into the number is going to be real.",
-      "tickers": [
-        "SPY"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-12-3",
-      "title": "Bank earnings to shed the first light on how higher yields are affecting the economy",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/bank-earnings-to-shed-the-first-light-on-how-higher-yields-are-affecting-the-economy-cf3763ef?mod=mw_rss_topstories",
-      "published_at": "2026-10-12T12:00:00Z",
-      "summary": "The big banks step into the box Tuesday and they're the first real read on whether this high-yield environment is friend or foe to the economy — NIM expansion is the bull case, credit deterioration is the bear case, and the market needs to know which story is winning. JPM, GS, and the rest will set the tone for the entire earnings season and either confirm or blow up Goldman's freshly minted bullish call. This is the kind of tape-setter that moves the whole index, not just the financials.",
-      "tickers": [
-        "XLF"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "USO",
-      "category": "commodity",
-      "title": "Brent tops $105 as doubts grow over supply boost from Trump's 'energy ceasefire'",
-      "justification": "Brent cracking $105 is the tape screaming at you — this isn't background noise, it's a supply shock in real time. Houthis hammering Riyadh's airport, Iran playing games on Hormuz, and Trump's diesel deal going nowhere fast means energy names, airlines, and anything with a fuel bill are all in play. The long bond doesn't like this either — $105 oil feeds right back into the inflation print everyone's already sweating on Wednesday.",
+      "ticker": "UNH",
+      "category": "single_name",
+      "title": "UnitedHealth Group tops estimates, hikes profit outlook as insurer manages high medical costs",
+      "justification": "UNH is the biggest name in managed care and a Dow component — when it beats and raises, the whole healthcare sector gets a bid. A hike to at least $20.50 EPS guidance is the kind of print that moves the tape on insurers, hospitals, and pharmacy benefit managers alike. This is the real deal, not a whisper number.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Fed officials want to hold off a rate hike this month. Will this week's inflation data let them?",
-      "justification": "Wednesday's CPI is the whole ballgame right now — the Fed wants to sit on their hands but $105 oil and a dollar near 18-month highs are making that a tough sell. A hot number could force Warsh's hand and reprice the entire rate path, hitting rate-sensitive sectors from housing to tech hard. Every desk on the Street is positioned around this print, so the vol into the number is going to be real.",
+      "ticker": "MU",
+      "category": "single_name",
+      "title": "Micron, SoftBank and ASML slide as Wall Street chip rout spreads",
+      "justification": "A chip selloff that jumps continents — from Seoul to Amsterdam to New York — is not a one-day blip, it's a sector rotation story with real teeth. Semis are the engine of the AI trade, so when Micron, ASML, and SoftBank all get hit simultaneously, the Nasdaq feels it in the gut. Watch the SOX index; if it can't hold support, the broader market narrative gets a lot messier.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "XLF",
-      "category": "single_name",
-      "title": "Bank earnings to shed the first light on how higher yields are affecting the economy",
-      "justification": "The big banks step into the box Tuesday and they're the first real read on whether this high-yield environment is friend or foe to the economy — NIM expansion is the bull case, credit deterioration is the bear case, and the market needs to know which story is winning. JPM, GS, and the rest will set the tone for the entire earnings season and either confirm or blow up Goldman's freshly minted bullish call. This is the kind of tape-setter that moves the whole index, not just the financials.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Iran reportedly fortifies nuclear sites as it prepares for possible U.S. strikes after midterms",
+      "justification": "Riyadh airport attacks, Houthi missiles, Iran hardening nuclear sites — this is a full-blown Middle East escalation story that puts a floor under oil and a ceiling on risk appetite. Airlines, defense names, and energy stocks all move on this; the FAA warning over Saudi airspace alone is a direct hit to carriers with Gulf exposure. Geopolitical risk premiums don't price themselves.",
       "verdict": null
     }
   ]
