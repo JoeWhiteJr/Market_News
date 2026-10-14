@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-13T12:17:55.663261+00:00",
-  "brief_date": "2026-10-13",
+  "generated_at": "2026-10-14T12:16:26.774801+00:00",
+  "brief_date": "2026-10-14",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-13-1",
-      "title": "UnitedHealth Group tops estimates, hikes profit outlook as insurer manages high medical costs",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/13/unitedhealth-group-unh-earnings-q3-2026.html",
-      "published_at": "2026-10-13T12:00:00Z",
-      "summary": "UNH is the biggest name in managed care and a Dow component — when it beats and raises, the whole healthcare sector gets a bid. A hike to at least $20.50 EPS guidance is the kind of print that moves the tape on insurers, hospitals, and pharmacy benefit managers alike. This is the real deal, not a whisper number.",
-      "tickers": [
-        "UNH"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-13-2",
-      "title": "Micron, SoftBank and ASML slide as Wall Street chip rout spreads",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/13/sk-hynix-softbank-samsung-electronics-shares-tech-stocks-fall.html",
-      "published_at": "2026-10-13T12:00:00Z",
-      "summary": "A chip selloff that jumps continents — from Seoul to Amsterdam to New York — is not a one-day blip, it's a sector rotation story with real teeth. Semis are the engine of the AI trade, so when Micron, ASML, and SoftBank all get hit simultaneously, the Nasdaq feels it in the gut. Watch the SOX index; if it can't hold support, the broader market narrative gets a lot messier.",
-      "tickers": [
-        "MU"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-13-3",
-      "title": "Iran reportedly fortifies nuclear sites as it prepares for possible U.S. strikes after midterms",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/13/iran-us-war-houthis-saudi-arabia-airport.html",
-      "published_at": "2026-10-13T12:00:00Z",
-      "summary": "Riyadh airport attacks, Houthi missiles, Iran hardening nuclear sites — this is a full-blown Middle East escalation story that puts a floor under oil and a ceiling on risk appetite. Airlines, defense names, and energy stocks all move on this; the FAA warning over Saudi airspace alone is a direct hit to carriers with Gulf exposure. Geopolitical risk premiums don't price themselves.",
+      "id": "mm-2026-10-14-1",
+      "title": "Saudi Aramco headquarters suffered extensive damage in Houthi attack, sources say - Reuters",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTEY0UDJsbGo1MXFVX1FoY1RIdkFLeW96R3hMOEkwQTNRTFpLby1wZEFGRy10SThxSkhSaXZKQ1psYmdiQVZQd19uaDFtZFBZa1pJZzZCT0dsd0lSdmV1UWV0dExiRmU2Y2lVUS1SaWs1UzNkZ25lUnRJaklfWnlOeEFVQTg2dDVQTWF4UWp1aTcyR2JsUWN5d0JzSWRqMlp1ZDY3OXpncUZDN2FuVk9tN0VuaGtIMVpXM1F4RU5QX00xek9q?oc=5",
+      "published_at": "2026-10-14T12:00:00Z",
+      "summary": "One, the Houthis hit Saudi Aramco's actual headquarters (not a pipeline somewhere in the desert — the headquarters, in Dhahran, which is a bit like bombing the lobby of a company you're mad at), and two, they then vowed more attacks on airports and oil facilities, which is the kind of follow-up statement that tends to make crude oil futures do something dramatic before breakfast. This hits energy broadly (USO, XLE, refiners, tanker stocks), rattles Gulf equity markets, and introduces a genuine supply-disruption premium into oil at a moment when Iranian exports are already at zero and shipping costs are already described elsewhere in this feed as 'soaring' — so the setup, structurally, is not great.",
       "tickers": [
         "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-14-2",
+      "title": "The latest inflation data is expected to show price increases are accelerating",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/13/september-consumer-price-index-inflation.html",
+      "published_at": "2026-10-14T12:00:00Z",
+      "summary": "September CPI is expected to print at 3.6% year-over-year and +0.6% month-over-month (which, if you're keeping score at home, is the kind of number that makes the Fed's 'one more hike and then we'll see' posture feel less like a plan and more like a prayer), and this is dropping into a market that is already dealing with 7.5% mortgage rates, a Bullard who sees 'two hikes and hope,' and a NY Fed president publicly disagreeing with traders about 2027 — so the rate-path uncertainty is genuinely unresolved. Affects SPY, TLT, rate-sensitive sectors (homebuilders, banks, utilities), and basically everything with a duration.",
+      "tickers": [
+        "SPY"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-14-3",
+      "title": "US chip stocks extend slide as China memory report, AI spending jitters hit sector - Reuters",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQdjlLc0J0QjMyZmZRZWM1SldodnE0RV8xUWN0S0EzdUtWX1VjNXRiTVRKdDJQQVNkNkNadU50bGFueTItd3V0Zk43aFRiV2xsMVdCS1lFbFh3TVI3b05yd253VjBLSWdlYmwyb3VIOFBLQm5VbFRlR1ZQczRlekUyWHNOMjUwdmhvMXA2MWl1UUp6aDFydkZRZWdjUzZnRUR2NXAteDNMZS1zdDNUWm1HRVBxYlo3TXh6ZGZKT1lNOXFHUjBp?oc=5",
+      "published_at": "2026-10-14T12:00:00Z",
+      "summary": "The semiconductor selloff is now a multi-session, multi-geography event (Nikkei down 2.6%, Micron -3.9%, AMD -2.3%, Broadcom -1.9%, Nvidia -1.3%) driven by the twin anxieties of Chinese memory competition and a growing suspicion that AI capex may be peaking — which is a somewhat awkward thing to believe simultaneously with ASML reporting that customers are placing orders through 2030, but markets have never been accused of excessive internal consistency. NVDA, AMD, MU, AVGO, and the SOX index are all in the blast radius, and given that semis have been the primary engine of the S&P's gains, a sustained rotation out of the sector is the kind of thing that turns a 'critical juncture' (per the CNBC headline also in this feed) into something less pleasant.",
+      "tickers": [
+        "NVDA"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "UNH",
-      "category": "single_name",
-      "title": "UnitedHealth Group tops estimates, hikes profit outlook as insurer manages high medical costs",
-      "justification": "UNH is the biggest name in managed care and a Dow component — when it beats and raises, the whole healthcare sector gets a bid. A hike to at least $20.50 EPS guidance is the kind of print that moves the tape on insurers, hospitals, and pharmacy benefit managers alike. This is the real deal, not a whisper number.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Saudi Aramco headquarters suffered extensive damage in Houthi attack, sources say - Reuters",
+      "justification": "One, the Houthis hit Saudi Aramco's actual headquarters (not a pipeline somewhere in the desert — the headquarters, in Dhahran, which is a bit like bombing the lobby of a company you're mad at), and two, they then vowed more attacks on airports and oil facilities, which is the kind of follow-up statement that tends to make crude oil futures do something dramatic before breakfast. This hits energy broadly (USO, XLE, refiners, tanker stocks), rattles Gulf equity markets, and introduces a genuine supply-disruption premium into oil at a moment when Iranian exports are already at zero and shipping costs are already described elsewhere in this feed as 'soaring' — so the setup, structurally, is not great.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "MU",
-      "category": "single_name",
-      "title": "Micron, SoftBank and ASML slide as Wall Street chip rout spreads",
-      "justification": "A chip selloff that jumps continents — from Seoul to Amsterdam to New York — is not a one-day blip, it's a sector rotation story with real teeth. Semis are the engine of the AI trade, so when Micron, ASML, and SoftBank all get hit simultaneously, the Nasdaq feels it in the gut. Watch the SOX index; if it can't hold support, the broader market narrative gets a lot messier.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "The latest inflation data is expected to show price increases are accelerating",
+      "justification": "September CPI is expected to print at 3.6% year-over-year and +0.6% month-over-month (which, if you're keeping score at home, is the kind of number that makes the Fed's 'one more hike and then we'll see' posture feel less like a plan and more like a prayer), and this is dropping into a market that is already dealing with 7.5% mortgage rates, a Bullard who sees 'two hikes and hope,' and a NY Fed president publicly disagreeing with traders about 2027 — so the rate-path uncertainty is genuinely unresolved. Affects SPY, TLT, rate-sensitive sectors (homebuilders, banks, utilities), and basically everything with a duration.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Iran reportedly fortifies nuclear sites as it prepares for possible U.S. strikes after midterms",
-      "justification": "Riyadh airport attacks, Houthi missiles, Iran hardening nuclear sites — this is a full-blown Middle East escalation story that puts a floor under oil and a ceiling on risk appetite. Airlines, defense names, and energy stocks all move on this; the FAA warning over Saudi airspace alone is a direct hit to carriers with Gulf exposure. Geopolitical risk premiums don't price themselves.",
+      "ticker": "NVDA",
+      "category": "single_name",
+      "title": "US chip stocks extend slide as China memory report, AI spending jitters hit sector - Reuters",
+      "justification": "The semiconductor selloff is now a multi-session, multi-geography event (Nikkei down 2.6%, Micron -3.9%, AMD -2.3%, Broadcom -1.9%, Nvidia -1.3%) driven by the twin anxieties of Chinese memory competition and a growing suspicion that AI capex may be peaking — which is a somewhat awkward thing to believe simultaneously with ASML reporting that customers are placing orders through 2030, but markets have never been accused of excessive internal consistency. NVDA, AMD, MU, AVGO, and the SOX index are all in the blast radius, and given that semis have been the primary engine of the S&P's gains, a sustained rotation out of the sector is the kind of thing that turns a 'critical juncture' (per the CNBC headline also in this feed) into something less pleasant.",
       "verdict": null
     }
   ]
