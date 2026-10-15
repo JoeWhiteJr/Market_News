@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-14T12:16:26.774801+00:00",
-  "brief_date": "2026-10-14",
+  "generated_at": "2026-10-15T12:16:14.659275+00:00",
+  "brief_date": "2026-10-15",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-14-1",
-      "title": "Saudi Aramco headquarters suffered extensive damage in Houthi attack, sources say - Reuters",
+      "id": "mm-2026-10-15-1",
+      "title": "US inflation heats up in September; Fed rate hike this month back on table - Reuters",
       "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTEY0UDJsbGo1MXFVX1FoY1RIdkFLeW96R3hMOEkwQTNRTFpLby1wZEFGRy10SThxSkhSaXZKQ1psYmdiQVZQd19uaDFtZFBZa1pJZzZCT0dsd0lSdmV1UWV0dExiRmU2Y2lVUS1SaWs1UzNkZ25lUnRJaklfWnlOeEFVQTg2dDVQTWF4UWp1aTcyR2JsUWN5d0JzSWRqMlp1ZDY3OXpncUZDN2FuVk9tN0VuaGtIMVpXM1F4RU5QX00xek9q?oc=5",
-      "published_at": "2026-10-14T12:00:00Z",
-      "summary": "One, the Houthis hit Saudi Aramco's actual headquarters (not a pipeline somewhere in the desert — the headquarters, in Dhahran, which is a bit like bombing the lobby of a company you're mad at), and two, they then vowed more attacks on airports and oil facilities, which is the kind of follow-up statement that tends to make crude oil futures do something dramatic before breakfast. This hits energy broadly (USO, XLE, refiners, tanker stocks), rattles Gulf equity markets, and introduces a genuine supply-disruption premium into oil at a moment when Iranian exports are already at zero and shipping costs are already described elsewhere in this feed as 'soaring' — so the setup, structurally, is not great.",
-      "tickers": [
-        "USO"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-14-2",
-      "title": "The latest inflation data is expected to show price increases are accelerating",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/13/september-consumer-price-index-inflation.html",
-      "published_at": "2026-10-14T12:00:00Z",
-      "summary": "September CPI is expected to print at 3.6% year-over-year and +0.6% month-over-month (which, if you're keeping score at home, is the kind of number that makes the Fed's 'one more hike and then we'll see' posture feel less like a plan and more like a prayer), and this is dropping into a market that is already dealing with 7.5% mortgage rates, a Bullard who sees 'two hikes and hope,' and a NY Fed president publicly disagreeing with traders about 2027 — so the rate-path uncertainty is genuinely unresolved. Affects SPY, TLT, rate-sensitive sectors (homebuilders, banks, utilities), and basically everything with a duration.",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNX3hkV3J5em1xWWY4V0hQODFTamFtU3NvdkpPRUUzMGY0TnlKaVlneXZPc0J6bFpWdDZWb2hLRkZZaHhZVElDSXNFbGNYMVVBRGR6c1RlNDA4cEhkMEcwck5VMFRtZ1QxOFJqNTkyaGJzWWFLSXp2Z0l1Z19vMDh5bGd6N1FJSkJFR2tZUXd1UWUzeVlvZi1xNTVONk00ejJ5cE0xSGY4THFsaUo0RGxPV3dpaW4tbEZseUE",
+      "published_at": "2026-10-15T12:00:00Z",
+      "summary": "September CPI came in hot at 3.7% — energy from the Iran war is doing the Fed's dirty work in reverse, and now a rate hike this month is back on the table. That's a gut-punch to the long bond, rate-sensitive equities, and anything that's been riding the 'Fed pivot' trade. Every sector feels this one; it's the tape-changer of the day.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-14-3",
-      "title": "US chip stocks extend slide as China memory report, AI spending jitters hit sector - Reuters",
+      "id": "mm-2026-10-15-2",
+      "title": "Two ships sink near Hormuz after being hit by projectiles amid surge in attacks - Reuters",
       "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQdjlLc0J0QjMyZmZRZWM1SldodnE0RV8xUWN0S0EzdUtWX1VjNXRiTVRKdDJQQVNkNkNadU50bGFueTItd3V0Zk43aFRiV2xsMVdCS1lFbFh3TVI3b05yd253VjBLSWdlYmwyb3VIOFBLQm5VbFRlR1ZQczRlekUyWHNOMjUwdmhvMXA2MWl1UUp6aDFydkZRZWdjUzZnRUR2NXAteDNMZS1zdDNUWm1HRVBxYlo3TXh6ZGZKT1lNOXFHUjBp?oc=5",
-      "published_at": "2026-10-14T12:00:00Z",
-      "summary": "The semiconductor selloff is now a multi-session, multi-geography event (Nikkei down 2.6%, Micron -3.9%, AMD -2.3%, Broadcom -1.9%, Nvidia -1.3%) driven by the twin anxieties of Chinese memory competition and a growing suspicion that AI capex may be peaking — which is a somewhat awkward thing to believe simultaneously with ASML reporting that customers are placing orders through 2030, but markets have never been accused of excessive internal consistency. NVDA, AMD, MU, AVGO, and the SOX index are all in the blast radius, and given that semis have been the primary engine of the S&P's gains, a sustained rotation out of the sector is the kind of thing that turns a 'critical juncture' (per the CNBC headline also in this feed) into something less pleasant.",
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNVlQtcHJibXBpYWEwWTQ4dFdfWUFJbTVteGY0WThGcTFybEdUTERvVG9DcGdoY09vUjh0TG1QeG5zMWx0LTFvV09teVNXY1NLdXZVNlpuMVBIV3pndWJKWVBRdENjLVd0dnVwdUxPTHFPU002S0ZqR0lkcjgyNVl2ZFFXc05MdTJHenM3LVNUSlBUb1RyeDVxY3VTdUxEamxrbS1OXzJJR3o3SlltandncHAwVXFNSTFYcmJXblh2U25vN2xMMW1ibQ",
+      "published_at": "2026-10-15T12:00:00Z",
+      "summary": "Ships sinking in the Strait of Hormuz is not a drill — roughly 20% of global oil flows through that chokepoint, and projectile attacks escalating to actual sinkings is a whole new level of ugly. Oil shipping costs are already spiking per other headlines, and this feeds directly into energy prices, inflation, and the Fed's impossible position. Energy stocks catch a bid; everything else gets nervous.",
       "tickers": [
-        "NVDA"
+        "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-15-3",
+      "title": "CoreWeave's AI bonds tumble, raising red flags for the wider market",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/coreweave-sparks-worry-about-broader-credit-market-stress-as-its-bonds-tumble-887458e4?mod=mw_rss_topstories",
+      "published_at": "2026-10-15T12:00:00Z",
+      "summary": "CoreWeave bonds trading at 81 cents on the dollar with yields blowing out past 15% is the credit market sending a flare up over the AI infrastructure borrowing binge — and credit leads equity, always. This isn't just a CoreWeave story; it's a warning shot for the whole AI capex trade, hitting Nvidia, data center REITs, and any name that's been priced for perfection on the AI buildout. When the bond market starts screaming, you listen.",
+      "tickers": [
+        "CRWV"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Saudi Aramco headquarters suffered extensive damage in Houthi attack, sources say - Reuters",
-      "justification": "One, the Houthis hit Saudi Aramco's actual headquarters (not a pipeline somewhere in the desert — the headquarters, in Dhahran, which is a bit like bombing the lobby of a company you're mad at), and two, they then vowed more attacks on airports and oil facilities, which is the kind of follow-up statement that tends to make crude oil futures do something dramatic before breakfast. This hits energy broadly (USO, XLE, refiners, tanker stocks), rattles Gulf equity markets, and introduces a genuine supply-disruption premium into oil at a moment when Iranian exports are already at zero and shipping costs are already described elsewhere in this feed as 'soaring' — so the setup, structurally, is not great.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "US inflation heats up in September; Fed rate hike this month back on table - Reuters",
+      "justification": "September CPI came in hot at 3.7% — energy from the Iran war is doing the Fed's dirty work in reverse, and now a rate hike this month is back on the table. That's a gut-punch to the long bond, rate-sensitive equities, and anything that's been riding the 'Fed pivot' trade. Every sector feels this one; it's the tape-changer of the day.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "The latest inflation data is expected to show price increases are accelerating",
-      "justification": "September CPI is expected to print at 3.6% year-over-year and +0.6% month-over-month (which, if you're keeping score at home, is the kind of number that makes the Fed's 'one more hike and then we'll see' posture feel less like a plan and more like a prayer), and this is dropping into a market that is already dealing with 7.5% mortgage rates, a Bullard who sees 'two hikes and hope,' and a NY Fed president publicly disagreeing with traders about 2027 — so the rate-path uncertainty is genuinely unresolved. Affects SPY, TLT, rate-sensitive sectors (homebuilders, banks, utilities), and basically everything with a duration.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Two ships sink near Hormuz after being hit by projectiles amid surge in attacks - Reuters",
+      "justification": "Ships sinking in the Strait of Hormuz is not a drill — roughly 20% of global oil flows through that chokepoint, and projectile attacks escalating to actual sinkings is a whole new level of ugly. Oil shipping costs are already spiking per other headlines, and this feeds directly into energy prices, inflation, and the Fed's impossible position. Energy stocks catch a bid; everything else gets nervous.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "NVDA",
+      "ticker": "CRWV",
       "category": "single_name",
-      "title": "US chip stocks extend slide as China memory report, AI spending jitters hit sector - Reuters",
-      "justification": "The semiconductor selloff is now a multi-session, multi-geography event (Nikkei down 2.6%, Micron -3.9%, AMD -2.3%, Broadcom -1.9%, Nvidia -1.3%) driven by the twin anxieties of Chinese memory competition and a growing suspicion that AI capex may be peaking — which is a somewhat awkward thing to believe simultaneously with ASML reporting that customers are placing orders through 2030, but markets have never been accused of excessive internal consistency. NVDA, AMD, MU, AVGO, and the SOX index are all in the blast radius, and given that semis have been the primary engine of the S&P's gains, a sustained rotation out of the sector is the kind of thing that turns a 'critical juncture' (per the CNBC headline also in this feed) into something less pleasant.",
+      "title": "CoreWeave's AI bonds tumble, raising red flags for the wider market",
+      "justification": "CoreWeave bonds trading at 81 cents on the dollar with yields blowing out past 15% is the credit market sending a flare up over the AI infrastructure borrowing binge — and credit leads equity, always. This isn't just a CoreWeave story; it's a warning shot for the whole AI capex trade, hitting Nvidia, data center REITs, and any name that's been priced for perfection on the AI buildout. When the bond market starts screaming, you listen.",
       "verdict": null
     }
   ]
