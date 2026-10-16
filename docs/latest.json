@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-15T12:16:14.659275+00:00",
-  "brief_date": "2026-10-15",
+  "generated_at": "2026-10-16T12:15:40.939801+00:00",
+  "brief_date": "2026-10-16",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-15-1",
-      "title": "US inflation heats up in September; Fed rate hike this month back on table - Reuters",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNX3hkV3J5em1xWWY4V0hQODFTamFtU3NvdkpPRUUzMGY0TnlKaVlneXZPc0J6bFpWdDZWb2hLRkZZaHhZVElDSXNFbGNYMVVBRGR6c1RlNDA4cEhkMEcwck5VMFRtZ1QxOFJqNTkyaGJzWWFLSXp2Z0l1Z19vMDh5bGd6N1FJSkJFR2tZUXd1UWUzeVlvZi1xNTVONk00ejJ5cE0xSGY4THFsaUo0RGxPV3dpaW4tbEZseUE",
-      "published_at": "2026-10-15T12:00:00Z",
-      "summary": "September CPI came in hot at 3.7% — energy from the Iran war is doing the Fed's dirty work in reverse, and now a rate hike this month is back on the table. That's a gut-punch to the long bond, rate-sensitive equities, and anything that's been riding the 'Fed pivot' trade. Every sector feels this one; it's the tape-changer of the day.",
+      "id": "mm-2026-10-16-1",
+      "title": "CPI Hotter Than Expected: Is A Hike Back On The Table?",
+      "source": "realinvestmentadvice.com",
+      "url": "https://realinvestmentadvice.com/resources/blog/cpi-hotter-than-expected-is-a-hike-back-on-the-table/",
+      "published_at": "2026-10-16T12:00:00Z",
+      "summary": "September headline CPI came in hot at 0.6% month-over-month — that's the kind of print that puts a rate hike back on the table and sent the tape into a tailspin, triggering the KOSPI circuit breaker and the worst day for the S&P since July. Every rate-sensitive sector from tech to housing to long bonds gets repriced when the Fed's next move suddenly looks like 'up' instead of 'hold.' This is the root cause behind everything else ugly in this batch of news.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-15-2",
-      "title": "Two ships sink near Hormuz after being hit by projectiles amid surge in attacks - Reuters",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNVlQtcHJibXBpYWEwWTQ4dFdfWUFJbTVteGY0WThGcTFybEdUTERvVG9DcGdoY09vUjh0TG1QeG5zMWx0LTFvV09teVNXY1NLdXZVNlpuMVBIV3pndWJKWVBRdENjLVd0dnVwdUxPTHFPU002S0ZqR0lkcjgyNVl2ZFFXc05MdTJHenM3LVNUSlBUb1RyeDVxY3VTdUxEamxrbS1OXzJJR3o3SlltandncHAwVXFNSTFYcmJXblh2U25vN2xMMW1ibQ",
-      "published_at": "2026-10-15T12:00:00Z",
-      "summary": "Ships sinking in the Strait of Hormuz is not a drill — roughly 20% of global oil flows through that chokepoint, and projectile attacks escalating to actual sinkings is a whole new level of ugly. Oil shipping costs are already spiking per other headlines, and this feeds directly into energy prices, inflation, and the Fed's impossible position. Energy stocks catch a bid; everything else gets nervous.",
+      "id": "mm-2026-10-16-2",
+      "title": "CoreWeave credit default swaps hit distress levels as investors sour on AI debt",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html",
+      "published_at": "2026-10-16T12:00:00Z",
+      "summary": "When CDS on a high-flying AI infrastructure name hit distress territory, that's not just a single-stock story — it's a flare gun going off over the entire leveraged AI build-out trade. CoreWeave's debt load is a proxy for how the Street is financing the AI capex boom, and if that credit starts cracking, the bid under Nvidia, the hyperscalers, and every data center REIT gets wobbly fast. This one's got contagion written all over it.",
       "tickers": [
-        "USO"
+        "CRWV"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-15-3",
-      "title": "CoreWeave's AI bonds tumble, raising red flags for the wider market",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/coreweave-sparks-worry-about-broader-credit-market-stress-as-its-bonds-tumble-887458e4?mod=mw_rss_topstories",
-      "published_at": "2026-10-15T12:00:00Z",
-      "summary": "CoreWeave bonds trading at 81 cents on the dollar with yields blowing out past 15% is the credit market sending a flare up over the AI infrastructure borrowing binge — and credit leads equity, always. This isn't just a CoreWeave story; it's a warning shot for the whole AI capex trade, hitting Nvidia, data center REITs, and any name that's been priced for perfection on the AI buildout. When the bond market starts screaming, you listen.",
+      "id": "mm-2026-10-16-3",
+      "title": "West Asia War: Riyadh Ravaged, Battles in Yemen, Iranian Mines Sink Ship",
+      "source": "nakedcapitalism.com",
+      "url": "https://www.nakedcapitalism.com/?p=318128",
+      "published_at": "2026-10-16T12:00:00Z",
+      "summary": "Houthis hitting Saudi infrastructure and Iranian mines taking out ships in the Strait is the kind of escalation that puts an immediate bid under crude and a chill through global shipping and insurance markets. The IEA already scrambling to release diesel stocks tells you supply disruption risk is real, not theoretical. Energy names, tanker stocks, and defense contractors all feel this — and if the Strait of Hormuz gets dicier, you're talking about a macro shock that dwarfs the CPI print.",
       "tickers": [
-        "CRWV"
+        "USO"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "SPY",
       "category": "macro",
-      "title": "US inflation heats up in September; Fed rate hike this month back on table - Reuters",
-      "justification": "September CPI came in hot at 3.7% — energy from the Iran war is doing the Fed's dirty work in reverse, and now a rate hike this month is back on the table. That's a gut-punch to the long bond, rate-sensitive equities, and anything that's been riding the 'Fed pivot' trade. Every sector feels this one; it's the tape-changer of the day.",
+      "title": "CPI Hotter Than Expected: Is A Hike Back On The Table?",
+      "justification": "September headline CPI came in hot at 0.6% month-over-month — that's the kind of print that puts a rate hike back on the table and sent the tape into a tailspin, triggering the KOSPI circuit breaker and the worst day for the S&P since July. Every rate-sensitive sector from tech to housing to long bonds gets repriced when the Fed's next move suddenly looks like 'up' instead of 'hold.' This is the root cause behind everything else ugly in this batch of news.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Two ships sink near Hormuz after being hit by projectiles amid surge in attacks - Reuters",
-      "justification": "Ships sinking in the Strait of Hormuz is not a drill — roughly 20% of global oil flows through that chokepoint, and projectile attacks escalating to actual sinkings is a whole new level of ugly. Oil shipping costs are already spiking per other headlines, and this feeds directly into energy prices, inflation, and the Fed's impossible position. Energy stocks catch a bid; everything else gets nervous.",
+      "ticker": "CRWV",
+      "category": "single_name",
+      "title": "CoreWeave credit default swaps hit distress levels as investors sour on AI debt",
+      "justification": "When CDS on a high-flying AI infrastructure name hit distress territory, that's not just a single-stock story — it's a flare gun going off over the entire leveraged AI build-out trade. CoreWeave's debt load is a proxy for how the Street is financing the AI capex boom, and if that credit starts cracking, the bid under Nvidia, the hyperscalers, and every data center REIT gets wobbly fast. This one's got contagion written all over it.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "CRWV",
-      "category": "single_name",
-      "title": "CoreWeave's AI bonds tumble, raising red flags for the wider market",
-      "justification": "CoreWeave bonds trading at 81 cents on the dollar with yields blowing out past 15% is the credit market sending a flare up over the AI infrastructure borrowing binge — and credit leads equity, always. This isn't just a CoreWeave story; it's a warning shot for the whole AI capex trade, hitting Nvidia, data center REITs, and any name that's been priced for perfection on the AI buildout. When the bond market starts screaming, you listen.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "West Asia War: Riyadh Ravaged, Battles in Yemen, Iranian Mines Sink Ship",
+      "justification": "Houthis hitting Saudi infrastructure and Iranian mines taking out ships in the Strait is the kind of escalation that puts an immediate bid under crude and a chill through global shipping and insurance markets. The IEA already scrambling to release diesel stocks tells you supply disruption risk is real, not theoretical. Energy names, tanker stocks, and defense contractors all feel this — and if the Strait of Hormuz gets dicier, you're talking about a macro shock that dwarfs the CPI print.",
       "verdict": null
     }
   ]
