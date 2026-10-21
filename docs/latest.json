@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-20T12:15:37.211040+00:00",
-  "brief_date": "2026-10-20",
+  "generated_at": "2026-10-21T12:15:31.877804+00:00",
+  "brief_date": "2026-10-21",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-20-1",
-      "title": "European Gas Prices Rise Above €90 for First Time Since 2022",
+      "id": "mm-2026-10-21-1",
+      "title": "French Yields Hit 5%, Highest Since 2002, as Risk Gauge Climbs",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-20/european-gas-prices-rise-above-90-for-first-time-since-2022",
-      "published_at": "2026-10-20T12:00:00Z",
-      "summary": "European natgas cracking €90 for the first time since the 2022 energy crisis is a five-alarm fire for the continent — it hits utilities, industrials, and chemicals hard while feeding the inflation narrative that keeps the ECB's hands tied. Layer in the France unrest and Houthi attacks on Saudi energy infrastructure, and you've got a supply-shock cocktail that moves the long bond, the euro, and energy equities simultaneously. This is the kind of tape-changer that makes every other story this morning look like noise.",
-      "tickers": [
-        "TTF"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-20-2",
-      "title": "French unrest compounds debt crisis fears. Paris-listed stocks, bonds and the euro fall",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/19/france-protests-bond-yields-markets.html",
-      "published_at": "2026-10-20T12:00:00Z",
-      "summary": "When the people riot AND the bond market riots at the same time, you've got a genuine sovereign stress event — and France is the eurozone's second-largest economy, so this isn't some peripheral sideshow. OAT spreads widening, the CAC getting shorted aggressively, and the euro under pressure all feed back into U.S. multinationals with European exposure and risk-off flows globally. The ECB is caught flat-footed between supporting growth and defending fiscal credibility, which is exactly the kind of policy paralysis markets hate.",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-21/french-bond-risk-gauge-nears-160-basis-points-hits-15-year-high",
+      "published_at": "2026-10-21T12:00:00Z",
+      "summary": "French 10-year yields breaching 5% for the first time since 2002 is not a footnote — it is a SOVEREIGN STRESS signal that the consensus has been desperately papering over. Rising energy costs plus fiscal paralysis plus violent street protests is a cocktail that spreads to peripheral European debt, hammers EUR, and puts the ECB in an impossible position. Watch for contagion into Italian BTPs, European bank stocks, and any dollar-denominated safe-haven flows that accelerate the very dollar strength everyone claims is 'priced in.'",
       "tickers": [
         "EWQ"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-20-3",
-      "title": "South Korean IPO flop is the latest in a string of disappointments for the global AI trade",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/south-korean-ipo-flop-is-the-latest-in-a-string-of-disappointments-for-the-global-ai-trade-fc97748c?mod=mw_rss_topstories",
-      "published_at": "2026-10-20T12:00:00Z",
-      "summary": "Three data-center IPOs shelved in October alone — backed by Nvidia, Blackstone, and SoftBank — and now Elice faceplants on debut: the market is sending a loud message that it's done writing blank checks for AI capex stories without a clear return on investment. This hits the entire neocloud complex, pressures hyperscaler valuations ahead of a critical earnings week, and validates the Gartner note that sparked last week's tech rout. Watch NVDA, SMCI, and the broader QQQ — the bid under this trade is shakier than the bulls want to admit.",
+      "id": "mm-2026-10-21-2",
+      "title": "SpaceX up over 8% in premarket after earnings beat and Musk hints at Tesla tie-up",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/21/spacex-spcx-stock-musk-merger-tesla.html",
+      "published_at": "2026-10-21T12:00:00Z",
+      "summary": "SpaceX's blowout quarter is doing the EXACT job the AI bull market needed — a real revenue number to wave at the skeptics — and Musk dangling a Tesla-SpaceX megamerger is the kind of narrative grenade that sends both stocks into orbit before anyone has done the math. TSLA gets a free valuation re-rating on merger speculation alone, the broader neocloud complex gets a lifeline after last week's carnage, and NVDA catches a sympathy bid. The conspiracy-minded will note that a merger conveniently solves Musk's Tesla governance discount problem while locking retail into a story too big to short.",
       "tickers": [
-        "QQQ"
+        "TSLA"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-21-3",
+      "title": "Oil prices climb as traders assess Middle East developments",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/21/oil-price-today-wti-brent-rise-on-middle-east-worries.html",
+      "published_at": "2026-10-21T12:00:00Z",
+      "summary": "Iran's Revolutionary Guards mining the Strait of Hormuz is not a drill — roughly 20% of global oil supply transits that chokepoint, and even a CREDIBLE THREAT reprices energy risk across every sector that breathes diesel. United Airlines already slashed its 2026 profit outlook on fuel costs, UK CPI just printed 3.5% driven by motor fuels, and Indian Oil is scrambling to reroute Middle East imports. The feedback loop from higher energy into sticky inflation into rate-hike expectations is the one macro thread that ties together the French bond blowup, the Fed's next move, and every earnings guide that assumed $80 oil.",
+      "tickers": [
+        "USO"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "TTF",
-      "category": "commodity",
-      "title": "European Gas Prices Rise Above €90 for First Time Since 2022",
-      "justification": "European natgas cracking €90 for the first time since the 2022 energy crisis is a five-alarm fire for the continent — it hits utilities, industrials, and chemicals hard while feeding the inflation narrative that keeps the ECB's hands tied. Layer in the France unrest and Houthi attacks on Saudi energy infrastructure, and you've got a supply-shock cocktail that moves the long bond, the euro, and energy equities simultaneously. This is the kind of tape-changer that makes every other story this morning look like noise.",
+      "ticker": "EWQ",
+      "category": "macro",
+      "title": "French Yields Hit 5%, Highest Since 2002, as Risk Gauge Climbs",
+      "justification": "French 10-year yields breaching 5% for the first time since 2002 is not a footnote — it is a SOVEREIGN STRESS signal that the consensus has been desperately papering over. Rising energy costs plus fiscal paralysis plus violent street protests is a cocktail that spreads to peripheral European debt, hammers EUR, and puts the ECB in an impossible position. Watch for contagion into Italian BTPs, European bank stocks, and any dollar-denominated safe-haven flows that accelerate the very dollar strength everyone claims is 'priced in.'",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "EWQ",
-      "category": "geopolitical",
-      "title": "French unrest compounds debt crisis fears. Paris-listed stocks, bonds and the euro fall",
-      "justification": "When the people riot AND the bond market riots at the same time, you've got a genuine sovereign stress event — and France is the eurozone's second-largest economy, so this isn't some peripheral sideshow. OAT spreads widening, the CAC getting shorted aggressively, and the euro under pressure all feed back into U.S. multinationals with European exposure and risk-off flows globally. The ECB is caught flat-footed between supporting growth and defending fiscal credibility, which is exactly the kind of policy paralysis markets hate.",
+      "ticker": "TSLA",
+      "category": "single_name",
+      "title": "SpaceX up over 8% in premarket after earnings beat and Musk hints at Tesla tie-up",
+      "justification": "SpaceX's blowout quarter is doing the EXACT job the AI bull market needed — a real revenue number to wave at the skeptics — and Musk dangling a Tesla-SpaceX megamerger is the kind of narrative grenade that sends both stocks into orbit before anyone has done the math. TSLA gets a free valuation re-rating on merger speculation alone, the broader neocloud complex gets a lifeline after last week's carnage, and NVDA catches a sympathy bid. The conspiracy-minded will note that a merger conveniently solves Musk's Tesla governance discount problem while locking retail into a story too big to short.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "QQQ",
-      "category": "single_name",
-      "title": "South Korean IPO flop is the latest in a string of disappointments for the global AI trade",
-      "justification": "Three data-center IPOs shelved in October alone — backed by Nvidia, Blackstone, and SoftBank — and now Elice faceplants on debut: the market is sending a loud message that it's done writing blank checks for AI capex stories without a clear return on investment. This hits the entire neocloud complex, pressures hyperscaler valuations ahead of a critical earnings week, and validates the Gartner note that sparked last week's tech rout. Watch NVDA, SMCI, and the broader QQQ — the bid under this trade is shakier than the bulls want to admit.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Oil prices climb as traders assess Middle East developments",
+      "justification": "Iran's Revolutionary Guards mining the Strait of Hormuz is not a drill — roughly 20% of global oil supply transits that chokepoint, and even a CREDIBLE THREAT reprices energy risk across every sector that breathes diesel. United Airlines already slashed its 2026 profit outlook on fuel costs, UK CPI just printed 3.5% driven by motor fuels, and Indian Oil is scrambling to reroute Middle East imports. The feedback loop from higher energy into sticky inflation into rate-hike expectations is the one macro thread that ties together the French bond blowup, the Fed's next move, and every earnings guide that assumed $80 oil.",
       "verdict": null
     }
   ]
