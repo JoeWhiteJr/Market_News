@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-21T12:15:31.877804+00:00",
-  "brief_date": "2026-10-21",
+  "generated_at": "2026-10-22T12:16:26.381147+00:00",
+  "brief_date": "2026-10-22",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-21-1",
-      "title": "French Yields Hit 5%, Highest Since 2002, as Risk Gauge Climbs",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-21/french-bond-risk-gauge-nears-160-basis-points-hits-15-year-high",
-      "published_at": "2026-10-21T12:00:00Z",
-      "summary": "French 10-year yields breaching 5% for the first time since 2002 is not a footnote — it is a SOVEREIGN STRESS signal that the consensus has been desperately papering over. Rising energy costs plus fiscal paralysis plus violent street protests is a cocktail that spreads to peripheral European debt, hammers EUR, and puts the ECB in an impossible position. Watch for contagion into Italian BTPs, European bank stocks, and any dollar-denominated safe-haven flows that accelerate the very dollar strength everyone claims is 'priced in.'",
-      "tickers": [
-        "EWQ"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-21-2",
-      "title": "SpaceX up over 8% in premarket after earnings beat and Musk hints at Tesla tie-up",
+      "id": "mm-2026-10-22-1",
+      "title": "Brent crude tops $111 on Middle East worries as U.S., Israel reportedly weigh fresh Iran strikes",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/21/spacex-spcx-stock-musk-merger-tesla.html",
-      "published_at": "2026-10-21T12:00:00Z",
-      "summary": "SpaceX's blowout quarter is doing the EXACT job the AI bull market needed — a real revenue number to wave at the skeptics — and Musk dangling a Tesla-SpaceX megamerger is the kind of narrative grenade that sends both stocks into orbit before anyone has done the math. TSLA gets a free valuation re-rating on merger speculation alone, the broader neocloud complex gets a lifeline after last week's carnage, and NVDA catches a sympathy bid. The conspiracy-minded will note that a merger conveniently solves Musk's Tesla governance discount problem while locking retail into a story too big to short.",
-      "tickers": [
-        "TSLA"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-21-3",
-      "title": "Oil prices climb as traders assess Middle East developments",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/21/oil-price-today-wti-brent-rise-on-middle-east-worries.html",
-      "published_at": "2026-10-21T12:00:00Z",
-      "summary": "Iran's Revolutionary Guards mining the Strait of Hormuz is not a drill — roughly 20% of global oil supply transits that chokepoint, and even a CREDIBLE THREAT reprices energy risk across every sector that breathes diesel. United Airlines already slashed its 2026 profit outlook on fuel costs, UK CPI just printed 3.5% driven by motor fuels, and Indian Oil is scrambling to reroute Middle East imports. The feedback loop from higher energy into sticky inflation into rate-hike expectations is the one macro thread that ties together the French bond blowup, the Fed's next move, and every earnings guide that assumed $80 oil.",
+      "url": "https://www.cnbc.com/2026/10/22/oil-prices-today-wti-brent-saudi-arabia.html",
+      "published_at": "2026-10-22T12:00:00Z",
+      "summary": "This is the tape-mover of the morning — Brent at $111 with U.S. diplomats ordered out of Saudi Arabia and Iran strikes reportedly back on the table. Energy names catch a bid, airlines get crushed (four carriers already cut guidance this month), and the long bond rallies on haven demand while equities slide. When oil spikes on genuine supply-threat news, it touches every sector from consumer staples to industrials — this isn't noise, it's a regime shift.",
       "tickers": [
         "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-22-2",
+      "title": "Tech Slide and Oil Rally Spur Flight to Treasuries: Markets Wrap",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-21/stock-market-today-dow-s-p-live-updates",
+      "published_at": "2026-10-22T12:00:00Z",
+      "summary": "The whole risk-off cocktail is in one headline — tech earnings disappointing, oil ripping, and money flooding into Treasuries. This is the macro setup that sets the tone for every asset class: growth stocks under pressure, energy outperforming, credit spreads widening (see CoreWeave down 29% in October). When the broad market wraps look like this, the SPY is your primary instrument and every sector rotation trade is live.",
+      "tickers": [
+        "SPY"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-22-3",
+      "title": "US Midterm Elections 2026: What Results Could Mean for Wall Street",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-22/us-midterm-elections-2026-what-results-could-mean-for-wall-street",
+      "published_at": "2026-10-22T12:00:00Z",
+      "summary": "Less than a month out and Wall Street is pricing in a Democratic House takeover — Bloomberg says stocks fall if both chambers flip, and the polling edge is real. This is a slow-burn catalyst that's already reshaping sector positioning: defense, energy, and financials face regulatory headwinds if the blue wave materializes. With Trump's economic approval at an all-time low per the CNBC survey dropping the same day, the political risk premium on equities is rising fast.",
+      "tickers": [
+        "SPY"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "EWQ",
-      "category": "macro",
-      "title": "French Yields Hit 5%, Highest Since 2002, as Risk Gauge Climbs",
-      "justification": "French 10-year yields breaching 5% for the first time since 2002 is not a footnote — it is a SOVEREIGN STRESS signal that the consensus has been desperately papering over. Rising energy costs plus fiscal paralysis plus violent street protests is a cocktail that spreads to peripheral European debt, hammers EUR, and puts the ECB in an impossible position. Watch for contagion into Italian BTPs, European bank stocks, and any dollar-denominated safe-haven flows that accelerate the very dollar strength everyone claims is 'priced in.'",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Brent crude tops $111 on Middle East worries as U.S., Israel reportedly weigh fresh Iran strikes",
+      "justification": "This is the tape-mover of the morning — Brent at $111 with U.S. diplomats ordered out of Saudi Arabia and Iran strikes reportedly back on the table. Energy names catch a bid, airlines get crushed (four carriers already cut guidance this month), and the long bond rallies on haven demand while equities slide. When oil spikes on genuine supply-threat news, it touches every sector from consumer staples to industrials — this isn't noise, it's a regime shift.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "TSLA",
-      "category": "single_name",
-      "title": "SpaceX up over 8% in premarket after earnings beat and Musk hints at Tesla tie-up",
-      "justification": "SpaceX's blowout quarter is doing the EXACT job the AI bull market needed — a real revenue number to wave at the skeptics — and Musk dangling a Tesla-SpaceX megamerger is the kind of narrative grenade that sends both stocks into orbit before anyone has done the math. TSLA gets a free valuation re-rating on merger speculation alone, the broader neocloud complex gets a lifeline after last week's carnage, and NVDA catches a sympathy bid. The conspiracy-minded will note that a merger conveniently solves Musk's Tesla governance discount problem while locking retail into a story too big to short.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Tech Slide and Oil Rally Spur Flight to Treasuries: Markets Wrap",
+      "justification": "The whole risk-off cocktail is in one headline — tech earnings disappointing, oil ripping, and money flooding into Treasuries. This is the macro setup that sets the tone for every asset class: growth stocks under pressure, energy outperforming, credit spreads widening (see CoreWeave down 29% in October). When the broad market wraps look like this, the SPY is your primary instrument and every sector rotation trade is live.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "USO",
+      "ticker": "SPY",
       "category": "geopolitical",
-      "title": "Oil prices climb as traders assess Middle East developments",
-      "justification": "Iran's Revolutionary Guards mining the Strait of Hormuz is not a drill — roughly 20% of global oil supply transits that chokepoint, and even a CREDIBLE THREAT reprices energy risk across every sector that breathes diesel. United Airlines already slashed its 2026 profit outlook on fuel costs, UK CPI just printed 3.5% driven by motor fuels, and Indian Oil is scrambling to reroute Middle East imports. The feedback loop from higher energy into sticky inflation into rate-hike expectations is the one macro thread that ties together the French bond blowup, the Fed's next move, and every earnings guide that assumed $80 oil.",
+      "title": "US Midterm Elections 2026: What Results Could Mean for Wall Street",
+      "justification": "Less than a month out and Wall Street is pricing in a Democratic House takeover — Bloomberg says stocks fall if both chambers flip, and the polling edge is real. This is a slow-burn catalyst that's already reshaping sector positioning: defense, energy, and financials face regulatory headwinds if the blue wave materializes. With Trump's economic approval at an all-time low per the CNBC survey dropping the same day, the political risk premium on equities is rising fast.",
       "verdict": null
     }
   ]
