@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-26T13:38:20.027379+00:00",
-  "brief_date": "2026-10-26",
+  "generated_at": "2026-10-27T12:16:24.240304+00:00",
+  "brief_date": "2026-10-27",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-26-1",
-      "title": "Meta announces $95 billion stock offering to fund AI expansion",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/26/meta-stock-offering-ai.html",
-      "published_at": "2026-10-26T12:00:00Z",
-      "summary": "Listen up — a $95 billion equity raise is the kind of tape-moving event that rattles the whole neighborhood. META itself gets hit with dilution, but the real story is Nvidia, AMD, and Broadcom potentially taking shares, which ties the chip sector directly into this deal and signals where the smart money thinks AI capex is heading. This is peak earnings week and the Street is already skittish on AI valuations — this one lands like a bowling ball in a quiet pond.",
+      "id": "mm-2026-10-27-1",
+      "title": "Meta launches $35 billion stock offering to fund AI expansion",
+      "source": "channelnewsasia.com",
+      "url": "https://www.channelnewsasia.com/business/meta-raise-up-95-billion-in-equity-fund-costly-ai-expansion-6492931",
+      "published_at": "2026-10-27T12:00:00Z",
+      "summary": "A $95 billion equity raise is not a footnote — that's a tape-moving event. Meta flooding the market with new shares puts immediate pressure on its stock price and signals to the Street just how capital-hungry this AI buildout really is; Nvidia's $3B investment in Meta adds another wrinkle. This ripples across the whole AI infrastructure complex — cloud, chips, data centers — and raises the uncomfortable question Cramer already flagged: is this IPO/capital-raise wave about to drain the liquidity that's been fueling the bull run?",
       "tickers": [
         "META"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-26-2",
-      "title": "Brazil Markets Suffer Rout After Lula's Improbable Election Win",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-26/brazil-markets-brace-for-rout-on-lula-s-improbable-election-win",
-      "published_at": "2026-10-26T12:00:00Z",
-      "summary": "Lula pulling off a comeback nobody priced in is a genuine shock to EM positioning — Brazilian dollar bonds are already getting hit in London and the real is under pressure, which ripples into soybeans, coffee, sugar, and any fund with EM exposure. Bolsonaro refusing to concede adds a political risk premium that keeps the bid thin on Brazilian assets for days. Watch EWZ and the commodity complex for the spillover.",
+      "id": "mm-2026-10-27-2",
+      "title": "Fed expected to hold rates steady, but Warsh may point way to more hikes",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/27/federal-reserve-rates-kevin-warsh.html",
+      "published_at": "2026-10-27T12:00:00Z",
+      "summary": "A hold is baked in — 93% of the Street expects no move — but the real trade here is what Warsh signals about the path forward. If the new Fed chair leans hawkish and hints at more hikes ahead, the long bond sells off and rate-sensitive tech multiples get another haircut right into a monster earnings week. This is the macro event that sets the tone for everything else on the calendar.",
       "tickers": [
-        "EWZ"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-26-3",
-      "title": "Anthropic Is Said to Plan Public Filing for Mega-IPO Monday",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-26/anthropic-is-said-to-plan-public-filing-for-mega-ipo-monday",
-      "published_at": "2026-10-26T12:00:00Z",
-      "summary": "Anthropic dropping its S-1 on a Monday morning during peak earnings week and a Fed meeting is the kind of event that reshuffles capital across the entire AI sector — money comes out of existing AI names to fund the new issue. This is a potentially record-breaking debut that will set the valuation benchmark for every private AI company on the Street's radar. The timing alone makes it a volatility catalyst for NVDA, MSFT, GOOGL, and anything else wearing an AI badge.",
+      "id": "mm-2026-10-27-3",
+      "title": "From Wall Street to Silicon Valley, Anthropic IPO poised to have massive 'trickle-down effect'",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/26/anthropic-ipo-might-trigger-tech-reset-if-ipo-underperforms.html",
+      "published_at": "2026-10-27T12:00:00Z",
+      "summary": "Anthropic's S-1 is the AI sector's report card right now — a 15-fold revenue jump sounds great until you read the fine print: concentrated customers, massive compute bills flowing to Google and Amazon, and a governance structure that leaves public shareholders holding the bag. How this IPO prices and trades will set the sentiment dial for every AI name on the board; a stumble here could be the pin that pricks the whole AI valuation story.",
       "tickers": [
-        "SPY"
+        "GOOGL"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "META",
       "category": "single_name",
-      "title": "Meta announces $95 billion stock offering to fund AI expansion",
-      "justification": "Listen up — a $95 billion equity raise is the kind of tape-moving event that rattles the whole neighborhood. META itself gets hit with dilution, but the real story is Nvidia, AMD, and Broadcom potentially taking shares, which ties the chip sector directly into this deal and signals where the smart money thinks AI capex is heading. This is peak earnings week and the Street is already skittish on AI valuations — this one lands like a bowling ball in a quiet pond.",
+      "title": "Meta launches $35 billion stock offering to fund AI expansion",
+      "justification": "A $95 billion equity raise is not a footnote — that's a tape-moving event. Meta flooding the market with new shares puts immediate pressure on its stock price and signals to the Street just how capital-hungry this AI buildout really is; Nvidia's $3B investment in Meta adds another wrinkle. This ripples across the whole AI infrastructure complex — cloud, chips, data centers — and raises the uncomfortable question Cramer already flagged: is this IPO/capital-raise wave about to drain the liquidity that's been fueling the bull run?",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "EWZ",
-      "category": "geopolitical",
-      "title": "Brazil Markets Suffer Rout After Lula's Improbable Election Win",
-      "justification": "Lula pulling off a comeback nobody priced in is a genuine shock to EM positioning — Brazilian dollar bonds are already getting hit in London and the real is under pressure, which ripples into soybeans, coffee, sugar, and any fund with EM exposure. Bolsonaro refusing to concede adds a political risk premium that keeps the bid thin on Brazilian assets for days. Watch EWZ and the commodity complex for the spillover.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Fed expected to hold rates steady, but Warsh may point way to more hikes",
+      "justification": "A hold is baked in — 93% of the Street expects no move — but the real trade here is what Warsh signals about the path forward. If the new Fed chair leans hawkish and hints at more hikes ahead, the long bond sells off and rate-sensitive tech multiples get another haircut right into a monster earnings week. This is the macro event that sets the tone for everything else on the calendar.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "SPY",
+      "ticker": "GOOGL",
       "category": "single_name",
-      "title": "Anthropic Is Said to Plan Public Filing for Mega-IPO Monday",
-      "justification": "Anthropic dropping its S-1 on a Monday morning during peak earnings week and a Fed meeting is the kind of event that reshuffles capital across the entire AI sector — money comes out of existing AI names to fund the new issue. This is a potentially record-breaking debut that will set the valuation benchmark for every private AI company on the Street's radar. The timing alone makes it a volatility catalyst for NVDA, MSFT, GOOGL, and anything else wearing an AI badge.",
+      "title": "From Wall Street to Silicon Valley, Anthropic IPO poised to have massive 'trickle-down effect'",
+      "justification": "Anthropic's S-1 is the AI sector's report card right now — a 15-fold revenue jump sounds great until you read the fine print: concentrated customers, massive compute bills flowing to Google and Amazon, and a governance structure that leaves public shareholders holding the bag. How this IPO prices and trades will set the sentiment dial for every AI name on the board; a stumble here could be the pin that pricks the whole AI valuation story.",
       "verdict": null
     }
   ]
