@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-27T12:16:24.240304+00:00",
-  "brief_date": "2026-10-27",
+  "generated_at": "2026-10-28T12:11:46.063976+00:00",
+  "brief_date": "2026-10-28",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-27-1",
-      "title": "Meta launches $35 billion stock offering to fund AI expansion",
-      "source": "channelnewsasia.com",
-      "url": "https://www.channelnewsasia.com/business/meta-raise-up-95-billion-in-equity-fund-costly-ai-expansion-6492931",
-      "published_at": "2026-10-27T12:00:00Z",
-      "summary": "A $95 billion equity raise is not a footnote — that's a tape-moving event. Meta flooding the market with new shares puts immediate pressure on its stock price and signals to the Street just how capital-hungry this AI buildout really is; Nvidia's $3B investment in Meta adds another wrinkle. This ripples across the whole AI infrastructure complex — cloud, chips, data centers — and raises the uncomfortable question Cramer already flagged: is this IPO/capital-raise wave about to drain the liquidity that's been fueling the bull run?",
-      "tickers": [
-        "META"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-27-2",
-      "title": "Fed expected to hold rates steady, but Warsh may point way to more hikes",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/27/federal-reserve-rates-kevin-warsh.html",
-      "published_at": "2026-10-27T12:00:00Z",
-      "summary": "A hold is baked in — 93% of the Street expects no move — but the real trade here is what Warsh signals about the path forward. If the new Fed chair leans hawkish and hints at more hikes ahead, the long bond sells off and rate-sensitive tech multiples get another haircut right into a monster earnings week. This is the macro event that sets the tone for everything else on the calendar.",
+      "id": "mm-2026-10-28-1",
+      "title": "Wall Street's AI Debt Machine Is Starting to Choke on Supply",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-28/wall-street-s-ai-debt-machine-is-starting-to-choke-on-supply",
+      "published_at": "2026-10-28T12:00:00Z",
+      "summary": "This newspaper has long argued that the credit market, not the equity market, is where AI euphoria will first encounter its reckoning — and here, precisely, is the evidence. Early signs that debt markets are approaching absorption limits for AI infrastructure financing threatens the capital pipeline underpinning hyperscaler capex, with direct read-through to Nvidia, the broader semiconductor complex, and the investment-grade credit spreads that have thus far remained implausibly serene. On a day when Microsoft and Alphabet report after the close and the Federal Reserve deliberates on rates, a structural warning from the credit side of the ledger is the most consequential piece of analysis in the room.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-27-3",
-      "title": "From Wall Street to Silicon Valley, Anthropic IPO poised to have massive 'trickle-down effect'",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/26/anthropic-ipo-might-trigger-tech-reset-if-ipo-underperforms.html",
-      "published_at": "2026-10-27T12:00:00Z",
-      "summary": "Anthropic's S-1 is the AI sector's report card right now — a 15-fold revenue jump sounds great until you read the fine print: concentrated customers, massive compute bills flowing to Google and Amazon, and a governance structure that leaves public shareholders holding the bag. How this IPO prices and trades will set the sentiment dial for every AI name on the board; a stumble here could be the pin that pricks the whole AI valuation story.",
+      "id": "mm-2026-10-28-2",
+      "title": "SK Hynix delivered on third-quarter results — but the outlook is what really mattered to Wall Street and the AI trade",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/sk-hynix-delivered-on-third-quarter-results-but-the-outlook-is-what-really-mattered-to-wall-street-and-the-ai-trade-2fde9a57?mod=mw_rss_topstories",
+      "published_at": "2026-10-28T12:00:00Z",
+      "summary": "SK Hynix's declaration that HBM supply constraints will persist through 2030 is, for the AI trade, rather more than a quarterly earnings footnote — it is a forward guidance statement of the first order, one that simultaneously validates Nvidia's pricing power and raises uncomfortable questions about the pace at which AI infrastructure can actually be assembled. The 11% surge in Hynix shares has already propagated through Samsung, the Nikkei, and the KOSPI; one may reasonably expect the reverberations to reach Micron and the Philadelphia Semiconductor Index when New York opens in earnest.",
       "tickers": [
-        "GOOGL"
+        "MU"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-10-28-3",
+      "title": "Oil up over 1% as Saudi Arabian refinery attack reignites supply risk concerns",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQYUhHblNqOGNPczlpdUR2NDFMWjZxX2FZYjVTTzREX2R4YU5jRzF2ckN1MG9sSnIxWG9hbDJ0TjV4YTZXRjdqSUc3aF9OcTJuUVlJZkZrdUd0V0RMUU1qUWxiNDdmdXhCTmJUczZWOFRUWTRKdzJQLUJYNXZBODhnTjJfOXMyNU01OGVreWM5TkNyamNjbzV5UzAxX3ZOdWcwcUE5SFZHSkEyUjZ1M1dUQ3ByRDdxbC13ZzRQR0xfcTZ0bjh6dnNPalJZRWI",
+      "published_at": "2026-10-28T12:00:00Z",
+      "summary": "A Houthi missile strike on the Ras Tanura refinery — one of the world's largest crude processing facilities — is precisely the sort of kinetic event that transforms geopolitical background noise into an immediate supply-risk premium. With Brent already elevated and Saudi exports running near wartime highs, any disruption to refinery throughput tightens the product market rather than merely the crude one, with disproportionate consequences for diesel and jet fuel. Energy equities, airline cost structures, and the broader inflation outlook all feel the draught simultaneously, arriving at a peculiarly inconvenient moment for a Federal Reserve already navigating persistently elevated price pressures.",
+      "tickers": [
+        "USO"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "META",
-      "category": "single_name",
-      "title": "Meta launches $35 billion stock offering to fund AI expansion",
-      "justification": "A $95 billion equity raise is not a footnote — that's a tape-moving event. Meta flooding the market with new shares puts immediate pressure on its stock price and signals to the Street just how capital-hungry this AI buildout really is; Nvidia's $3B investment in Meta adds another wrinkle. This ripples across the whole AI infrastructure complex — cloud, chips, data centers — and raises the uncomfortable question Cramer already flagged: is this IPO/capital-raise wave about to drain the liquidity that's been fueling the bull run?",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Wall Street's AI Debt Machine Is Starting to Choke on Supply",
+      "justification": "This newspaper has long argued that the credit market, not the equity market, is where AI euphoria will first encounter its reckoning — and here, precisely, is the evidence. Early signs that debt markets are approaching absorption limits for AI infrastructure financing threatens the capital pipeline underpinning hyperscaler capex, with direct read-through to Nvidia, the broader semiconductor complex, and the investment-grade credit spreads that have thus far remained implausibly serene. On a day when Microsoft and Alphabet report after the close and the Federal Reserve deliberates on rates, a structural warning from the credit side of the ledger is the most consequential piece of analysis in the room.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Fed expected to hold rates steady, but Warsh may point way to more hikes",
-      "justification": "A hold is baked in — 93% of the Street expects no move — but the real trade here is what Warsh signals about the path forward. If the new Fed chair leans hawkish and hints at more hikes ahead, the long bond sells off and rate-sensitive tech multiples get another haircut right into a monster earnings week. This is the macro event that sets the tone for everything else on the calendar.",
+      "ticker": "MU",
+      "category": "single_name",
+      "title": "SK Hynix delivered on third-quarter results — but the outlook is what really mattered to Wall Street and the AI trade",
+      "justification": "SK Hynix's declaration that HBM supply constraints will persist through 2030 is, for the AI trade, rather more than a quarterly earnings footnote — it is a forward guidance statement of the first order, one that simultaneously validates Nvidia's pricing power and raises uncomfortable questions about the pace at which AI infrastructure can actually be assembled. The 11% surge in Hynix shares has already propagated through Samsung, the Nikkei, and the KOSPI; one may reasonably expect the reverberations to reach Micron and the Philadelphia Semiconductor Index when New York opens in earnest.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "GOOGL",
-      "category": "single_name",
-      "title": "From Wall Street to Silicon Valley, Anthropic IPO poised to have massive 'trickle-down effect'",
-      "justification": "Anthropic's S-1 is the AI sector's report card right now — a 15-fold revenue jump sounds great until you read the fine print: concentrated customers, massive compute bills flowing to Google and Amazon, and a governance structure that leaves public shareholders holding the bag. How this IPO prices and trades will set the sentiment dial for every AI name on the board; a stumble here could be the pin that pricks the whole AI valuation story.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Oil up over 1% as Saudi Arabian refinery attack reignites supply risk concerns",
+      "justification": "A Houthi missile strike on the Ras Tanura refinery — one of the world's largest crude processing facilities — is precisely the sort of kinetic event that transforms geopolitical background noise into an immediate supply-risk premium. With Brent already elevated and Saudi exports running near wartime highs, any disruption to refinery throughput tightens the product market rather than merely the crude one, with disproportionate consequences for diesel and jet fuel. Energy equities, airline cost structures, and the broader inflation outlook all feel the draught simultaneously, arriving at a peculiarly inconvenient moment for a Federal Reserve already navigating persistently elevated price pressures.",
       "verdict": null
     }
   ]
