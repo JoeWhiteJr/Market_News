@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-28T12:11:46.063976+00:00",
-  "brief_date": "2026-10-28",
+  "generated_at": "2026-10-29T12:12:01.726903+00:00",
+  "brief_date": "2026-10-29",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-28-1",
-      "title": "Wall Street's AI Debt Machine Is Starting to Choke on Supply",
+      "id": "mm-2026-10-29-1",
+      "title": "US Stock Futures Fall as Alphabet Sales Miss Revives AI Fears",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-28/wall-street-s-ai-debt-machine-is-starting-to-choke-on-supply",
-      "published_at": "2026-10-28T12:00:00Z",
-      "summary": "This newspaper has long argued that the credit market, not the equity market, is where AI euphoria will first encounter its reckoning — and here, precisely, is the evidence. Early signs that debt markets are approaching absorption limits for AI infrastructure financing threatens the capital pipeline underpinning hyperscaler capex, with direct read-through to Nvidia, the broader semiconductor complex, and the investment-grade credit spreads that have thus far remained implausibly serene. On a day when Microsoft and Alphabet report after the close and the Federal Reserve deliberates on rates, a structural warning from the credit side of the ledger is the most consequential piece of analysis in the room.",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-29/us-stock-futures-fall-as-alphabet-sales-miss-revives-ai-fears",
+      "published_at": "2026-10-29T12:00:00Z",
+      "summary": "This is the tape-mover of the morning — Alphabet whiffed on revenue and the AI trade is cracking at the seams. When the search king stumbles AND capex comes in light alongside Microsoft, every data-center play, chip name, and cloud stock gets repriced before the open. The Mag Seven correlation breakdown just got a lot more interesting.",
       "tickers": [
-        "SPY"
+        "GOOGL"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-28-2",
-      "title": "SK Hynix delivered on third-quarter results — but the outlook is what really mattered to Wall Street and the AI trade",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/sk-hynix-delivered-on-third-quarter-results-but-the-outlook-is-what-really-mattered-to-wall-street-and-the-ai-trade-2fde9a57?mod=mw_rss_topstories",
-      "published_at": "2026-10-28T12:00:00Z",
-      "summary": "SK Hynix's declaration that HBM supply constraints will persist through 2030 is, for the AI trade, rather more than a quarterly earnings footnote — it is a forward guidance statement of the first order, one that simultaneously validates Nvidia's pricing power and raises uncomfortable questions about the pace at which AI infrastructure can actually be assembled. The 11% surge in Hynix shares has already propagated through Samsung, the Nikkei, and the KOSPI; one may reasonably expect the reverberations to reach Micron and the Philadelphia Semiconductor Index when New York opens in earnest.",
+      "id": "mm-2026-10-29-2",
+      "title": "AI build-out hits snag as Google and Microsoft put off raising capex forecasts",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html",
+      "published_at": "2026-10-29T12:00:00Z",
+      "summary": "Both hyperscalers blinked on capex guidance — that's a gut-punch to every pick-and-shovel name riding the AI infrastructure wave: Nvidia, the data-center REITs, the power plays, the cooling stocks. When the two biggest spenders in the world pump the brakes, the whole supply chain feels it. This one ripples wide.",
       "tickers": [
-        "MU"
+        "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-28-3",
-      "title": "Oil up over 1% as Saudi Arabian refinery attack reignites supply risk concerns",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQYUhHblNqOGNPczlpdUR2NDFMWjZxX2FZYjVTTzREX2R4YU5jRzF2ckN1MG9sSnIxWG9hbDJ0TjV4YTZXRjdqSUc3aF9OcTJuUVlJZkZrdUd0V0RMUU1qUWxiNDdmdXhCTmJUczZWOFRUWTRKdzJQLUJYNXZBODhnTjJfOXMyNU01OGVreWM5TkNyamNjbzV5UzAxX3ZOdWcwcUE5SFZHSkEyUjZ1M1dUQ3ByRDdxbC13ZzRQR0xfcTZ0bjh6dnNPalJZRWI",
-      "published_at": "2026-10-28T12:00:00Z",
-      "summary": "A Houthi missile strike on the Ras Tanura refinery — one of the world's largest crude processing facilities — is precisely the sort of kinetic event that transforms geopolitical background noise into an immediate supply-risk premium. With Brent already elevated and Saudi exports running near wartime highs, any disruption to refinery throughput tightens the product market rather than merely the crude one, with disproportionate consequences for diesel and jet fuel. Energy equities, airline cost structures, and the broader inflation outlook all feel the draught simultaneously, arriving at a peculiarly inconvenient moment for a Federal Reserve already navigating persistently elevated price pressures.",
+      "id": "mm-2026-10-29-3",
+      "title": "Eli Lilly blows past estimates, hikes sales outlook as Zepbound and Mounjaro demand surge again",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/29/eli-lilly-lly-earnings-q3-2026.html",
+      "published_at": "2026-10-29T12:00:00Z",
+      "summary": "Lilly is raising guidance for the third time this year — that's not a beat, that's a statement. GLP-1 demand is still running hot and the bears keep getting steamrolled; this lifts the whole obesity drug complex including Novo Nordisk and puts pressure on anyone in the food, medical device, or bariatric space. One of the cleanest single-name stories on the tape today.",
       "tickers": [
-        "USO"
+        "LLY"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Wall Street's AI Debt Machine Is Starting to Choke on Supply",
-      "justification": "This newspaper has long argued that the credit market, not the equity market, is where AI euphoria will first encounter its reckoning — and here, precisely, is the evidence. Early signs that debt markets are approaching absorption limits for AI infrastructure financing threatens the capital pipeline underpinning hyperscaler capex, with direct read-through to Nvidia, the broader semiconductor complex, and the investment-grade credit spreads that have thus far remained implausibly serene. On a day when Microsoft and Alphabet report after the close and the Federal Reserve deliberates on rates, a structural warning from the credit side of the ledger is the most consequential piece of analysis in the room.",
+      "ticker": "GOOGL",
+      "category": "single_name",
+      "title": "US Stock Futures Fall as Alphabet Sales Miss Revives AI Fears",
+      "justification": "This is the tape-mover of the morning — Alphabet whiffed on revenue and the AI trade is cracking at the seams. When the search king stumbles AND capex comes in light alongside Microsoft, every data-center play, chip name, and cloud stock gets repriced before the open. The Mag Seven correlation breakdown just got a lot more interesting.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "MU",
+      "ticker": "NVDA",
       "category": "single_name",
-      "title": "SK Hynix delivered on third-quarter results — but the outlook is what really mattered to Wall Street and the AI trade",
-      "justification": "SK Hynix's declaration that HBM supply constraints will persist through 2030 is, for the AI trade, rather more than a quarterly earnings footnote — it is a forward guidance statement of the first order, one that simultaneously validates Nvidia's pricing power and raises uncomfortable questions about the pace at which AI infrastructure can actually be assembled. The 11% surge in Hynix shares has already propagated through Samsung, the Nikkei, and the KOSPI; one may reasonably expect the reverberations to reach Micron and the Philadelphia Semiconductor Index when New York opens in earnest.",
+      "title": "AI build-out hits snag as Google and Microsoft put off raising capex forecasts",
+      "justification": "Both hyperscalers blinked on capex guidance — that's a gut-punch to every pick-and-shovel name riding the AI infrastructure wave: Nvidia, the data-center REITs, the power plays, the cooling stocks. When the two biggest spenders in the world pump the brakes, the whole supply chain feels it. This one ripples wide.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Oil up over 1% as Saudi Arabian refinery attack reignites supply risk concerns",
-      "justification": "A Houthi missile strike on the Ras Tanura refinery — one of the world's largest crude processing facilities — is precisely the sort of kinetic event that transforms geopolitical background noise into an immediate supply-risk premium. With Brent already elevated and Saudi exports running near wartime highs, any disruption to refinery throughput tightens the product market rather than merely the crude one, with disproportionate consequences for diesel and jet fuel. Energy equities, airline cost structures, and the broader inflation outlook all feel the draught simultaneously, arriving at a peculiarly inconvenient moment for a Federal Reserve already navigating persistently elevated price pressures.",
+      "ticker": "LLY",
+      "category": "single_name",
+      "title": "Eli Lilly blows past estimates, hikes sales outlook as Zepbound and Mounjaro demand surge again",
+      "justification": "Lilly is raising guidance for the third time this year — that's not a beat, that's a statement. GLP-1 demand is still running hot and the bears keep getting steamrolled; this lifts the whole obesity drug complex including Novo Nordisk and puts pressure on anyone in the food, medical device, or bariatric space. One of the cleanest single-name stories on the tape today.",
       "verdict": null
     }
   ]
