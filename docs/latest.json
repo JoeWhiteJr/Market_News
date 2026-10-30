@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-29T12:12:01.726903+00:00",
-  "brief_date": "2026-10-29",
+  "generated_at": "2026-10-30T12:12:00.990460+00:00",
+  "brief_date": "2026-10-30",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-29-1",
-      "title": "US Stock Futures Fall as Alphabet Sales Miss Revives AI Fears",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-10-29/us-stock-futures-fall-as-alphabet-sales-miss-revives-ai-fears",
-      "published_at": "2026-10-29T12:00:00Z",
-      "summary": "This is the tape-mover of the morning — Alphabet whiffed on revenue and the AI trade is cracking at the seams. When the search king stumbles AND capex comes in light alongside Microsoft, every data-center play, chip name, and cloud stock gets repriced before the open. The Mag Seven correlation breakdown just got a lot more interesting.",
+      "id": "mm-2026-10-30-1",
+      "title": "Amazon falls 7%, Intel plunges 25% in premarket trading, as pressure mounts after earnings",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/10/30/amazon-intel-earnings-big-tech-ai-spending-concerns.html",
+      "published_at": "2026-10-30T12:00:00Z",
+      "summary": "Two mega-cap names getting torched in premarket — Amazon down 7% and Intel cratering 25% — is the kind of tape action that bleeds into the whole tech complex and drags the Nasdaq with it. Intel's guidance miss is a $128 billion wipeout in market cap; that's not a rounding error. With Alphabet already in the woodshed from the prior session, the AI spending reckoning is now a full-blown sector event.",
       "tickers": [
-        "GOOGL"
+        "QQQ"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-29-2",
-      "title": "AI build-out hits snag as Google and Microsoft put off raising capex forecasts",
+      "id": "mm-2026-10-30-2",
+      "title": "Iran claims four tankers struck mines in Hormuz as strike fears grow after U.S. midterms",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html",
-      "published_at": "2026-10-29T12:00:00Z",
-      "summary": "Both hyperscalers blinked on capex guidance — that's a gut-punch to every pick-and-shovel name riding the AI infrastructure wave: Nvidia, the data-center REITs, the power plays, the cooling stocks. When the two biggest spenders in the world pump the brakes, the whole supply chain feels it. This one ripples wide.",
+      "url": "https://www.cnbc.com/2026/10/30/iran-trump-hormuz-oil-middle-east-.html",
+      "published_at": "2026-10-30T12:00:00Z",
+      "summary": "Four tankers hitting mines in the Strait of Hormuz is the kind of headline that sends crude spiking and defense names bid before the opening bell even rings. About 20% of global oil supply transits that chokepoint — any credible disruption there is an immediate shock to energy markets, shipping, and inflation expectations. With the Fed already on edge about prices and the midterms days away, this is the worst possible time for a Hormuz flare-up.",
       "tickers": [
-        "NVDA"
+        "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-29-3",
-      "title": "Eli Lilly blows past estimates, hikes sales outlook as Zepbound and Mounjaro demand surge again",
+      "id": "mm-2026-10-30-3",
+      "title": "Biggest-ever crypto hack impacts $6.3 billion as Binance works to contain fallout",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/29/eli-lilly-lly-earnings-q3-2026.html",
-      "published_at": "2026-10-29T12:00:00Z",
-      "summary": "Lilly is raising guidance for the third time this year — that's not a beat, that's a statement. GLP-1 demand is still running hot and the bears keep getting steamrolled; this lifts the whole obesity drug complex including Novo Nordisk and puts pressure on anyone in the food, medical device, or bariatric space. One of the cleanest single-name stories on the tape today.",
+      "url": "https://www.cnbc.com/2026/10/29/circle-tether-freeze-funds-impacted-by-potential-binance-security-issue.html",
+      "published_at": "2026-10-30T12:00:00Z",
+      "summary": "A $6.3 billion hack at the world's largest crypto exchange is the kind of systemic shock that rattles the entire digital asset ecosystem — think forced selling, contagion fears, and a confidence crisis all at once. Binance halting trading while Circle and Tether freeze funds means liquidity is locked up across the space, and crypto-adjacent equities like Coinbase are going to feel the heat. This is the Mt. Gox playbook, just with a lot more zeros.",
       "tickers": [
-        "LLY"
+        "COIN"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "GOOGL",
+      "ticker": "QQQ",
       "category": "single_name",
-      "title": "US Stock Futures Fall as Alphabet Sales Miss Revives AI Fears",
-      "justification": "This is the tape-mover of the morning — Alphabet whiffed on revenue and the AI trade is cracking at the seams. When the search king stumbles AND capex comes in light alongside Microsoft, every data-center play, chip name, and cloud stock gets repriced before the open. The Mag Seven correlation breakdown just got a lot more interesting.",
+      "title": "Amazon falls 7%, Intel plunges 25% in premarket trading, as pressure mounts after earnings",
+      "justification": "Two mega-cap names getting torched in premarket — Amazon down 7% and Intel cratering 25% — is the kind of tape action that bleeds into the whole tech complex and drags the Nasdaq with it. Intel's guidance miss is a $128 billion wipeout in market cap; that's not a rounding error. With Alphabet already in the woodshed from the prior session, the AI spending reckoning is now a full-blown sector event.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "NVDA",
-      "category": "single_name",
-      "title": "AI build-out hits snag as Google and Microsoft put off raising capex forecasts",
-      "justification": "Both hyperscalers blinked on capex guidance — that's a gut-punch to every pick-and-shovel name riding the AI infrastructure wave: Nvidia, the data-center REITs, the power plays, the cooling stocks. When the two biggest spenders in the world pump the brakes, the whole supply chain feels it. This one ripples wide.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Iran claims four tankers struck mines in Hormuz as strike fears grow after U.S. midterms",
+      "justification": "Four tankers hitting mines in the Strait of Hormuz is the kind of headline that sends crude spiking and defense names bid before the opening bell even rings. About 20% of global oil supply transits that chokepoint — any credible disruption there is an immediate shock to energy markets, shipping, and inflation expectations. With the Fed already on edge about prices and the midterms days away, this is the worst possible time for a Hormuz flare-up.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "LLY",
-      "category": "single_name",
-      "title": "Eli Lilly blows past estimates, hikes sales outlook as Zepbound and Mounjaro demand surge again",
-      "justification": "Lilly is raising guidance for the third time this year — that's not a beat, that's a statement. GLP-1 demand is still running hot and the bears keep getting steamrolled; this lifts the whole obesity drug complex including Novo Nordisk and puts pressure on anyone in the food, medical device, or bariatric space. One of the cleanest single-name stories on the tape today.",
+      "ticker": "COIN",
+      "category": "crypto",
+      "title": "Biggest-ever crypto hack impacts $6.3 billion as Binance works to contain fallout",
+      "justification": "A $6.3 billion hack at the world's largest crypto exchange is the kind of systemic shock that rattles the entire digital asset ecosystem — think forced selling, contagion fears, and a confidence crisis all at once. Binance halting trading while Circle and Tether freeze funds means liquidity is locked up across the space, and crypto-adjacent equities like Coinbase are going to feel the heat. This is the Mt. Gox playbook, just with a lot more zeros.",
       "verdict": null
     }
   ]
