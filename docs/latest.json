@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-30T12:12:00.990460+00:00",
-  "brief_date": "2026-10-30",
+  "generated_at": "2026-11-02T12:11:37.527060+00:00",
+  "brief_date": "2026-11-02",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-10-30-1",
-      "title": "Amazon falls 7%, Intel plunges 25% in premarket trading, as pressure mounts after earnings",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/30/amazon-intel-earnings-big-tech-ai-spending-concerns.html",
-      "published_at": "2026-10-30T12:00:00Z",
-      "summary": "Two mega-cap names getting torched in premarket — Amazon down 7% and Intel cratering 25% — is the kind of tape action that bleeds into the whole tech complex and drags the Nasdaq with it. Intel's guidance miss is a $128 billion wipeout in market cap; that's not a rounding error. With Alphabet already in the woodshed from the prior session, the AI spending reckoning is now a full-blown sector event.",
-      "tickers": [
-        "QQQ"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-10-30-2",
-      "title": "Iran claims four tankers struck mines in Hormuz as strike fears grow after U.S. midterms",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/30/iran-trump-hormuz-oil-middle-east-.html",
-      "published_at": "2026-10-30T12:00:00Z",
-      "summary": "Four tankers hitting mines in the Strait of Hormuz is the kind of headline that sends crude spiking and defense names bid before the opening bell even rings. About 20% of global oil supply transits that chokepoint — any credible disruption there is an immediate shock to energy markets, shipping, and inflation expectations. With the Fed already on edge about prices and the midterms days away, this is the worst possible time for a Hormuz flare-up.",
+      "id": "mm-2026-11-02-1",
+      "title": "Iran's IRGC Navy says two tankers 'exploded' after hitting mines in Hormuz",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNZmk2dmxjdk1sOW96UkZiaUlJVXhzc1pJMjZJUnY2WGtvaXd4aXRJY3d4UTNoUmFJdUVQQjlkb0JPSmxEc2YzS1JOZ2NSWmpTUnhzYzBiU1hfeXBvb2F2WEp2NHc5YkFfUUNKSHc2NW1PMUVKT0xqUTdOa0tfUmZpQWE2SDFtdzJ5TmZleWpLd0Zid1JWR2Z0d0dOeVMwekFzNTNTYndHMmMyV0poZ2h0UmFOVWc2M3o3Z2h6TUR2SQ?oc=5",
+      "published_at": "2026-11-02T12:00:00Z",
+      "summary": "Tankers hitting mines in the Strait of Hormuz is the kind of tape that stops the floor cold — roughly 20% of global oil supply transits that chokepoint. Even with diplomacy headlines softening crude today, a physical incident in Hormuz puts an instant bid under oil and hammers airlines, refiners, and any consumer-facing name with a fuel cost line. Watch USO, XLE, and the long bond for the flight-to-safety move.",
       "tickers": [
         "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-10-30-3",
-      "title": "Biggest-ever crypto hack impacts $6.3 billion as Binance works to contain fallout",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/10/29/circle-tether-freeze-funds-impacted-by-potential-binance-security-issue.html",
-      "published_at": "2026-10-30T12:00:00Z",
-      "summary": "A $6.3 billion hack at the world's largest crypto exchange is the kind of systemic shock that rattles the entire digital asset ecosystem — think forced selling, contagion fears, and a confidence crisis all at once. Binance halting trading while Circle and Tether freeze funds means liquidity is locked up across the space, and crypto-adjacent equities like Coinbase are going to feel the heat. This is the Mt. Gox playbook, just with a lot more zeros.",
+      "id": "mm-2026-11-02-2",
+      "title": "Alphabet Shares Fall 13% After Earnings Miss; Search Revenue Growth Slows to 12%",
+      "source": "naturalnews.com",
+      "url": "https://www.naturalnews.com/2026-11-01-alphabet-shares-fall-after-earnings-miss.html",
+      "published_at": "2026-11-02T12:00:00Z",
+      "summary": "A 13% drop in Alphabet is not a rounding error — that's a $200-billion-plus market cap evaporating in a session, and it drags the whole AI-ad complex with it. When the king of search stumbles, Meta's relative outperformance becomes the story, and every hyperscaler gets repriced as the Street asks who's next to disappoint on AI monetization. QQQ feels this one in the gut.",
       "tickers": [
-        "COIN"
+        "GOOGL"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-02-3",
+      "title": "Binance sees $3.64 billion in net outflows as withdrawals resume after massive hack",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/02/binance-outflow-hack-bitcoin.html",
+      "published_at": "2026-11-02T12:00:00Z",
+      "summary": "A $6.3 billion hack at the world's largest crypto exchange followed by $3.64 billion in net outflows is the kind of confidence-shaking event that sends Bitcoin and the whole crypto complex into a tailspin — think FTX echoes. Contagion risk to crypto-adjacent equities like Coinbase and MicroStrategy is real, and retail sentiment in digital assets could crater fast. The dollar headline stabilizing bitcoin mentioned elsewhere looks increasingly fragile.",
+      "tickers": [
+        "BTC-USD"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "QQQ",
-      "category": "single_name",
-      "title": "Amazon falls 7%, Intel plunges 25% in premarket trading, as pressure mounts after earnings",
-      "justification": "Two mega-cap names getting torched in premarket — Amazon down 7% and Intel cratering 25% — is the kind of tape action that bleeds into the whole tech complex and drags the Nasdaq with it. Intel's guidance miss is a $128 billion wipeout in market cap; that's not a rounding error. With Alphabet already in the woodshed from the prior session, the AI spending reckoning is now a full-blown sector event.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Iran's IRGC Navy says two tankers 'exploded' after hitting mines in Hormuz",
+      "justification": "Tankers hitting mines in the Strait of Hormuz is the kind of tape that stops the floor cold — roughly 20% of global oil supply transits that chokepoint. Even with diplomacy headlines softening crude today, a physical incident in Hormuz puts an instant bid under oil and hammers airlines, refiners, and any consumer-facing name with a fuel cost line. Watch USO, XLE, and the long bond for the flight-to-safety move.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Iran claims four tankers struck mines in Hormuz as strike fears grow after U.S. midterms",
-      "justification": "Four tankers hitting mines in the Strait of Hormuz is the kind of headline that sends crude spiking and defense names bid before the opening bell even rings. About 20% of global oil supply transits that chokepoint — any credible disruption there is an immediate shock to energy markets, shipping, and inflation expectations. With the Fed already on edge about prices and the midterms days away, this is the worst possible time for a Hormuz flare-up.",
+      "ticker": "GOOGL",
+      "category": "single_name",
+      "title": "Alphabet Shares Fall 13% After Earnings Miss; Search Revenue Growth Slows to 12%",
+      "justification": "A 13% drop in Alphabet is not a rounding error — that's a $200-billion-plus market cap evaporating in a session, and it drags the whole AI-ad complex with it. When the king of search stumbles, Meta's relative outperformance becomes the story, and every hyperscaler gets repriced as the Street asks who's next to disappoint on AI monetization. QQQ feels this one in the gut.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "COIN",
+      "ticker": "BTC-USD",
       "category": "crypto",
-      "title": "Biggest-ever crypto hack impacts $6.3 billion as Binance works to contain fallout",
-      "justification": "A $6.3 billion hack at the world's largest crypto exchange is the kind of systemic shock that rattles the entire digital asset ecosystem — think forced selling, contagion fears, and a confidence crisis all at once. Binance halting trading while Circle and Tether freeze funds means liquidity is locked up across the space, and crypto-adjacent equities like Coinbase are going to feel the heat. This is the Mt. Gox playbook, just with a lot more zeros.",
+      "title": "Binance sees $3.64 billion in net outflows as withdrawals resume after massive hack",
+      "justification": "A $6.3 billion hack at the world's largest crypto exchange followed by $3.64 billion in net outflows is the kind of confidence-shaking event that sends Bitcoin and the whole crypto complex into a tailspin — think FTX echoes. Contagion risk to crypto-adjacent equities like Coinbase and MicroStrategy is real, and retail sentiment in digital assets could crater fast. The dollar headline stabilizing bitcoin mentioned elsewhere looks increasingly fragile.",
       "verdict": null
     }
   ]
