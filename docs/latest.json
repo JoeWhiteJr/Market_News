@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-02T12:11:37.527060+00:00",
-  "brief_date": "2026-11-02",
+  "generated_at": "2026-11-03T19:01:37.668512+00:00",
+  "brief_date": "2026-11-03",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-02-1",
-      "title": "Iran's IRGC Navy says two tankers 'exploded' after hitting mines in Hormuz",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNZmk2dmxjdk1sOW96UkZiaUlJVXhzc1pJMjZJUnY2WGtvaXd4aXRJY3d4UTNoUmFJdUVQQjlkb0JPSmxEc2YzS1JOZ2NSWmpTUnhzYzBiU1hfeXBvb2F2WEp2NHc5YkFfUUNKSHc2NW1PMUVKT0xqUTdOa0tfUmZpQWE2SDFtdzJ5TmZleWpLd0Zid1JWR2Z0d0dOeVMwekFzNTNTYndHMmMyV0poZ2h0UmFOVWc2M3o3Z2h6TUR2SQ?oc=5",
-      "published_at": "2026-11-02T12:00:00Z",
-      "summary": "Tankers hitting mines in the Strait of Hormuz is the kind of tape that stops the floor cold — roughly 20% of global oil supply transits that chokepoint. Even with diplomacy headlines softening crude today, a physical incident in Hormuz puts an instant bid under oil and hammers airlines, refiners, and any consumer-facing name with a fuel cost line. Watch USO, XLE, and the long bond for the flight-to-safety move.",
-      "tickers": [
-        "USO"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-02-2",
-      "title": "Alphabet Shares Fall 13% After Earnings Miss; Search Revenue Growth Slows to 12%",
-      "source": "naturalnews.com",
-      "url": "https://www.naturalnews.com/2026-11-01-alphabet-shares-fall-after-earnings-miss.html",
-      "published_at": "2026-11-02T12:00:00Z",
-      "summary": "A 13% drop in Alphabet is not a rounding error — that's a $200-billion-plus market cap evaporating in a session, and it drags the whole AI-ad complex with it. When the king of search stumbles, Meta's relative outperformance becomes the story, and every hyperscaler gets repriced as the Street asks who's next to disappoint on AI monetization. QQQ feels this one in the gut.",
-      "tickers": [
-        "GOOGL"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-02-3",
-      "title": "Binance sees $3.64 billion in net outflows as withdrawals resume after massive hack",
+      "id": "mm-2026-11-03-1",
+      "title": "Apple stock sinks as global memory crisis hurts profits, giving Ternus his first big test",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/02/binance-outflow-hack-bitcoin.html",
-      "published_at": "2026-11-02T12:00:00Z",
-      "summary": "A $6.3 billion hack at the world's largest crypto exchange followed by $3.64 billion in net outflows is the kind of confidence-shaking event that sends Bitcoin and the whole crypto complex into a tailspin — think FTX echoes. Contagion risk to crypto-adjacent equities like Coinbase and MicroStrategy is real, and retail sentiment in digital assets could crater fast. The dollar headline stabilizing bitcoin mentioned elsewhere looks increasingly fragile.",
+      "url": "https://www.cnbc.com/2026/11/03/apple-earnings-john-ternus-faces-first-test-amid-high-memory-costs.html",
+      "published_at": "2026-11-03T12:00:00Z",
+      "summary": "Apple disappointing on gross margins is a tape-mover of the first order — this thing touches every index, every ETF, and every portfolio manager on the planet. A memory cost squeeze also ripples straight into the semiconductor supply chain, hitting names like Micron and SK Hynix. Coming off a $1 trillion rally with 'no room for error,' a margin miss from the new CEO is exactly the kind of cold water that can reset the whole tech complex.",
       "tickers": [
-        "BTC-USD"
+        "AAPL"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-03-2",
+      "title": "Meta seeks to raise up to $25 billion in debt sale as AI spending jumps",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/03/meta-bond-sale-ai-funding.html",
+      "published_at": "2026-11-03T12:00:00Z",
+      "summary": "Twenty-five billion in new paper from Meta is a monster deal that hits the credit markets at exactly the wrong moment — junk spreads are already blowing out on AI capex fears, and now the investment-grade market has to absorb this slug too. It signals that the hyperscalers are doubling down on AI infrastructure spending even as Wall Street is questioning the return on that capital, which keeps the 'AI bubble' debate front and center. Watch the long bond and credit spreads for the market's verdict.",
+      "tickers": [
+        "META"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-03-3",
+      "title": "Job openings posted big September gain in positive sign for labor market ahead of payrolls report",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/03/job-openings-posted-big-september-gain-in-positive-sign-for-labor-market-ahead-of-payrolls-report.html",
+      "published_at": "2026-11-03T12:00:00Z",
+      "summary": "JOLTS coming in at 7.52 million versus a 7.15 million consensus is the kind of upside surprise that gives the Fed cover to stay hawkish — Treasuries sold off on the print, and that's the tell. With payrolls due later this week, a hot labor market read keeps rate-cut hopes on ice and puts pressure on rate-sensitive sectors like real estate and utilities. I've been burned calling macro before, but a number this far above the bar ahead of payrolls Friday is hard to ignore.",
+      "tickers": [
+        "SPY"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Iran's IRGC Navy says two tankers 'exploded' after hitting mines in Hormuz",
-      "justification": "Tankers hitting mines in the Strait of Hormuz is the kind of tape that stops the floor cold — roughly 20% of global oil supply transits that chokepoint. Even with diplomacy headlines softening crude today, a physical incident in Hormuz puts an instant bid under oil and hammers airlines, refiners, and any consumer-facing name with a fuel cost line. Watch USO, XLE, and the long bond for the flight-to-safety move.",
+      "ticker": "AAPL",
+      "category": "single_name",
+      "title": "Apple stock sinks as global memory crisis hurts profits, giving Ternus his first big test",
+      "justification": "Apple disappointing on gross margins is a tape-mover of the first order — this thing touches every index, every ETF, and every portfolio manager on the planet. A memory cost squeeze also ripples straight into the semiconductor supply chain, hitting names like Micron and SK Hynix. Coming off a $1 trillion rally with 'no room for error,' a margin miss from the new CEO is exactly the kind of cold water that can reset the whole tech complex.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "GOOGL",
+      "ticker": "META",
       "category": "single_name",
-      "title": "Alphabet Shares Fall 13% After Earnings Miss; Search Revenue Growth Slows to 12%",
-      "justification": "A 13% drop in Alphabet is not a rounding error — that's a $200-billion-plus market cap evaporating in a session, and it drags the whole AI-ad complex with it. When the king of search stumbles, Meta's relative outperformance becomes the story, and every hyperscaler gets repriced as the Street asks who's next to disappoint on AI monetization. QQQ feels this one in the gut.",
+      "title": "Meta seeks to raise up to $25 billion in debt sale as AI spending jumps",
+      "justification": "Twenty-five billion in new paper from Meta is a monster deal that hits the credit markets at exactly the wrong moment — junk spreads are already blowing out on AI capex fears, and now the investment-grade market has to absorb this slug too. It signals that the hyperscalers are doubling down on AI infrastructure spending even as Wall Street is questioning the return on that capital, which keeps the 'AI bubble' debate front and center. Watch the long bond and credit spreads for the market's verdict.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "BTC-USD",
-      "category": "crypto",
-      "title": "Binance sees $3.64 billion in net outflows as withdrawals resume after massive hack",
-      "justification": "A $6.3 billion hack at the world's largest crypto exchange followed by $3.64 billion in net outflows is the kind of confidence-shaking event that sends Bitcoin and the whole crypto complex into a tailspin — think FTX echoes. Contagion risk to crypto-adjacent equities like Coinbase and MicroStrategy is real, and retail sentiment in digital assets could crater fast. The dollar headline stabilizing bitcoin mentioned elsewhere looks increasingly fragile.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Job openings posted big September gain in positive sign for labor market ahead of payrolls report",
+      "justification": "JOLTS coming in at 7.52 million versus a 7.15 million consensus is the kind of upside surprise that gives the Fed cover to stay hawkish — Treasuries sold off on the print, and that's the tell. With payrolls due later this week, a hot labor market read keeps rate-cut hopes on ice and puts pressure on rate-sensitive sectors like real estate and utilities. I've been burned calling macro before, but a number this far above the bar ahead of payrolls Friday is hard to ignore.",
       "verdict": null
     }
   ]
