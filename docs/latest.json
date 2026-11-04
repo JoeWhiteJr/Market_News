@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-03T19:01:37.668512+00:00",
-  "brief_date": "2026-11-03",
+  "generated_at": "2026-11-04T19:20:52.357587+00:00",
+  "brief_date": "2026-11-04",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-03-1",
-      "title": "Apple stock sinks as global memory crisis hurts profits, giving Ternus his first big test",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/03/apple-earnings-john-ternus-faces-first-test-amid-high-memory-costs.html",
-      "published_at": "2026-11-03T12:00:00Z",
-      "summary": "Apple disappointing on gross margins is a tape-mover of the first order — this thing touches every index, every ETF, and every portfolio manager on the planet. A memory cost squeeze also ripples straight into the semiconductor supply chain, hitting names like Micron and SK Hynix. Coming off a $1 trillion rally with 'no room for error,' a margin miss from the new CEO is exactly the kind of cold water that can reset the whole tech complex.",
-      "tickers": [
-        "AAPL"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-03-2",
-      "title": "Meta seeks to raise up to $25 billion in debt sale as AI spending jumps",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/03/meta-bond-sale-ai-funding.html",
-      "published_at": "2026-11-03T12:00:00Z",
-      "summary": "Twenty-five billion in new paper from Meta is a monster deal that hits the credit markets at exactly the wrong moment — junk spreads are already blowing out on AI capex fears, and now the investment-grade market has to absorb this slug too. It signals that the hyperscalers are doubling down on AI infrastructure spending even as Wall Street is questioning the return on that capital, which keeps the 'AI bubble' debate front and center. Watch the long bond and credit spreads for the market's verdict.",
-      "tickers": [
-        "META"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-03-3",
-      "title": "Job openings posted big September gain in positive sign for labor market ahead of payrolls report",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/03/job-openings-posted-big-september-gain-in-positive-sign-for-labor-market-ahead-of-payrolls-report.html",
-      "published_at": "2026-11-03T12:00:00Z",
-      "summary": "JOLTS coming in at 7.52 million versus a 7.15 million consensus is the kind of upside surprise that gives the Fed cover to stay hawkish — Treasuries sold off on the print, and that's the tell. With payrolls due later this week, a hot labor market read keeps rate-cut hopes on ice and puts pressure on rate-sensitive sectors like real estate and utilities. I've been burned calling macro before, but a number this far above the bar ahead of payrolls Friday is hard to ignore.",
+      "id": "mm-2026-11-04-1",
+      "title": "Wall Street rallies after Democrats win Congress; data center stocks slide - Reuters",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQbWpBY1VHMFd5a2tJXzM1RFFFQTl5Y09aVDgza095UkJKVzNnQ3F4VW1pMzBEazJKMGhlS21zUEdCLXJPOVhWdXRnZmlLRHliMDdqYmt2b2ZWYk5FeW85VnBSalpRd1E1b3BVSUZDU2VLMUNiQm41YWw1SUgxV2dWaUFZUkI2MllhY0Z5ZkZHcWNuQmdCaHBKbVRhck1meTRz?oc=5",
+      "published_at": "2026-11-04T12:00:00Z",
+      "summary": "BOOM — the Democratic sweep is the BIGGEST story of the week, full stop! Every sector gets repriced simultaneously: oil CRATERS on Iran de-escalation hopes, data center and AI infrastructure stocks SLIDE on fears of regulatory headwinds, renewables SURGE, banks brace for re-regulation, and the dollar drops hard. This is a complete portfolio reshuffling event touching SPY, USO, XLE, ICLN, XLF, and every Mag-7 name — the breadth of impact is ENORMOUS.",
       "tickers": [
         "SPY"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-04-2",
+      "title": "Oil tumbles 9% as investors eye possible end to Iran war after US midterm elections - Reuters",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPQUEyU0pEVG8xTHJtT2xCU0ltcXVTalphM0RNTEZ0UVlCTW5Qbjg4cS1RQnh5QXZnVEZvdnBacmZRM2FhMWJLWXVjU08yNkpvOHZiLTUtSGN0Mk55NGFBNWdxTmR4b3ZBeGNlX3ptUGNaRVFzRzhyNDZodklncGFZaV96cUxHY1Q1ODZWdmpTVWlWRVp4bVdJb0Zrb1pLaXVsUFFySUd4cm40cFphNGZB?oc=5",
+      "published_at": "2026-11-04T12:00:00Z",
+      "summary": "A NINE PERCENT single-session CRASH in oil — that is not a typo, folks! Brent plunging below $100 on Iran ceasefire speculation ripples through every energy company, airline, shipping name, and inflation-sensitive bond on the planet. XLE gets HAMMERED while airlines and consumer discretionary catch a massive tailwind — this is a cross-asset EARTHQUAKE that moves USO, XLE, XLI, and Treasuries all at once.",
+      "tickers": [
+        "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-04-3",
+      "title": "Wall Street Girding for US Debt Ceiling Showdown in 2027",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-04/wall-street-girding-for-us-debt-ceiling-showdown-in-2027",
+      "published_at": "2026-11-04T12:00:00Z",
+      "summary": "Divided government is BACK, baby, and Wall Street strategists are already war-gaming the 2027 debt ceiling fight — and the bond market is listening! A potential default standoff between a Trump White House and a Democrat-controlled Congress could spike Treasury yields, crush risk assets, and send volatility screaming higher across TLT, SPY, and the entire credit complex. This is a slow-burn fuse that traders are pricing RIGHT NOW.",
+      "tickers": [
+        "TLT"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "AAPL",
-      "category": "single_name",
-      "title": "Apple stock sinks as global memory crisis hurts profits, giving Ternus his first big test",
-      "justification": "Apple disappointing on gross margins is a tape-mover of the first order — this thing touches every index, every ETF, and every portfolio manager on the planet. A memory cost squeeze also ripples straight into the semiconductor supply chain, hitting names like Micron and SK Hynix. Coming off a $1 trillion rally with 'no room for error,' a margin miss from the new CEO is exactly the kind of cold water that can reset the whole tech complex.",
+      "ticker": "SPY",
+      "category": "geopolitical",
+      "title": "Wall Street rallies after Democrats win Congress; data center stocks slide - Reuters",
+      "justification": "BOOM — the Democratic sweep is the BIGGEST story of the week, full stop! Every sector gets repriced simultaneously: oil CRATERS on Iran de-escalation hopes, data center and AI infrastructure stocks SLIDE on fears of regulatory headwinds, renewables SURGE, banks brace for re-regulation, and the dollar drops hard. This is a complete portfolio reshuffling event touching SPY, USO, XLE, ICLN, XLF, and every Mag-7 name — the breadth of impact is ENORMOUS.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "META",
-      "category": "single_name",
-      "title": "Meta seeks to raise up to $25 billion in debt sale as AI spending jumps",
-      "justification": "Twenty-five billion in new paper from Meta is a monster deal that hits the credit markets at exactly the wrong moment — junk spreads are already blowing out on AI capex fears, and now the investment-grade market has to absorb this slug too. It signals that the hyperscalers are doubling down on AI infrastructure spending even as Wall Street is questioning the return on that capital, which keeps the 'AI bubble' debate front and center. Watch the long bond and credit spreads for the market's verdict.",
+      "ticker": "USO",
+      "category": "commodity",
+      "title": "Oil tumbles 9% as investors eye possible end to Iran war after US midterm elections - Reuters",
+      "justification": "A NINE PERCENT single-session CRASH in oil — that is not a typo, folks! Brent plunging below $100 on Iran ceasefire speculation ripples through every energy company, airline, shipping name, and inflation-sensitive bond on the planet. XLE gets HAMMERED while airlines and consumer discretionary catch a massive tailwind — this is a cross-asset EARTHQUAKE that moves USO, XLE, XLI, and Treasuries all at once.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "SPY",
+      "ticker": "TLT",
       "category": "macro",
-      "title": "Job openings posted big September gain in positive sign for labor market ahead of payrolls report",
-      "justification": "JOLTS coming in at 7.52 million versus a 7.15 million consensus is the kind of upside surprise that gives the Fed cover to stay hawkish — Treasuries sold off on the print, and that's the tell. With payrolls due later this week, a hot labor market read keeps rate-cut hopes on ice and puts pressure on rate-sensitive sectors like real estate and utilities. I've been burned calling macro before, but a number this far above the bar ahead of payrolls Friday is hard to ignore.",
+      "title": "Wall Street Girding for US Debt Ceiling Showdown in 2027",
+      "justification": "Divided government is BACK, baby, and Wall Street strategists are already war-gaming the 2027 debt ceiling fight — and the bond market is listening! A potential default standoff between a Trump White House and a Democrat-controlled Congress could spike Treasury yields, crush risk assets, and send volatility screaming higher across TLT, SPY, and the entire credit complex. This is a slow-burn fuse that traders are pricing RIGHT NOW.",
       "verdict": null
     }
   ]
