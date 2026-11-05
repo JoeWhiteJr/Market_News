@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-04T19:20:52.357587+00:00",
-  "brief_date": "2026-11-04",
+  "generated_at": "2026-11-05T19:29:21.826178+00:00",
+  "brief_date": "2026-11-05",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-04-1",
-      "title": "Wall Street rallies after Democrats win Congress; data center stocks slide - Reuters",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQbWpBY1VHMFd5a2tJXzM1RFFFQTl5Y09aVDgza095UkJKVzNnQ3F4VW1pMzBEazJKMGhlS21zUEdCLXJPOVhWdXRnZmlLRHliMDdqYmt2b2ZWYk5FeW85VnBSalpRd1E1b3BVSUZDU2VLMUNiQm41YWw1SUgxV2dWaUFZUkI2MllhY0Z5ZkZHcWNuQmdCaHBKbVRhck1meTRz?oc=5",
-      "published_at": "2026-11-04T12:00:00Z",
-      "summary": "BOOM — the Democratic sweep is the BIGGEST story of the week, full stop! Every sector gets repriced simultaneously: oil CRATERS on Iran de-escalation hopes, data center and AI infrastructure stocks SLIDE on fears of regulatory headwinds, renewables SURGE, banks brace for re-regulation, and the dollar drops hard. This is a complete portfolio reshuffling event touching SPY, USO, XLE, ICLN, XLF, and every Mag-7 name — the breadth of impact is ENORMOUS.",
+      "id": "mm-2026-11-05-1",
+      "title": "US Selloff Deepens as Democrat Sweep Sparks AI Exposure Worries",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-05/us-stock-futures-diverge-as-chip-selloff-extends-into-second-day",
+      "published_at": "2026-11-05T12:00:00Z",
+      "summary": "This is the tape right now — the whole AI complex is getting taken out to the woodshed as the Street reprices regulatory risk under a Democratic Congress. Chips, data center plays, neoclouds — nothing with an AI label is safe, and Goldman's traders say the phones haven't stopped ringing. When the VIX moves 11 points intraday and the S&P posts its worst day since April 2025, that's not noise, that's a regime change in sentiment.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-04-2",
-      "title": "Oil tumbles 9% as investors eye possible end to Iran war after US midterm elections - Reuters",
+      "id": "mm-2026-11-05-2",
+      "title": "Bank of England raises rates for first time since 2023, warns more likely",
       "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPQUEyU0pEVG8xTHJtT2xCU0ltcXVTalphM0RNTEZ0UVlCTW5Qbjg4cS1RQnh5QXZnVEZvdnBacmZRM2FhMWJLWXVjU08yNkpvOHZiLTUtSGN0Mk55NGFBNWdxTmR4b3ZBeGNlX3ptUGNaRVFzRzhyNDZodklncGFZaV96cUxHY1Q1ODZWdmpTVWlWRVp4bVdJb0Zrb1pLaXVsUFFySUd4cm40cFphNGZB?oc=5",
-      "published_at": "2026-11-04T12:00:00Z",
-      "summary": "A NINE PERCENT single-session CRASH in oil — that is not a typo, folks! Brent plunging below $100 on Iran ceasefire speculation ripples through every energy company, airline, shipping name, and inflation-sensitive bond on the planet. XLE gets HAMMERED while airlines and consumer discretionary catch a massive tailwind — this is a cross-asset EARTHQUAKE that moves USO, XLE, XLI, and Treasuries all at once.",
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNcEhfdUpzSlRCb2JiYmFYMjdxaEZySFE1cEJFcVlEWG1qajB4V2VGTXNmcGhRNHdBSF9Wa3FKcFpwMUpVVEc5NnQtaEhnQy0xUHpBc1lpZWp3TlZoUEhMQ1NHcFplMndKcmJJNEJrYlg2VnhoZlVJSkxnUDZzRzh2N0FuSlRHcl9JQTZ0LUhVMmxOaS1NWV9uWE15X19TN3pDMHFUeWNIdkRVQlYtemNsTQ?oc=5",
+      "published_at": "2026-11-05T12:00:00Z",
+      "summary": "The Old Lady of Threadneedle Street just hiked for the first time in three years and telegraphed more pain ahead — that's a global rates story, not just a UK one. Gilt yields are jumping, sterling is moving, and it puts fresh pressure on every central bank narrative that was leaning toward easing; the long bond crowd on both sides of the Atlantic needs to reprice. Add this to a day when Treasuries are already soaring on a flight-to-quality bid and you've got a real cross-asset mess.",
       "tickers": [
-        "USO"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-04-3",
-      "title": "Wall Street Girding for US Debt Ceiling Showdown in 2027",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-04/wall-street-girding-for-us-debt-ceiling-showdown-in-2027",
-      "published_at": "2026-11-04T12:00:00Z",
-      "summary": "Divided government is BACK, baby, and Wall Street strategists are already war-gaming the 2027 debt ceiling fight — and the bond market is listening! A potential default standoff between a Trump White House and a Democrat-controlled Congress could spike Treasury yields, crush risk assets, and send volatility screaming higher across TLT, SPY, and the entire credit complex. This is a slow-burn fuse that traders are pricing RIGHT NOW.",
+      "id": "mm-2026-11-05-3",
+      "title": "Tankers hit in Hormuz as Iran keeps up pressure after US vote",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQS25WaGR6RHltaldweFlqblRLWTQwanRGbVY4Vm5YZXBVdUVacG5DSTU3SXd1N00zTDROTTlYaGlnQzZPQUlmeUNPRlExc01kSUUwTFkwQUpWTWlXZEtkdTZmQktpWXUwcGt6dVBHbjkyb25ISjB1N0tOaWNJRHBoNk9iSzBJMURrM2dlemVvVnU5aHplVko3aGlQc296enRpdDlLNWJDWGtLWDZZVWc?oc=5",
+      "published_at": "2026-11-05T12:00:00Z",
+      "summary": "Tankers getting hit in the Strait of Hormuz is the kind of headline that wakes up the oil desk at 3am — roughly 20% of global seaborne crude flows through that chokepoint, and Iran is clearly not done making noise post-election. Oil already cratered nearly 9% on the Democratic sweep Wednesday, so any re-escalation here is a violent two-way trade for energy names and shipping stocks. Keep one eye on USO and the tanker names; this one can move fast.",
       "tickers": [
-        "TLT"
+        "USO"
       ],
       "sentiment": null
     }
@@ -45,25 +45,25 @@
     {
       "rank": 1,
       "ticker": "SPY",
-      "category": "geopolitical",
-      "title": "Wall Street rallies after Democrats win Congress; data center stocks slide - Reuters",
-      "justification": "BOOM — the Democratic sweep is the BIGGEST story of the week, full stop! Every sector gets repriced simultaneously: oil CRATERS on Iran de-escalation hopes, data center and AI infrastructure stocks SLIDE on fears of regulatory headwinds, renewables SURGE, banks brace for re-regulation, and the dollar drops hard. This is a complete portfolio reshuffling event touching SPY, USO, XLE, ICLN, XLF, and every Mag-7 name — the breadth of impact is ENORMOUS.",
+      "category": "macro",
+      "title": "US Selloff Deepens as Democrat Sweep Sparks AI Exposure Worries",
+      "justification": "This is the tape right now — the whole AI complex is getting taken out to the woodshed as the Street reprices regulatory risk under a Democratic Congress. Chips, data center plays, neoclouds — nothing with an AI label is safe, and Goldman's traders say the phones haven't stopped ringing. When the VIX moves 11 points intraday and the S&P posts its worst day since April 2025, that's not noise, that's a regime change in sentiment.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "commodity",
-      "title": "Oil tumbles 9% as investors eye possible end to Iran war after US midterm elections - Reuters",
-      "justification": "A NINE PERCENT single-session CRASH in oil — that is not a typo, folks! Brent plunging below $100 on Iran ceasefire speculation ripples through every energy company, airline, shipping name, and inflation-sensitive bond on the planet. XLE gets HAMMERED while airlines and consumer discretionary catch a massive tailwind — this is a cross-asset EARTHQUAKE that moves USO, XLE, XLI, and Treasuries all at once.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Bank of England raises rates for first time since 2023, warns more likely",
+      "justification": "The Old Lady of Threadneedle Street just hiked for the first time in three years and telegraphed more pain ahead — that's a global rates story, not just a UK one. Gilt yields are jumping, sterling is moving, and it puts fresh pressure on every central bank narrative that was leaning toward easing; the long bond crowd on both sides of the Atlantic needs to reprice. Add this to a day when Treasuries are already soaring on a flight-to-quality bid and you've got a real cross-asset mess.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "TLT",
-      "category": "macro",
-      "title": "Wall Street Girding for US Debt Ceiling Showdown in 2027",
-      "justification": "Divided government is BACK, baby, and Wall Street strategists are already war-gaming the 2027 debt ceiling fight — and the bond market is listening! A potential default standoff between a Trump White House and a Democrat-controlled Congress could spike Treasury yields, crush risk assets, and send volatility screaming higher across TLT, SPY, and the entire credit complex. This is a slow-burn fuse that traders are pricing RIGHT NOW.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Tankers hit in Hormuz as Iran keeps up pressure after US vote",
+      "justification": "Tankers getting hit in the Strait of Hormuz is the kind of headline that wakes up the oil desk at 3am — roughly 20% of global seaborne crude flows through that chokepoint, and Iran is clearly not done making noise post-election. Oil already cratered nearly 9% on the Democratic sweep Wednesday, so any re-escalation here is a violent two-way trade for energy names and shipping stocks. Keep one eye on USO and the tanker names; this one can move fast.",
       "verdict": null
     }
   ]
