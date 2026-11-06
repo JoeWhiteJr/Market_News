@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-05T19:29:21.826178+00:00",
-  "brief_date": "2026-11-05",
+  "generated_at": "2026-11-06T18:53:30.548243+00:00",
+  "brief_date": "2026-11-06",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-05-1",
-      "title": "US Selloff Deepens as Democrat Sweep Sparks AI Exposure Worries",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-05/us-stock-futures-diverge-as-chip-selloff-extends-into-second-day",
-      "published_at": "2026-11-05T12:00:00Z",
-      "summary": "This is the tape right now — the whole AI complex is getting taken out to the woodshed as the Street reprices regulatory risk under a Democratic Congress. Chips, data center plays, neoclouds — nothing with an AI label is safe, and Goldman's traders say the phones haven't stopped ringing. When the VIX moves 11 points intraday and the S&P posts its worst day since April 2025, that's not noise, that's a regime change in sentiment.",
+      "id": "mm-2026-11-06-1",
+      "title": "U.S. economy added 165,000 jobs in October, way more than expected; unemployment rate slips to 4.1%",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html",
+      "published_at": "2026-11-06T12:00:00Z",
+      "summary": "A blowout payrolls print — 165K vs. 59K expected — is the kind of number that reprices everything from the long bond to the front end of the curve in about 90 seconds. With Pimco already calling multiple Fed hikes 'reasonable' and gold dropping on the print, this is the tape-mover that makes Thursday's AI selloff look like a sideshow. Every rate-sensitive sector — tech, real estate, utilities — has to recalibrate right now.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-05-2",
-      "title": "Bank of England raises rates for first time since 2023, warns more likely",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNcEhfdUpzSlRCb2JiYmFYMjdxaEZySFE1cEJFcVlEWG1qajB4V2VGTXNmcGhRNHdBSF9Wa3FKcFpwMUpVVEc5NnQtaEhnQy0xUHpBc1lpZWp3TlZoUEhMQ1NHcFplMndKcmJJNEJrYlg2VnhoZlVJSkxnUDZzRzh2N0FuSlRHcl9JQTZ0LUhVMmxOaS1NWV9uWE15X19TN3pDMHFUeWNIdkRVQlYtemNsTQ?oc=5",
-      "published_at": "2026-11-05T12:00:00Z",
-      "summary": "The Old Lady of Threadneedle Street just hiked for the first time in three years and telegraphed more pain ahead — that's a global rates story, not just a UK one. Gilt yields are jumping, sterling is moving, and it puts fresh pressure on every central bank narrative that was leaning toward easing; the long bond crowd on both sides of the Atlantic needs to reprice. Add this to a day when Treasuries are already soaring on a flight-to-quality bid and you've got a real cross-asset mess.",
+      "id": "mm-2026-11-06-2",
+      "title": "Markets plunge as Wall Street heads for its worst post-midterm day since 1896",
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-oil-rises-chip-stocks-141439950.html",
+      "published_at": "2026-11-06T12:00:00Z",
+      "summary": "The Dow down 1,200, the S&P off 3.3%, the Nasdaq flirting with correction territory — this is the kind of session that rewrites positioning across every desk on the Street. The Democratic sweep spooked the AI trade hard, with $2 trillion wiped from the Nasdaq 100 alone, dragging chips, data center plays, and crypto down with it. When retail is dumping at Covid-selloff pace and options volumes hit all-time records, you don't need a PhD to know the bid has left the building.",
       "tickers": [
-        "SPY"
+        "QQQ"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-05-3",
-      "title": "Tankers hit in Hormuz as Iran keeps up pressure after US vote",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQS25WaGR6RHltaldweFlqblRLWTQwanRGbVY4Vm5YZXBVdUVacG5DSTU3SXd1N00zTDROTTlYaGlnQzZPQUlmeUNPRlExc01kSUUwTFkwQUpWTWlXZEtkdTZmQktpWXUwcGt6dVBHbjkyb25ISjB1N0tOaWNJRHBoNk9iSzBJMURrM2dlemVvVnU5aHplVko3aGlQc296enRpdDlLNWJDWGtLWDZZVWc?oc=5",
-      "published_at": "2026-11-05T12:00:00Z",
-      "summary": "Tankers getting hit in the Strait of Hormuz is the kind of headline that wakes up the oil desk at 3am — roughly 20% of global seaborne crude flows through that chokepoint, and Iran is clearly not done making noise post-election. Oil already cratered nearly 9% on the Democratic sweep Wednesday, so any re-escalation here is a violent two-way trade for energy names and shipping stocks. Keep one eye on USO and the tanker names; this one can move fast.",
+      "id": "mm-2026-11-06-3",
+      "title": "The AI 'credit card' is getting costlier as CoreWeave bond yield tops 16%",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/06/coreweave-bond-yield-tops-16percent-as-ai-credit-stress-rises.html",
+      "published_at": "2026-11-06T12:00:00Z",
+      "summary": "When the junk paper funding the AI buildout starts yielding 16%, the whole capital structure of the trade is in question — and ING reportedly trying to offload $500 million in data center loans is the canary in that coal mine. This isn't just a CoreWeave story; it's a signal that the credit markets are starting to price in what equity investors are only beginning to fear. If the debt spigot tightens, the hyperscalers' capex plans don't survive contact with a Democratic Congress and a hawkish Fed.",
       "tickers": [
-        "USO"
+        "CRWV"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "SPY",
       "category": "macro",
-      "title": "US Selloff Deepens as Democrat Sweep Sparks AI Exposure Worries",
-      "justification": "This is the tape right now — the whole AI complex is getting taken out to the woodshed as the Street reprices regulatory risk under a Democratic Congress. Chips, data center plays, neoclouds — nothing with an AI label is safe, and Goldman's traders say the phones haven't stopped ringing. When the VIX moves 11 points intraday and the S&P posts its worst day since April 2025, that's not noise, that's a regime change in sentiment.",
+      "title": "U.S. economy added 165,000 jobs in October, way more than expected; unemployment rate slips to 4.1%",
+      "justification": "A blowout payrolls print — 165K vs. 59K expected — is the kind of number that reprices everything from the long bond to the front end of the curve in about 90 seconds. With Pimco already calling multiple Fed hikes 'reasonable' and gold dropping on the print, this is the tape-mover that makes Thursday's AI selloff look like a sideshow. Every rate-sensitive sector — tech, real estate, utilities — has to recalibrate right now.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Bank of England raises rates for first time since 2023, warns more likely",
-      "justification": "The Old Lady of Threadneedle Street just hiked for the first time in three years and telegraphed more pain ahead — that's a global rates story, not just a UK one. Gilt yields are jumping, sterling is moving, and it puts fresh pressure on every central bank narrative that was leaning toward easing; the long bond crowd on both sides of the Atlantic needs to reprice. Add this to a day when Treasuries are already soaring on a flight-to-quality bid and you've got a real cross-asset mess.",
+      "ticker": "QQQ",
+      "category": "geopolitical",
+      "title": "Markets plunge as Wall Street heads for its worst post-midterm day since 1896",
+      "justification": "The Dow down 1,200, the S&P off 3.3%, the Nasdaq flirting with correction territory — this is the kind of session that rewrites positioning across every desk on the Street. The Democratic sweep spooked the AI trade hard, with $2 trillion wiped from the Nasdaq 100 alone, dragging chips, data center plays, and crypto down with it. When retail is dumping at Covid-selloff pace and options volumes hit all-time records, you don't need a PhD to know the bid has left the building.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Tankers hit in Hormuz as Iran keeps up pressure after US vote",
-      "justification": "Tankers getting hit in the Strait of Hormuz is the kind of headline that wakes up the oil desk at 3am — roughly 20% of global seaborne crude flows through that chokepoint, and Iran is clearly not done making noise post-election. Oil already cratered nearly 9% on the Democratic sweep Wednesday, so any re-escalation here is a violent two-way trade for energy names and shipping stocks. Keep one eye on USO and the tanker names; this one can move fast.",
+      "ticker": "CRWV",
+      "category": "single_name",
+      "title": "The AI 'credit card' is getting costlier as CoreWeave bond yield tops 16%",
+      "justification": "When the junk paper funding the AI buildout starts yielding 16%, the whole capital structure of the trade is in question — and ING reportedly trying to offload $500 million in data center loans is the canary in that coal mine. This isn't just a CoreWeave story; it's a signal that the credit markets are starting to price in what equity investors are only beginning to fear. If the debt spigot tightens, the hyperscalers' capex plans don't survive contact with a Democratic Congress and a hawkish Fed.",
       "verdict": null
     }
   ]
