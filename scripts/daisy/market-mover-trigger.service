@@ -1,0 +1,8 @@
+[Unit]
+Description=Trigger the Market Mover daily briefing on GitHub
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/market-mover-trigger/trigger-briefing.sh

@@ -2,11 +2,11 @@ name: Briefing Watchdog
 
 on:
   schedule:
-    # 17:30 UTC weekdays = 11:30 AM MDT. The briefing is scheduled for 12:00
-    # UTC, but GitHub delays scheduled starts under load (worst observed start:
-    # 15:41 UTC on 2026-06-29) — and on 2026-07-11 it silently never started
-    # the run at all. Check well after any plausible late start.
-    - cron: "30 17 * * 1-5"
+    # 15:00 UTC weekdays, after daisy's 6 AM Denver trigger and the 13:30 UTC backup.
+    # GitHub can delay this check too (22:47 UTC observed in 2026-11) and on
+    # 2026-07-11 it never started a scheduled briefing at all. A very late backup can
+    # cause a false "missed" alert, but only on a day daisy's trigger also failed.
+    - cron: "0 15 * * 1-5"
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
 jobs:
@@ -28,7 +28,8 @@ jobs:
           TODAY=$(date -u +%Y-%m-%d)
           RUNS=$(gh run list --workflow daily-briefing.yml \
             --created "$TODAY" --limit 50 \
-            --json status,conclusion)
+            --json status,conclusion,displayTitle \
+            | jq '[.[] | select(.displayTitle != "Dry run")]')
           TOTAL=$(echo "$RUNS" | jq 'length')
           SUCCESS=$(echo "$RUNS" | jq '[.[] | select(.conclusion == "success")] | length')
           PENDING=$(echo "$RUNS" | jq '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "waiting")] | length')

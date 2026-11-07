@@ -1,0 +1,11 @@
+[Unit]
+Description=Market Mover briefing at 6 AM Denver on weekdays
+
+[Timer]
+OnCalendar=Mon..Fri 06:00 America/Denver
+AccuracySec=1s
+# Don't catch up after downtime. The GitHub backup covers missed mornings.
+Persistent=false
+
+[Install]
+WantedBy=timers.target
