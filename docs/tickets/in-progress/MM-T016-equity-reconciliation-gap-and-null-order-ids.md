@@ -1,12 +1,12 @@
 ---
 id: MM-T016
 title: Reconcile $1,499 equity gap (2026-08-21) and handle null order_id opens
-status: open
+status: in-progress
 priority: high
 type: bug
 owner: joe
 created: 2026-08-25
-updated: 2026-08-25
+updated: 2026-11-06
 related-pr:
 related-tickets: MM-T010
 assigned-team:
@@ -46,3 +46,14 @@ Relevant context for MM-T010 (revisit edge after sizing bump).
 
 ## Retrospective
 (fill on close)
+
+## Progress (2026-11-06)
+Done: repeat-pick failures fixed by carrying positions, `opened[].status` records
+failures, broker error bodies are logged, failed closes are no longer logged as trades.
+
+Still open:
+- Root-cause the 2026-08-21 gap and add the per-cycle reconciliation check.
+- Market holidays double-log closes. On Labor Day (09-07) closes were queued, the
+  positions were still held on 09-08, and SPY, TLT, and USO were logged again at the
+  same qty. The 09-07 rows add about +$135 of P&L that never existed. The next
+  weekday US market closure will repeat this.
