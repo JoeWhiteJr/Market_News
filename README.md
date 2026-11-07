@@ -5,7 +5,7 @@ A personal MCP server that emails a daily Top-3 market-moving-news briefing,
 ranked by Claude with a Gemini fallback. It pulls from NewsAPI, Finnhub, RSS
 feeds (Bloomberg, CNBC, MarketWatch), and YouTube finance channels, dedupes,
 asks an LLM to rank the three most market-moving stories with a short impact
-summary, and emails the result to a configurable recipient list at 6 AM MDT
+summary, and emails the result to a configurable recipient list at 6 AM Denver time
 on weekdays.
 
 ## Why it exists
@@ -49,8 +49,8 @@ market-mover
 
 ## Daily run
 
-The `.github/workflows/daily-briefing.yml` workflow runs on cron
-`0 12 * * 1-5` — that's 12:00 UTC, which is 6:00 AM MDT on weekdays. Logs
+The `.github/workflows/daily-briefing.yml` workflow is started by
+a timer on daisy (`scripts/daisy/`) at 6 AM Denver on weekdays, with a `30 13 * * 1-5` GitHub cron as backup. Logs
 are visible under the repo's Actions tab. If the run fails, the workflow
 opens an issue labeled `automated,daily-briefing-failure` so the failure
 is impossible to miss.

@@ -24,8 +24,9 @@ PAPER ONLY — there is no live-trading path here.
 import logging
 import os
 import tempfile
-from datetime import date
+from datetime import date, datetime, time, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel
 
@@ -40,6 +41,11 @@ _SKIP_CATEGORIES = {"crypto"}
 # A carried position within this fraction of its target value is left alone, so
 # ordinary daily drift doesn't generate churn orders.
 _RESIZE_TOLERANCE = 0.10
+
+# Orders placed at or after the opening bell fill at intraday prices, not the open
+# ADR 0003 assumes, so those cycles are flagged for analysis to exclude or split.
+_MARKET_TZ = ZoneInfo("America/New_York")
+_MARKET_OPEN = time(9, 30)
 
 STATUS_SUBMITTED = "submitted"
 STATUS_CARRIED = "carried"
@@ -79,6 +85,8 @@ class PaperCycleRecord(BaseModel):
 
     cycle_date: str                       # ISO date the cycle ran
     equity: float | None = None           # Alpaca account equity after the cycle
+    run_started_at: str | None = None     # UTC time the cycle ran (null on legacy rows)
+    late_entry: bool | None = None        # True if it ran at/after the US open
     opened: list[OpenedPaperPosition] = []
     closed: list[ClosedPaperTrade] = []
 
@@ -247,6 +255,7 @@ def run_paper_cycle(
     settings: MarketMoverSettings,
     today: date,
     client: AlpacaTradingClient | None = None,
+    now: datetime | None = None,
 ) -> PaperCycleRecord | None:
     """Run one paper-trading cycle: close prior positions, open today's picks.
 
@@ -265,6 +274,10 @@ def run_paper_cycle(
         return cycles[-1]
 
     client = client or AlpacaTradingClient(settings)
+    now = now or datetime.now(timezone.utc)
+    late_entry = now.astimezone(_MARKET_TZ).time() >= _MARKET_OPEN
+    if late_entry:
+        logger.warning("paper: cycle %s started after the US open, flagging as late", today)
 
     # 1) Close the prior run's positions (the ~24h exit). Carry each pick's
     # category so closed P&L pools. Walk the whole ledger, oldest first, because a
@@ -328,7 +341,8 @@ def run_paper_cycle(
             equity = None
 
     record = PaperCycleRecord(
-        cycle_date=today.isoformat(), equity=equity, opened=opened, closed=closed
+        cycle_date=today.isoformat(), equity=equity, opened=opened, closed=closed,
+        run_started_at=now.astimezone(timezone.utc).isoformat(), late_entry=late_entry,
     )
     _append_cycle(path, record)
     logger.info(

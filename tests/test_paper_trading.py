@@ -1,7 +1,7 @@
 """Tests for the paper-trading engine (Cycle 6 / ADR 0003)."""
 
 import json
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from market_mover.models import RankedArticle
@@ -374,3 +374,40 @@ class TestCategoryLookback:
         record = run_paper_cycle([], _Settings(path), date(2026, 9, 9),
                                  client=_FakeClient(positions=[_position("EWG")]))
         assert record.closed[0].category == "geopolitical"
+
+
+class TestLateEntryFlag:
+    def _run(self, tmp_path, now):
+        return run_paper_cycle(
+            [_pick(1, "NVDA")], _Settings(tmp_path / "paper.jsonl"), date(2026, 11, 9),
+            client=_FakeClient(), now=now,
+        )
+
+    def test_pre_market_run_is_not_late(self, tmp_path):
+        record = self._run(tmp_path, datetime(2026, 11, 9, 13, 2, tzinfo=timezone.utc))  # 8:02 ET
+        assert record.late_entry is False
+        assert record.run_started_at == "2026-11-09T13:02:00+00:00"
+
+    def test_run_after_the_open_trades_and_is_flagged(self, tmp_path):
+        client = _FakeClient()
+        record = run_paper_cycle(
+            [_pick(1, "NVDA")], _Settings(tmp_path / "paper.jsonl"), date(2026, 11, 9),
+            client=client, now=datetime(2026, 11, 9, 14, 30, tzinfo=timezone.utc),  # 9:30 ET
+        )
+        assert record.late_entry is True
+        assert [o[0] for o in client.opened] == ["NVDA"]
+
+    def test_open_boundary_follows_daylight_saving(self, tmp_path):
+        # 13:45 UTC is 9:45 ET in summer but 8:45 ET in winter.
+        summer = self._run(tmp_path, datetime(2026, 7, 9, 13, 45, tzinfo=timezone.utc))
+        assert summer.late_entry is True
+        winter = run_paper_cycle(
+            [_pick(1, "NVDA")], _Settings(tmp_path / "winter.jsonl"), date(2026, 12, 9),
+            client=_FakeClient(), now=datetime(2026, 12, 9, 13, 45, tzinfo=timezone.utc),
+        )
+        assert winter.late_entry is False
+
+    def test_legacy_rows_have_no_flag(self, tmp_path):
+        path = tmp_path / "paper.jsonl"
+        path.write_text('{"cycle_date":"2026-11-05","equity":1.0,"opened":[],"closed":[]}\n')
+        assert load_cycles(path)[0].late_entry is None
