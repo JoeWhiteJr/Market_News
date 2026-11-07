@@ -7,7 +7,7 @@ type: chore
 owner: joe
 assigned-team: Builder
 created: 2026-08-18
-updated: 2026-08-18
+updated: 2026-11-06
 related-tickets: MM-T012, MM-T009, MM-T010
 ---
 
@@ -72,3 +72,7 @@ single_name is the loser, geopolitical the winner. This kills the earlier
 
 ## Retrospective
 (to fill on merge)
+- 2026-11-06: two more null categories appeared after the Labor Day cycle (TLT 09-08,
+  EWG 09-09), which failed `TestLedgerCategoryIntegrity`. Their fills or closes slipped
+  a cycle and category lookup only read the previous cycle. Backfilled from the opening
+  rows (TLT macro from 09-04, EWG geopolitical from 09-07); lookup now reads the whole ledger.

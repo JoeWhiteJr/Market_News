@@ -16,6 +16,7 @@ from .config import MarketMoverSettings
 logger = logging.getLogger("market_mover.alpaca_trading")
 
 _HTTP_TIMEOUT_SECS = 15
+_ERROR_BODY_LOG_CHARS = 300
 
 
 class AlpacaTradingClient:
@@ -49,7 +50,11 @@ class AlpacaTradingClient:
             # DELETE /positions/{sym} returns the closing order; 207s etc. still parse.
             return resp.json()
         except Exception as e:
-            logger.warning(f"Alpaca {method} {path} failed: {e}")
+            # raise_for_status() omits the response body, which is where the broker
+            # says why it refused (e.g. wash-trade rejection, unknown symbol).
+            body = getattr(getattr(e, "response", None), "text", "") or ""
+            detail = f" | {body[:_ERROR_BODY_LOG_CHARS]}" if body else ""
+            logger.warning(f"Alpaca {method} {path} failed: {e}{detail}")
             return None
 
     # -- read --------------------------------------------------------------

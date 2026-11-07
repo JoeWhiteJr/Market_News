@@ -80,3 +80,16 @@ equity + win-rate surfaced in the email scorecard (cosmetic, iterable).
 - [x] Joe approves $1,000/position equal-weight sizing — 2026-06-08
 - [x] Joe approves ~24h hold, single-cron model (close prior run → open today) — 2026-06-08
 - [x] Joe approves paper-only (live trading is a separate, future ADR) — 2026-06-08
+
+## Amendment (2026-11-06, MM-T016): carry repeat picks
+
+88 of 292 logged opens failed. 82 were a ticker being closed in the same run, which
+the broker refuses with a 403 while the sell is pending. Those days ran with no
+position in a ticker the strategy meant to hold, so "flat between cycles" no longer
+applies to repeat picks:
+
+- A held ticker picked again is **carried**, then resized to target if it is more
+  than 10% off. Trims log a partial closed trade.
+- Carried trades can span several days, so `pnl_pct` is no longer always a one-day
+  return. Analyses should treat 2026-11-06 onward as a new regime.
+- `opened[].status` records `submitted`, `carried`, or `failed`.

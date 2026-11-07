@@ -240,3 +240,137 @@ class TestLedgerCategoryIntegrity:
                 if not trade.get("category"):
                     offenders.append((row.get("cycle_date"), trade.get("ticker")))
         assert not offenders, f"closed trades missing category: {offenders}"
+
+
+class _WashRejectingClient(_FakeClient):
+    """Mimics the broker: a buy is refused while a sell on that ticker is pending."""
+
+    def submit_notional_order(self, symbol, notional, side="buy"):
+        if side == "buy" and symbol in self.closed:
+            self.opened.append((symbol, notional, "rejected"))
+            return None
+        return super().submit_notional_order(symbol, notional, side)
+
+
+def _position(symbol, qty=10.0, entry=100.0, price=100.0):
+    return {
+        "symbol": symbol,
+        "qty": str(qty),
+        "avg_entry_price": str(entry),
+        "current_price": str(price),
+        "market_value": str(qty * price),
+        "unrealized_pl": str((price - entry) * qty),
+        "unrealized_plpc": str((price - entry) / entry),
+    }
+
+
+class TestRepeatPicks:
+    def test_repick_of_held_ticker_is_carried_not_closed_and_rebought(self, tmp_path):
+        path = tmp_path / "paper.jsonl"
+        client = _WashRejectingClient(positions=[_position("SPY")])
+        record = run_paper_cycle(
+            [_pick(1, "SPY", "macro")], _Settings(path), date(2026, 11, 6), client=client
+        )
+        assert client.closed == []
+        assert client.opened == []
+        assert record.closed == []
+        assert [(o.ticker, o.status) for o in record.opened] == [("SPY", "carried")]
+
+    def test_unpicked_ticker_still_closes_while_repick_carries(self, tmp_path):
+        path = tmp_path / "paper.jsonl"
+        client = _WashRejectingClient(positions=[_position("SPY"), _position("USO")])
+        record = run_paper_cycle(
+            [_pick(1, "SPY", "macro")], _Settings(path), date(2026, 11, 6), client=client
+        )
+        assert client.closed == ["USO"]
+        assert [t.ticker for t in record.closed] == ["USO"]
+
+    def test_carried_position_tops_up_when_under_target(self, tmp_path):
+        path = tmp_path / "paper.jsonl"
+        client = _WashRejectingClient(positions=[_position("SPY", qty=8.0)])  # $800
+        record = run_paper_cycle(
+            [_pick(1, "SPY", "macro")], _Settings(path), date(2026, 11, 6), client=client
+        )
+        assert client.opened == [("SPY", 200.0, "buy")]
+        assert record.opened[0].status == "carried"
+        assert record.opened[0].order_id == "order-SPY"
+
+    def test_carried_position_trims_and_logs_realized_pnl(self, tmp_path):
+        path = tmp_path / "paper.jsonl"
+        # Worth $2,000 (two picks yesterday), one pick today: sell half at a +10% gain.
+        client = _WashRejectingClient(
+            positions=[_position("SPY", qty=20.0, entry=90.909090, price=100.0)]
+        )
+        record = run_paper_cycle(
+            [_pick(1, "SPY", "macro")], _Settings(path), date(2026, 11, 6), client=client
+        )
+        assert client.closed == []
+        assert client.opened == [("SPY", 1000.0, "sell")]
+        assert len(record.closed) == 1
+        assert abs(record.closed[0].qty - 10.0) < 1e-6
+        assert abs(record.closed[0].pnl_abs - 90.9091) < 1e-3
+
+    def test_small_drift_does_not_trade(self, tmp_path):
+        path = tmp_path / "paper.jsonl"
+        client = _WashRejectingClient(positions=[_position("SPY", price=105.0)])  # $1,050
+        run_paper_cycle(
+            [_pick(1, "SPY", "macro")], _Settings(path), date(2026, 11, 6), client=client
+        )
+        assert client.opened == []
+
+    def test_duplicate_picks_of_new_ticker_each_buy(self, tmp_path):
+        path = tmp_path / "paper.jsonl"
+        client = _WashRejectingClient()
+        record = run_paper_cycle(
+            [_pick(1, "SPY", "macro"), _pick(2, "SPY", "macro")],
+            _Settings(path), date(2026, 11, 6), client=client,
+        )
+        assert client.opened == [("SPY", 1000.0, "buy"), ("SPY", 1000.0, "buy")]
+        assert [o.status for o in record.opened] == ["submitted", "submitted"]
+
+
+class TestOrderFailures:
+    def test_rejected_buy_is_recorded_as_failed_and_warned(self, tmp_path, caplog):
+        class _Rejecting(_FakeClient):
+            def submit_notional_order(self, symbol, notional, side="buy"):
+                return None
+
+        path = tmp_path / "paper.jsonl"
+        record = run_paper_cycle(
+            [_pick(1, "NVDA")], _Settings(path), date(2026, 11, 6), client=_Rejecting()
+        )
+        assert record.opened[0].status == "failed"
+        assert record.opened[0].order_id is None
+        assert "NVDA" in caplog.text
+
+    def test_failed_close_is_not_logged_as_a_closed_trade(self, tmp_path, caplog):
+        class _CloseFails(_FakeClient):
+            def close_position(self, symbol):
+                return None
+
+        path = tmp_path / "paper.jsonl"
+        client = _CloseFails(positions=[_position("USO")])
+        record = run_paper_cycle([], _Settings(path), date(2026, 11, 6), client=client)
+        assert record.closed == []
+        assert "USO" in caplog.text
+
+    def test_legacy_ledger_rows_still_load(self, tmp_path):
+        path = tmp_path / "paper.jsonl"
+        path.write_text(
+            '{"cycle_date":"2026-11-05","equity":1.0,"opened":[{"ticker":"SPY","rank":1,'
+            '"notional":15000.0,"order_id":null,"category":"macro"}],"closed":[]}\n'
+        )
+        assert load_cycles(path)[0].opened[0].status is None
+
+
+class TestCategoryLookback:
+    def test_position_older_than_prior_cycle_keeps_its_category(self, tmp_path):
+        """A close delayed past one cycle (e.g. a market holiday) still gets a category."""
+        path = tmp_path / "paper.jsonl"
+        run_paper_cycle([_pick(1, "EWG", "geopolitical")], _Settings(path), date(2026, 9, 7),
+                        client=_FakeClient())
+        run_paper_cycle([_pick(1, "NVDA")], _Settings(path), date(2026, 9, 8),
+                        client=_FakeClient())
+        record = run_paper_cycle([], _Settings(path), date(2026, 9, 9),
+                                 client=_FakeClient(positions=[_position("EWG")]))
+        assert record.closed[0].category == "geopolitical"

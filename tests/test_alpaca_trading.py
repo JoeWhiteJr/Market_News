@@ -68,3 +68,26 @@ class TestAlpacaTradingClient:
         with patch.dict("sys.modules", {"requests": m}):
             out = AlpacaTradingClient(_Settings()).get_account()
         assert out == {"equity": "100000"}
+
+
+def test_request_failure_logs_broker_error_body(monkeypatch, caplog):
+    import requests
+
+    from market_mover.alpaca_trading import AlpacaTradingClient
+
+    class _Resp:
+        status_code = 403
+        text = '{"code":40310000,"message":"potential wash trade detected"}'
+
+        def raise_for_status(self):
+            raise requests.HTTPError("403 Client Error: Forbidden", response=self)
+
+    monkeypatch.setattr(requests, "request", lambda *a, **k: _Resp())
+
+    class _S:
+        alpaca_paper_base_url = "https://paper-api.alpaca.markets"
+        alpaca_api_key_id = "k"
+        alpaca_api_secret_key = "s"
+
+    assert AlpacaTradingClient(_S()).submit_notional_order("SPY", 100.0) is None
+    assert "wash trade" in caplog.text

@@ -10,6 +10,9 @@ Alpaca **paper** account. Per ADR 0003 the rules are locked:
 - **Sizing**: equal-weight, fixed ``paper_notional_per_position`` per pick.
 - **Hold**: ~24h. Each daily run **closes** the prior run's positions, then
   **opens** today's picks (single pre-market cron, so open-to-open ≈ 24h).
+  A held ticker that is picked again is **carried** and resized to target rather
+  than closed and re-bought, because the broker refuses a buy while a sell on the
+  same ticker is pending (ADR 0003 amendment, MM-T016).
 
 The ledger (``data/paper_trades.jsonl``) stores one :class:`PaperCycleRecord`
 per trading day. The run is idempotent: a second run on the same calendar day
@@ -33,6 +36,14 @@ logger = logging.getLogger("market_mover.paper_trading")
 
 # Categories whose picks are NOT paper-traded in v1 (no clean equity proxy).
 _SKIP_CATEGORIES = {"crypto"}
+
+# A carried position within this fraction of its target value is left alone, so
+# ordinary daily drift doesn't generate churn orders.
+_RESIZE_TOLERANCE = 0.10
+
+STATUS_SUBMITTED = "submitted"
+STATUS_CARRIED = "carried"
+STATUS_FAILED = "failed"
 
 
 class ClosedPaperTrade(BaseModel):
@@ -58,6 +69,9 @@ class OpenedPaperPosition(BaseModel):
     notional: float
     order_id: str | None = None
     category: str | None = None  # the pick's category (Phase 0 / ADR 0004)
+    # submitted | carried | failed. Null on legacy rows, where a null order_id was
+    # ambiguous. "carried" means the ticker was already held, so no opening order.
+    status: str | None = None
 
 
 class PaperCycleRecord(BaseModel):
@@ -146,36 +160,86 @@ def compute_paper_stats(cycles: list[PaperCycleRecord]) -> dict:
     }
 
 
+def _mark_position(
+    pos: dict, category: str | None, fraction: float = 1.0
+) -> ClosedPaperTrade | None:
+    """Mark ``fraction`` of a broker position as a closed trade (None if malformed)."""
+    try:
+        ticker = str(pos["symbol"])
+        qty = float(pos.get("qty", 0) or 0)
+        entry = float(pos.get("avg_entry_price", 0) or 0)
+        exit_price = float(pos.get("current_price", entry) or entry)
+        pnl_abs = float(pos.get("unrealized_pl", (exit_price - entry) * qty))
+        pnl_pct = float(pos.get("unrealized_plpc", 0) or 0) * 100.0
+    except (KeyError, TypeError, ValueError) as e:
+        logger.warning(f"paper: skipping malformed position {pos!r} ({e})")
+        return None
+    return ClosedPaperTrade(
+        ticker=ticker, qty=qty * fraction, entry_price=entry, exit_price=exit_price,
+        pnl_abs=pnl_abs * fraction, pnl_pct=pnl_pct, category=category,
+    )
+
+
 def _close_open_positions(
-    client: AlpacaTradingClient, category_by_ticker: dict[str, str] | None = None
+    client: AlpacaTradingClient,
+    positions: list[dict],
+    category_by_ticker: dict[str, str] | None = None,
 ) -> list[ClosedPaperTrade]:
-    """Mark + liquidate every open paper position (the prior run's opens).
+    """Mark + liquidate ``positions``, logging only the closes the broker accepted.
 
     ``category_by_ticker`` (from the prior cycle's opened positions) lets each
     closed trade carry the pick's category so P&L pools by category.
     """
     category_by_ticker = category_by_ticker or {}
     closed: list[ClosedPaperTrade] = []
-    for pos in client.list_positions():
-        try:
-            ticker = str(pos["symbol"])
-            qty = float(pos.get("qty", 0) or 0)
-            entry = float(pos.get("avg_entry_price", 0) or 0)
-            exit_price = float(pos.get("current_price", entry) or entry)
-            pnl_abs = float(pos.get("unrealized_pl", (exit_price - entry) * qty))
-            pnl_pct = float(pos.get("unrealized_plpc", 0) or 0) * 100.0
-        except (KeyError, TypeError, ValueError) as e:
-            logger.warning(f"paper: skipping malformed position {pos!r} ({e})")
+    for pos in positions:
+        symbol = str(pos.get("symbol", ""))
+        trade = _mark_position(pos, category_by_ticker.get(symbol.upper()))
+        if trade is None:
             continue
-        closed.append(
-            ClosedPaperTrade(
-                ticker=ticker, qty=qty, entry_price=entry, exit_price=exit_price,
-                pnl_abs=pnl_abs, pnl_pct=pnl_pct,
-                category=category_by_ticker.get(ticker.upper()),
-            )
-        )
-        client.close_position(ticker)
+        if not client.close_position(trade.ticker):
+            logger.warning("paper: close of %s failed, position still open", trade.ticker)
+            continue
+        closed.append(trade)
     return closed
+
+
+def _position_value(pos: dict) -> float | None:
+    """Current dollar value of a broker position, or None if it can't be read."""
+    try:
+        if pos.get("market_value") not in (None, ""):
+            return float(pos["market_value"])
+        return float(pos["qty"]) * float(pos["current_price"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def _resize_carried(
+    client: AlpacaTradingClient,
+    pos: dict,
+    target: float,
+    category: str | None,
+) -> tuple[str | None, ClosedPaperTrade | None]:
+    """Move a carried position to ``target`` dollars if it drifted past tolerance.
+
+    Returns ``(order_id, trade)``. ``trade`` is the realized slice of a trim, logged
+    so the ledger keeps tracking broker equity.
+    """
+    ticker = str(pos["symbol"]).upper()
+    value = _position_value(pos)
+    if value is None or value <= 0:
+        logger.warning("paper: can't value carried %s, leaving it unchanged", ticker)
+        return None, None
+    delta = target - value
+    if abs(delta) <= target * _RESIZE_TOLERANCE:
+        return None, None
+    side = "buy" if delta > 0 else "sell"
+    order = client.submit_notional_order(ticker, round(abs(delta), 2), side=side)
+    if not isinstance(order, dict):
+        logger.warning("paper: %s of carried %s was rejected", side, ticker)
+        return None, None
+    trade = _mark_position(pos, category, fraction=-delta / value) if delta < 0 else None
+    return order.get("id"), trade
 
 
 def run_paper_cycle(
@@ -203,30 +267,56 @@ def run_paper_cycle(
     client = client or AlpacaTradingClient(settings)
 
     # 1) Close the prior run's positions (the ~24h exit). Carry each pick's
-    # category from the prior cycle's opened positions so closed P&L pools.
+    # category so closed P&L pools. Walk the whole ledger, oldest first, because a
+    # position can outlive one cycle when a market holiday delays its fill or close.
     prior_categories: dict[str, str] = {}
-    if cycles:
-        for op in cycles[-1].opened:
+    for cycle in cycles:
+        for op in cycle.opened:
             if op.category:
                 prior_categories[op.ticker.upper()] = op.category
-    closed = _close_open_positions(client, prior_categories)
-
-    # 2) Open today's eligible picks, equal-weight notional.
-    opened: list[OpenedPaperPosition] = []
+    #    A ticker picked again today is carried instead: closing it would leave a
+    #    pending sell that makes the broker refuse today's buy.
+    picks_by_ticker: dict[str, list] = {}
     for p in eligible_picks(picks):
-        ticker = p.primary_ticker.strip().upper()
-        order = client.submit_notional_order(
-            ticker, settings.paper_notional_per_position, side="buy"
-        )
-        opened.append(
-            OpenedPaperPosition(
-                ticker=ticker,
-                rank=int(p.rank),
-                notional=settings.paper_notional_per_position,
-                order_id=(order or {}).get("id") if isinstance(order, dict) else None,
-                category=getattr(p, "category", None),
+        picks_by_ticker.setdefault(p.primary_ticker.strip().upper(), []).append(p)
+    held = {str(pos.get("symbol", "")).upper(): pos for pos in client.list_positions()}
+    closed = _close_open_positions(
+        client,
+        [pos for ticker, pos in held.items() if ticker not in picks_by_ticker],
+        prior_categories,
+    )
+
+    # 2) Open today's eligible picks, equal-weight notional; resize carried ones.
+    notional = settings.paper_notional_per_position
+    opened: list[OpenedPaperPosition] = []
+    for ticker, ticker_picks in picks_by_ticker.items():
+        if ticker in held:
+            order_id, trim = _resize_carried(
+                client, held[ticker], notional * len(ticker_picks), prior_categories.get(ticker)
             )
-        )
+            if trim is not None:
+                closed.append(trim)
+            for i, p in enumerate(ticker_picks):
+                opened.append(
+                    OpenedPaperPosition(
+                        ticker=ticker, rank=int(p.rank), notional=notional,
+                        order_id=order_id if i == 0 else None,
+                        category=getattr(p, "category", None), status=STATUS_CARRIED,
+                    )
+                )
+            continue
+        for p in ticker_picks:
+            order = client.submit_notional_order(ticker, notional, side="buy")
+            order_id = order.get("id") if isinstance(order, dict) else None
+            if order_id is None:
+                logger.warning("paper: buy of %s (rank %s) failed", ticker, p.rank)
+            opened.append(
+                OpenedPaperPosition(
+                    ticker=ticker, rank=int(p.rank), notional=notional, order_id=order_id,
+                    category=getattr(p, "category", None),
+                    status=STATUS_SUBMITTED if order_id else STATUS_FAILED,
+                )
+            )
 
     # 3) Equity snapshot (Alpaca is the source of truth for the curve).
     account = client.get_account()
