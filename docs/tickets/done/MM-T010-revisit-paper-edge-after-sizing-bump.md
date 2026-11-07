@@ -1,7 +1,7 @@
 ---
 id: MM-T010
 title: Revisit the paper-trading edge ~4 weeks after the $15k sizing bump
-status: in-progress
+status: done
 priority: medium
 type: analysis
 owner: joe
@@ -9,7 +9,7 @@ assigned-team: Scout
 created: 2026-08-12
 updated: 2026-11-06
 review-after: 2026-09-09
-related-pr:
+related-pr: 48
 related-tickets: MM-T009, MM-T003
 ---
 
@@ -108,3 +108,6 @@ to shift the mix, so it needs watching.
 
 **What this means for real money:** not yet. At $2,000 fully invested, this period scales
 to +$333, or +$89 without MRNA, with an -$80 worst day and a -$107 max drawdown.
+
+## Retrospective
+The review ran about 2 months after its 2026-09-09 date. Nothing scheduled it, so the next check needs its own ticket or date.
