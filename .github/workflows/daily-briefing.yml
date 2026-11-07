@@ -114,6 +114,7 @@ jobs:
           git add data/briefings.jsonl 2>/dev/null || true
           git add data/paper_trades.jsonl 2>/dev/null || true
           git add data/predictions.jsonl 2>/dev/null || true
+          git add data/shadow_picks.jsonl 2>/dev/null || true
           # Regenerated browsable scores page (MM-T003) — served via GitHub Pages.
           git add docs/scores.html 2>/dev/null || true
           # Latest briefings as JSON (MM-T014) — served via GitHub Pages for the Wasden Watch

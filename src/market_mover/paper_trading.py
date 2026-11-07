@@ -168,6 +168,11 @@ def compute_paper_stats(cycles: list[PaperCycleRecord]) -> dict:
     }
 
 
+def is_after_market_open(now: datetime) -> bool:
+    """True if ``now`` is at or after the 9:30 AM ET open on its own date."""
+    return now.astimezone(_MARKET_TZ).time() >= _MARKET_OPEN
+
+
 def _mark_position(
     pos: dict, category: str | None, fraction: float = 1.0
 ) -> ClosedPaperTrade | None:
@@ -275,7 +280,7 @@ def run_paper_cycle(
 
     client = client or AlpacaTradingClient(settings)
     now = now or datetime.now(timezone.utc)
-    late_entry = now.astimezone(_MARKET_TZ).time() >= _MARKET_OPEN
+    late_entry = is_after_market_open(now)
     if late_entry:
         logger.warning("paper: cycle %s started after the US open, flagging as late", today)
 
