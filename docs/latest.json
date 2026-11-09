@@ -1,40 +1,40 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-06T18:53:30.548243+00:00",
-  "brief_date": "2026-11-06",
+  "generated_at": "2026-11-09T13:01:32.464142+00:00",
+  "brief_date": "2026-11-09",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-06-1",
-      "title": "U.S. economy added 165,000 jobs in October, way more than expected; unemployment rate slips to 4.1%",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/06/jobs-report-october-2026.html",
-      "published_at": "2026-11-06T12:00:00Z",
-      "summary": "A blowout payrolls print — 165K vs. 59K expected — is the kind of number that reprices everything from the long bond to the front end of the curve in about 90 seconds. With Pimco already calling multiple Fed hikes 'reasonable' and gold dropping on the print, this is the tape-mover that makes Thursday's AI selloff look like a sideshow. Every rate-sensitive sector — tech, real estate, utilities — has to recalibrate right now.",
+      "id": "mm-2026-11-09-1",
+      "title": "Nvidia CEO Jensen Huang Admits Affair With Suspected Chinese Spy",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-09/the-pulse-11-9-2026-video",
+      "published_at": "2026-11-09T12:00:00Z",
+      "summary": "Listen up — this is the kind of headline that stops the tape cold. Nvidia's board launching an independent probe into Jensen Huang over a suspected Chinese intelligence connection hits the stock with a governance crisis, a national security angle, AND a succession question all at once. The whole AI trade — NVDA, CoreWeave, the hyperscalers — takes collateral damage when the face of the chip boom is under a spy investigation.",
       "tickers": [
-        "SPY"
+        "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-06-2",
-      "title": "Markets plunge as Wall Street heads for its worst post-midterm day since 1896",
-      "source": "finance.yahoo.com",
-      "url": "https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-5-dow-sp-500-nasdaq-oil-rises-chip-stocks-141439950.html",
-      "published_at": "2026-11-06T12:00:00Z",
-      "summary": "The Dow down 1,200, the S&P off 3.3%, the Nasdaq flirting with correction territory — this is the kind of session that rewrites positioning across every desk on the Street. The Democratic sweep spooked the AI trade hard, with $2 trillion wiped from the Nasdaq 100 alone, dragging chips, data center plays, and crypto down with it. When retail is dumping at Covid-selloff pace and options volumes hit all-time records, you don't need a PhD to know the bid has left the building.",
+      "id": "mm-2026-11-09-2",
+      "title": "Oil Extends Drop as Hopes Grow of Diplomatic Progress to End War",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-09/oil-falls-on-unconfirmed-report-that-iran-eased-hormuz-demands",
+      "published_at": "2026-11-09T12:00:00Z",
+      "summary": "Oil posting its biggest weekly drop since April 2020 is a macro event that ripples across every sector — lower energy costs are a tailwind for airlines, industrials, and consumers, while E&P names get hit. The Strait of Hormuz situation is still live with navigation aids destroyed and fresh shipping attacks, so this relief rally in equities could reverse fast if diplomacy stalls — Rubio's already calling Iranian demands 'outrageous.'",
       "tickers": [
-        "QQQ"
+        "USO"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-06-3",
-      "title": "The AI 'credit card' is getting costlier as CoreWeave bond yield tops 16%",
+      "id": "mm-2026-11-09-3",
+      "title": "CoreWeave confronts 'doom cycle' narrative as neocloud credit risk overshadows growth",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/06/coreweave-bond-yield-tops-16percent-as-ai-credit-stress-rises.html",
-      "published_at": "2026-11-06T12:00:00Z",
-      "summary": "When the junk paper funding the AI buildout starts yielding 16%, the whole capital structure of the trade is in question — and ING reportedly trying to offload $500 million in data center loans is the canary in that coal mine. This isn't just a CoreWeave story; it's a signal that the credit markets are starting to price in what equity investors are only beginning to fear. If the debt spigot tightens, the hyperscalers' capex plans don't survive contact with a Democratic Congress and a hawkish Fed.",
+      "url": "https://www.cnbc.com/2026/11/09/coreweave-debt-credit-risk-neoclouds.html",
+      "published_at": "2026-11-09T12:00:00Z",
+      "summary": "CoreWeave and Nebius are both down roughly 50% in a month heading into earnings — that's not a dip, that's a rout, and the 'doom cycle' framing around neocloud credit risk could spread contagion to the broader AI infrastructure trade. With the CNBC investing club flagging CoreWeave earnings as one of the two big things to watch this week, this is a live catalyst that could either stabilize or accelerate the AI selloff.",
       "tickers": [
         "CRWV"
       ],
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "U.S. economy added 165,000 jobs in October, way more than expected; unemployment rate slips to 4.1%",
-      "justification": "A blowout payrolls print — 165K vs. 59K expected — is the kind of number that reprices everything from the long bond to the front end of the curve in about 90 seconds. With Pimco already calling multiple Fed hikes 'reasonable' and gold dropping on the print, this is the tape-mover that makes Thursday's AI selloff look like a sideshow. Every rate-sensitive sector — tech, real estate, utilities — has to recalibrate right now.",
+      "ticker": "NVDA",
+      "category": "single_name",
+      "title": "Nvidia CEO Jensen Huang Admits Affair With Suspected Chinese Spy",
+      "justification": "Listen up — this is the kind of headline that stops the tape cold. Nvidia's board launching an independent probe into Jensen Huang over a suspected Chinese intelligence connection hits the stock with a governance crisis, a national security angle, AND a succession question all at once. The whole AI trade — NVDA, CoreWeave, the hyperscalers — takes collateral damage when the face of the chip boom is under a spy investigation.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "QQQ",
+      "ticker": "USO",
       "category": "geopolitical",
-      "title": "Markets plunge as Wall Street heads for its worst post-midterm day since 1896",
-      "justification": "The Dow down 1,200, the S&P off 3.3%, the Nasdaq flirting with correction territory — this is the kind of session that rewrites positioning across every desk on the Street. The Democratic sweep spooked the AI trade hard, with $2 trillion wiped from the Nasdaq 100 alone, dragging chips, data center plays, and crypto down with it. When retail is dumping at Covid-selloff pace and options volumes hit all-time records, you don't need a PhD to know the bid has left the building.",
+      "title": "Oil Extends Drop as Hopes Grow of Diplomatic Progress to End War",
+      "justification": "Oil posting its biggest weekly drop since April 2020 is a macro event that ripples across every sector — lower energy costs are a tailwind for airlines, industrials, and consumers, while E&P names get hit. The Strait of Hormuz situation is still live with navigation aids destroyed and fresh shipping attacks, so this relief rally in equities could reverse fast if diplomacy stalls — Rubio's already calling Iranian demands 'outrageous.'",
       "verdict": null
     },
     {
       "rank": 3,
       "ticker": "CRWV",
       "category": "single_name",
-      "title": "The AI 'credit card' is getting costlier as CoreWeave bond yield tops 16%",
-      "justification": "When the junk paper funding the AI buildout starts yielding 16%, the whole capital structure of the trade is in question — and ING reportedly trying to offload $500 million in data center loans is the canary in that coal mine. This isn't just a CoreWeave story; it's a signal that the credit markets are starting to price in what equity investors are only beginning to fear. If the debt spigot tightens, the hyperscalers' capex plans don't survive contact with a Democratic Congress and a hawkish Fed.",
+      "title": "CoreWeave confronts 'doom cycle' narrative as neocloud credit risk overshadows growth",
+      "justification": "CoreWeave and Nebius are both down roughly 50% in a month heading into earnings — that's not a dip, that's a rout, and the 'doom cycle' framing around neocloud credit risk could spread contagion to the broader AI infrastructure trade. With the CNBC investing club flagging CoreWeave earnings as one of the two big things to watch this week, this is a live catalyst that could either stabilize or accelerate the AI selloff.",
       "verdict": null
     }
   ]
