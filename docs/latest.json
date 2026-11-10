@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-09T13:01:32.464142+00:00",
-  "brief_date": "2026-11-09",
+  "generated_at": "2026-11-10T13:01:39.149466+00:00",
+  "brief_date": "2026-11-10",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-09-1",
-      "title": "Nvidia CEO Jensen Huang Admits Affair With Suspected Chinese Spy",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-09/the-pulse-11-9-2026-video",
-      "published_at": "2026-11-09T12:00:00Z",
-      "summary": "Listen up — this is the kind of headline that stops the tape cold. Nvidia's board launching an independent probe into Jensen Huang over a suspected Chinese intelligence connection hits the stock with a governance crisis, a national security angle, AND a succession question all at once. The whole AI trade — NVDA, CoreWeave, the hyperscalers — takes collateral damage when the face of the chip boom is under a spy investigation.",
+      "id": "mm-2026-11-10-1",
+      "title": "Fed Governor Waller sees December hike likely, opens door to possible half-point increase",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/10/fed-governor-waller-sees-december-hike-likely.html",
+      "published_at": "2026-11-10T12:00:00Z",
+      "summary": "Listen up — a Fed governor just put a 50-basis-point hike on the table the day before CPI drops. That's the tape-stopper right there. Every rate-sensitive sector from housing to tech to the long bond is repricing in real time, and the stock rebound already stalled on this news per Bloomberg's wrap.",
       "tickers": [
-        "NVDA"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-09-2",
-      "title": "Oil Extends Drop as Hopes Grow of Diplomatic Progress to End War",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-09/oil-falls-on-unconfirmed-report-that-iran-eased-hormuz-demands",
-      "published_at": "2026-11-09T12:00:00Z",
-      "summary": "Oil posting its biggest weekly drop since April 2020 is a macro event that ripples across every sector — lower energy costs are a tailwind for airlines, industrials, and consumers, while E&P names get hit. The Strait of Hormuz situation is still live with navigation aids destroyed and fresh shipping attacks, so this relief rally in equities could reverse fast if diplomacy stalls — Rubio's already calling Iranian demands 'outrageous.'",
+      "id": "mm-2026-11-10-2",
+      "title": "Anthropic sets IPO price range of $70 to $78, looks to start trading Nov. 19, sources say",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/10/anthropic-sets-price-range-of-70-to-78-in-upcoming-ipo.html",
+      "published_at": "2026-11-10T12:00:00Z",
+      "summary": "A trillion-dollar AI name hitting the tape next week is the biggest sentiment test for the entire AI trade since the sector got rocked last week. If this thing prices well, it's a green light for beaten-down AI names; if it stumbles, the whole complex gets another leg down. Every hyperscaler, chip name, and cloud play has skin in this game.",
+      "tickers": [
+        "QQQ"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-10-3",
+      "title": "Brent crude falls below $90 for first time since August on Iran war de-escalation hopes",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/10/oil-prices-trump-iran.html",
+      "published_at": "2026-11-10T12:00:00Z",
+      "summary": "Brent cracking below $90 for the first time since August is a big deal — it's a tax cut for every consumer and business on the planet, and it takes pressure off the inflation print coming tomorrow. Energy stocks get hit, airlines and transports catch a bid, and the geopolitical risk premium that's been baked into everything starts coming out of the market.",
       "tickers": [
         "USO"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-09-3",
-      "title": "CoreWeave confronts 'doom cycle' narrative as neocloud credit risk overshadows growth",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/09/coreweave-debt-credit-risk-neoclouds.html",
-      "published_at": "2026-11-09T12:00:00Z",
-      "summary": "CoreWeave and Nebius are both down roughly 50% in a month heading into earnings — that's not a dip, that's a rout, and the 'doom cycle' framing around neocloud credit risk could spread contagion to the broader AI infrastructure trade. With the CNBC investing club flagging CoreWeave earnings as one of the two big things to watch this week, this is a live catalyst that could either stabilize or accelerate the AI selloff.",
-      "tickers": [
-        "CRWV"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "NVDA",
-      "category": "single_name",
-      "title": "Nvidia CEO Jensen Huang Admits Affair With Suspected Chinese Spy",
-      "justification": "Listen up — this is the kind of headline that stops the tape cold. Nvidia's board launching an independent probe into Jensen Huang over a suspected Chinese intelligence connection hits the stock with a governance crisis, a national security angle, AND a succession question all at once. The whole AI trade — NVDA, CoreWeave, the hyperscalers — takes collateral damage when the face of the chip boom is under a spy investigation.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Fed Governor Waller sees December hike likely, opens door to possible half-point increase",
+      "justification": "Listen up — a Fed governor just put a 50-basis-point hike on the table the day before CPI drops. That's the tape-stopper right there. Every rate-sensitive sector from housing to tech to the long bond is repricing in real time, and the stock rebound already stalled on this news per Bloomberg's wrap.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Oil Extends Drop as Hopes Grow of Diplomatic Progress to End War",
-      "justification": "Oil posting its biggest weekly drop since April 2020 is a macro event that ripples across every sector — lower energy costs are a tailwind for airlines, industrials, and consumers, while E&P names get hit. The Strait of Hormuz situation is still live with navigation aids destroyed and fresh shipping attacks, so this relief rally in equities could reverse fast if diplomacy stalls — Rubio's already calling Iranian demands 'outrageous.'",
+      "ticker": "QQQ",
+      "category": "single_name",
+      "title": "Anthropic sets IPO price range of $70 to $78, looks to start trading Nov. 19, sources say",
+      "justification": "A trillion-dollar AI name hitting the tape next week is the biggest sentiment test for the entire AI trade since the sector got rocked last week. If this thing prices well, it's a green light for beaten-down AI names; if it stumbles, the whole complex gets another leg down. Every hyperscaler, chip name, and cloud play has skin in this game.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "CRWV",
-      "category": "single_name",
-      "title": "CoreWeave confronts 'doom cycle' narrative as neocloud credit risk overshadows growth",
-      "justification": "CoreWeave and Nebius are both down roughly 50% in a month heading into earnings — that's not a dip, that's a rout, and the 'doom cycle' framing around neocloud credit risk could spread contagion to the broader AI infrastructure trade. With the CNBC investing club flagging CoreWeave earnings as one of the two big things to watch this week, this is a live catalyst that could either stabilize or accelerate the AI selloff.",
+      "ticker": "USO",
+      "category": "commodity",
+      "title": "Brent crude falls below $90 for first time since August on Iran war de-escalation hopes",
+      "justification": "Brent cracking below $90 for the first time since August is a big deal — it's a tax cut for every consumer and business on the planet, and it takes pressure off the inflation print coming tomorrow. Energy stocks get hit, airlines and transports catch a bid, and the geopolitical risk premium that's been baked into everything starts coming out of the market.",
       "verdict": null
     }
   ]
