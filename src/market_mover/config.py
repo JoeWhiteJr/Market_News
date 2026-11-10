@@ -61,8 +61,19 @@ class MarketMoverSettings(BaseSettings):
     paper_notional_per_position: float = 15000.0
     # Append-only ledger, one cycle record per trading day.
     paper_trades_jsonl_path: str = "data/paper_trades.jsonl"
+    # Shadow tracking (MM-T020): log untraded runner-up stories and every pick's
+    # direction, scored later from prices. Places no orders and changes no picks.
+    shadow_tracking_enabled: bool = True
+    shadow_runner_up_count: int = 5
+    shadow_picks_jsonl_path: str = "data/shadow_picks.jsonl"
     # Paper trading API base — hard-coded to the paper host as a safety rail.
     alpaca_paper_base_url: str = "https://paper-api.alpaca.markets"
+
+    @property
+    def shadow_picks_jsonl_full_path(self) -> Path:
+        """Absolute path to the shadow-picks ledger."""
+        p = Path(self.shadow_picks_jsonl_path)
+        return p if p.is_absolute() else _PROJECT_ROOT / p
 
     @property
     def paper_trades_jsonl_full_path(self) -> Path:

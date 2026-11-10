@@ -27,6 +27,7 @@ from .learning import (  # noqa: E402
 )
 from .macro_mode import MacroSignal, detect_macro_mode  # noqa: E402
 from .paper_trading import compute_paper_stats, load_cycles, run_paper_cycle  # noqa: E402
+from .shadow_picks import record_shadow_picks  # noqa: E402
 from .llm_client import LLMClient  # noqa: E402
 from .mimicry import mimicry_voice_for, mimicry_voice_to_voice_spec  # noqa: E402
 from .models import RawArticle, SparklineSeries  # noqa: E402
@@ -476,6 +477,10 @@ def run_pipeline() -> None:
         except Exception as e:
             logger.warning("Paper-trading cycle raised (%s) — continuing", e)
             paper_stats = None
+
+    # Shadow tracking (MM-T020): log untraded runner-ups and pick directions. The top
+    # 3 are already final and no orders are placed. Failures never affect the send.
+    record_shadow_picks(client, ranked, deduped, settings, today)
 
     # Pre-Market Earnings Card (creative #14): notable companies reporting
     # earnings today, via Finnhub's free calendar. Best-effort — a fetch
