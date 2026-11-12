@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-11T13:02:26.860196+00:00",
-  "brief_date": "2026-11-11",
+  "generated_at": "2026-11-12T21:00:26.562053+00:00",
+  "brief_date": "2026-11-12",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-11-1",
-      "title": "Instant view: Hot October inflation report rattles markets - Reuters",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQRGxVcWRPUjR6aDlqZEVjYjNScVg4MHpQRXQ0Z1VBLU5WbENmYi1XWlJUOWt3MFdlNGdJcVlaRjEtUzZUd0dYVXJDTEY2Ung1Nm9meGZfWFpUYnVPbElHQjJIaW9pVUQwWWY0czJsMEV0YkNTNmh0SDA5MVM3dVhaRUI1Q19JLTlIVFM3SHJKSEU3MmNZczROOExR?oc=5",
-      "published_at": "2026-11-11T12:00:00Z",
-      "summary": "Well now, here is a report that hits every barn on the farm at once — a hotter-than-expected October CPI print, arriving just as Fed governors Waller and Logan were already out there calling for more rate hikes, has sent bond yields surging by the most in nineteen months and pushed Goldman Sachs to revise its Fed forecast toward additional tightening. Every sector from housing to tech to consumer discretionary feels this one, same as a late frost that don't care which crop you planted; mortgage rates jumped sharply, credit card balances hit a record $1.29 trillion, and the futures market is now pricing a December hike at 96% odds — which is about as certain as the sun rising over Omaha.",
-      "tickers": [
-        "SPY"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-11-2",
-      "title": "Nvidia’s Bull Case Hinges on Huang Surviving China Spy Probe",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-10/nvidia-s-bull-case-hinges-on-ceo-huang-surviving-china-spy-probe",
-      "published_at": "2026-11-11T12:00:00Z",
-      "summary": "Now, I have seen a good many corporate scandals in my time, and most of them turn out to be more bark than bite — but when your CEO is under FBI investigation for an alleged affair with a suspected Chinese intelligence operative, and your company happens to sit at the very center of America's AI supply chain and constitutes seven percent of the S&P 500, well, that is not a garden-variety distraction. Nvidia hired Wachtell Lipton to run an internal probe, shareholders filed suit within five minutes of the closing bell, and the board's independence to investigate its own founder is being questioned from Washington to Wall Street; the key-person risk here is as real as a drought in July, and every index fund holder in the country has a stake in how this harvest comes in.",
+      "id": "mm-2026-11-12-1",
+      "title": "Nvidia stock pares morning losses after CEO Jensen Huang announces resignation",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/12/nvidia-nvda-jensen-huang-second-affair.html",
+      "published_at": "2026-11-12T12:00:00Z",
+      "summary": "Jensen Huang is out — full stop. The man who built Nvidia from a gaming chip shop into the central bank of AI is gone, and CFO Colette Kress is minding the store. This hits every corner of the tape: NVDA itself, the entire AI infrastructure complex, hyperscaler capex plans, and the $500 billion in AI debt financing that was underwritten on the assumption Huang was steering the ship. When the architect walks out the door, you reprice everything he touched.",
       "tickers": [
         "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-11-3",
-      "title": "Anthropic launches roadshow for proposed initial public offering",
-      "source": "anthropic.com",
-      "url": "https://www.anthropic.com/news/roadshow-launch",
-      "published_at": "2026-11-11T12:00:00Z",
-      "summary": "Anthropic kicking off its NASDAQ roadshow in the middle of an AI selloff is a bit like opening a new grain elevator during a commodity slump — either an act of supreme confidence or a very well-timed contrarian bet, and the early evidence suggests traders are leaning toward the former, with perpetual futures pointing to a healthy first-day pop. This is the largest AI-pure-play IPO in history, and its reception will set the temperature for the entire AI investment thesis at a moment when the sector sorely needs a vote of confidence; CoreWeave's strong quarterly results arriving the same week makes for a tidy one-two punch that has already lifted futures across the hyperscaler and semiconductor neighborhood.",
+      "id": "mm-2026-11-12-2",
+      "title": "Four tankers struck by explosions in Strait of Hormuz, Iran says",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDQ2cWxyeTFpazFaX1ZNM2RoS0t2ZVpEa0JpMElTZVFMUElROEF5c20tMlU0dEszWFlEdkhfR2VOb3hEQmo3MjRtdVlSaEhkZnpKXzExbE5QcXItQ3Z6REoyY1Fpak9IUUplYWp6NTQ2UjBiNVk1WDN0MmJjaFRkOHNLdDYxMU9xOWhuMnVaTlNiVXJNTlhLYV9EZEpnd1oxYmF0cG82b2VkMURkYnkzZkZBX0hhWHM?oc=5",
+      "published_at": "2026-11-12T12:00:00Z",
+      "summary": "Four tankers blown up in the Strait of Hormuz is not a drill — roughly 20% of global oil supply runs through that chokepoint, and Trump just told the world he doesn't need an Iran deal. Oil is bid hard, the long bond is getting hit on inflation fears, and energy names are screaming. This is the kind of headline that moves USO, XLE, and airline stocks all at once while the bond market reprices the Fed's next move.",
       "tickers": [
-        "QQQ"
+        "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-12-3",
+      "title": "Daly Says More Fed Rates Hikes Likely Needed",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-12/daly-says-more-fed-rates-hikes-likely-needed-video",
+      "published_at": "2026-11-12T12:00:00Z",
+      "summary": "San Francisco Fed's Daly is out there saying more hikes are coming, businesses are already thinking about raising prices, and a December move is now fully priced in per JPMorgan's desk. Hot CPI plus hawkish Fed speak plus a $404 billion October deficit is a nasty cocktail for rate-sensitive equities and the long bond. Utilities, REITs, and anything that borrowed cheap money are all in the crosshairs.",
+      "tickers": [
+        "SPY"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Instant view: Hot October inflation report rattles markets - Reuters",
-      "justification": "Well now, here is a report that hits every barn on the farm at once — a hotter-than-expected October CPI print, arriving just as Fed governors Waller and Logan were already out there calling for more rate hikes, has sent bond yields surging by the most in nineteen months and pushed Goldman Sachs to revise its Fed forecast toward additional tightening. Every sector from housing to tech to consumer discretionary feels this one, same as a late frost that don't care which crop you planted; mortgage rates jumped sharply, credit card balances hit a record $1.29 trillion, and the futures market is now pricing a December hike at 96% odds — which is about as certain as the sun rising over Omaha.",
+      "ticker": "NVDA",
+      "category": "single_name",
+      "title": "Nvidia stock pares morning losses after CEO Jensen Huang announces resignation",
+      "justification": "Jensen Huang is out — full stop. The man who built Nvidia from a gaming chip shop into the central bank of AI is gone, and CFO Colette Kress is minding the store. This hits every corner of the tape: NVDA itself, the entire AI infrastructure complex, hyperscaler capex plans, and the $500 billion in AI debt financing that was underwritten on the assumption Huang was steering the ship. When the architect walks out the door, you reprice everything he touched.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "NVDA",
-      "category": "single_name",
-      "title": "Nvidia’s Bull Case Hinges on Huang Surviving China Spy Probe",
-      "justification": "Now, I have seen a good many corporate scandals in my time, and most of them turn out to be more bark than bite — but when your CEO is under FBI investigation for an alleged affair with a suspected Chinese intelligence operative, and your company happens to sit at the very center of America's AI supply chain and constitutes seven percent of the S&P 500, well, that is not a garden-variety distraction. Nvidia hired Wachtell Lipton to run an internal probe, shareholders filed suit within five minutes of the closing bell, and the board's independence to investigate its own founder is being questioned from Washington to Wall Street; the key-person risk here is as real as a drought in July, and every index fund holder in the country has a stake in how this harvest comes in.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Four tankers struck by explosions in Strait of Hormuz, Iran says",
+      "justification": "Four tankers blown up in the Strait of Hormuz is not a drill — roughly 20% of global oil supply runs through that chokepoint, and Trump just told the world he doesn't need an Iran deal. Oil is bid hard, the long bond is getting hit on inflation fears, and energy names are screaming. This is the kind of headline that moves USO, XLE, and airline stocks all at once while the bond market reprices the Fed's next move.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "QQQ",
-      "category": "single_name",
-      "title": "Anthropic launches roadshow for proposed initial public offering",
-      "justification": "Anthropic kicking off its NASDAQ roadshow in the middle of an AI selloff is a bit like opening a new grain elevator during a commodity slump — either an act of supreme confidence or a very well-timed contrarian bet, and the early evidence suggests traders are leaning toward the former, with perpetual futures pointing to a healthy first-day pop. This is the largest AI-pure-play IPO in history, and its reception will set the temperature for the entire AI investment thesis at a moment when the sector sorely needs a vote of confidence; CoreWeave's strong quarterly results arriving the same week makes for a tidy one-two punch that has already lifted futures across the hyperscaler and semiconductor neighborhood.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "Daly Says More Fed Rates Hikes Likely Needed",
+      "justification": "San Francisco Fed's Daly is out there saying more hikes are coming, businesses are already thinking about raising prices, and a December move is now fully priced in per JPMorgan's desk. Hot CPI plus hawkish Fed speak plus a $404 billion October deficit is a nasty cocktail for rate-sensitive equities and the long bond. Utilities, REITs, and anything that borrowed cheap money are all in the crosshairs.",
       "verdict": null
     }
   ]
