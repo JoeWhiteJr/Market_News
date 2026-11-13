@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-12T21:00:26.562053+00:00",
-  "brief_date": "2026-11-12",
+  "generated_at": "2026-11-13T13:02:21.948255+00:00",
+  "brief_date": "2026-11-13",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-12-1",
-      "title": "Nvidia stock pares morning losses after CEO Jensen Huang announces resignation",
+      "id": "mm-2026-11-13-1",
+      "title": "Jensen Huang is out and Nvidia stock is down—what market pros say about buying dips",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/12/nvidia-nvda-jensen-huang-second-affair.html",
-      "published_at": "2026-11-12T12:00:00Z",
-      "summary": "Jensen Huang is out — full stop. The man who built Nvidia from a gaming chip shop into the central bank of AI is gone, and CFO Colette Kress is minding the store. This hits every corner of the tape: NVDA itself, the entire AI infrastructure complex, hyperscaler capex plans, and the $500 billion in AI debt financing that was underwritten on the assumption Huang was steering the ship. When the architect walks out the door, you reprice everything he touched.",
+      "url": "https://www.cnbc.com/make-it/2026/11/12/nvidia-what-market-pros-say-about-buying-dips.html",
+      "published_at": "2026-11-13T12:00:00Z",
+      "summary": "Jensen Huang's confirmed departure is the single biggest single-name event on the tape this week — NVDA has shed nearly $500 billion in market cap, dragging the SOX, QQQ, and every AI-adjacent name with it. This isn't just a chip story; it's touching AI financing, neocloud credit, the Anthropic IPO pipeline, and U.S.-China relations all at once. The rotation into AMD, Broadcom, and TSMC tells you the Street is repricing the whole sector, not just one stock.",
       "tickers": [
         "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-12-2",
-      "title": "Four tankers struck by explosions in Strait of Hormuz, Iran says",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDQ2cWxyeTFpazFaX1ZNM2RoS0t2ZVpEa0JpMElTZVFMUElROEF5c20tMlU0dEszWFlEdkhfR2VOb3hEQmo3MjRtdVlSaEhkZnpKXzExbE5QcXItQ3Z6REoyY1Fpak9IUUplYWp6NTQ2UjBiNVk1WDN0MmJjaFRkOHNLdDYxMU9xOWhuMnVaTlNiVXJNTlhLYV9EZEpnd1oxYmF0cG82b2VkMURkYnkzZkZBX0hhWHM?oc=5",
-      "published_at": "2026-11-12T12:00:00Z",
-      "summary": "Four tankers blown up in the Strait of Hormuz is not a drill — roughly 20% of global oil supply runs through that chokepoint, and Trump just told the world he doesn't need an Iran deal. Oil is bid hard, the long bond is getting hit on inflation fears, and energy names are screaming. This is the kind of headline that moves USO, XLE, and airline stocks all at once while the bond market reprices the Fed's next move.",
+      "id": "mm-2026-11-13-2",
+      "title": "The Fed expected rate cuts this year. Now it's bracing for another inflation fight",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/13/us-inflation-outlook-federal-reserve-rate-hike.html",
+      "published_at": "2026-11-13T12:00:00Z",
+      "summary": "October CPI came in hotter than expected at 0.4% month-over-month, and now the Fed — which was supposed to be cutting — is staring down another hike cycle. The long bond is getting hit, the dollar is near a 19-month high, and the yen is testing 160; that's a global rates repricing, not a domestic footnote. Every rate-sensitive sector from housing to utilities to growth tech is in the crosshairs when the Fed pivots from dove to hawk.",
       "tickers": [
-        "USO"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-12-3",
-      "title": "Daly Says More Fed Rates Hikes Likely Needed",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-12/daly-says-more-fed-rates-hikes-likely-needed-video",
-      "published_at": "2026-11-12T12:00:00Z",
-      "summary": "San Francisco Fed's Daly is out there saying more hikes are coming, businesses are already thinking about raising prices, and a December move is now fully priced in per JPMorgan's desk. Hot CPI plus hawkish Fed speak plus a $404 billion October deficit is a nasty cocktail for rate-sensitive equities and the long bond. Utilities, REITs, and anything that borrowed cheap money are all in the crosshairs.",
+      "id": "mm-2026-11-13-3",
+      "title": "Four tankers struck by explosions in Strait of Hormuz, Iran says",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDQ2cWxyeTFpazFaX1ZNM2RoS0t2ZVpEa0JpMElTZVFMUElROEF5c20tMlU0dEszWFlEdkhfR2VOb3hEQmo3MjRtdVlSaEhkZnpKXzExbE5QcXItQ3Z6REoyY1Fpak9IUUplYWp6NTQ2UjBiNVk1WDN0MmJjaFRkOHNLdDYxMU9xOWhuMnVaTlNiVXJNTlhLYV9EZEpnd1oxYmF0cG82b2VkMURkYnkzZkZBX0hhWHM?oc=5",
+      "published_at": "2026-11-13T12:00:00Z",
+      "summary": "Four tankers hit in the Strait of Hormuz is the kind of headline that moves crude before the open — roughly 20% of global seaborne oil transits that chokepoint, and any escalation there is an instant bid for energy names and a tax on everything else. Layer in the Houthi attack on the Saudi East-West pipeline and Trump saying he doesn't need an Iran deal, and you've got a geopolitical premium that isn't going away quietly. Energy stocks, shipping names, and defense contractors all feel this one.",
       "tickers": [
-        "SPY"
+        "USO"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "NVDA",
       "category": "single_name",
-      "title": "Nvidia stock pares morning losses after CEO Jensen Huang announces resignation",
-      "justification": "Jensen Huang is out — full stop. The man who built Nvidia from a gaming chip shop into the central bank of AI is gone, and CFO Colette Kress is minding the store. This hits every corner of the tape: NVDA itself, the entire AI infrastructure complex, hyperscaler capex plans, and the $500 billion in AI debt financing that was underwritten on the assumption Huang was steering the ship. When the architect walks out the door, you reprice everything he touched.",
+      "title": "Jensen Huang is out and Nvidia stock is down—what market pros say about buying dips",
+      "justification": "Jensen Huang's confirmed departure is the single biggest single-name event on the tape this week — NVDA has shed nearly $500 billion in market cap, dragging the SOX, QQQ, and every AI-adjacent name with it. This isn't just a chip story; it's touching AI financing, neocloud credit, the Anthropic IPO pipeline, and U.S.-China relations all at once. The rotation into AMD, Broadcom, and TSMC tells you the Street is repricing the whole sector, not just one stock.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Four tankers struck by explosions in Strait of Hormuz, Iran says",
-      "justification": "Four tankers blown up in the Strait of Hormuz is not a drill — roughly 20% of global oil supply runs through that chokepoint, and Trump just told the world he doesn't need an Iran deal. Oil is bid hard, the long bond is getting hit on inflation fears, and energy names are screaming. This is the kind of headline that moves USO, XLE, and airline stocks all at once while the bond market reprices the Fed's next move.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "The Fed expected rate cuts this year. Now it's bracing for another inflation fight",
+      "justification": "October CPI came in hotter than expected at 0.4% month-over-month, and now the Fed — which was supposed to be cutting — is staring down another hike cycle. The long bond is getting hit, the dollar is near a 19-month high, and the yen is testing 160; that's a global rates repricing, not a domestic footnote. Every rate-sensitive sector from housing to utilities to growth tech is in the crosshairs when the Fed pivots from dove to hawk.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Daly Says More Fed Rates Hikes Likely Needed",
-      "justification": "San Francisco Fed's Daly is out there saying more hikes are coming, businesses are already thinking about raising prices, and a December move is now fully priced in per JPMorgan's desk. Hot CPI plus hawkish Fed speak plus a $404 billion October deficit is a nasty cocktail for rate-sensitive equities and the long bond. Utilities, REITs, and anything that borrowed cheap money are all in the crosshairs.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Four tankers struck by explosions in Strait of Hormuz, Iran says",
+      "justification": "Four tankers hit in the Strait of Hormuz is the kind of headline that moves crude before the open — roughly 20% of global seaborne oil transits that chokepoint, and any escalation there is an instant bid for energy names and a tax on everything else. Layer in the Houthi attack on the Saudi East-West pipeline and Trump saying he doesn't need an Iran deal, and you've got a geopolitical premium that isn't going away quietly. Energy stocks, shipping names, and defense contractors all feel this one.",
       "verdict": null
     }
   ]
