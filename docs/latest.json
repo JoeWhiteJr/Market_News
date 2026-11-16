@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-13T13:02:21.948255+00:00",
-  "brief_date": "2026-11-13",
+  "generated_at": "2026-11-16T13:01:52.138153+00:00",
+  "brief_date": "2026-11-16",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-13-1",
-      "title": "Jensen Huang is out and Nvidia stock is down—what market pros say about buying dips",
+      "id": "mm-2026-11-16-1",
+      "title": "Nvidia's Colette Kress confronts key questions in first earnings report since Jensen Huang's exit",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/make-it/2026/11/12/nvidia-what-market-pros-say-about-buying-dips.html",
-      "published_at": "2026-11-13T12:00:00Z",
-      "summary": "Jensen Huang's confirmed departure is the single biggest single-name event on the tape this week — NVDA has shed nearly $500 billion in market cap, dragging the SOX, QQQ, and every AI-adjacent name with it. This isn't just a chip story; it's touching AI financing, neocloud credit, the Anthropic IPO pipeline, and U.S.-China relations all at once. The rotation into AMD, Broadcom, and TSMC tells you the Street is repricing the whole sector, not just one stock.",
+      "url": "https://www.cnbc.com/2026/11/16/nvidia-earnings-jensen-huang-resignation.html",
+      "published_at": "2026-11-16T12:00:00Z",
+      "summary": "This is the tape event of the week — Nvidia earnings with a brand-new interim CEO at the helm, less than a week after a $500 billion market-cap implosion. The whole AI trade is riding on this print: NVDA, AMD, SMCI, the data center REITs, every ETF with 'AI' in the name. If Kress stumbles on the call, the selling won't stop at the semiconductor aisle.",
       "tickers": [
         "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-13-2",
-      "title": "The Fed expected rate cuts this year. Now it's bracing for another inflation fight",
+      "id": "mm-2026-11-16-2",
+      "title": "China confirms Xi-Trump-Putin historic summit. What will be on the agenda?",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/13/us-inflation-outlook-federal-reserve-rate-hike.html",
-      "published_at": "2026-11-13T12:00:00Z",
-      "summary": "October CPI came in hotter than expected at 0.4% month-over-month, and now the Fed — which was supposed to be cutting — is staring down another hike cycle. The long bond is getting hit, the dollar is near a 19-month high, and the yen is testing 160; that's a global rates repricing, not a domestic footnote. Every rate-sensitive sector from housing to utilities to growth tech is in the crosshairs when the Fed pivots from dove to hawk.",
+      "url": "https://www.cnbc.com/2026/11/16/trump-xi-putin-ukraine-nuclear-tariffs-russia-iran-.html",
+      "published_at": "2026-11-16T12:00:00Z",
+      "summary": "A three-way summit between the world's biggest nuclear powers — covering Ukraine, the Middle East, trade and nukes — is the kind of headline that moves every asset class simultaneously. Defense names, energy, emerging markets, the dollar, and the long bond all have a stake in whatever comes out of this room. Markets hate uncertainty, but they love a ceasefire rumor.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-13-3",
-      "title": "Four tankers struck by explosions in Strait of Hormuz, Iran says",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQcDQ2cWxyeTFpazFaX1ZNM2RoS0t2ZVpEa0JpMElTZVFMUElROEF5c20tMlU0dEszWFlEdkhfR2VOb3hEQmo3MjRtdVlSaEhkZnpKXzExbE5QcXItQ3Z6REoyY1Fpak9IUUplYWp6NTQ2UjBiNVk1WDN0MmJjaFRkOHNLdDYxMU9xOWhuMnVaTlNiVXJNTlhLYV9EZEpnd1oxYmF0cG82b2VkMURkYnkzZkZBX0hhWHM?oc=5",
-      "published_at": "2026-11-13T12:00:00Z",
-      "summary": "Four tankers hit in the Strait of Hormuz is the kind of headline that moves crude before the open — roughly 20% of global seaborne oil transits that chokepoint, and any escalation there is an instant bid for energy names and a tax on everything else. Layer in the Houthi attack on the Saudi East-West pipeline and Trump saying he doesn't need an Iran deal, and you've got a geopolitical premium that isn't going away quietly. Energy stocks, shipping names, and defense contractors all feel this one.",
+      "id": "mm-2026-11-16-3",
+      "title": "Anthropic Holds the Key to the Future of the AI Trade",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/newsletters/2026-11-16/anthropic-holds-the-key-to-the-future-of-the-ai-trade",
+      "published_at": "2026-11-16T12:00:00Z",
+      "summary": "Anthropic's IPO pricing Wednesday and debut Thursday is the first major AI pure-play to hit the public market, and the Street is watching the bid like a hawk — it's a real-time referendum on whether the AI capital cycle still has legs after the Nvidia mess. A weak open torches sentiment across the whole AI complex; a strong one gives the bulls their narrative back. GOOG and AMZN, both deep investors in Anthropic, have skin in this game too.",
       "tickers": [
-        "USO"
+        "ANT"
       ],
       "sentiment": null
     }
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "NVDA",
       "category": "single_name",
-      "title": "Jensen Huang is out and Nvidia stock is down—what market pros say about buying dips",
-      "justification": "Jensen Huang's confirmed departure is the single biggest single-name event on the tape this week — NVDA has shed nearly $500 billion in market cap, dragging the SOX, QQQ, and every AI-adjacent name with it. This isn't just a chip story; it's touching AI financing, neocloud credit, the Anthropic IPO pipeline, and U.S.-China relations all at once. The rotation into AMD, Broadcom, and TSMC tells you the Street is repricing the whole sector, not just one stock.",
+      "title": "Nvidia's Colette Kress confronts key questions in first earnings report since Jensen Huang's exit",
+      "justification": "This is the tape event of the week — Nvidia earnings with a brand-new interim CEO at the helm, less than a week after a $500 billion market-cap implosion. The whole AI trade is riding on this print: NVDA, AMD, SMCI, the data center REITs, every ETF with 'AI' in the name. If Kress stumbles on the call, the selling won't stop at the semiconductor aisle.",
       "verdict": null
     },
     {
       "rank": 2,
       "ticker": "SPY",
-      "category": "macro",
-      "title": "The Fed expected rate cuts this year. Now it's bracing for another inflation fight",
-      "justification": "October CPI came in hotter than expected at 0.4% month-over-month, and now the Fed — which was supposed to be cutting — is staring down another hike cycle. The long bond is getting hit, the dollar is near a 19-month high, and the yen is testing 160; that's a global rates repricing, not a domestic footnote. Every rate-sensitive sector from housing to utilities to growth tech is in the crosshairs when the Fed pivots from dove to hawk.",
+      "category": "geopolitical",
+      "title": "China confirms Xi-Trump-Putin historic summit. What will be on the agenda?",
+      "justification": "A three-way summit between the world's biggest nuclear powers — covering Ukraine, the Middle East, trade and nukes — is the kind of headline that moves every asset class simultaneously. Defense names, energy, emerging markets, the dollar, and the long bond all have a stake in whatever comes out of this room. Markets hate uncertainty, but they love a ceasefire rumor.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "USO",
-      "category": "geopolitical",
-      "title": "Four tankers struck by explosions in Strait of Hormuz, Iran says",
-      "justification": "Four tankers hit in the Strait of Hormuz is the kind of headline that moves crude before the open — roughly 20% of global seaborne oil transits that chokepoint, and any escalation there is an instant bid for energy names and a tax on everything else. Layer in the Houthi attack on the Saudi East-West pipeline and Trump saying he doesn't need an Iran deal, and you've got a geopolitical premium that isn't going away quietly. Energy stocks, shipping names, and defense contractors all feel this one.",
+      "ticker": "ANT",
+      "category": "single_name",
+      "title": "Anthropic Holds the Key to the Future of the AI Trade",
+      "justification": "Anthropic's IPO pricing Wednesday and debut Thursday is the first major AI pure-play to hit the public market, and the Street is watching the bid like a hawk — it's a real-time referendum on whether the AI capital cycle still has legs after the Nvidia mess. A weak open torches sentiment across the whole AI complex; a strong one gives the bulls their narrative back. GOOG and AMZN, both deep investors in Anthropic, have skin in this game too.",
       "verdict": null
     }
   ]
