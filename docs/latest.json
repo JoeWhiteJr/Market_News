@@ -1,40 +1,40 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-17T13:01:23.557423+00:00",
-  "brief_date": "2026-11-17",
+  "generated_at": "2026-11-18T13:01:57.520200+00:00",
+  "brief_date": "2026-11-18",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-17-1",
-      "title": "Nvidia's Earnings Come at a Time of Mounting Tech Turmoil",
+      "id": "mm-2026-11-18-1",
+      "title": "Nvidia Offers Relief to AI Trade, US Hits Island in Hormuz",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/newsletters/2026-11-17/nvidia-s-earnings-come-at-a-time-of-mounting-tech-turmoil",
-      "published_at": "2026-11-17T12:00:00Z",
-      "summary": "This is the whole ballgame right now — NVDA earnings drop after the close with the stock already down 35% from its October peak, Jensen Huang gone, and new chip export curbs hitting the tape simultaneously. Every AI-adjacent name from TSMC to AMD to the hyperscalers is trading off this print, and the BofA survey showing fund managers cut tech exposure at the fastest pace since 2006 tells you the positioning unwind has real legs. Whatever Colette Kress says tonight moves the Nasdaq — full stop.",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-18/the-opening-trade-11-18-2026-video",
+      "published_at": "2026-11-18T12:00:00Z",
+      "summary": "One, Nvidia's post-earnings beat-and-raise (first under interim CEO Colette Kress, which is already a sentence that would have seemed insane six months ago) is directly reversing a multi-day, multi-trillion-dollar selloff across semis, AI infrastructure, and every ETF that has ever touched a GPU — so the blast radius here is genuinely the entire tech complex, from NVDA itself to TSMC to the hyperscalers who've been quietly hoping the AI capex story wasn't just Jensen Huang's personal charisma. Two, the same Bloomberg wrap casually mentions that American warplanes struck an Iranian missile site on Qeshm Island (in the Strait of Hormuz, which the IEA chief has separately noted has no 'credible pathway' back to normal), meaning the single most important oil chokepoint on earth is now also a live combat zone — which is the kind of thing that tends to move energy, defense, and, frankly, everything else simultaneously.",
       "tickers": [
         "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-17-2",
-      "title": "Iran escalates threats as third U.S. carrier arrives in Middle East, tanker struck in Hormuz",
+      "id": "mm-2026-11-18-2",
+      "title": "Trump arrives in China for historic meeting with Xi, Putin",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/17/iran-war-trump-hormuz-oil-.html",
-      "published_at": "2026-11-17T12:00:00Z",
-      "summary": "A third carrier battle group in the Gulf plus a tanker strike in the Strait of Hormuz — that's the kind of headline that gets oil traders off their chairs fast. Roughly 20% of global seaborne crude transits Hormuz, so any credible threat to that chokepoint is an immediate bid for energy names and a risk-off signal for equities broadly. Pair this with the Iran drone strikes on Bahrain and you've got a genuine geopolitical premium building back into crude.",
+      "url": "https://www.cnbc.com/2026/11/18/trump-xi-putin-china-apec.html",
+      "published_at": "2026-11-18T12:00:00Z",
+      "summary": "A trilateral summit between Trump, Xi, and Putin — happening simultaneously with new US AI chip export restrictions targeting Chinese data centers in Thailand and Malaysia, Houthi drone strikes on Saudi pipelines, and an active US-Iran shooting war in the Gulf — is the kind of geopolitical confluence that makes macro traders stare at their screens and quietly question their career choices. The immediate market read is genuinely ambiguous (the cheek-to-cheek airport hug is bullish for trade-truce hopes; the chip restrictions and Xi-Putin joint statement blasting Western 'protectionism' are decidedly not), which means volatility, not direction, is the near-term trade — affecting everything from semiconductors and defense names to EM currencies and commodity exporters.",
       "tickers": [
-        "USO"
+        "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-17-3",
-      "title": "Fed's Musalem Says 'Several' Rate Hikes Likely Needed by Spring",
+      "id": "mm-2026-11-18-3",
+      "title": "Anthropic IPO Puts Wall Street's Speculation Factory on Display",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-17/fed-s-musalem-says-several-rate-hikes-likely-needed-by-spring",
-      "published_at": "2026-11-17T12:00:00Z",
-      "summary": "A Fed official flagging *multiple* hikes by spring is the kind of hawkish signal that reprices the long bond and squeezes rate-sensitive sectors — utilities, REITs, and anything levered. Coming on top of gold already hitting a one-year low on yield pressure and the AI selloff already rattling risk appetite, this adds another headwind to an already shaky tape. My macro hit rate has been soft, so I'm keeping the score honest, but this one's got real teeth given the current environment.",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-18/anthropic-ipo-puts-wall-street-s-speculation-factory-on-display",
+      "published_at": "2026-11-18T12:00:00Z",
+      "summary": "Anthropic is pricing Wednesday (with crypto futures apparently already pointing to a 'big pop,' which is a sentence that tells you something about the current moment in financial history), and the read-through here is not just about one company — it's a referendum on whether the AI venture capital complex, which has been sitting on enormous paper gains, can actually convert those into public-market liquidity at scale (the CNBC piece notes this sets the stage for 'many smaller AI startups seeking exits,' which is either a healthy ecosystem or a very orderly queue forming at the exit door, depending on your disposition). A strong debut lifts the entire AI software and infrastructure cohort; a stumble would be the kind of thing that gets cited in think-pieces for the next eighteen months.",
       "tickers": [
         "SPY"
       ],
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "NVDA",
       "category": "single_name",
-      "title": "Nvidia's Earnings Come at a Time of Mounting Tech Turmoil",
-      "justification": "This is the whole ballgame right now — NVDA earnings drop after the close with the stock already down 35% from its October peak, Jensen Huang gone, and new chip export curbs hitting the tape simultaneously. Every AI-adjacent name from TSMC to AMD to the hyperscalers is trading off this print, and the BofA survey showing fund managers cut tech exposure at the fastest pace since 2006 tells you the positioning unwind has real legs. Whatever Colette Kress says tonight moves the Nasdaq — full stop.",
+      "title": "Nvidia Offers Relief to AI Trade, US Hits Island in Hormuz",
+      "justification": "One, Nvidia's post-earnings beat-and-raise (first under interim CEO Colette Kress, which is already a sentence that would have seemed insane six months ago) is directly reversing a multi-day, multi-trillion-dollar selloff across semis, AI infrastructure, and every ETF that has ever touched a GPU — so the blast radius here is genuinely the entire tech complex, from NVDA itself to TSMC to the hyperscalers who've been quietly hoping the AI capex story wasn't just Jensen Huang's personal charisma. Two, the same Bloomberg wrap casually mentions that American warplanes struck an Iranian missile site on Qeshm Island (in the Strait of Hormuz, which the IEA chief has separately noted has no 'credible pathway' back to normal), meaning the single most important oil chokepoint on earth is now also a live combat zone — which is the kind of thing that tends to move energy, defense, and, frankly, everything else simultaneously.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "USO",
+      "ticker": "SPY",
       "category": "geopolitical",
-      "title": "Iran escalates threats as third U.S. carrier arrives in Middle East, tanker struck in Hormuz",
-      "justification": "A third carrier battle group in the Gulf plus a tanker strike in the Strait of Hormuz — that's the kind of headline that gets oil traders off their chairs fast. Roughly 20% of global seaborne crude transits Hormuz, so any credible threat to that chokepoint is an immediate bid for energy names and a risk-off signal for equities broadly. Pair this with the Iran drone strikes on Bahrain and you've got a genuine geopolitical premium building back into crude.",
+      "title": "Trump arrives in China for historic meeting with Xi, Putin",
+      "justification": "A trilateral summit between Trump, Xi, and Putin — happening simultaneously with new US AI chip export restrictions targeting Chinese data centers in Thailand and Malaysia, Houthi drone strikes on Saudi pipelines, and an active US-Iran shooting war in the Gulf — is the kind of geopolitical confluence that makes macro traders stare at their screens and quietly question their career choices. The immediate market read is genuinely ambiguous (the cheek-to-cheek airport hug is bullish for trade-truce hopes; the chip restrictions and Xi-Putin joint statement blasting Western 'protectionism' are decidedly not), which means volatility, not direction, is the near-term trade — affecting everything from semiconductors and defense names to EM currencies and commodity exporters.",
       "verdict": null
     },
     {
       "rank": 3,
       "ticker": "SPY",
-      "category": "macro",
-      "title": "Fed's Musalem Says 'Several' Rate Hikes Likely Needed by Spring",
-      "justification": "A Fed official flagging *multiple* hikes by spring is the kind of hawkish signal that reprices the long bond and squeezes rate-sensitive sectors — utilities, REITs, and anything levered. Coming on top of gold already hitting a one-year low on yield pressure and the AI selloff already rattling risk appetite, this adds another headwind to an already shaky tape. My macro hit rate has been soft, so I'm keeping the score honest, but this one's got real teeth given the current environment.",
+      "category": "single_name",
+      "title": "Anthropic IPO Puts Wall Street's Speculation Factory on Display",
+      "justification": "Anthropic is pricing Wednesday (with crypto futures apparently already pointing to a 'big pop,' which is a sentence that tells you something about the current moment in financial history), and the read-through here is not just about one company — it's a referendum on whether the AI venture capital complex, which has been sitting on enormous paper gains, can actually convert those into public-market liquidity at scale (the CNBC piece notes this sets the stage for 'many smaller AI startups seeking exits,' which is either a healthy ecosystem or a very orderly queue forming at the exit door, depending on your disposition). A strong debut lifts the entire AI software and infrastructure cohort; a stumble would be the kind of thing that gets cited in think-pieces for the next eighteen months.",
       "verdict": null
     }
   ]
