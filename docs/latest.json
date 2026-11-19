@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-18T13:01:57.520200+00:00",
-  "brief_date": "2026-11-18",
+  "generated_at": "2026-11-19T13:01:41.621952+00:00",
+  "brief_date": "2026-11-19",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-18-1",
-      "title": "Nvidia Offers Relief to AI Trade, US Hits Island in Hormuz",
+      "id": "mm-2026-11-19-1",
+      "title": "Anthropic IPO Draws 'Massive Enthusiasm' From Investors: Ludlow & Bloxham",
       "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-18/the-opening-trade-11-18-2026-video",
-      "published_at": "2026-11-18T12:00:00Z",
-      "summary": "One, Nvidia's post-earnings beat-and-raise (first under interim CEO Colette Kress, which is already a sentence that would have seemed insane six months ago) is directly reversing a multi-day, multi-trillion-dollar selloff across semis, AI infrastructure, and every ETF that has ever touched a GPU — so the blast radius here is genuinely the entire tech complex, from NVDA itself to TSMC to the hyperscalers who've been quietly hoping the AI capex story wasn't just Jensen Huang's personal charisma. Two, the same Bloomberg wrap casually mentions that American warplanes struck an Iranian missile site on Qeshm Island (in the Strait of Hormuz, which the IEA chief has separately noted has no 'credible pathway' back to normal), meaning the single most important oil chokepoint on earth is now also a live combat zone — which is the kind of thing that tends to move energy, defense, and, frankly, everything else simultaneously.",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-19/anthropic-ipo-draws-massive-enthusiasm-from-investors-video",
+      "published_at": "2026-11-19T12:00:00Z",
+      "summary": "Anthropic priced a record-shattering $107.3 billion IPO — bigger than SpaceX — at $83 a share, above the marketed range, with gray markets pointing to a 20-26% first-day pop. This is the tape-defining event of the week: it either validates the AI spending boom or becomes the top-tick everyone talks about for years. Every AI-adjacent name from semiconductors to cloud infrastructure is moving on this print.",
       "tickers": [
-        "NVDA"
+        "ANTH"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-18-2",
-      "title": "Trump arrives in China for historic meeting with Xi, Putin",
+      "id": "mm-2026-11-19-2",
+      "title": "Fed's Waller says central bank may need to 'shock people' with half-point rate hike",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/18/trump-xi-putin-china-apec.html",
-      "published_at": "2026-11-18T12:00:00Z",
-      "summary": "A trilateral summit between Trump, Xi, and Putin — happening simultaneously with new US AI chip export restrictions targeting Chinese data centers in Thailand and Malaysia, Houthi drone strikes on Saudi pipelines, and an active US-Iran shooting war in the Gulf — is the kind of geopolitical confluence that makes macro traders stare at their screens and quietly question their career choices. The immediate market read is genuinely ambiguous (the cheek-to-cheek airport hug is bullish for trade-truce hopes; the chip restrictions and Xi-Putin joint statement blasting Western 'protectionism' are decidedly not), which means volatility, not direction, is the near-term trade — affecting everything from semiconductors and defense names to EM currencies and commodity exporters.",
+      "url": "https://www.cnbc.com/2026/11/18/federal-reserve-governor-christopher-waller.html",
+      "published_at": "2026-11-19T12:00:00Z",
+      "summary": "Fed Governor Waller floating a 50-basis-point hike is the kind of jawboning that moves the long bond and reprices every duration-sensitive asset on the board — equities, real estate, you name it. Coming on the same day the Fed minutes showed officials worried about AI-driven inflation, this is a one-two punch that could keep a lid on any Anthropic-IPO-fueled rally. Watch the two-year Treasury; that's where the real verdict gets rendered.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-18-3",
-      "title": "Anthropic IPO Puts Wall Street's Speculation Factory on Display",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-18/anthropic-ipo-puts-wall-street-s-speculation-factory-on-display",
-      "published_at": "2026-11-18T12:00:00Z",
-      "summary": "Anthropic is pricing Wednesday (with crypto futures apparently already pointing to a 'big pop,' which is a sentence that tells you something about the current moment in financial history), and the read-through here is not just about one company — it's a referendum on whether the AI venture capital complex, which has been sitting on enormous paper gains, can actually convert those into public-market liquidity at scale (the CNBC piece notes this sets the stage for 'many smaller AI startups seeking exits,' which is either a healthy ecosystem or a very orderly queue forming at the exit door, depending on your disposition). A strong debut lifts the entire AI software and infrastructure cohort; a stumble would be the kind of thing that gets cited in think-pieces for the next eighteen months.",
+      "id": "mm-2026-11-19-3",
+      "title": "Walmart hikes outlook as top execs tell CNBC the retailer is gaining market share ahead of holidays",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/19/walmart-wmt-q3-2026-earnings.html",
+      "published_at": "2026-11-19T12:00:00Z",
+      "summary": "Walmart raising guidance heading into the holiday stretch is a real-economy signal that cuts through all the AI noise — it tells you the consumer is still breathing. When the world's largest retailer says it's taking share, the whole consumer staples and discretionary complex has to reprice, and it gives the bulls a fundamental anchor beyond just chip stocks. This one moves WMT directly and sets the tone for Target and the rest of the retail tape.",
       "tickers": [
-        "SPY"
+        "WMT"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "NVDA",
+      "ticker": "ANTH",
       "category": "single_name",
-      "title": "Nvidia Offers Relief to AI Trade, US Hits Island in Hormuz",
-      "justification": "One, Nvidia's post-earnings beat-and-raise (first under interim CEO Colette Kress, which is already a sentence that would have seemed insane six months ago) is directly reversing a multi-day, multi-trillion-dollar selloff across semis, AI infrastructure, and every ETF that has ever touched a GPU — so the blast radius here is genuinely the entire tech complex, from NVDA itself to TSMC to the hyperscalers who've been quietly hoping the AI capex story wasn't just Jensen Huang's personal charisma. Two, the same Bloomberg wrap casually mentions that American warplanes struck an Iranian missile site on Qeshm Island (in the Strait of Hormuz, which the IEA chief has separately noted has no 'credible pathway' back to normal), meaning the single most important oil chokepoint on earth is now also a live combat zone — which is the kind of thing that tends to move energy, defense, and, frankly, everything else simultaneously.",
+      "title": "Anthropic IPO Draws 'Massive Enthusiasm' From Investors: Ludlow & Bloxham",
+      "justification": "Anthropic priced a record-shattering $107.3 billion IPO — bigger than SpaceX — at $83 a share, above the marketed range, with gray markets pointing to a 20-26% first-day pop. This is the tape-defining event of the week: it either validates the AI spending boom or becomes the top-tick everyone talks about for years. Every AI-adjacent name from semiconductors to cloud infrastructure is moving on this print.",
       "verdict": null
     },
     {
       "rank": 2,
       "ticker": "SPY",
-      "category": "geopolitical",
-      "title": "Trump arrives in China for historic meeting with Xi, Putin",
-      "justification": "A trilateral summit between Trump, Xi, and Putin — happening simultaneously with new US AI chip export restrictions targeting Chinese data centers in Thailand and Malaysia, Houthi drone strikes on Saudi pipelines, and an active US-Iran shooting war in the Gulf — is the kind of geopolitical confluence that makes macro traders stare at their screens and quietly question their career choices. The immediate market read is genuinely ambiguous (the cheek-to-cheek airport hug is bullish for trade-truce hopes; the chip restrictions and Xi-Putin joint statement blasting Western 'protectionism' are decidedly not), which means volatility, not direction, is the near-term trade — affecting everything from semiconductors and defense names to EM currencies and commodity exporters.",
+      "category": "macro",
+      "title": "Fed's Waller says central bank may need to 'shock people' with half-point rate hike",
+      "justification": "Fed Governor Waller floating a 50-basis-point hike is the kind of jawboning that moves the long bond and reprices every duration-sensitive asset on the board — equities, real estate, you name it. Coming on the same day the Fed minutes showed officials worried about AI-driven inflation, this is a one-two punch that could keep a lid on any Anthropic-IPO-fueled rally. Watch the two-year Treasury; that's where the real verdict gets rendered.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "SPY",
+      "ticker": "WMT",
       "category": "single_name",
-      "title": "Anthropic IPO Puts Wall Street's Speculation Factory on Display",
-      "justification": "Anthropic is pricing Wednesday (with crypto futures apparently already pointing to a 'big pop,' which is a sentence that tells you something about the current moment in financial history), and the read-through here is not just about one company — it's a referendum on whether the AI venture capital complex, which has been sitting on enormous paper gains, can actually convert those into public-market liquidity at scale (the CNBC piece notes this sets the stage for 'many smaller AI startups seeking exits,' which is either a healthy ecosystem or a very orderly queue forming at the exit door, depending on your disposition). A strong debut lifts the entire AI software and infrastructure cohort; a stumble would be the kind of thing that gets cited in think-pieces for the next eighteen months.",
+      "title": "Walmart hikes outlook as top execs tell CNBC the retailer is gaining market share ahead of holidays",
+      "justification": "Walmart raising guidance heading into the holiday stretch is a real-economy signal that cuts through all the AI noise — it tells you the consumer is still breathing. When the world's largest retailer says it's taking share, the whole consumer staples and discretionary complex has to reprice, and it gives the bulls a fundamental anchor beyond just chip stocks. This one moves WMT directly and sets the tone for Target and the rest of the retail tape.",
       "verdict": null
     }
   ]
