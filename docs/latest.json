@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-19T13:01:41.621952+00:00",
-  "brief_date": "2026-11-19",
+  "generated_at": "2026-11-23T13:01:31.588763+00:00",
+  "brief_date": "2026-11-23",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-19-1",
-      "title": "Anthropic IPO Draws 'Massive Enthusiasm' From Investors: Ludlow & Bloxham",
-      "source": "bloomberg.com",
-      "url": "https://www.bloomberg.com/news/videos/2026-11-19/anthropic-ipo-draws-massive-enthusiasm-from-investors-video",
-      "published_at": "2026-11-19T12:00:00Z",
-      "summary": "Anthropic priced a record-shattering $107.3 billion IPO — bigger than SpaceX — at $83 a share, above the marketed range, with gray markets pointing to a 20-26% first-day pop. This is the tape-defining event of the week: it either validates the AI spending boom or becomes the top-tick everyone talks about for years. Every AI-adjacent name from semiconductors to cloud infrastructure is moving on this print.",
+      "id": "mm-2026-11-23-1",
+      "title": "Nvidia stock bounces as Trump administration pushes for rehiring of Jensen Huang",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/nvidia-stock-bounces-as-trump-administration-pushes-for-rehiring-of-jensen-huang-08057c29?mod=mw_rss_topstories",
+      "published_at": "2026-11-23T12:00:00Z",
+      "summary": "This is the tape-mover of the morning — Nvidia is the single most important stock in the market right now, down 30% in six weeks and dragging the whole AI complex with it. White House pressure to reinstate Jensen Huang is a genuine catalyst that could reverse sentiment across semis, hyperscalers, and every name that's been caught in the AI rout. Watch NVDA, AMD, SMCI, and the SOX index for the read-through.",
       "tickers": [
-        "ANTH"
+        "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-19-2",
-      "title": "Fed's Waller says central bank may need to 'shock people' with half-point rate hike",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/18/federal-reserve-governor-christopher-waller.html",
-      "published_at": "2026-11-19T12:00:00Z",
-      "summary": "Fed Governor Waller floating a 50-basis-point hike is the kind of jawboning that moves the long bond and reprices every duration-sensitive asset on the board — equities, real estate, you name it. Coming on the same day the Fed minutes showed officials worried about AI-driven inflation, this is a one-two punch that could keep a lid on any Anthropic-IPO-fueled rally. Watch the two-year Treasury; that's where the real verdict gets rendered.",
+      "id": "mm-2026-11-23-2",
+      "title": "Cybersecurity stocks have been hot — and now CrowdStrike inks deal to buy Zscaler",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/cybersecurity-stocks-have-been-hot-and-now-crowdstrike-inks-deal-to-buy-zscaler-df8fd163?mod=mw_rss_topstories",
+      "published_at": "2026-11-23T12:00:00Z",
+      "summary": "A $43.9 billion all-stock megadeal in cybersecurity is the kind of M&A that reprices the entire sector — every name from Palo Alto to Fortinet to SentinelOne gets a fresh look when the biggest player on the tape makes a move this size. CRWD shareholders will scrutinize the dilution while ZS holders cash in; expect the whole cyber cohort to gap at the open. This also feeds the broader M&A-record narrative that's running counter to the AI selloff story.",
+      "tickers": [
+        "CRWD"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-23-3",
+      "title": "The U.S. may enter a recession if the Fed raises rates, hedge-fund manager Bill Ackman says",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/the-u-s-may-enter-a-recession-if-the-fed-raises-rates-hedge-fund-manager-bill-ackman-says-16738971?mod=mw_rss_topstories",
+      "published_at": "2026-11-23T12:00:00Z",
+      "summary": "Ackman calling out recession risk from a Fed hike is the kind of loud, public warning that moves the long bond and puts a bid under rate-sensitive names — especially with the market already in correction mode and gold bouncing off its worst week in months. The Fed-pause debate is the macro overhang on everything right now; when a name like Ackman goes on record, the bond market listens. Macro hit rates in my track record are weak, so I'm keeping the score honest.",
       "tickers": [
         "SPY"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-19-3",
-      "title": "Walmart hikes outlook as top execs tell CNBC the retailer is gaining market share ahead of holidays",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/19/walmart-wmt-q3-2026-earnings.html",
-      "published_at": "2026-11-19T12:00:00Z",
-      "summary": "Walmart raising guidance heading into the holiday stretch is a real-economy signal that cuts through all the AI noise — it tells you the consumer is still breathing. When the world's largest retailer says it's taking share, the whole consumer staples and discretionary complex has to reprice, and it gives the bulls a fundamental anchor beyond just chip stocks. This one moves WMT directly and sets the tone for Target and the rest of the retail tape.",
-      "tickers": [
-        "WMT"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "ANTH",
+      "ticker": "NVDA",
       "category": "single_name",
-      "title": "Anthropic IPO Draws 'Massive Enthusiasm' From Investors: Ludlow & Bloxham",
-      "justification": "Anthropic priced a record-shattering $107.3 billion IPO — bigger than SpaceX — at $83 a share, above the marketed range, with gray markets pointing to a 20-26% first-day pop. This is the tape-defining event of the week: it either validates the AI spending boom or becomes the top-tick everyone talks about for years. Every AI-adjacent name from semiconductors to cloud infrastructure is moving on this print.",
+      "title": "Nvidia stock bounces as Trump administration pushes for rehiring of Jensen Huang",
+      "justification": "This is the tape-mover of the morning — Nvidia is the single most important stock in the market right now, down 30% in six weeks and dragging the whole AI complex with it. White House pressure to reinstate Jensen Huang is a genuine catalyst that could reverse sentiment across semis, hyperscalers, and every name that's been caught in the AI rout. Watch NVDA, AMD, SMCI, and the SOX index for the read-through.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Fed's Waller says central bank may need to 'shock people' with half-point rate hike",
-      "justification": "Fed Governor Waller floating a 50-basis-point hike is the kind of jawboning that moves the long bond and reprices every duration-sensitive asset on the board — equities, real estate, you name it. Coming on the same day the Fed minutes showed officials worried about AI-driven inflation, this is a one-two punch that could keep a lid on any Anthropic-IPO-fueled rally. Watch the two-year Treasury; that's where the real verdict gets rendered.",
+      "ticker": "CRWD",
+      "category": "single_name",
+      "title": "Cybersecurity stocks have been hot — and now CrowdStrike inks deal to buy Zscaler",
+      "justification": "A $43.9 billion all-stock megadeal in cybersecurity is the kind of M&A that reprices the entire sector — every name from Palo Alto to Fortinet to SentinelOne gets a fresh look when the biggest player on the tape makes a move this size. CRWD shareholders will scrutinize the dilution while ZS holders cash in; expect the whole cyber cohort to gap at the open. This also feeds the broader M&A-record narrative that's running counter to the AI selloff story.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "WMT",
-      "category": "single_name",
-      "title": "Walmart hikes outlook as top execs tell CNBC the retailer is gaining market share ahead of holidays",
-      "justification": "Walmart raising guidance heading into the holiday stretch is a real-economy signal that cuts through all the AI noise — it tells you the consumer is still breathing. When the world's largest retailer says it's taking share, the whole consumer staples and discretionary complex has to reprice, and it gives the bulls a fundamental anchor beyond just chip stocks. This one moves WMT directly and sets the tone for Target and the rest of the retail tape.",
+      "ticker": "SPY",
+      "category": "macro",
+      "title": "The U.S. may enter a recession if the Fed raises rates, hedge-fund manager Bill Ackman says",
+      "justification": "Ackman calling out recession risk from a Fed hike is the kind of loud, public warning that moves the long bond and puts a bid under rate-sensitive names — especially with the market already in correction mode and gold bouncing off its worst week in months. The Fed-pause debate is the macro overhang on everything right now; when a name like Ackman goes on record, the bond market listens. Macro hit rates in my track record are weak, so I'm keeping the score honest.",
       "verdict": null
     }
   ]
