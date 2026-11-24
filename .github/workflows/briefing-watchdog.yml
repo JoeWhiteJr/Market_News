@@ -15,9 +15,13 @@ jobs:
     timeout-minutes: 5
     permissions:
       actions: read
+      contents: read
       issues: write
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: Look for today's daily-briefing runs
         id: check
         env:
@@ -25,9 +29,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           set -e
-          TODAY=$(date -u +%Y-%m-%d)
+          source scripts/ci/briefing-window.sh
+          TODAY="$BRIEFING_DAY"
           RUNS=$(gh run list --workflow daily-briefing.yml \
-            --created "$TODAY" --limit 50 \
+            --created "$BRIEFING_CREATED" --limit 50 \
             --json status,conclusion,displayTitle \
             | jq '[.[] | select(.displayTitle != "Dry run")]')
           TOTAL=$(echo "$RUNS" | jq 'length')
