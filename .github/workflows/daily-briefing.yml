@@ -13,7 +13,8 @@ on:
         default: false
   schedule:
     # Backup if daisy's trigger didn't run: 8:30 AM ET in winter, 9:30 AM ET in
-    # summer. The guard job skips it when today's dispatched run exists.
+    # summer. The guard job skips it when that day's dispatched run
+    # exists, even if GitHub starts this after midnight UTC (MM-T022).
     - cron: "30 13 * * 1-5"
 
 # Never let two briefings run at once. Later runs wait instead of cancelling.
@@ -27,38 +28,21 @@ jobs:
     timeout-minutes: 2
     permissions:
       actions: read
+      contents: read
+      issues: write
     outputs:
       skip: ${{ steps.check.outputs.skip }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: Decide whether this run should send the briefing
         id: check
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           DRY_RUN: ${{ inputs.dry_run }}
-        run: |
-          if [ "$DRY_RUN" = "true" ]; then
-            echo "Dry run: trigger received, skipping the briefing."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          if [ "$GITHUB_EVENT_NAME" != "schedule" ]; then
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          TODAY=$(date -u +%Y-%m-%d)
-          # If this lookup fails, count zero runs: a duplicate email beats no email.
-          RUNS=$(gh run list --workflow daily-briefing.yml --event workflow_dispatch \
-            --created "$TODAY" --limit 50 --json status,conclusion,displayTitle) || RUNS='[]'
-          ACTIVE=$(echo "$RUNS" | jq '[.[] | select(.displayTitle != "Dry run")
-            | select(.conclusion == "success" or .status != "completed")] | length')
-          if [ "$ACTIVE" -ge 1 ]; then
-            echo "Today's dispatched run exists, so the backup has nothing to do."
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "::warning::No dispatched run today, so daisy's trigger may be down. Backup is sending the briefing."
-            echo "skip=false" >> "$GITHUB_OUTPUT"
-          fi
+        run: scripts/ci/backup-guard.sh
 
   send-briefing:
     needs: guard
