@@ -1,40 +1,40 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-23T13:01:31.588763+00:00",
-  "brief_date": "2026-11-23",
+  "generated_at": "2026-11-24T01:06:33.041746+00:00",
+  "brief_date": "2026-11-24",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-23-1",
-      "title": "Nvidia stock bounces as Trump administration pushes for rehiring of Jensen Huang",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/nvidia-stock-bounces-as-trump-administration-pushes-for-rehiring-of-jensen-huang-08057c29?mod=mw_rss_topstories",
-      "published_at": "2026-11-23T12:00:00Z",
-      "summary": "This is the tape-mover of the morning — Nvidia is the single most important stock in the market right now, down 30% in six weeks and dragging the whole AI complex with it. White House pressure to reinstate Jensen Huang is a genuine catalyst that could reverse sentiment across semis, hyperscalers, and every name that's been caught in the AI rout. Watch NVDA, AMD, SMCI, and the SOX index for the read-through.",
+      "id": "mm-2026-11-24-1",
+      "title": "Jensen Huang reinstated as Nvidia CEO. Stock skyrockets 31%",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo.html",
+      "published_at": "2026-11-24T12:00:00Z",
+      "summary": "This is the tape-moving story of the year — Nvidia posting its biggest single-day gain in stock-market history, dragging the entire AI ecosystem with it. The ripple hit semiconductors, cloud names, credit markets, and Asian bourses overnight, making this a global event, not just a single-name pop. When the White House is brokering CEO reinstatements and short sellers are getting carried out on stretchers, you know the bid under this market just got a whole lot firmer.",
       "tickers": [
         "NVDA"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-23-2",
-      "title": "Cybersecurity stocks have been hot — and now CrowdStrike inks deal to buy Zscaler",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/cybersecurity-stocks-have-been-hot-and-now-crowdstrike-inks-deal-to-buy-zscaler-df8fd163?mod=mw_rss_topstories",
-      "published_at": "2026-11-23T12:00:00Z",
-      "summary": "A $43.9 billion all-stock megadeal in cybersecurity is the kind of M&A that reprices the entire sector — every name from Palo Alto to Fortinet to SentinelOne gets a fresh look when the biggest player on the tape makes a move this size. CRWD shareholders will scrutinize the dilution while ZS holders cash in; expect the whole cyber cohort to gap at the open. This also feeds the broader M&A-record narrative that's running counter to the AI selloff story.",
+      "id": "mm-2026-11-24-2",
+      "title": "CrowdStrike to buy Zscaler in $44 billion deal as AI supercharges cyberattacks",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/23/crowdstrike-zscaler-aquisition-ai-cyberattacks.html",
+      "published_at": "2026-11-24T12:00:00Z",
+      "summary": "A $44 billion cybersecurity mega-merger is no small thing — this reshapes the entire sector's competitive landscape and will force every player from Palo Alto to SentinelOne to reprice their strategic value. Zscaler shareholders are sitting on a deal premium, while CrowdStrike holders are digesting whether this is a bold power move or an expensive stretch. M&A of this size in a high-multiple sector always rattles the whole neighborhood.",
       "tickers": [
         "CRWD"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-23-3",
-      "title": "The U.S. may enter a recession if the Fed raises rates, hedge-fund manager Bill Ackman says",
-      "source": "marketwatch.com",
-      "url": "https://www.marketwatch.com/story/the-u-s-may-enter-a-recession-if-the-fed-raises-rates-hedge-fund-manager-bill-ackman-says-16738971?mod=mw_rss_topstories",
-      "published_at": "2026-11-23T12:00:00Z",
-      "summary": "Ackman calling out recession risk from a Fed hike is the kind of loud, public warning that moves the long bond and puts a bid under rate-sensitive names — especially with the market already in correction mode and gold bouncing off its worst week in months. The Fed-pause debate is the macro overhang on everything right now; when a name like Ackman goes on record, the bond market listens. Macro hit rates in my track record are weak, so I'm keeping the score honest.",
+      "id": "mm-2026-11-24-3",
+      "title": "Fed's John Williams indicates higher interest rates likely 'over time' to address inflation",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/23/john-williams-fed-inflation-rate-hikes.html",
+      "published_at": "2026-11-24T12:00:00Z",
+      "summary": "Williams isn't a backbencher — he runs the New York Fed and his words move the long bond. Signaling rates stay higher for longer is a direct headwind for rate-sensitive sectors like real estate and utilities, and it puts a ceiling on how far this equity bounce can run. On a day when the market is already celebrating, this is the cold water nobody wants to hear about.",
       "tickers": [
         "SPY"
       ],
@@ -46,24 +46,24 @@
       "rank": 1,
       "ticker": "NVDA",
       "category": "single_name",
-      "title": "Nvidia stock bounces as Trump administration pushes for rehiring of Jensen Huang",
-      "justification": "This is the tape-mover of the morning — Nvidia is the single most important stock in the market right now, down 30% in six weeks and dragging the whole AI complex with it. White House pressure to reinstate Jensen Huang is a genuine catalyst that could reverse sentiment across semis, hyperscalers, and every name that's been caught in the AI rout. Watch NVDA, AMD, SMCI, and the SOX index for the read-through.",
+      "title": "Jensen Huang reinstated as Nvidia CEO. Stock skyrockets 31%",
+      "justification": "This is the tape-moving story of the year — Nvidia posting its biggest single-day gain in stock-market history, dragging the entire AI ecosystem with it. The ripple hit semiconductors, cloud names, credit markets, and Asian bourses overnight, making this a global event, not just a single-name pop. When the White House is brokering CEO reinstatements and short sellers are getting carried out on stretchers, you know the bid under this market just got a whole lot firmer.",
       "verdict": null
     },
     {
       "rank": 2,
       "ticker": "CRWD",
       "category": "single_name",
-      "title": "Cybersecurity stocks have been hot — and now CrowdStrike inks deal to buy Zscaler",
-      "justification": "A $43.9 billion all-stock megadeal in cybersecurity is the kind of M&A that reprices the entire sector — every name from Palo Alto to Fortinet to SentinelOne gets a fresh look when the biggest player on the tape makes a move this size. CRWD shareholders will scrutinize the dilution while ZS holders cash in; expect the whole cyber cohort to gap at the open. This also feeds the broader M&A-record narrative that's running counter to the AI selloff story.",
+      "title": "CrowdStrike to buy Zscaler in $44 billion deal as AI supercharges cyberattacks",
+      "justification": "A $44 billion cybersecurity mega-merger is no small thing — this reshapes the entire sector's competitive landscape and will force every player from Palo Alto to SentinelOne to reprice their strategic value. Zscaler shareholders are sitting on a deal premium, while CrowdStrike holders are digesting whether this is a bold power move or an expensive stretch. M&A of this size in a high-multiple sector always rattles the whole neighborhood.",
       "verdict": null
     },
     {
       "rank": 3,
       "ticker": "SPY",
       "category": "macro",
-      "title": "The U.S. may enter a recession if the Fed raises rates, hedge-fund manager Bill Ackman says",
-      "justification": "Ackman calling out recession risk from a Fed hike is the kind of loud, public warning that moves the long bond and puts a bid under rate-sensitive names — especially with the market already in correction mode and gold bouncing off its worst week in months. The Fed-pause debate is the macro overhang on everything right now; when a name like Ackman goes on record, the bond market listens. Macro hit rates in my track record are weak, so I'm keeping the score honest.",
+      "title": "Fed's John Williams indicates higher interest rates likely 'over time' to address inflation",
+      "justification": "Williams isn't a backbencher — he runs the New York Fed and his words move the long bond. Signaling rates stay higher for longer is a direct headwind for rate-sensitive sectors like real estate and utilities, and it puts a ceiling on how far this equity bounce can run. On a day when the market is already celebrating, this is the cold water nobody wants to hear about.",
       "verdict": null
     }
   ]
