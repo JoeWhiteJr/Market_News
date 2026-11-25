@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-24T13:01:10.219282+00:00",
-  "brief_date": "2026-11-24",
+  "generated_at": "2026-11-25T13:02:02.016177+00:00",
+  "brief_date": "2026-11-25",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-24-1",
-      "title": "Jensen Huang reinstated as Nvidia CEO. Stock skyrockets 31%",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo.html",
-      "published_at": "2026-11-24T12:00:00Z",
-      "summary": "This is the tape-moving story of the year — Nvidia posting its biggest single-day gain in stock-market history, dragging the entire AI ecosystem with it. The ripple hit semiconductors, cloud names, credit markets, and Asian bourses overnight, making this a global event, not just a single-name pop. When the White House is brokering CEO reinstatements and short sellers are getting carried out on stretchers, you know the bid under this market just got a whole lot firmer.",
+      "id": "mm-2026-11-25-1",
+      "title": "Nasdaq futures slide over 2% as AI losses deepen; inflation data in focus - Reuters",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNdUdBTGhVT2V5cDcydUZMX2NTdTkxVDBJSHdCMUgwNXBibGhQc28zdktpLXA2dGVUYzRzV3hpMld1U29KempSNUswd2dNYVdITlFxV2NycEkwbnlpZkdPSDNicVRKM3NCU2l0M0hoWU13UTZkbTAtX2JFempxaUtFbjdTZGMxT2lXM2g3dkR4cy1UYnVfZ09kOWpTNGxtUEZZOTRPaXhENlZ6OGt2ZF94d0RCVjdOSldfc0E?oc=5",
+      "published_at": "2026-11-25T12:00:00Z",
+      "summary": "The MONDAY euphoria is ALREADY unwinding — Nasdaq futures down 2%-plus as the AI trade faces a reckoning that one CEO reinstatement cannot paper over, and now the market must stare directly into an inflation print that could hand the Fed a LOADED GUN. This is the double-barrel scenario: tech multiple compression meeting a hawkish macro catalyst, hitting QQQ, NVDA, and every AI-adjacent name simultaneously. The consensus said the bottom was in; the consensus is usually wrong.",
       "tickers": [
-        "NVDA"
+        "QQQ"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-24-2",
-      "title": "CrowdStrike to buy Zscaler in $44 billion deal as AI supercharges cyberattacks",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/23/crowdstrike-zscaler-aquisition-ai-cyberattacks.html",
-      "published_at": "2026-11-24T12:00:00Z",
-      "summary": "A $44 billion cybersecurity mega-merger is no small thing — this reshapes the entire sector's competitive landscape and will force every player from Palo Alto to SentinelOne to reprice their strategic value. Zscaler shareholders are sitting on a deal premium, while CrowdStrike holders are digesting whether this is a bold power move or an expensive stretch. M&A of this size in a high-multiple sector always rattles the whole neighborhood.",
-      "tickers": [
-        "CRWD"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-24-3",
-      "title": "Fed's John Williams indicates higher interest rates likely 'over time' to address inflation",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/23/john-williams-fed-inflation-rate-hikes.html",
-      "published_at": "2026-11-24T12:00:00Z",
-      "summary": "Williams isn't a backbencher — he runs the New York Fed and his words move the long bond. Signaling rates stay higher for longer is a direct headwind for rate-sensitive sectors like real estate and utilities, and it puts a ceiling on how far this equity bounce can run. On a day when the market is already celebrating, this is the cold water nobody wants to hear about.",
+      "id": "mm-2026-11-25-2",
+      "title": "Trump administration set to unveil new tariffs after probe on excess factory capacity, sources say - Reuters",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNNklFaE54bEV6OGdKT29ScUxHUlZwRDNyREJ0MzBSZzZGdnptTkVxaXNHeWx2WjFWYVMzMzdMeU92dC1PVmYyZ1BTT3lCTWVRVnJ5ODFEb0NXYWpDd1ZQUlg4bkZ5QVAyck9KQUhMbldjY2FqMmtsZGs3MTFUY0xLZm9wMWRRTFAyS3VvZUZ6Wnk0VzlxTjR3VS1GSkJ1S3VCU2xmZ09FX1E5dUVjTUhfR21wMG1pcktxdGc?oc=5",
+      "published_at": "2026-11-25T12:00:00Z",
+      "summary": "New tariffs targeting EXCESS factory capacity — read: China — arriving precisely when markets are already fragile is the kind of ACCELERANT that turns a tech selloff into a broad-market rout. Industrials, materials, and any multinational with China supply chain exposure get repriced overnight; the Bloomberg headline 'China Hits Back' confirms Beijing is not sitting quietly. This is the geopolitical wildcard that the bulls conveniently forgot to price in during Monday's relief rally.",
       "tickers": [
         "SPY"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-25-3",
+      "title": "Dell earnings beat on AI strength, company authorizes $25 billion buyback",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/24/dell-earnings-report-q3-2027.html",
+      "published_at": "2026-11-25T12:00:00Z",
+      "summary": "Dell's sales MORE THAN DOUBLED on AI server demand and they're handing back $25 billion to shareholders — this is the rare earnings print that actually VALIDATES the capex thesis rather than just promising future returns, and it drags the entire AI infrastructure complex with it: HPE, Super Micro, and the hyperscalers who are Dell's customers. The cynical read is that one strong quarter doesn't resolve the margin compression story, but the market will chase the headline number first and ask questions later.",
+      "tickers": [
+        "DELL"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "NVDA",
-      "category": "single_name",
-      "title": "Jensen Huang reinstated as Nvidia CEO. Stock skyrockets 31%",
-      "justification": "This is the tape-moving story of the year — Nvidia posting its biggest single-day gain in stock-market history, dragging the entire AI ecosystem with it. The ripple hit semiconductors, cloud names, credit markets, and Asian bourses overnight, making this a global event, not just a single-name pop. When the White House is brokering CEO reinstatements and short sellers are getting carried out on stretchers, you know the bid under this market just got a whole lot firmer.",
+      "ticker": "QQQ",
+      "category": "macro",
+      "title": "Nasdaq futures slide over 2% as AI losses deepen; inflation data in focus - Reuters",
+      "justification": "The MONDAY euphoria is ALREADY unwinding — Nasdaq futures down 2%-plus as the AI trade faces a reckoning that one CEO reinstatement cannot paper over, and now the market must stare directly into an inflation print that could hand the Fed a LOADED GUN. This is the double-barrel scenario: tech multiple compression meeting a hawkish macro catalyst, hitting QQQ, NVDA, and every AI-adjacent name simultaneously. The consensus said the bottom was in; the consensus is usually wrong.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "CRWD",
-      "category": "single_name",
-      "title": "CrowdStrike to buy Zscaler in $44 billion deal as AI supercharges cyberattacks",
-      "justification": "A $44 billion cybersecurity mega-merger is no small thing — this reshapes the entire sector's competitive landscape and will force every player from Palo Alto to SentinelOne to reprice their strategic value. Zscaler shareholders are sitting on a deal premium, while CrowdStrike holders are digesting whether this is a bold power move or an expensive stretch. M&A of this size in a high-multiple sector always rattles the whole neighborhood.",
+      "ticker": "SPY",
+      "category": "geopolitical",
+      "title": "Trump administration set to unveil new tariffs after probe on excess factory capacity, sources say - Reuters",
+      "justification": "New tariffs targeting EXCESS factory capacity — read: China — arriving precisely when markets are already fragile is the kind of ACCELERANT that turns a tech selloff into a broad-market rout. Industrials, materials, and any multinational with China supply chain exposure get repriced overnight; the Bloomberg headline 'China Hits Back' confirms Beijing is not sitting quietly. This is the geopolitical wildcard that the bulls conveniently forgot to price in during Monday's relief rally.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "SPY",
-      "category": "macro",
-      "title": "Fed's John Williams indicates higher interest rates likely 'over time' to address inflation",
-      "justification": "Williams isn't a backbencher — he runs the New York Fed and his words move the long bond. Signaling rates stay higher for longer is a direct headwind for rate-sensitive sectors like real estate and utilities, and it puts a ceiling on how far this equity bounce can run. On a day when the market is already celebrating, this is the cold water nobody wants to hear about.",
+      "ticker": "DELL",
+      "category": "single_name",
+      "title": "Dell earnings beat on AI strength, company authorizes $25 billion buyback",
+      "justification": "Dell's sales MORE THAN DOUBLED on AI server demand and they're handing back $25 billion to shareholders — this is the rare earnings print that actually VALIDATES the capex thesis rather than just promising future returns, and it drags the entire AI infrastructure complex with it: HPE, Super Micro, and the hyperscalers who are Dell's customers. The cynical read is that one strong quarter doesn't resolve the margin compression story, but the market will chase the headline number first and ask questions later.",
       "verdict": null
     }
   ]
