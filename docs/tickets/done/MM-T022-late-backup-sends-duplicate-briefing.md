@@ -1,13 +1,13 @@
 ---
 id: MM-T022
 title: Late GitHub backup sends a duplicate briefing after midnight UTC
-status: in-progress
+status: done
 priority: high
 type: bug
 owner: joe
 created: 2026-11-24
-updated: 2026-11-24
-related-pr:
+updated: 2026-11-26
+related-pr: 53
 related-tickets: MM-T019, MM-T008, MM-T013
 assigned-team:
 ---
@@ -27,8 +27,8 @@ The watchdog had the same date bug (it ran at 01:56 UTC and checked the wrong da
 - [x] A backup too late to send (after 23:30 UTC) never sends. If that day's dispatched run
       also failed or never ran, it opens a MISSED issue and fails the job
 - [x] Full test suite and ruff pass
-- [ ] PR merged
-- [ ] Next weekday: dispatched run sends, backup skips, watchdog passes
+- [x] PR merged (#53, 2026-11-24)
+- [x] Next weekday: dispatched run sends, backup skips, watchdog passes (2026-11-24 evening and 2026-11-25)
 
 ## Data
 `data/briefings.jsonl` has two 2026-11-24 rows: the late run, then the 6 AM run. Both are
@@ -37,4 +37,12 @@ row and the late row stays ungraded. Paper-trade and shadow rows for 11-24 belon
 late run and already have `late_entry: true`. MM-T021 should account for this.
 
 ## Retrospective
-_Fill in when moving to done/._
+Closed 2026-11-26. The dry run after merge passed (guard ran from the checkout, send skipped).
+On 11-24 and 11-25 the backup started at 23:10 and 22:38 UTC and skipped in about 10 seconds.
+The watchdog checked the right day both times.
+
+- Root cause: three jobs each picked "today" from the UTC clock, but GitHub can start a
+  13:30 UTC cron more than 11 hours late. A shared briefing-day window fixes all of them.
+- The too-late MISSED path (after 23:30 UTC with no good run) has only run in tests.
+- Found while diagnosing the Nov 20 spend-cap outage, not by any alert: a duplicate send
+  succeeds, so nothing fires. Worth watching for double rows in briefings.jsonl.
