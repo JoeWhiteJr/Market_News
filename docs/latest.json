@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-25T13:02:02.016177+00:00",
-  "brief_date": "2026-11-25",
+  "generated_at": "2026-11-26T13:01:53.885743+00:00",
+  "brief_date": "2026-11-26",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-25-1",
-      "title": "Nasdaq futures slide over 2% as AI losses deepen; inflation data in focus - Reuters",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNdUdBTGhVT2V5cDcydUZMX2NTdTkxVDBJSHdCMUgwNXBibGhQc28zdktpLXA2dGVUYzRzV3hpMld1U29KempSNUswd2dNYVdITlFxV2NycEkwbnlpZkdPSDNicVRKM3NCU2l0M0hoWU13UTZkbTAtX2JFempxaUtFbjdTZGMxT2lXM2g3dkR4cy1UYnVfZ09kOWpTNGxtUEZZOTRPaXhENlZ6OGt2ZF94d0RCVjdOSldfc0E?oc=5",
-      "published_at": "2026-11-25T12:00:00Z",
-      "summary": "The MONDAY euphoria is ALREADY unwinding — Nasdaq futures down 2%-plus as the AI trade faces a reckoning that one CEO reinstatement cannot paper over, and now the market must stare directly into an inflation print that could hand the Fed a LOADED GUN. This is the double-barrel scenario: tech multiple compression meeting a hawkish macro catalyst, hitting QQQ, NVDA, and every AI-adjacent name simultaneously. The consensus said the bottom was in; the consensus is usually wrong.",
-      "tickers": [
-        "QQQ"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-25-2",
-      "title": "Trump administration set to unveil new tariffs after probe on excess factory capacity, sources say - Reuters",
-      "source": "news.google.com",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNNklFaE54bEV6OGdKT29ScUxHUlZwRDNyREJ0MzBSZzZGdnptTkVxaXNHeWx2WjFWYVMzMzdMeU92dC1PVmYyZ1BTT3lCTWVRVnJ5ODFEb0NXYWpDd1ZQUlg4bkZ5QVAyck9KQUhMbldjY2FqMmtsZGs3MTFUY0xLZm9wMWRRTFAyS3VvZUZ6Wnk0VzlxTjR3VS1GSkJ1S3VCU2xmZ09FX1E5dUVjTUhfR21wMG1pcktxdGc?oc=5",
-      "published_at": "2026-11-25T12:00:00Z",
-      "summary": "New tariffs targeting EXCESS factory capacity — read: China — arriving precisely when markets are already fragile is the kind of ACCELERANT that turns a tech selloff into a broad-market rout. Industrials, materials, and any multinational with China supply chain exposure get repriced overnight; the Bloomberg headline 'China Hits Back' confirms Beijing is not sitting quietly. This is the geopolitical wildcard that the bulls conveniently forgot to price in during Monday's relief rally.",
+      "id": "mm-2026-11-26-1",
+      "title": "U.S. proposes new tariffs on 14 trading partners, including China and the EU",
+      "source": "cnbc.com",
+      "url": "https://www.cnbc.com/2026/11/25/us-tariffs-trump-section-301.html",
+      "published_at": "2026-11-26T12:00:00Z",
+      "summary": "This is the tape-mover right here — new Section 301 levies hitting China, the EU, and a dozen others simultaneously is a multi-sector gut punch touching everything from semiconductors to autos to consumer goods. When you slap tariffs on that many partners at once, you're not just repricing trade flows, you're repricing global supply chains, and every multinational on the S&P 500 has to recalculate. Watch the long bond and the dollar for the first read on how bad the damage is.",
       "tickers": [
         "SPY"
       ],
       "sentiment": null
     },
     {
-      "id": "mm-2026-11-25-3",
-      "title": "Dell earnings beat on AI strength, company authorizes $25 billion buyback",
+      "id": "mm-2026-11-26-2",
+      "title": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
       "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/24/dell-earnings-report-q3-2027.html",
-      "published_at": "2026-11-25T12:00:00Z",
-      "summary": "Dell's sales MORE THAN DOUBLED on AI server demand and they're handing back $25 billion to shareholders — this is the rare earnings print that actually VALIDATES the capex thesis rather than just promising future returns, and it drags the entire AI infrastructure complex with it: HPE, Super Micro, and the hyperscalers who are Dell's customers. The cynical read is that one strong quarter doesn't resolve the margin compression story, but the market will chase the headline number first and ask questions later.",
+      "url": "https://www.cnbc.com/2026/11/26/nvidia-market-governance-risk.html",
+      "published_at": "2026-11-26T12:00:00Z",
+      "summary": "S&P putting a notch-cut warning on Nvidia's credit is a fresh body blow to a stock that's already been through the wringer — a ratings action from a major agency signals the governance soap opera isn't just a headline risk, it's now a balance-sheet risk. This widens the blast radius beyond NVDA itself, hitting the whole AI infrastructure trade: AMD, SMCI, the hyperscalers who depend on Nvidia silicon. The bid in NVDA was already fragile; this doesn't help.",
       "tickers": [
-        "DELL"
+        "NVDA"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-26-3",
+      "title": "Asia's stock markets dive as doubts to swirl over AI boom",
+      "source": "aljazeera.com",
+      "url": "https://www.aljazeera.com/news/2026/11/25/asias-stock-markets-dive-as-doubts-to-swirl-over-ai-boom",
+      "published_at": "2026-11-26T12:00:00Z",
+      "summary": "When Seoul drops 3.7% and Taiwan gets hit for nearly 9% at the worst point, that's not noise — that's the AI supply chain repricing in real time, and it sets the tone for the U.S. open. South Korea and Taiwan are ground zero for the chip ecosystem, so moves of that magnitude in those markets are a leading indicator for what NVDA, AMD, and the Nasdaq are going to do when the bell rings. The AI glut fears are doing the heavy lifting here, and they don't resolve in a day.",
+      "tickers": [
+        "QQQ"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "QQQ",
-      "category": "macro",
-      "title": "Nasdaq futures slide over 2% as AI losses deepen; inflation data in focus - Reuters",
-      "justification": "The MONDAY euphoria is ALREADY unwinding — Nasdaq futures down 2%-plus as the AI trade faces a reckoning that one CEO reinstatement cannot paper over, and now the market must stare directly into an inflation print that could hand the Fed a LOADED GUN. This is the double-barrel scenario: tech multiple compression meeting a hawkish macro catalyst, hitting QQQ, NVDA, and every AI-adjacent name simultaneously. The consensus said the bottom was in; the consensus is usually wrong.",
+      "ticker": "SPY",
+      "category": "geopolitical",
+      "title": "U.S. proposes new tariffs on 14 trading partners, including China and the EU",
+      "justification": "This is the tape-mover right here — new Section 301 levies hitting China, the EU, and a dozen others simultaneously is a multi-sector gut punch touching everything from semiconductors to autos to consumer goods. When you slap tariffs on that many partners at once, you're not just repricing trade flows, you're repricing global supply chains, and every multinational on the S&P 500 has to recalculate. Watch the long bond and the dollar for the first read on how bad the damage is.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "SPY",
-      "category": "geopolitical",
-      "title": "Trump administration set to unveil new tariffs after probe on excess factory capacity, sources say - Reuters",
-      "justification": "New tariffs targeting EXCESS factory capacity — read: China — arriving precisely when markets are already fragile is the kind of ACCELERANT that turns a tech selloff into a broad-market rout. Industrials, materials, and any multinational with China supply chain exposure get repriced overnight; the Bloomberg headline 'China Hits Back' confirms Beijing is not sitting quietly. This is the geopolitical wildcard that the bulls conveniently forgot to price in during Monday's relief rally.",
+      "ticker": "NVDA",
+      "category": "single_name",
+      "title": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
+      "justification": "S&P putting a notch-cut warning on Nvidia's credit is a fresh body blow to a stock that's already been through the wringer — a ratings action from a major agency signals the governance soap opera isn't just a headline risk, it's now a balance-sheet risk. This widens the blast radius beyond NVDA itself, hitting the whole AI infrastructure trade: AMD, SMCI, the hyperscalers who depend on Nvidia silicon. The bid in NVDA was already fragile; this doesn't help.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "DELL",
-      "category": "single_name",
-      "title": "Dell earnings beat on AI strength, company authorizes $25 billion buyback",
-      "justification": "Dell's sales MORE THAN DOUBLED on AI server demand and they're handing back $25 billion to shareholders — this is the rare earnings print that actually VALIDATES the capex thesis rather than just promising future returns, and it drags the entire AI infrastructure complex with it: HPE, Super Micro, and the hyperscalers who are Dell's customers. The cynical read is that one strong quarter doesn't resolve the margin compression story, but the market will chase the headline number first and ask questions later.",
+      "ticker": "QQQ",
+      "category": "macro",
+      "title": "Asia's stock markets dive as doubts to swirl over AI boom",
+      "justification": "When Seoul drops 3.7% and Taiwan gets hit for nearly 9% at the worst point, that's not noise — that's the AI supply chain repricing in real time, and it sets the tone for the U.S. open. South Korea and Taiwan are ground zero for the chip ecosystem, so moves of that magnitude in those markets are a leading indicator for what NVDA, AMD, and the Nasdaq are going to do when the bell rings. The AI glut fears are doing the heavy lifting here, and they don't resolve in a day.",
       "verdict": null
     }
   ]
