@@ -1,42 +1,42 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-11-26T13:01:53.885743+00:00",
-  "brief_date": "2026-11-26",
+  "generated_at": "2026-11-27T13:02:12.039596+00:00",
+  "brief_date": "2026-11-27",
   "macro_read": null,
   "headlines": [
     {
-      "id": "mm-2026-11-26-1",
-      "title": "U.S. proposes new tariffs on 14 trading partners, including China and the EU",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/25/us-tariffs-trump-section-301.html",
-      "published_at": "2026-11-26T12:00:00Z",
-      "summary": "This is the tape-mover right here — new Section 301 levies hitting China, the EU, and a dozen others simultaneously is a multi-sector gut punch touching everything from semiconductors to autos to consumer goods. When you slap tariffs on that many partners at once, you're not just repricing trade flows, you're repricing global supply chains, and every multinational on the S&P 500 has to recalculate. Watch the long bond and the dollar for the first read on how bad the damage is.",
+      "id": "mm-2026-11-27-1",
+      "title": "China Drives Biggest Stock Gain Since 2024 With Rare Midday Vow",
+      "source": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-27/china-s-cabinet-stresses-market-support-in-midday-release",
+      "published_at": "2026-11-27T12:00:00Z",
+      "summary": "When Beijing drops a rare midday market-support statement, you put down your coffee and pay attention — this is the kind of tape-moving intervention that ripples from Shanghai to the S&P. China-exposed names, emerging market ETFs, and commodity plays like copper all feel this one immediately. The timing, right as U.S. futures are rallying post-Thanksgiving, amplifies the risk-on signal across every asset class.",
+      "tickers": [
+        "FXI"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-27-2",
+      "title": "Attack on Saudi Aramco's Jazan refinery kills worker, halts some operations",
+      "source": "news.google.com",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxORnNINWJlUzU0bDVSQ1Z5TWhtZTl1dzVxa01lbWhiMTg0bjBKZzQtbld6RmpIQ3NOSkctT29wTmdmR3VCcHpMbzdBQUdQSU0wVWItQU1COHhCS1BzYnpoOTJsRzl2TWp0aVNNZWVpZVFhS2cwWXVtNnA0bzRfUXNTRTJRTEVHem5BY2V2SURxZG9Vb3VkT3FNa1RuR3RfZWJQUE15WTdGaVFudnJaeVJIdVhXdE9PcWFuY2c",
+      "published_at": "2026-11-27T12:00:00Z",
+      "summary": "A direct hit on Saudi Aramco infrastructure is the kind of headline that gets oil traders off their bar stools on a holiday weekend — supply disruption risk at the world's biggest crude exporter is never background noise. Pair this with the OPEC+ quota meeting Sunday and Iranian drone activity in Kuwait, and you've got a genuine geopolitical bid under crude. Energy sector and defense names will feel this on the open.",
+      "tickers": [
+        "USO"
+      ],
+      "sentiment": null
+    },
+    {
+      "id": "mm-2026-11-27-3",
+      "title": "Stocks are poised for a Friday jump — right into a $100 billion wave of automated selling, Goldman Sachs warns",
+      "source": "marketwatch.com",
+      "url": "https://www.marketwatch.com/story/stocks-are-poised-for-a-friday-jump-right-into-a-100-billion-wave-of-automated-selling-goldman-sachs-warns-aba6440f?mod=mw_rss_topstories",
+      "published_at": "2026-11-27T12:00:00Z",
+      "summary": "Goldman's desk flagging $100 billion in systematic selling pressure into a holiday-thin tape is the kind of flow warning that makes every buy-the-dip cowboy think twice. CTA and vol-control funds don't care about your fundamental thesis — they sell when the model says sell, and a light-volume Black Friday session is exactly when that kind of forced flow can punch above its weight. Watch the intraday action closely; the open gap could get faded hard.",
       "tickers": [
         "SPY"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-26-2",
-      "title": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
-      "source": "cnbc.com",
-      "url": "https://www.cnbc.com/2026/11/26/nvidia-market-governance-risk.html",
-      "published_at": "2026-11-26T12:00:00Z",
-      "summary": "S&P putting a notch-cut warning on Nvidia's credit is a fresh body blow to a stock that's already been through the wringer — a ratings action from a major agency signals the governance soap opera isn't just a headline risk, it's now a balance-sheet risk. This widens the blast radius beyond NVDA itself, hitting the whole AI infrastructure trade: AMD, SMCI, the hyperscalers who depend on Nvidia silicon. The bid in NVDA was already fragile; this doesn't help.",
-      "tickers": [
-        "NVDA"
-      ],
-      "sentiment": null
-    },
-    {
-      "id": "mm-2026-11-26-3",
-      "title": "Asia's stock markets dive as doubts to swirl over AI boom",
-      "source": "aljazeera.com",
-      "url": "https://www.aljazeera.com/news/2026/11/25/asias-stock-markets-dive-as-doubts-to-swirl-over-ai-boom",
-      "published_at": "2026-11-26T12:00:00Z",
-      "summary": "When Seoul drops 3.7% and Taiwan gets hit for nearly 9% at the worst point, that's not noise — that's the AI supply chain repricing in real time, and it sets the tone for the U.S. open. South Korea and Taiwan are ground zero for the chip ecosystem, so moves of that magnitude in those markets are a leading indicator for what NVDA, AMD, and the Nasdaq are going to do when the bell rings. The AI glut fears are doing the heavy lifting here, and they don't resolve in a day.",
-      "tickers": [
-        "QQQ"
       ],
       "sentiment": null
     }
@@ -44,26 +44,26 @@
   "top_movers": [
     {
       "rank": 1,
-      "ticker": "SPY",
-      "category": "geopolitical",
-      "title": "U.S. proposes new tariffs on 14 trading partners, including China and the EU",
-      "justification": "This is the tape-mover right here — new Section 301 levies hitting China, the EU, and a dozen others simultaneously is a multi-sector gut punch touching everything from semiconductors to autos to consumer goods. When you slap tariffs on that many partners at once, you're not just repricing trade flows, you're repricing global supply chains, and every multinational on the S&P 500 has to recalculate. Watch the long bond and the dollar for the first read on how bad the damage is.",
+      "ticker": "FXI",
+      "category": "macro",
+      "title": "China Drives Biggest Stock Gain Since 2024 With Rare Midday Vow",
+      "justification": "When Beijing drops a rare midday market-support statement, you put down your coffee and pay attention — this is the kind of tape-moving intervention that ripples from Shanghai to the S&P. China-exposed names, emerging market ETFs, and commodity plays like copper all feel this one immediately. The timing, right as U.S. futures are rallying post-Thanksgiving, amplifies the risk-on signal across every asset class.",
       "verdict": null
     },
     {
       "rank": 2,
-      "ticker": "NVDA",
-      "category": "single_name",
-      "title": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
-      "justification": "S&P putting a notch-cut warning on Nvidia's credit is a fresh body blow to a stock that's already been through the wringer — a ratings action from a major agency signals the governance soap opera isn't just a headline risk, it's now a balance-sheet risk. This widens the blast radius beyond NVDA itself, hitting the whole AI infrastructure trade: AMD, SMCI, the hyperscalers who depend on Nvidia silicon. The bid in NVDA was already fragile; this doesn't help.",
+      "ticker": "USO",
+      "category": "geopolitical",
+      "title": "Attack on Saudi Aramco's Jazan refinery kills worker, halts some operations",
+      "justification": "A direct hit on Saudi Aramco infrastructure is the kind of headline that gets oil traders off their bar stools on a holiday weekend — supply disruption risk at the world's biggest crude exporter is never background noise. Pair this with the OPEC+ quota meeting Sunday and Iranian drone activity in Kuwait, and you've got a genuine geopolitical bid under crude. Energy sector and defense names will feel this on the open.",
       "verdict": null
     },
     {
       "rank": 3,
-      "ticker": "QQQ",
+      "ticker": "SPY",
       "category": "macro",
-      "title": "Asia's stock markets dive as doubts to swirl over AI boom",
-      "justification": "When Seoul drops 3.7% and Taiwan gets hit for nearly 9% at the worst point, that's not noise — that's the AI supply chain repricing in real time, and it sets the tone for the U.S. open. South Korea and Taiwan are ground zero for the chip ecosystem, so moves of that magnitude in those markets are a leading indicator for what NVDA, AMD, and the Nasdaq are going to do when the bell rings. The AI glut fears are doing the heavy lifting here, and they don't resolve in a day.",
+      "title": "Stocks are poised for a Friday jump — right into a $100 billion wave of automated selling, Goldman Sachs warns",
+      "justification": "Goldman's desk flagging $100 billion in systematic selling pressure into a holiday-thin tape is the kind of flow warning that makes every buy-the-dip cowboy think twice. CTA and vol-control funds don't care about your fundamental thesis — they sell when the model says sell, and a light-volume Black Friday session is exactly when that kind of forced flow can punch above its weight. Watch the intraday action closely; the open gap could get faded hard.",
       "verdict": null
     }
   ]
